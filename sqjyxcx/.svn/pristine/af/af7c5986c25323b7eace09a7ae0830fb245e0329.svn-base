@@ -1,0 +1,161 @@
+.tximg{
+	border-radius: 50%;width: 70px;height: 70px;margin-left: 19px;margin-right: 12px;vertical-align: middle;
+}
+page{
+	background: #EEEEEE;
+}
+.topbox{
+	margin: 10px;background: #fff;border-radius: 5px;margin-bottom: 10px;
+}
+
+.name{
+	font-size: 22px;
+font-family: SimHei-Regular, SimHei;
+font-weight: 400;
+color: #333333;margin-top: 6px;margin-bottom: 10px;
+}
+.sex{
+	font-size: 16px;
+font-family: SimHei-Regular, SimHei;
+font-weight: 400;
+color: #999999;
+}
+.personbox{
+	margin: 0 10px;padding-top: 20px;border-bottom: 1px solid #F2F2F2;padding-bottom: 20px;
+}
+.imgjt{
+	width: 19px;
+	height: 18px;vertical-align: middle;
+	margin-top: -3px;    margin-right: 23px;
+}
+.frimg{
+	height: 70px;
+    line-height: 70px;
+		text-align: right;
+		/* margin-right: 23px; */
+}
+.ttbox{
+	height: 40px;line-height: 40px;border-bottom: 1px solid #EEEEEE;
+}
+.leftname {
+	margin-left: 15px;
+	width: 45%;
+	font-size: 16px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #333333;
+}
+.rtip {
+	margin-right: 15px;text-align: right;color: #F8424C;
+	width: 45%;
+	height: 40px;
+	font-size: 16px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+}
+.textarea {
+	width: 90%;line-height: 28px;
+	padding-bottom: 8px;
+	margin: 0 auto;
+}
+.topjob{font-size: 16px;padding: 14px 0 14px 16px;border-bottom: 1px solid #CCCCCC;
+  font-family: SimHei-Regular, SimHei;
+  font-weight: 400;color: #333333;
+}
+.local{
+  width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin-top: -3px;
+}
+.company{
+  border-bottom: 1px solid #E5E5E5;
+}
+.companyname {
+	padding: 19px 0 0 14px;
+	font-size: 18px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #1A1A1A;
+}
+.companyjuli {
+	padding: 10px 0 0 14px;
+	font-size: 14px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #297EFE;
+}
+.tagbox {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 15px;
+	margin-top: 9px;
+	padding-bottom: 6px;
+}
+.companytag {
+	height: 27px;
+	line-height: 27px;
+	text-align: center;
+	padding: 2px 9px;
+	margin-right: 9px;
+	margin-bottom: 5px;
+	background: #EAF1FB;
+	border-radius: 5px 5px 5px 5px;
+	font-size: 14px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #3384FD;
+}
+.companyname {
+	font-size: 14px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #999999;
+}
+.companytx {
+	width: 22px;
+	height: 22px;
+	vertical-align: middle;
+	background: #CBCBCB;
+	border-radius: 50%;margin-top: -3px;
+}
+.lcm{
+	padding: 5px 0 15px 14px;
+}
+
+.container {
+	display: block;
+    position: relative;
+    padding-bottom: 64px;
+}
+
+.imgbt{
+	width: 36px;height: 36px;margin-top: 14px;margin-left: 21px;
+}
+.botombox{
+	background: #fff;height: 64px;line-height: 64px;position: fixed;
+	bottom: 0;
+	width: 100%;
+}
+.ddh{
+	width: 36px;height: 36px;margin-top:14px;margin-left: 14px;
+}
+.tijsq {
+	width: 62%; margin-top: 9px;margin-right: 9px;
+}
+.imgbg{
+	margin-left: 0;width: 36px;height: 36px;
+	margin-top: 0;position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	margin: 0 auto;
+}
+.buttonbox{
+	width: 36px!important;height: 36px;position: relative;background:#fff
+}
+
+
+
+
+

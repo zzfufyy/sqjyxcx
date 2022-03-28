@@ -1,0 +1,8 @@
+.box{
+	font-size: 14px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;margin: 0 11px;
+color: #333333;height: 46px;line-height: 46px;padding-left: 11px;border-bottom: 1px solid #EEEEEE;
+}
+
+

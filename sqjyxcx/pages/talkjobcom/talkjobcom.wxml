@@ -1,0 +1,124 @@
+<view class="container">
+	<!-- 公司聊天 -->
+	<block wx:if="{{ident == 'company'}}">
+		<block wx:for="{{qzzxx}}" wx:key="key">
+			<view class="topnav">
+				<view class="topitem" bindtap="checkjl">
+					<image src="/img/kjl.png" class="itemimg"></image>
+					<view class="itemtxt">看简历</view>
+				</view>
+				<view class="topitem" bindtap="cellnum" data-cellnum="{{item.cellnum}}">
+					<image src="/img/ddh.png" class="itemimg"></image>
+					<view class="itemtxt">打电话</view>
+				</view>
+				<view class="topitem" style="opacity: {{opacity}};" >
+					<image src="/img/bhs.svg" bindtap="buheshi" class="itemimg"></image>
+					<view class="itemtxt">不合适</view>
+				</view>
+			</view>
+			<view class="middlebox" >
+				<view class="qzzinfobox">
+					<text class="qzzname" decode>求职者:{{item.name}}&nbsp;&nbsp;&nbsp;</text>
+					{{item.sex}} {{item.year}} {{item.hy}}
+				</view>
+				<view class="line1"></view>
+				<view class="qzzinfobox" style="color: #F8424C;">
+					<text class="qzzname" decode>工作意向&nbsp;&nbsp;&nbsp;</text>
+					{{item.gzyx}},{{item.money}}
+				</view>
+			</view>
+		</block>
+		<scroll-view scroll-y scroll-top="{{scrollTop}}" style="height: {{ht}}px;padding-bottom: 20px;" class="chatbox">
+			<view class="time">3月3日 16：41</view>
+			<block wx:for="{{ltlist}}" wx:key="key">
+				<view class="qybox" wx:if="{{item.sf == 'company'}}">
+					<view class="lisbox clearfloat">
+						<view class="fr rtbox">
+							<image class="txbox" src="{{item.tximg}}"></image>
+						</view>
+						<view class="fr ltbox">
+							{{item.comjz}}
+						</view>
+					</view>
+				</view>
+				<view class="qzbox" wx:if="{{item.sf == 'qzz'}}">
+					<view class="lisbox clearfloat">
+						<view class="ft rtbox">
+							<image class="txbox" src="/img/tx.png"></image>
+						</view>
+						<view class="ft ltbox">
+							{{item.comjz}}
+						</view>
+					</view>
+				</view>
+			</block>
+		</scroll-view >
+		<view class="inputbox">
+			<input type="text" class="inputmesege" 	bindconfirm="send"  placeholder="请输入消息内容" confirm-type="send"	cursor-spacing="20"/>
+		</view>
+	</block>
+
+	<!-- 求职者聊天 -->
+	<block wx:if="{{ident == 'user'}}">
+		<block wx:for="{{compgs}}" wx:key="key">
+			<view class="topnav">
+				<view class="topitem" bindtap="tdjl">
+					<image src="/img/kjl.png" class="itemimg"></image>
+					<view class="itemtxt">投简历</view>
+				</view>
+				<view class="topitem" bindtap="cellnum" data-cellnum="{{item.cellnum}}">
+					<image src="/img/ddh.png" class="itemimg"></image>
+					<view class="itemtxt">打电话</view>
+				</view>
+				<view class="topitem" style="opacity: {{opacityqzz}};">
+					<image src="/img/bhs.svg" bindtap="buheshiqzz"  class="itemimg"></image>
+					<view class="itemtxt">不合适</view>
+				</view>
+			</view>
+			<view class="middlebox" >
+				<view class="qzzinfobox">
+					<text class="qzzname" decode>{{item.name}}</text>
+				</view>
+				<view class="line1"></view>
+				<view class="qzzinfobox" style="color: #F8424C;">
+					<!-- <text class="qzzname" decode>{{item.gzyx}}&nbsp;&nbsp;</text> -->
+					{{item.gzyx}} {{item.money}}/月 {{item.rs}}人
+				</view>
+			</view>
+		</block>
+		<scroll-view scroll-y scroll-top="{{scrollTopqzz}}" style="height: {{ht}}px;padding-bottom: 20px;" class="chatbox">
+			<view class="time">3月3日 16：41</view>
+			<block wx:for="{{ltlistqzz}}" wx:key="key">
+				<view class="qybox" wx:if="{{item.sf == 'company'}}">
+					<view class="lisbox clearfloat">
+						<view class="ft rtbox">
+							<image class="txbox" src="{{item.tximg}}"></image>
+						</view>
+						<view class="ft ltbox">
+							{{item.comjz}}
+						</view>
+					</view>
+				</view>
+				<view class="qzbox" wx:if="{{item.sf == 'qzz'}}">
+					<view class="lisbox clearfloat">
+						<view class="fr rtbox">
+							<image class="txbox" src="/img/tx.png"></image>
+						</view>
+						<view class="fr ltbox">
+							{{item.comjz}}
+						</view>
+					</view>
+				</view>
+			</block>
+		</scroll-view >
+		<view class="inputbox">
+			<input type="text" class="inputmesege" 	bindconfirm="sendmes"  placeholder="请输入消息内容" confirm-type="send"	cursor-spacing="20"/>
+		</view>
+	</block>
+</view>
+
+
+
+
+
+

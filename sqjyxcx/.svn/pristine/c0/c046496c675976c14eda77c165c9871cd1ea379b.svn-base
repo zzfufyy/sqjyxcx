@@ -1,0 +1,24 @@
+<view class="clearfloat container">
+	<view class="topbox">
+		<view class="comname">公司信息</view>
+		<view class="comimg">
+			<image src="{{imgsrc}}" class="imgtag" style="border:{{none}}"></image>
+			<text class="qybz" bindtap="xgtx">上传企业标志</text>
+		</view>
+		<view class="line1"></view>
+	</view>
+	<view class="topbox">
+		<view class="comname">法人信息</view>
+		<view class="clearfloat frxx">
+			<view class="ft nm">姓名</view>
+			<view class="fr nm"><input type="text" bindinput="name" placeholder="请输入" class="ipt" /></view>
+		</view>
+		<view class="clearfloat frxx">
+			<view class="ft nm">联系电话</view>
+			<view class="fr nm"><input type="text" bindinput="cellphone" placeholder="请输入" class="ipt" /></view>
+		</view>
+	</view>
+</view>
+<view class="bcbox">
+	<view class="tijsq" bindtap="bc">保存</view>
+</view>

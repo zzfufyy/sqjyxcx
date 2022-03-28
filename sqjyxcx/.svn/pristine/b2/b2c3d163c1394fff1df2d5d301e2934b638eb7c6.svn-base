@@ -1,0 +1,68 @@
+<view class="container" style="padding-bottom: 20px;">
+	<view class="titwarn">
+		平台提醒：标*为必填项
+	</view>
+	<view class="clearfloat ttbox">
+		<view class="ft leftname">企业名称*</view>
+		<view class="fr rtip">
+			<input type="text" bindinput="bindinputCompanyName" class="iptqy" placeholder="请输入企业名称"  />
+		</view>
+	</view>
+	<!-- <view class="clearfloat ttbox">
+		<view class="ft leftname">行业分类*</view>
+		<view class="qyname rtip fr">
+        <picker bindchange="bindPickerChange" range="{{array}}" value="{{index}}" >
+          <view class="picker">
+            {{array[index]}}
+            <image class="slect" src="https://demo.csjing.com/img/rtjt.png"></image>
+          </view>
+        </picker>
+      </view>
+	</view> -->
+	<view class="line10"></view>
+	<view class="clearfloat ttbox">
+		<view class="ft leftname">所属社区*</view>
+		<view class="qyname rtip fr">
+        <picker bindchange="bindPickerChange1" range="{{array1}}" value="{{index1}}" >
+          <view class="picker">
+            {{array1[index1]}}
+            <image class="slect" src="https://demo.csjing.com/img/rtjt.png"></image>
+          </view>
+        </picker>
+      </view>
+	</view>
+	<view class="line10"></view>
+	<view class="clearfloat ttbox">
+		<view class="ft leftname">公司地址</view>
+		<view class="fr rtip">
+			<view class="ggdw" bindtap="changedw">更改定位</view>
+		</view>
+	</view>
+	<view class="clearfloat ttbox local">{{positionData}}</view>
+	<view class="line10"></view>
+	<view class="clearfloat ttbox">
+		<view class="ft leftname">统一社会信用代码</view>
+		<view class="fr rtip" style="color: #3384FD;text-align:right">
+			填写将提升可信度
+		</view>
+	</view>
+	<view class="clearfloat ttbox">
+		<input type="text" bindinput="bindinputLicenseId" class="iptqy xyd" style="" placeholder="请输入社会信用代码"  />
+	</view>
+	<view class="line10"></view>
+	<view class="clearfloat ttbox">
+		<view class="ft leftname">招聘岗位意向</view>
+		<view class="fr rtip" style="text-align: right;width: 20%;" bindtap="tianjaijob">
+			<image class="imgtj" src="/img/tjimg.png"></image>
+		</view>
+	</view>
+	<view class="clearfloat obbox">
+		<view class="yxjob {{item.checked?'hide':'xb'}}" wx:for="{{wantjob}}"  wx:key="key">
+			<image src="/img/gbimg.png" class="gbimg" data-id="{{index}}" bindtap="closethis"></image>
+			<view class="jobbox"  >{{item.job}}</view>
+		</view>
+	</view>
+
+	<view class="tijsq" bindtap="wstijsq" style="margin: 0 21px;width: auto;margin-top: 25px;">提交审核</view>
+
+</view>

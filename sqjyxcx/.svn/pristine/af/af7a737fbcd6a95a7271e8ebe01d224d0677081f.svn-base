@@ -1,0 +1,64 @@
+<view class="container">
+	<navigator hover-class="none" url="/pages/comjbxx/comjbxx" class="clearfloat personbox">
+		<view class="ft ltimg">
+			<image src="{{tximg}}" class="tximg"></image>
+		</view>
+		<view class="ft nameinfo">
+			<view class="name">{{name}}</view>
+			<view class="sex">
+				{{companyname}}
+			</view>
+		</view>
+		<view class="fr frimg">
+			<image class="imgjt" src="/img/jt.png"></image>
+		</view>
+	</navigator>
+
+	<view class="clearfloat personbox">
+		<navigator hover-class="none " bindtap="changedw"  class="clearfloat tybox" >
+			<view class="ft qzyx">公司地址</view>
+			<view class="fr " ><image class="imgjt" src="/img/jt.png"></image></view>
+		</navigator>
+		<view class="clearfloat yxjobname" style="padding-right: 10px;">
+			{{comadress}}
+		</view>
+	</view>
+
+	<view class="clearfloat personbox">
+		<view class="clearfloat tybox" >
+			<view class="ft qzyx">企业介绍</view>
+			<view class="fr ">
+				<view class="tjia" bindtap="gzjltj">+ 添加</view>
+			</view>
+		</view>
+		<view class="clearfloat yxjobname" >
+			<text>{{gzjy}}</text>
+		</view>
+	</view>
+
+	<view class="clearfloat personbox">
+		<view class="clearfloat tybox" >
+			<view class="ft qzyx">企业相册</view>
+			<view class="fr ">
+				<navigator class="tjia" url="/pages/comxc/comxc">+ 添加</navigator>
+			</view>
+		</view>
+		<view class="clearfloat yxjobname flexbox" >
+			<text style="display: {{zwpj.length>0?'none':'block'}}">{{qyxc}}</text>
+			<image wx:for="{{zwpj}}" data-src="{{item.imgqy}}" bindtap="preimg1" wx:key="key" style="display: {{zwpj.length>0?'block':'none'}};width: {{imgwd}}px;height: {{bight}}px;"  class="qyfc" src="{{item.imgqy}}"></image>
+		</view>
+	</view>
+
+	<view class="clearfloat personbox">
+		<view class="clearfloat tybox" >
+			<view class="ft qzyx" style="margin-bottom: 0;">营业执照</view>
+			<view class="fr ">
+				<navigator class="tjia" url="/pages/yyzz/yyzz">+ 添加</navigator>
+			</view>
+		</view>
+		<view class="clearfloat yxjobname" >
+			<image style="display: {{imgyyzz.length>0?'block':'none'}}" wx:key="key" wx:for="{{imgyyzz}}" data-src="{{item.img}}" bindtap="preimg" src="{{item.img}}" class="yyzz"></image>
+		</view>
+	</view>
+
+</view>

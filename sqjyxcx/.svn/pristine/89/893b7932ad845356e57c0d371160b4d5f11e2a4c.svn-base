@@ -1,0 +1,159 @@
+.INinputheader {
+	/* width: 98%; */
+	margin-left: 20px;margin-top: 12px;padding-bottom: 11px;
+	margin-right: 20px;
+	height: 30px;
+	background: rgba(255,255,255,1);
+	border-radius: 30px;
+	font-size: 14px;
+	/* margin-top: -17px; */position: relative;
+	position: relative;
+}
+.INsearchicon {
+	position: absolute;
+	left: 8px;
+	top: 4px;
+}
+.weui-input {
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	padding-left: 30px;
+	letter-spacing: 0px;
+	background-color: #EFEFEF;
+	border-radius: 30px;
+	color: #333;
+}
+.sx{
+	position: relative;color: #A9A9A9;margin-right: 10px;margin-top: 4px;
+}
+.jtbox{
+	width:0;
+height:0;
+border:7px solid transparent;      position: absolute;
+top: 6px;margin-left: 4px;margin-right: 10px;
+border-top-color:#A9A9A9;display: inline; font-size: 14px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+}
+.lt{
+	width: 84%;
+}
+
+
+
+/* 悬浮层 */
+.topjlsg{
+	margin: 17px 10px 19px 10px ;
+}
+.yxbox{
+	margin: 6px 10px 19px 10px;display: flex;flex-wrap: wrap;
+}
+.yxforbox{
+	width: 30%;margin-right: 3%;margin-top: 10px;font-size: 12px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333333;
+	background: #F7F8FA;padding: 9px 0;text-align: center;
+}
+.active{
+	
+color: #F8424C;
+background: #FFEBED;
+}
+.yx {
+	font-size: 14px;
+	margin-left: 10px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #999999;
+}
+.sxac {
+	color: #F8424C;
+	margin-right: 23px;
+	font-size: 14px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+}
+.xz {
+	transform: rotate(180deg);
+	top: 16px;
+	border-top-color: #F8424C;
+}
+.company {
+	border-bottom: 1px solid #E5E5E5;
+}
+.companyname {
+	padding: 19px 0 0 14px;
+	font-size: 18px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #1A1A1A;
+}
+.tagbox {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 15px;
+	margin-top: 9px;
+	padding-bottom: 6px;
+}
+.companytag {
+	height: 27px;
+	line-height: 27px;
+	text-align: center;
+	padding: 2px 9px;
+	margin-right: 9px;
+	margin-bottom: 5px;
+	background: #EAF1FB;
+	border-radius: 5px 5px 5px 5px;
+	font-size: 14px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #3384FD;
+}
+.btmbbb {
+	margin: 0 15px;
+	margin-top: 4px;
+	padding-bottom: 11px;
+}
+.tximgc {
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	vertical-align: middle;
+	margin-top: -3px;
+	margin-right: 6px;
+}
+.nemas {
+	font-size: 14px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #999999;
+}
+
+
+.btmbtnbox{
+	display: flex;justify-content: space-around;padding-bottom: 37px;margin-top:30px ;
+}
+.clear{
+	font-size: 18px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;width: 29%;
+border-radius: 4px 4px 4px 4px;
+color: #FFFFFF;
+border: 1px solid #F8424C;
+color: #F8424C;height: 46px;line-height: 46px;text-align: center;
+}
+.qd{
+	background: #F8424C;height: 46px;line-height: 46px;text-align: center;
+border-radius: 4px 4px 4px 4px;font-size: 18px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #FFFFFF;width: 56%;
+}
+
+
+
+
+
+
+
+

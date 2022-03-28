@@ -1,0 +1,56 @@
+.toptit{
+	font-size: 12px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #3384FD;padding: 15px 0 13px 20px;
+}
+
+
+.jobbox {
+	margin: 0 16px 0 20px;
+	padding-bottom: 19px;
+}
+.ltbox {
+	width: 70%;
+}
+.jobname{
+	font-size: 18px;
+font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+font-weight: 500;margin-top: 23px;margin-bottom: 19px;
+color: #333333;
+}
+.jobmoney{font-size: 16px;
+	font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+	font-weight: 500;margin: 14px 0 8px 0;
+	color: #F8424C;
+}
+.companytx{
+	width: 22px;
+	height: 22px;vertical-align: middle;
+	background: #CBCBCB;border-radius: 50%;
+}
+.companyname{
+	font-size: 14px;
+font-family: SimHei-Regular, SimHei;
+font-weight: 400;
+color: #999999;
+}
+.far{
+	font-size: 14px;margin-top: 23px;
+font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+font-weight: 500;
+color: #999999;text-align: right;
+}
+.phonecall{
+	height: 30px;width: 70px;margin-top:16px;
+background: #FFFFFF;
+border-radius: 0px 0px 0px 0px;font-size: 12px;
+font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+font-weight: 500;
+color: #F8424C;
+opacity: 1;
+border: 1px solid #F8424C;line-height: 30px;text-align: center;
+}
+
+
+

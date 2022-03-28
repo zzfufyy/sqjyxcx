@@ -1,0 +1,168 @@
+.INinputheader {
+	/* width: 98%; */
+	margin-left: 20px;margin-top: 12px;padding-bottom: 11px;
+	margin-right: 20px;
+	height: 30px;
+	background: rgba(255,255,255,1);
+	border-radius: 30px;
+	font-size: 14px;
+	/* margin-top: -17px; */position: relative;
+	position: relative;
+}
+.INsearchicon {
+	position: absolute;
+	left: 8px;
+	top: 4px;
+}
+.weui-input {
+	height: 30px;
+	line-height: 30px;
+	text-align: left;
+	padding-left: 30px;
+	letter-spacing: 0px;
+	background-color: #EFEFEF;
+	border-radius: 30px;
+	color: #333;
+}
+.sx{
+	position: relative;color: #A9A9A9;margin-right: 10px;margin-top: 4px;
+}
+.jtbox{
+	width:0;
+height:0;
+border:7px solid transparent;      position: absolute;
+top: 6px;margin-left: 4px;margin-right: 10px;
+border-top-color:#A9A9A9;display: inline; font-size: 14px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+}
+.lt{
+	width: 84%;
+}
+
+
+
+/* 悬浮层 */
+.topjlsg{
+	margin: 17px 10px 19px 10px ;
+}
+.yxbox{
+	margin: 6px 10px 19px 10px;display: flex;flex-wrap: wrap;
+}
+.yxforbox{
+	width: 30%;margin-right: 3%;margin-top: 10px;font-size: 12px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333333;
+	background: #F7F8FA;padding: 9px 0;text-align: center;
+}
+.active{
+	
+color: #F8424C;
+background: #FFEBED;
+}
+.yx {
+	font-size: 14px;
+	margin-left: 10px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #999999;
+}
+.sxac {
+	color: #F8424C;
+	margin-right: 23px;
+	font-size: 14px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+}
+.xz {
+	transform: rotate(180deg);
+	top: 16px;
+	border-top-color: #F8424C;
+}
+.jobbox1 {
+	margin: 0 16px 0 20px;
+	padding-bottom: 19px;
+}
+.ltbox {
+	width: 70%;
+}
+.jobname {
+	font-size: 18px;
+	font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+	font-weight: 500;
+	margin-top: 23px;
+	color: #333333;
+}
+.jobmoney {
+	font-size: 16px;
+	font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+	font-weight: 500;
+	margin: 14px 0 8px 0;
+	color: #F8424C;
+}
+.companyname1 {
+	font-size: 14px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #999999;
+}
+.companytx {
+	width: 22px;
+	height: 22px;
+	vertical-align: middle;
+	background: #CBCBCB;
+	border-radius: 50%;
+}
+.far {
+	font-size: 14px;
+	margin-top: 23px;
+	font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+	font-weight: 500;
+	color: #999999;
+	text-align: right;
+}
+.phonecall {
+	height: 30px;
+	width: 70px;
+	margin-top: 32px;
+	background: #FFFFFF;
+	border-radius: 0px 0px 0px 0px;
+	font-size: 12px;
+	font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+	font-weight: 500;
+	color: #F8424C;
+	opacity: 1;
+	border: 1px solid #F8424C;
+	line-height: 30px;
+	text-align: center;
+}
+
+
+.btmbtnbox{
+	display: flex;justify-content: space-around;padding-bottom: 37px;margin-top:30px ;
+}
+.clear{
+	font-size: 18px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;width: 29%;
+border-radius: 4px 4px 4px 4px;
+color: #FFFFFF;
+border: 1px solid #F8424C;
+color: #F8424C;height: 46px;line-height: 46px;text-align: center;
+}
+.qd{
+	background: #F8424C;height: 46px;line-height: 46px;text-align: center;
+border-radius: 4px 4px 4px 4px;font-size: 18px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #FFFFFF;width: 56%;
+}
+/* .sxbox{
+	height: 100%;
+} */
+
+
+
+
+
+
+

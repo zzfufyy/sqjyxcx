@@ -1,0 +1,18 @@
+page{background: #F5F5F5;text-align: center;}
+.qyxx{
+	font-size: 20px;
+font-family: SimHei-Regular, SimHei;
+font-weight: 400;margin-top: 29px;
+color: #3384FD;text-align: center;
+}
+.obox{
+	margin-top: 122px;
+}
+.img{
+	width: 174px;height: 145px;
+}
+
+
+
+
+

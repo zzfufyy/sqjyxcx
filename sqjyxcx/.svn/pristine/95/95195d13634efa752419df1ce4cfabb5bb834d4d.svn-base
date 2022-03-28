@@ -1,0 +1,22 @@
+<view class="container">
+  <view class="toptit">
+    {{title}}
+  </view>
+  <view class="clearfloat lybox">
+    <view class="ft ly">{{ly}}</view>
+    <view class="fr ly">{{fbsj}}</view>
+  </view>
+  <scroll-view class="content" style="height:{{ht}}px" scroll-y>
+    <rich-text nodes="{{htmlSnip}}"></rich-text>
+  </scroll-view >
+	
+</view>
+<view class="btmbox clearfloat">
+	<view class="readtime ft">阅读 {{times}}</view>
+	<view class="share fr" bindtap="share">
+		<image class="srimg" src="/img/share.png"></image>
+		<button class="share_icon" open-type = "share">
+        分享
+    </button>
+	</view>
+</view>

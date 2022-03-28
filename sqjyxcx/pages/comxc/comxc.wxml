@@ -1,0 +1,11 @@
+<view class="container">
+	<view class="imgbox" style="height: {{bight}}px;padding-bottom: 20px;">
+		<view class="imgxc" style="height: {{imgwd}}px;width:{{imgwd}}px;" wx:key="key" wx:for="{{imgxc}}">
+			<image bindtap="preimg" style="height: {{imgwd}}px;width:{{imgwd}}px;" data-src="{{item.imgsrc}}" src="{{item.imgsrc}}" ></image>
+			<image data-imgsrc="{{item.imgsrc}}" data-id="{{item.id}}" class="gbimg" src="/img/del.png" bindtap="qxbtn"></image>
+		</view>
+		<view class="tjimg" bindtap="tjimg" style="height: {{imgwd}}px;width:{{imgwd}}px;line-height:{{imgwd}}px;display: {{imgxc.length>='9'?'none':'block'}};">+</view>
+	</view>
+</view>
+
+<view class="tijsq" bindtap="bc">保存</view>

@@ -1,0 +1,61 @@
+<view class="container">
+	<view class="INinputheader clearfloat">
+		<view class="ft lt">
+			<icon class="INsearchicon" type="search" size="22" color="#fff" />
+			<input class="weui-input" placeholder-class="opl" placeholder="搜索职位、公司" bindtap="searchjob"
+				confirm-type="search" />
+		</view>
+		<view class="nav-name sx fr" bindtap="sx">筛选<view class="jtbox "></view></view>
+	</view>
+	<view class="joblist">
+		<navigator hover-class="none" url="/pages/loojl/lookjl" class="company" wx:for="{{compangjob}}" wx:key="key">
+			<view class="companyname">找 {{item.jobname}} 工作</view>
+			<view class="wid95 tagbox" >
+				<view class="companytag" wx:key="key" wx:for="{{item.usertag}}">{{item.tagbq}}</view>
+			</view>
+			<view class="btmbbb">
+				<image src="{{item.tximg}}" class="tximgc"></image>
+				<text class="nemas">{{item.name}} {{item.hxtime}} {{item.sqname}} {{item.companyjuli}}km</text>
+			</view>
+		</navigator>
+	</view>
+</view>
+
+<view class="zzc" bindtap="sx" hidden="{{hidesx}}"></view>
+<scroll-view scroll-y  class="sxbox" hidden="{{hidesx}}">
+	<view class="topjlsg">
+		<view class="yxyq clearfloat">
+			<view class="yx ft">月薪要求</view>
+			<view class=" fr sxac" bindtap="sx">收起 <view class="jtbox xz"></view></view>
+		</view>
+		<view class="yxbox">
+			<view class="yxforbox {{item.checked?'active':'xb'}}"  bindtap="yxxz" data-id="{{item.id}}" 
+			wx:for="{{yxyq}}" wx:key="key">{{item.yxmoney}}</view>
+		</view>
+	</view>
+	<view class="topjlsg">
+		<view class="yxyq clearfloat">
+			<view class="yx ft">年龄范围</view>
+			<!-- <view class=" fr sxac">收起 <view class="jtbox xz"></view></view> -->
+		</view>
+		<view class="yxbox">
+			<view class="yxforbox {{item.checked?'active':'xb'}}"  bindtap="nlfw" data-id="{{item.id}}" 
+			wx:for="{{nyxz}}" wx:key="key">{{item.nl}}</view>
+		</view>
+	</view>
+	<view class="topjlsg">
+		<view class="yxyq clearfloat">
+			<view class="yx ft">工作经验</view>
+			<!-- <view class=" fr sxac">收起 <view class="jtbox xz"></view></view> -->
+		</view>
+		<view class="yxbox">
+			<view class="yxforbox {{item.checked?'active':'xb'}}"  bindtap="gzjy" data-id="{{item.id}}" 
+			wx:for="{{gzjy}}" wx:key="key">{{item.jy}}</view>
+		</view>
+	</view>
+	<view class="btmbtnbox">
+		<view class="clear" bindtap="clear">清空</view>
+		<view class="qd" bindtap="qd">确定</view>
+	</view>
+</scroll-view>
+
