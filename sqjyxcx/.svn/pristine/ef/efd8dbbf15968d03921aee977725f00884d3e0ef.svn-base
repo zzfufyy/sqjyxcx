@@ -1,0 +1,144 @@
+// pages/fbjob/fbjob.js
+Page({
+
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+		datall:[
+			{array:['IT','文化传媒','电子制造'],index:0,	array1:['社区1','街道1','街道2'],	index1:0,ppindex:-1, sbpp:"",}
+		],
+		dyxz:"",
+	},
+	//继续添加
+	jxtj(e){
+		let that = this
+		let odatall = that.data.datall
+		let newitem = {
+			array:['IT','文化传媒','电子制造'],index:0,	array1:['社区1','街道1','街道2'],	index1:0,ppindex:0,sbpp:"",
+		}
+		this.setData({
+			datall: that.data.datall.concat(newitem),
+		})
+	},
+	// 薪资范围选择
+	bindPickerChange(e){
+		let arr = this.data.datall
+    let ppindex = 'datall['+e.target.dataset.index+'].index';
+		console.log('picker发送选择改变，携带值为', e.detail.value)
+		console.log(ppindex)
+    this.setData({
+			// i:e.detail.value,
+			[ppindex]:e.detail.value,
+      dyxz: arr[e.target.dataset.index].array[e.detail.value],
+      color:"#000"
+    })
+	},
+
+	// 招聘人数选择
+	bindPickerChange1(e){
+    let ppindex = 'datall['+e.target.dataset.index+'].index1';
+		console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+			// i:e.detail.value,
+			[ppindex]:e.detail.value,
+			color1:"#000"
+		})
+	},
+  /**获取岗位名称**/
+  setInputValue2: function (e) {
+    // console.log(e)
+    let index = e.target.dataset.index //数组下标
+    let array = this.data.datall;
+    array[index].sbpp = e.detail.value  //赋值
+    this.setData({
+      datall: array
+    })
+  },
+
+  /****删除*/
+  deletePrice: function (e) {
+    let that = this
+    let index = e.target.dataset.index //数组下标
+    let arrayLength = that.data.datall.length //数组长度
+    let newArray = []
+    if (arrayLength > 1) {
+      //数组长度>1 才能删除
+      for (let i = 0; i < arrayLength; i++) {
+        if (i !== index) {
+          newArray.push(that.data.datall[i])
+        }
+      }
+      that.setData({
+        datall: newArray
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        content: '必须设置一个设备',
+        success (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
+  },
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function () {
+
+	},
+
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function () {
+
+	},
+
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+
+	},
+
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function () {
+
+	}
+})

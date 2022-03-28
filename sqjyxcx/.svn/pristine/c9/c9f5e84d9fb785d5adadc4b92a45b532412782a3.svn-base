@@ -1,0 +1,18 @@
+const Api = {
+    userCandidateAdd: '/user-candidate/add',
+    userCandidateInfo: '/user-candidate/info',
+
+
+    // user
+    userInfo: '/user/info',
+};
+
+
+module.exports = {
+    Api: Api,
+}
+
+
+
+
+

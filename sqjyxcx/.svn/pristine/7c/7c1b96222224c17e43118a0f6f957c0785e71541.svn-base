@@ -1,0 +1,84 @@
+{
+  "tabBar": {
+    "custom": false,
+    "color": "#7E7578",
+    "selectedColor": "#3384FD",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+        {
+            "pagePath": "pages/index/index",
+            "iconPath": "img/icon／shouye.png",
+            "selectedIconPath": "img/icon／shouye／xuanzhong.png",
+            "text": "首页"
+        },
+        {
+            "pagePath": "pages/massege/massege",
+            "iconPath": "img/icon／xiaoxi.png",
+            "selectedIconPath": "img/icon／xiaoxi／xuanzhong.png",
+            "text": "消息"
+        },
+        {
+            "pagePath": "pages/news/news",
+            "iconPath": "img/icon／zixun.png",
+            "selectedIconPath": "img/icon／zixun／xuanzhong.png",
+            "text": "资讯"
+        },
+        {
+            "pagePath": "pages/mine/mine",
+            "iconPath": "img/icon／wode.png",
+            "selectedIconPath": "img/icon／wode／xuanzhong.png",
+            "text": "我的"
+        }
+    ]
+} ,
+  "pages": [
+    "pages/index/index",
+    "pages/massege/massege",
+    "pages/news/news",
+    "pages/mine/mine",
+    "pages/qyzc/qyzc",
+    "pages/waiteyz/waiteyz",
+    "pages/fbjob/fbjob",
+    "pages/zxxq/zxxq",
+    "pages/wantjob/wantjob",
+    "pages/personjl/personjl",
+    "pages/jlxg/jlxg",
+    "pages/gzjl/gzjl",
+    "pages/selfpj/selfpj",
+    "pages/zyjn/zyjn",
+    "pages/msjob/msjob",
+    "pages/ytdjob/ytdjob",
+    "pages/byll/byll",
+    "pages/manegejob/manegejob",
+    "pages/set/set",
+    "pages/editjob/editjob",
+    "pages/manegejl/manegejl",
+    "pages/talkjobcom/talkjobcom",
+    "pages/loojl/lookjl",
+    "pages/zwxq/zwxq",
+    "pages/rzcenter/rzcenter",
+    "pages/comjbxx/comjbxx",
+    "pages/comadrres/comadrres",
+    "pages/comjs/comjs",
+    "pages/comxc/comxc",
+    "pages/yyzz/yyzz",
+    "pages/aboutus/aboutus"
+    
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#3384FD",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle": "white"
+    
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

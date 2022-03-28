@@ -1,0 +1,144 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "企业注册",
+          "pathName": "pages/qyzc/qyzc",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "企业验证",
+          "pathName": "pages/waiteyz/waiteyz",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "发布职位",
+          "pathName": "pages/fbjob/fbjob",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "资讯列表",
+          "pathName": "pages/news/news",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "资讯详情",
+          "pathName": "pages/zxxq/zxxq",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "个人中心-求职者",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "工作意向",
+          "pathName": "pages/wantjob/wantjob",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "个人简历",
+          "pathName": "pages/personjl/personjl",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "个人简历修改",
+          "pathName": "pages/jlxg/jlxg",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "工作经历添加",
+          "pathName": "pages/gzjl/gzjl",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "自我评价",
+          "pathName": "pages/selfpj/selfpj",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "面试岗位",
+          "pathName": "pages/msjob/msjob",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "已投递岗位",
+          "pathName": "pages/ytdjob/ytdjob",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "专业技能",
+          "pathName": "pages/zyjn/zyjn",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "被游览量",
+          "pathName": "pages/byll/byll",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "管理职位--企业版",
+          "pathName": "pages/manegejob/manegejob",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "设置",
+          "pathName": "pages/set/set",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "编辑职位--企业版",
+          "pathName": "pages/editjob/editjob",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "管理简历--企业版",
+          "pathName": "pages/manegejl/manegejl",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "聊一聊--企业版",
+          "pathName": "pages/talkjobcom/talkjobcom",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "查看简历--企业版",
+          "pathName": "pages/loojl/lookjl",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

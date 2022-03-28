@@ -1,0 +1,50 @@
+
+<view class="container">
+	<view class="topbox">
+		<view class="yhbg bg-blur" style="background: url(/img/tx.png) no-repeat center;">
+		</view>
+	</view>
+	<view class="toxbox">
+		<image class="bgimg" src="{{tximg}}"></image>
+		<view class="xgtx" bindtap="xgtx">点击修改头像</view>
+	</view>
+	<view class="naxbox" style="padding-bottom: 5px;" >
+		<view class="name">真实姓名</view>
+		<input type="text" placeholder="输入真实姓名" class="wxh truename" />
+	</view>
+	<view class="naxbox1">
+		<input type="text" placeholder="输入微信号" class="wxh" />
+	</view>
+	<view class="naxbox">
+		<view class="name">性别</view>
+		<view class="truename">
+			<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+				<view class="picker">
+					{{array[index]}}
+				</view>
+			</picker>
+		</view>
+	</view>
+	<view class="naxbox">
+		<view class="name">手机号</view>
+		<view class="phonenum">
+			{{phonenum}}
+		</view>
+	</view>
+	<view class="naxbox clearfloat">
+		<view class="ft" style="width: 49%;">
+			<view class="name">出生年份</view>
+			<view class="phonenum">
+				{{borthday}}年
+			</view>
+		</view>
+		<view class="fr" style="width: 49%;border-left: 1px solid #F2F2F2;">
+			<view class="name" >工作时间</view>
+			<view class="phonenum">
+				{{worktime}}年
+			</view>
+		</view>
+	</view>
+</view>
+<view class="tijsq">保存</view>
+

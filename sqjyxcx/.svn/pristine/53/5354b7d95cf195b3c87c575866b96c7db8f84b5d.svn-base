@@ -1,0 +1,211 @@
+// index.js
+// 获取应用实例
+const App  = getApp()
+
+Page({
+  data: {
+    topnav:[
+      {name:'投递记录',imsrc:'/img/tdjl.png',url:''},
+      {name:'个人简历',imsrc:'/img/grjl.png',url:''},
+      {name:'邀约面试',imsrc:'/img/yyms.png',url:''},
+      {name:'修改定位',imsrc:'/img/xgdw.png',url:''},
+    ],
+    compangjob:[
+      {companyname:'长沙星沙文和友餐饮文化管理有限公司',companyjuli:'1.2',companylocal:'长沙县泉塘街道新长海广场',
+        companytag:[{tagbq:'店长'},{tagbq:'楼面经理'},{tagbq:'楼面领班'},{tagbq:'服务员'},{tagbq:'收银员'},]
+      },
+      {companyname:'长沙鸿朗自动化科技有限公司',companyjuli:'1.2',companylocal:'长沙市望城经济技术开发区',
+        companytag:[{tagbq:'机械设计师'},{tagbq:'装配钳工'},{tagbq:'装配电工'}]
+      },
+      {companyname:'长沙鸿朗自动化科技有限公司',companyjuli:'1.2',companylocal:'长沙市望城经济技术开发区',
+        companytag:[{tagbq:'机械设计师'},{tagbq:'装配钳工'},{tagbq:'装配电工'}]
+      },
+    ],
+
+    xb:[{xb:'男'},{xb:'女'},],
+    num1:'',
+    nianl:[
+      {nal:'30-40岁'},{nal:'40-50岁'},{nal:'50-60岁'},
+    ],
+    num2:'',
+    wantjob:[
+      {job:'保洁',id: 1,},{job:'服务员',id: 2,},{job:'保安',id: 3},{job:'保姆',id: 4},
+    ],
+    xzyq:[
+      {xz:'3K-5K'},{xz:'5K-8K'},{xz:'8K-10K'},
+    ],
+    num3:'',
+    ht:'',
+    // 角色选择
+    juesehide:true,
+    // 实名认证
+    smhide:true,
+    // 求职者完善信息
+    infows:true,
+    //企业登录
+    qydl:true,
+    //提示用户需要获取手机号
+    sjh:false
+  },
+  // 更改定位
+	changedw(e){
+		let that = this
+		wx.chooseLocation({
+      type: 'gcj02',
+      success (res) {
+        console.log(res)
+        const latitude = res.latitude
+				const longitude = res.longitude
+				var positionData = res.address
+				that.setData({
+					// positionData:positionData
+				})
+			}
+		})
+	},
+  //搜索函数
+  searchjob(){
+    console.log("000")
+    this.setData({
+      okl:"000"
+    })
+  },
+  //添加意向
+  btntjia(){
+    wx.navigateTo({
+      url: 'url',
+    })
+  },
+  //求职者
+  qzz(){
+    let juesehide = this.data.juesehide
+    this.setData({
+      juesehide:true,
+      smhide:false
+    })
+  },
+  //招聘方
+  zpf(){
+    let juesehide = this.data.juesehide
+    this.setData({
+      juesehide:true,
+      qydl:false
+    })
+  },
+  //实名认证提交
+  smrztijsq(){
+    let smhide = this.data.smhide
+    this.setData({
+      smhide:true,
+      infows:false
+    })
+  },
+  //完善信息
+  wsxnhide(){
+    let infows = this.data.infows
+    this.setData({
+      infows:true
+    })
+  },
+  //提示用户需要获取手机号*确认*
+  getPhoneNumber (e) {
+    this.setData({
+      sjh:true,
+      juesehide:false
+    })
+  },
+  //提示用户需要获取手机号*忽略*
+  hulue(){
+    this.setData({
+      sjh:true,
+      // juesehide:false
+    })
+  },
+  // 求职者完善信息start
+  // 性别选择
+  xbxz(e){
+    let that = this;
+		let index = e.currentTarget.dataset.index1;
+		that.setData({
+			num1: index
+		})
+  },
+  // 年龄选择
+  nlxz(e){
+    let that = this;
+		let index = e.currentTarget.dataset.index2;
+		that.setData({
+			num2: index
+		})
+  },
+  //想从事的工作
+  wanjob(e){
+    let id = e.currentTarget.dataset.id
+    console.log(id)
+    for (let i = 0; i < this.data.wantjob.length; i++) {
+      if (this.data.wantjob[i].id == id) {
+        if (this.data.wantjob[i].checked == true) {
+          this.data.wantjob[i].checked = false;
+        } else {
+          this.data.wantjob[i].checked = true;
+        }
+      }
+    }
+   this.setData({
+     wantjob: this.data.wantjob,
+     msg: "id:"+id
+    })
+  },
+  //薪资要求
+  xzyq(e) {
+		let that = this;
+		let index = e.currentTarget.dataset.index3;
+		that.setData({
+			num3: index
+		})
+  },
+  // 求职者完善信息提交
+  wstijsq(){
+    let infows = this.data.infows
+    this.setData({
+      infows:true
+    })
+  },
+  // 求职者完善信息end
+  //企业登录
+  qydltijsq(){
+    let qydl = this.data.qydl
+    this.setData({
+      qydl:true
+    })
+  },
+  onLoad(options) {
+    let that = this
+    //自定义头部方法
+    this.setData({
+      navH: App.globalData.navHeight,
+      margtop:App.globalData.navHeight
+    });
+    this.data.wantjob[0].checked = true;
+    this.setData({
+      wantjob: this.data.wantjob,
+    })
+    //设置scroll-view的高度
+    console.log(App.globalData.arrij.screenHeight)
+
+    that.setData({
+      ht:App.globalData.arrij.screenHeight-119
+    })
+    // 获取位置信息
+    wx.getLocation({
+      type: 'wgs84',
+      success (res) {
+        console.log(res)
+        const latitude = res.latitude
+        const longitude = res.longitude
+        const speed = res.speed
+        const accuracy = res.accuracy
+      }
+     })
+  },
+})

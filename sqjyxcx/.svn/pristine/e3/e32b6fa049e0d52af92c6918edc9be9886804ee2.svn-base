@@ -1,0 +1,100 @@
+const { Api } = require('../common/api');
+const $ = require('../utils/request_util');
+const user = require('../common/user');
+
+const app = getApp();
+
+const _userRoleStorageKey = 'USER_ROLE';
+
+const UserService = {
+    /**
+     * 加载用户的基本信息
+     */
+    loadUserInfo: async function () {
+        return await $.requestOnlyData({
+            url: Api.userInfo,
+            data: {
+                openid: app.getOpenid(),
+            },
+        });
+    },
+
+    /**
+     * 加载用户作为求职者的信息
+     */
+    loadRcruiteeInfo: async function () {
+        return await $.requestOnlyData({
+            url: Api.userCandidateInfo,
+            data: {
+                openid: app.getOpenid(),
+            },
+        });
+    },
+
+    loadRecruiterInfo: async function () {
+        return await $.requestOnlyData({
+            url: Api.userRecruiterInfo,
+            data: {
+                id: app.getOpenid(),
+            }
+        });
+    },
+
+    getUserRoleInfo: async function (userRole) {
+        let res = null;
+        // 是求职者
+        if (userRole === user.UserRole.Recruitee) {
+            res = await this.loadRcruiteeInfo();
+        }
+        // 是招聘者
+        else {
+            res = await this.loadRecruiterInfo();
+        }
+
+        return res;
+    },
+
+    // 如果本地缓存无效的话，可以换成从服务端获取
+    saveUserRole: function (userRole) {
+        console.debug(`本地存储用户角色: ${userRole}[${user.userRoleName[userRole]}]`);
+        wx.setStorage({
+            key: _userRoleStorageKey,
+            data: userRole,
+        });
+    },
+
+    // 返回了一个 Promise
+    loadUserRole: function () {
+        return new Promise(
+            (resolve, reject) => {
+                wx.getStorage({
+                    key: _userRoleStorageKey,
+                    success: (r) => {
+                        let v = r.data;
+                        console.debug(`本地存储的用户角色为: ${v}[${user.userRoleName[v]}]`);
+                        resolve(v);
+                    },
+                    fail: reject,
+                });
+            }
+        )
+    },
+
+    clearUserRole: async function () {
+        return new Promise(
+            (resolve, reject) => {
+                wx.removeStorage({
+                    key: _userRoleStorageKey,
+                    success: resolve,
+                    fail: reject,
+                });
+            }
+        );
+    }
+};
+
+module.exports = {
+    UserService: UserService,
+    user: user,
+}
+

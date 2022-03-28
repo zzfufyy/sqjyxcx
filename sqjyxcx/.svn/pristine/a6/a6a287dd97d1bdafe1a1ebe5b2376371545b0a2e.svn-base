@@ -1,0 +1,95 @@
+<view class="container">
+	<navigator hover-class="none" url="/pages/comjbxx/comjbxx" class="clearfloat personbox">
+		<view class="ft ltimg">
+			<image src="{{tximg}}" class="tximg"></image>
+		</view>
+		<view class="ft nameinfo">
+			<view class="name">{{name}}</view>
+			<view class="sex">
+				{{companyname}}
+			</view>
+		</view>
+		<view class="fr frimg">
+			<image class="imgjt" src="/img/jt.png"></image>
+		</view>
+	</navigator>
+
+	<view class="clearfloat personbox">
+		<navigator hover-class="none " bindtap="changedw"  class="clearfloat tybox" >
+			<view class="ft qzyx">公司地址</view>
+			<view class="fr " ><image class="imgjt" src="/img/jt.png"></image></view>
+		</navigator>
+		<view class="clearfloat yxjobname" >
+			{{comadress}}
+		</view>
+	</view>
+
+	<view class="clearfloat personbox">
+		<view class="clearfloat tybox" >
+			<view class="ft qzyx">企业介绍</view>
+			<view class="fr ">
+				<view class="tjia" bindtap="gzjltj">+ 添加</view>
+			</view>
+		</view>
+		<view class="clearfloat yxjobname" >
+			<text wx:if="{{boolean==true}}">{{gzjy}}</text>
+			<view wx:if="{{boolean==false}}" wx:for="{{qzjy}}" wx:key="key">
+				<view class="clearfloat" style="padding-left: 0;">
+					<view class="companyname ft">
+						<view class="cmname">{{item.companyname}}</view>
+						<view class="namejob">{{item.jobname}},{{item.jobyear}}</view>
+					</view>
+					<view class=" fr"><image class="imgjt" src="/img/jt.png"></image></view>
+				</view>
+				<view class="namejob" wx:for="{{item.jobdsc}}" wx:key="key">
+					{{item.jobjl}}
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="clearfloat personbox">
+		<view class="clearfloat tybox" >
+			<view class="ft qzyx">企业相册</view>
+			<view class="fr ">
+				<navigator class="tjia" url="/pages/comxc/comxc">+ 添加</navigator>
+			</view>
+		</view>
+		<view class="clearfloat yxjobname" >
+			<text wx:if="{{selfpj==true}}">{{qyxc}}</text>
+			<view wx:if="{{selfpj==false}}" wx:for="{{zwpj}}" wx:key="key">
+				<view class="clearfloat" style="padding-left: 0;">
+					<view class="companyname ft">
+						<!-- <view class="cmname">{{item.companyname}}</view> -->
+						<view class="namejob">{{item.zwpj}}</view>
+					</view>
+					<view class=" fr"><image class="imgjt" src="/img/jt.png"></image></view>
+				</view>
+			
+			</view>
+		</view>
+	</view>
+
+	<view class="clearfloat personbox">
+		<view class="clearfloat tybox" >
+			<view class="ft qzyx" style="margin-bottom: 0;">营业执照</view>
+			<view class="fr ">
+				<navigator class="tjia" url="/pages/zyjn/zyjn">+ 添加</navigator>
+			</view>
+		</view>
+		<view class="clearfloat yxjobname" >
+			<text wx:if="{{zyjn==true}}">{{jszj}}</text>
+			<view wx:if="{{zyjn==false}}" wx:for="{{gerenzyjn}}" wx:key="key">
+				<view class="clearfloat" style="padding-left: 0;">
+					<view class="companyname ft">
+						<!-- <view class="cmname">{{item.companyname}}</view> -->
+						<view class="namejob">{{item.jobjl}}</view>
+					</view>
+					<view class=" fr"><image class="imgjt" src="/img/jt.png"></image></view>
+				</view>
+			
+			</view>
+		</view>
+	</view>
+
+</view>

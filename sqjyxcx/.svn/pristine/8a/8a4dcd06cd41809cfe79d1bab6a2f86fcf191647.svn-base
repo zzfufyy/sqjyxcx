@@ -1,0 +1,59 @@
+<view class="container">
+	<view class='top_nav'>
+		<view class="nav-name {{item.typeId == currentId ? 'nav-hover':''}}" wx:for="{{section}}" wx:key="id" id='{{item.typeId}}' catchtap='handleTap'>
+			{{item.name}}({{item.num}})
+			<view class="linbc"></view>
+		</view>
+	</view>
+
+	<swiper current="{{currentTab}}" data-current="{{currentId}}"  style="height:{{winHeight - 55}}px;" bindchange="switchTab">
+		<!-- 待查看 -->
+		<swiper-item style="height:100%;overflow-y:scroll;background: #F5F5F5;" >
+			<view class="workbox" wx:for="{{dck}}" wx:key="key">
+				<view class="jobname">{{item.name}} {{item.sex}} {{item.year}} {{item.workyear}}年 {{item.jyzt}}</view>
+				<view class="gwyq">应聘岗位:{{item.ypzw}}</view>
+				<!-- <view class="gwyq"></view> -->
+				<view class="clearfloat btmbox">
+					<view class="ft ltbox">
+						<view class="bjbox" data-ckid="{{item.ckid}}" bindtap="dcktalk">聊一聊</view>
+						<view class="xiajia1" data-ckid="{{item.ckid}}" data-cellphne="{{item.cellphne}}" bindtap="call">电话</view>
+						<view class="xiajia" data-ckid="{{item.ckid}}" bindtap="bhs">不合适</view>
+					</view>
+				</view>
+			</view>
+		</swiper-item>
+		<swiper-item style="height:100%;overflow-y:scroll;background: #F5F5F5;" >
+			<!-- 沟通中 -->
+			<view class="workbox" wx:for="{{gtz}}" wx:key="key">
+				<view class="jobname">{{item.name}} {{item.sex}} {{item.year}} {{item.workyear}}年 {{item.jyzt}}</view>
+				<view class="gwyq">应聘岗位:{{item.ypzw}}</view>
+				<!-- <view class="gwyq"></view> -->
+				<view class="clearfloat btmbox">
+					<view class="ft ltbox">
+						<view class="bjbox" data-talkid="{{item.ckid}}" bindtap="talk">聊一聊</view>
+						<view class="xiajia1" data-cellphne="{{item.cellphne}}" bindtap="callnum">电话</view>
+						<view class="xiajia" data-ckid="{{item.ckid}}" bindtap="gtzbhs">不合适</view>
+					</view>
+				</view>
+			</view>
+		</swiper-item>
+		<swiper-item style="height:100%;overflow-y:scroll;background: #F5F5F5;" >
+			<!-- 不合适 -->
+			<view class="workbox" wx:for="{{buheshi}}" wx:key="key">
+				<view class="jobname">{{item.name}} {{item.sex}} {{item.year}} {{item.workyear}}年 {{item.jyzt}}</view>
+				<view class="gwyq">应聘岗位:{{item.ypzw}}</view>
+				<!-- <view class="gwyq"></view> -->
+				<view class="clearfloat btmbox">
+					<view class="ft ltbox">
+						<view class="bjbox" data-ckid="{{item.ckid}}" bindtap="bhstalk">聊一聊</view>
+						<view class="xiajia1" data-ckid="{{item.ckid}}" data-cellphne="{{item.cellphne}}" bindtap="bhscall">电话</view>
+						<!-- <view class="xiajia" data-ckid="{{item.ckid}}" bindtap="bhs">不合适</view> -->
+					</view>
+				</view>
+			</view>
+		</swiper-item>
+	</swiper>
+
+</view>
+
+

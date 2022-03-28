@@ -1,0 +1,9 @@
+function isEmpty(param){
+    if(typeof(param)==="undefined" || param.length == 0 || param === null){
+        return true;
+    }
+}
+
+module.exports = {
+    isEmpty:isEmpty
+};

@@ -1,0 +1,56 @@
+
+page{
+	background-color: #F5F5F5;
+}
+.container{
+	background: #fff;
+}
+
+.topbox{
+	padding: 38px 29px 0 29px;
+}
+.comname{
+	font-size: 22px;margin-bottom: 20px;
+font-family: Source Han Sans CN-Bold, Source Han Sans CN;
+font-weight: bold;
+color: #333333;
+}
+.comimg{
+	margin: 0px 0 29px 0;
+}
+.imgtag{
+	width: 90px;height: 90px;vertical-align: middle;
+	border: 1px solid #707070;
+}
+.qybz{
+	width: 97px;display: inline-block;
+height: 25px;line-height: 25px;text-align: center;
+background: #FFFFFF;margin-left: 22px;
+border-radius: 3px 3px 3px 3px;
+opacity: 1;font-size: 14px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #FF4829;
+border: 1px solid #ECB29E;
+}
+
+.frxx{
+	height: 55px;line-height: 55px;
+background: #F6F6F6;
+border-radius: 0px 0px 0px 0px;margin-bottom: 12px;
+}
+.nm{
+	font-size: 16px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;margin-left: 18px;
+	color: #333333;
+}
+.ipt{
+	text-align: right;height: 55px;line-height: 55px;margin-right: 13px;
+}
+.bcbox{margin-top: 21px;}
+
+
+
+
+

@@ -1,0 +1,47 @@
+.naxbox{
+	border-bottom: 1px solid #F2F2F2;
+	margin: 0 10px;text-align: center; 
+	height: 60px;
+	padding-top: 10px;
+}
+.name{    width: 100%;
+	font-size: 14px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #C1C1C1;margin-bottom: 5px;
+}
+.wxh{
+	font-size: 20px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #333333;    height: 35px;
+line-height: 35px;
+}
+.phonenum {
+	font-size: 18px;
+	font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+	font-weight: 500;
+	color: #333333;
+}
+page{
+	background: #F5F5F5;
+}
+.container{
+	background-color: #fff;
+}
+.gznr{
+	font-size: 14px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #333333;
+margin: 19px 0 19px 22px;
+}
+.areanr{
+	padding: 0 19px;
+}
+
+
+
+
+
+

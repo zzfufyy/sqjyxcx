@@ -1,0 +1,142 @@
+<!-- // "navigationStyle":"custom" -->
+<view class="container">
+  <!-- 自定义头部 -->
+  <view class='nav bg-white' style='height:76px;'>
+    <view class=' ' style='height:37px'>
+      <view class='nav-title'>
+        <view class="INinputheader">
+          <icon class="INsearchicon" type="search" size="22" color="#fff"/>
+          <input class="weui-input" placeholder-class="opl" placeholder="搜索职位、公司" bindconfirm="searchjob" 	confirm-type="search"/>
+        </view>
+      </view>
+      <view class="btmbor"></view>
+    </view>
+  </view>
+  <view scroll-y style="top: -30px;position: relative;height: {{}}px;z-index: 999;">
+    <!-- 菜单栏 -->
+    <view class='bg-gray overflow' scroll-y >
+      <navigator hover-class="none"  bindtap="tdjl" url="" class="navtop" wx:key="key">
+        <view class="imgbox"><image src="/img/tdjl.png"></image></view>
+        <view class="texname">投递记录</view>
+      </navigator>
+      <navigator hover-class="none"  bindtap="grjl" url="" class="navtop" wx:key="key">
+        <view class="imgbox"><image src="/img/grjl.png"></image></view>
+        <view class="texname">个人简历</view>
+      </navigator>
+      <navigator hover-class="none"  bindtap="tyms" url="" class="navtop" wx:key="key">
+        <view class="imgbox"><image src="/img/yyms.png"></image></view>
+        <view class="texname">邀约面试</view>
+      </navigator>
+      <navigator hover-class="none"  bindtap="changedw" url="" class="navtop" wx:key="key">
+        <view class="imgbox"><image src="/img/xgdw.png"></image></view>
+        <view class="texname">修改定位</view>
+      </navigator>
+    </view>
+    <!-- 意向工作 -->
+    <view class="jobbox wdbox clearfloat">
+      <view class="ft ltjobox">
+        <view class="txextname">你想找什么工作？</view>
+        <view class="jobtj">根据职位类型等精准推荐职位</view>
+      </view>
+      <view class="fr lrjobox">
+        <view class="btntjia" bindtap="btntjia">＋添加意向</view>
+      </view>
+    </view>
+    <!-- 附近职位 -->
+    <view class="wdbox">
+      <view class="topjob">
+        <image class="local" src="/img/Icon ／ Location On ／ Rounded@2x.png"></image>附近职位
+      </view>
+      <view class="joblist">
+        <view class="company" wx:for="{{compangjob}}" wx:key="key">
+          <view class="companyname">{{item.companyname}}</view>
+          <view class="companyjuli">{{item.companyjuli}}km {{item.companylocal}}</view>
+          <view class="wid95 tagbox" style="">
+            <view class="companytag" wx:key="key" wx:for="{{item.companytag}}">{{item.tagbq}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 选择角色 -->
+  <view class="" hidden="{{juesehide}}">
+    <view class="zzc"></view>
+    <view class="qzbox">
+      <view class="qusf">请确认你的身份</view>
+      <view class="zsfw">确认后将为你提供专属服务</view>
+      <view class="qzz" bindtap="qzz">我是求职者 ></view>
+      <view class="qzz zpf" bindtap="zpf">我是招聘方 ></view>
+    </view>
+  </view>
+
+  <!-- 实名认证 -->
+  <view class="" hidden="{{smhide}}">
+    <view class="zzc"></view>
+    <view class="qzbox">
+      <view class="qusf">实名认证</view>
+      <view class="zsfw smrz">温馨提示：根据国家、省对政务服务实名制管理要求，使用“社区就业”需要进行实名信息验证</view>
+      <view class="qzz1" >
+        <input type="text" class="iptnam" placeholder="请输入姓名"/>
+      </view>
+      <view class="qzz1 zpf" bindtap="zpf">
+        <input type="text" class="iptnam" placeholder="请输入身份证号码"/>
+      </view>
+      <view class="tijsq" bindtap="smrztijsq" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>
+    </view>
+  </view>
+
+  <!-- 求职者完善信息 -->
+  <view class="" hidden="{{infows}}">
+    <view class="zzc" bindtap="wsxnhide"></view>
+    <view class="qzbox" style="top: 15%;">
+      <view class="qusf">完善信息</view>
+      <view class="zsfw smrz">性别</view>
+      <view class="qzz1 xxbox"  >
+        <view class="xb {{num1==index?'active':''}}" wx:key="key" wx:for="{{xb}}" data-index1="{{index}}" bindtap="xbxz">{{item.xb}}</view>
+      </view>
+      <view class="zsfw smrz">我想从事的工作</view>
+      <view class="qzz1 xxbox" >
+        <view class="xb {{item.checked?'active':'xb'}}" wx:for="{{wantjob}}" data-id='{{item.id}}' bindtap="wanjob" wx:key="key">{{item.job}}</view>
+      </view>
+      <view class="zsfw smrz">年龄</view>
+      <view class="qzz1 xxbox" >
+        <view class="xb {{num2==index?'active':''}}" wx:for="{{nianl}}" data-index2="{{index}}"  wx:key="key" 
+        bindtap="nlxz">{{item.nal}}</view>
+      </view>
+      <view class="zsfw smrz">薪资要求</view>
+      <view class="qzz1 xxbox" >
+        <view class="xb {{num3==index?'active':''}}" bindtap="xzyq" data-index3="{{index}}" wx:for="{{xzyq}}"  wx:key="key">{{item.xz}}</view>
+      </view>
+      <view class="tijsq" bindtap="wstijsq" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>
+    </view>
+  </view>
+
+  <!-- 企业登录 -->
+  <view class="" hidden="{{qydl}}">
+    <view class="zzc"></view>
+    <view class="qzbox">
+      <view class="qusf">企业登录</view>
+      <view class="qzz1" >
+        <input type="text" class="iptnam" placeholder="请输入企业名称"/>
+      </view>
+      <view class="qzz1 zpf" bindtap="zpf">
+        <input type="text" class="iptnam" placeholder="请输入登录密码"/>
+      </view>
+      <view class="tijsq" bindtap="qydltijsq" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>
+      <navigator hover-class="none" url="/pages/qyzc/qyzc" class="zc">还没有注册？点击注册</navigator>
+    </view>
+  </view>
+  
+  <!-- 提示用户需要获取手机号 -->
+  <view class="" hidden="{{sjh}}">
+    <view class="zzc"></view>
+    <view class="qzbox">
+      <view class="qusf" style="text-align: center;padding-left: 0;color: #333;">温馨提示</view>
+      <view class="textts">获取头像昵称,需要您的授权，为了提供更好的服务，请在稍后的提示框中点击“允许”</view>
+      <view class="clearfloat" style="margin-top: 20px;display: flex;">
+        <button class="ft  pomis" bindtap="hulue">忽略</button>
+        <button class="tijsq pomis fr" bindtap="getUserProfile" style="margin-top: 0px;">允许</button>
+      </view>
+    </view>
+  </view>
+</view>

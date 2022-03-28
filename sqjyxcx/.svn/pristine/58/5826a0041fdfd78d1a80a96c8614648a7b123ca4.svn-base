@@ -1,0 +1,57 @@
+// 节流
+function throttle(func, wait) {
+    let timeout = null;
+
+    return function () {
+        if (!timeout) {
+            timeout = setTimeout(() => {
+                timeout = null;
+                func.call(this, arguments);
+            }, wait);
+        }
+    }
+}
+
+// 防抖
+function debounce(func, wait) {
+    let timeout = null;
+
+    return function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+            func();
+        }, wait);
+    }
+}
+
+
+class Completer {
+    constructor() {
+        this.promise = new Promise(
+            (resolve, reject) => {
+                this.resolve = (v) => resolve(v);
+                this.reject = (e) => reject(e);
+            }
+        );
+    }
+}
+
+function toEmptyString(value,onEmpty){
+    if(value === null || value === undefined){
+        if(onEmpty){
+            return onEmpty
+        }else{
+            return '';
+        }
+    }else{
+        return value;
+    }
+}
+
+
+module.exports = {
+    throttle: throttle,
+    debounce: debounce,
+    Completer: Completer,
+    toEmptyString: toEmptyString,
+}

@@ -1,0 +1,130 @@
+// pages/mine/mine.js
+Page({
+
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+		personinfo:[
+			{
+				tximg:'/img/tx.png',
+				name:'张三',
+				sex:'女',
+				year:'23',
+				cellphone:'13111111111',
+				jobname:'保洁人员',
+				money:'3000-5000',
+				msgw:'34',
+				ytdgw:'127',
+				byll:'55',
+			}
+		],
+		companyinfo:[
+			{
+				tximg:'/img/tx.png',
+				name:'张三',
+				// sex:'女',
+				// year:'23',
+				companyname:'长沙竟网信息科技有限公司',
+				jobname:'保洁人员',
+				money:'3000-5000',
+				msgw:'34',
+				ytdgw:'127',
+				byll:'55',
+			}
+		],
+		
+		nowsf:'求职者',
+		ident:'招聘方',
+		userinfo:false
+	},
+	changeident(){
+		let that = this
+		let ident = this.data.ident
+		let nowsf = this.data.nowsf
+		wx.showModal({
+			title: '提示',
+			content: '您当前是'+nowsf+'身份，点击[确认]可切换至'+ident+'身份',
+			success (res) {
+				if (res.confirm) {
+					that.setData({
+						userinfo: false
+					})
+				} else if (res.cancel) {
+				}
+			}
+		})
+	},
+	changeident1(){
+		let that = this
+		let ident = this.data.ident
+		let nowsf = this.data.nowsf
+		wx.showModal({
+			title: '提示',
+			content: '您当前是'+ident+'身份，点击[确认]可切换至'+nowsf+'身份',
+			success (res) {
+				if (res.confirm) {
+					that.setData({
+						userinfo: true
+					})
+				} else if (res.cancel) {
+				}
+			}
+		})
+	},
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function () {
+
+	},
+
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function () {
+
+	},
+
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+
+	},
+
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function () {
+
+	}
+})

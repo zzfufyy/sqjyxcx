@@ -1,0 +1,83 @@
+.yhbg{
+	height: 110px;width: 100%;position: relative;
+}
+.bg-blur {
+	float: left;
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	-webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	-o-filter: blur(5px);
+	-ms-filter: blur(5px);
+	filter: blur(5px);
+}
+.topbox{
+	position: relative;    height: 110px;margin: 0 10px;
+}
+.bgimg{
+	width: 70px;height: 70px;border-radius: 50%;position: relative;top:-54px;
+}
+.xgtx{
+	position: relative;top:-44px;font-size: 14px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #999999;
+}
+.toxbox{
+	text-align: center;margin: 0 10px;
+	border-bottom: 1px solid #F2F2F2;background: #fff;
+	position: relative;height: 70px;
+}
+.naxbox{
+	border-bottom: 1px solid #F2F2F2;
+	margin: 0 10px;text-align: center; 
+	height: 60px;
+	padding-top: 10px;
+}
+.name{    width: 100%;
+	font-size: 14px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #C1C1C1;margin-bottom: 5px;
+}
+.truename{    width: 100%;
+	font-size: 20px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #AFAFAF;
+}
+.naxbox1{
+	border-bottom: 1px solid #F2F2F2;
+	margin: 0 10px;text-align: center; 
+	height: 53px;
+    padding-top: 17px;
+}
+.wxh{
+	font-size: 20px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #333333;    height: 35px;
+line-height: 35px;
+}
+.picker{
+	color: #333;
+}
+.phonenum{
+	font-size: 18px;
+font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+font-weight: 500;
+color: #333333;
+}
+page{
+	background-color: #F6F6F6;padding-bottom: 20px;
+}
+.container{
+	background-color: #fff;
+}
+
+
+
+
+

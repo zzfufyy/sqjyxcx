@@ -1,0 +1,147 @@
+
+  <!-- // "navigationStyle":"custom" -->
+<block wx:if="{{isRecruitee==true}}">
+	<view class="container" wx:for="{{personinfo}}" wx:key="key">
+		<!-- 自定义头部 -->
+		<view class='nav bg-white' style='height:70px;'>
+			<view class=' ' style='height:{{navH}}px'>
+				<!-- <view class='nav-title'>
+					<view class="INinputheader">
+						<view class="weui-input" >个人中心</view>
+					</view>
+				</view> -->
+				<view class="btmbor"></view>
+			</view>
+		</view>
+		<view class='bg-gray overflow' scroll-y >
+			<view class="clearfloat personbox">
+				<view class="ft ltimg">
+					<image src="{{item.tximg}}" class="tximg"></image>
+				</view>
+				<view class="fr nameinfo">
+					<view class="name">{{item.name}}</view>
+					<view class="sex">
+						{{item.sex}} {{item.year}} {{item.cellphone}}
+					</view>
+				</view>
+			</view>
+			<navigator url="/pages/wantjob/wantjob" hover-class="none" class="yxbox clearfloat">
+				<view class="ft zgyx">工作意向</view>
+				<view class="fr yx">
+					<view class="yxgz">{{item.jobname}}, {{item.money}} <image class="imgjt" src="/img/jt.png"></image></view>
+				</view>
+			</navigator>
+		</view>
+		<view class="cont">
+			<navigator url="/pages/personjl/personjl" hover-class="none"  class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/pergrjl.png"></image>个人简历</view>
+				<view class="fr yx">
+					<image class="imgjt" src="/img/jt.png" />
+				</view>
+			</navigator>
+			<navigator url="/pages/msjob/msjob" hover-class="none"  class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/msgw.png"></image>面试岗位</view>
+				<view class="fr yx">
+					<text>{{item.msgw}}</text><image class="imgjt" src="/img/jt.png" />
+				</view>
+			</navigator>
+			<navigator url="/pages/ytdjob/ytdjob" hover-class="none"  class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/ytdgw.png"></image>已投递岗位</view>
+				<view class="fr yx">
+					<text>{{item.ytdgw}}</text><image class="imgjt" src="/img/jt.png" />
+				</view>
+			</navigator>
+			<navigator url="/pages/byll/byll" hover-class="none"  class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/byll.png"></image>被游览量</view>
+				<view class="fr yx">
+					<text>{{item.byll}}</text><image class="imgjt" src="/img/jt.png" />
+				</view>
+			</navigator>
+		</view>
+		<view class="cont1">
+			<view  bindtap="switchUserRole" class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/qhsf.png"></image>切换身份</view>
+				<view class="fr yx">
+					<view class="dasf" >当前身份-{{nowsf}} <image class="imgjt" src="/img/jt.png" /></view>
+				</view>
+			</view>
+			<navigator url="/pages/set/set" hover-class="none"  class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/sz.png"></image>设置</view>
+				<view class="fr yx">
+					<image class="imgjt" src="/img/jt.png" />
+				</view>
+			</navigator>
+		</view>
+	</view>
+	<view class="comname">长沙市竟网科技有限公司</view>
+</block>
+<block wx:if="{{userinfo==false}}">
+	<view class="container" wx:for="{{companyinfo}}" wx:key="key">
+		<!-- 自定义头部 -->
+		<view class='nav bg-white' style='height:70px;'>
+			<view class=' ' style='height:{{navH}}px'>
+				<!-- <view class='nav-title'>
+					<view class="INinputheader">
+						<view class="weui-input" >个人中心</view>
+					</view>
+				</view> -->
+				<view class="btmbor"></view>
+			</view>
+		</view>
+		<view class='bg-gray overflow' scroll-y >
+			<view class="clearfloat personbox" style="padding-bottom: 15px;">
+				<view class="ft ltimg">
+					<image src="{{item.tximg}}" class="tximg"></image>
+				</view>
+				<view class="fr nameinfo">
+					<view class="name">{{item.name}}</view>
+					<view class="sex companyname">
+						{{item.companyname}}
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="cont">
+			<navigator url="/pages/manegejob/manegejob" hover-class="none"  class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/pergrjl.png"></image>管理职位</view>
+				<view class="fr yx">
+					<image class="imgjt" src="/img/jt.png" />
+				</view>
+			</navigator>
+			<navigator url="/pages/manegejl/manegejl" hover-class="none"  class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/msgw.png"></image>管理简历</view>
+				<view class="fr yx">
+					<text>{{item.msgw}}</text><image class="imgjt" src="/img/jt.png" />
+				</view>
+			</navigator>
+			<navigator url="/pages/fbjob/fbjob" hover-class="none"  class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/ytdgw.png"></image>发布职位</view>
+				<view class="fr yx">
+					<text>{{item.ytdgw}}</text><image class="imgjt" src="/img/jt.png" />
+				</view>
+			</navigator>
+			<navigator url="/pages/rzcenter/rzcenter" hover-class="none"  class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/byll.png"></image>认证中心</view>
+				<view class="fr yx">
+					<text>{{item.byll}}</text><image class="imgjt" src="/img/jt.png" />
+				</view>
+			</navigator>
+		</view>
+		<view class="cont1">
+			<view  bindtap="switchUserRole" class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/qhsf.png"></image>切换身份</view>
+				<view class="fr yx">
+					<view class="dasf" >当前身份-{{ident}} <image class="imgjt" src="/img/jt.png" /></view>
+				</view>
+			</view>
+			<navigator url="/pages/set/set" hover-class="none"  class="clearfloat yxbox1">
+				<view class="ft zgyx"><image class="contltimg" src="/img/sz.png"></image>设置</view>
+				<view class="fr yx">
+					<image class="imgjt" src="/img/jt.png" />
+				</view>
+			</navigator>
+		</view>
+	</view>
+</block>
+
+

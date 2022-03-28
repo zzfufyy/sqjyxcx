@@ -1,0 +1,123 @@
+const { Completer } = require("../../utils/function_util.js");
+const user = require('../../common/user');
+const loading = require('../../utils/loading_util');
+const $ = require('../../utils/request_util');
+
+const app = getApp();
+
+const createStepMethod = () => ({
+    /* 引导用户授权 */
+    _doAuthorize: function (scene) {
+        let auth = new Completer();
+        this.state.authCompleter = auth;
+
+        var that = this;
+
+        wx.login({
+            success: function (res) {
+                that.setData({
+                    res: res
+                })
+                wx.request({
+                    url: app.globalData.web_path + '/wx/user/' + app.globalData.appId + '/login',
+                    data: {
+                        code: res.code,
+                        loginType: 'openid'
+                    },
+                    header: app.globalData.header,
+                    success: function (e) {
+                        //将openid  缓存
+                        // wx.setStorageSync('openid', res.data.data.openid);
+                        // wx.setStorageSync('sessionKey', res.data.data.sessionKey);
+                        // wx.setStorageSync('Token', res.data.data.Token);
+                        // console.log(JSON.stringify(e.data.data.userWx))
+
+                        if (JSON.stringify(e.data.data.userWx) == undefined) {
+                            that.setData({
+                                hideUserInfoAuth: false,
+                                scene: scene
+                            })
+                            setTimeout(() => {
+                                that.setData({
+                                    animated: true
+                                })
+                            }, 100)
+
+                        } else {
+                            //已授权：1.已注册会自动登录 2.已授权但未注册则弹出注册页面
+
+                            that.setData({
+                                hideUserInfoAuth: true,
+                                scene: scene
+                            })
+                            setTimeout(() => {
+                                that.setData({
+                                    animated: false
+                                })
+                            }, 100);
+
+                            auth.resolve();
+                        }
+                    }
+                })
+            }
+        });
+
+        return auth.promise;
+    },
+
+    _selectUserRole: async function () {
+        let failback = (title) => {
+            console.warn(title);
+            this.setData({
+                juesehide: false,
+            });
+        }
+
+        try {
+            let userRole = await user.loadUserRole();
+            let hashRole = await this._hasUserRole(userRole);
+            if (!hashRole) {
+                failback('用户身份失效');
+            } else {
+                console.info(`用户身份 [${user.userRoleName[userRole]}] 校验成功`);
+            }
+        } catch (e) {
+            failback('没有本地存储的用户角色，提示用户选择角色');
+        }
+    },
+
+    _hasUserRole: async function (userRole) {
+        // 是求职者
+        let res = null;
+        if (userRole === user.UserRole.Recruitee) {
+            res = await $.requestOnlyData({
+                url: '/user-candidate/info',
+                data: {
+                    openid: app.getOpenid(),
+                }
+            });
+        } else {
+            // TODO: 实现公司
+            res = await $.requestOnlyData({
+                url: '/user-candidate/info',
+                data: {
+                    openid: app.getOpenid(),
+                }
+            });
+        }
+
+        return res && true;
+    },
+
+
+    step: async function () {
+        await app.state.opendidReady;
+        await this._doAuthorize();
+        await this._selectUserRole();
+    },
+});
+
+module.exports = {
+    createStepMethod: createStepMethod,
+}

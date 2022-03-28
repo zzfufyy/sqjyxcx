@@ -1,0 +1,246 @@
+// pages/mine/mine.js
+
+
+const { UserService, user } = require("../../service/user_service");
+const { Completer } = require("../../utils/function_util");
+const recruitee = require('./recruitee');
+
+const app = getApp();
+
+Page({
+
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+		personinfo: [
+			{
+				tximg: '/img/tx.png',
+				name: '张三',
+				sex: '女',
+				year: '23',
+				cellphone: '13111111111',
+				jobname: '保洁人员',
+				money: '3000-5000',
+				msgw: '34',
+				ytdgw: '127',
+				byll: '55',
+			}
+		],
+		companyinfo: [
+			{
+				tximg: '/img/tx.png',
+				name: '张三',
+				// sex:'女',
+				// year:'23',
+				companyname: '长沙竟网信息科技有限公司',
+				jobname: '保洁人员',
+				money: '3000-5000',
+				msgw: '34',
+				ytdgw: '127',
+				byll: '55',
+			}
+		],
+
+		// 默认身份为求职方
+		// TODO: 使用加载条
+		isRecruitee: true,
+	},
+
+
+	// 改变身份
+	switchUserRole: async function () {
+		let isRecruitee = this.data.isRecruitee;
+		let currentRole = (isRecruitee ?
+			user.UserRole.Recruitee : user.UserRole.Recruiter
+		);
+		let targetRole = (isRecruitee ?
+			user.UserRole.Recruiter : user.UserRole.Recruitee
+		);
+
+		let current = user.userRoleName[currentRole];
+		let target = user.userRoleName[targetRole];
+
+		let completer = new Completer();
+		wx.showModal({
+			title: '提示',
+			content: '您当前是' + current + '身份，点击[确认]可切换至' + target + '身份',
+			success(res) {
+				if (res.confirm) {
+					completer.resolve(true);
+				} else if (res.cancel) {
+					completer.resolve(false);
+				}
+			}
+		});
+
+		let shouldSwtich = await completer.promise;
+
+		if (shouldSwtich) {
+			if (!isRecruitee) {
+				console.debug("加载应聘者信息");
+				await this.loadRecruiteeInfo();
+
+
+			} else {
+				console.log("加载招聘者信息");
+			}
+
+			this.setData({
+				isRecruitee: !isRecruitee,
+			});
+		}
+	},
+
+	// // 改变身份
+	// changeident() {
+	// 	let that = this
+	// 	let ident = this.data.ident
+	// 	let nowsf = this.data.nowsf
+	// 	wx.showModal({
+	// 		title: '提示',
+	// 		content: '您当前是' + nowsf + '身份，点击[确认]可切换至' + ident + '身份',
+	// 		success(res) {
+	// 			if (res.confirm) {
+	// 				that.setData({
+	// 					userinfo: false
+	// 				})
+	// 			} else if (res.cancel) {
+	// 			}
+	// 		}
+	// 	})
+	// },
+	// changeident1() {
+	// 	let that = this
+	// 	let ident = this.data.ident
+	// 	let nowsf = this.data.nowsf
+	// 	wx.showModal({
+	// 		title: '提示',
+	// 		content: '您当前是' + ident + '身份，点击[确认]可切换至' + nowsf + '身份',
+	// 		success(res) {
+	// 			if (res.confirm) {
+	// 				that.setData({
+	// 					userinfo: true
+	// 				})
+	// 			} else if (res.cancel) {
+	// 			}
+	// 		}
+	// 	})
+	// },
+
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad(options) {
+		this._init();
+	},
+
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function () {
+
+	},
+
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function () {
+
+	},
+
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+
+	},
+
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function () {
+
+	},
+
+	_init: async function () {
+		await app.getOpenidReady();
+		await this._loadUserRole();
+		await this._loadUserInfo();
+	},
+
+	_loadUserRole: async function () {
+		let isRecruitee = null;
+		try {
+			let role = await UserService.loadUserRole();
+			console.log(`role: ${role}`);
+
+			switch (role) {
+				// 应聘人
+				case user.UserRole.Recruitee:
+					isRecruitee = true;
+					break;
+				case user.UserRole.Recruiter:
+					isRecruitee = false;
+					break;
+				// TODO: 实现社区工作人员
+
+				case user.UserRole.CommunityPersonel:
+				default:
+					console.error("未实现社区人员")
+					break;
+			}
+
+		} catch (e) {
+			// TODO: 没有检测到登录的用户角色，跳转首页要求用户选择
+			console.error(e);
+			isRecruitee = true;
+		}
+
+		if (isRecruitee != null) {
+
+			let currentRole = isRecruitee ?
+				user.UserRole.Recruitee : user.UserRole.Recruiter;
+
+			this.setData({
+				isRecruitee: isRecruitee,
+				nowsf: user.userRoleName[currentRole],
+			})
+		}
+	},
+
+	_loadUserInfo: async function () {
+		console.log(wx.getStorageSync('openid'));
+		// 是求职者，加载求职者信息
+		if (this.data.isRecruitee) {
+			this.loadRecruiteeInfo();
+		}
+		// 招聘人员
+		else {
+			console.log('加载招聘者信息');
+		}
+	},
+
+	...recruitee.createRecruitMethods(),
+})

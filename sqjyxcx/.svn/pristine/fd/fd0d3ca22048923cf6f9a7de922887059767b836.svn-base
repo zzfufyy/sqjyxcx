@@ -1,0 +1,54 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "企业注册",
+          "pathName": "pages/qyzc/qyzc",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "企业验证",
+          "pathName": "pages/waiteyz/waiteyz",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "发布职位",
+          "pathName": "pages/fbjob/fbjob",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "资讯列表",
+          "pathName": "pages/news/news",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "资讯详情",
+          "pathName": "pages/zxxq/zxxq",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "个人中心-求职者",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,66 @@
+
+
+const genderList = [
+    '女', '男',
+]
+
+const UserRole = {
+    // 求职者
+    Recruitee: 0,
+    // 招聘者
+    Recruiter: 1,
+    // 社区工作人员
+    CommunityPersonel: 2,
+}
+
+const userRoleName = [
+    '求职者',
+    '招聘方',
+    '社区工作人员'
+];
+
+const _userRoleStorageKey = 'USER_ROLE';
+
+// 如果本地缓存无效的话，可以换成从服务端获取
+function saveUserRole(userRole) {
+    console.debug(`本地存储用户角色: ${userRole}[${userRoleName[userRole]}]`);
+    wx.setStorage({
+        key: _userRoleStorageKey,
+        data: userRole,
+    });
+}
+
+// 返回了一个 Promise
+function loadUserRole() {
+    return new Promise(
+        (resolve, reject) => {
+            wx.getStorage({
+                key: _userRoleStorageKey,
+                success: (r) => {
+                    let v = r.data;
+                    console.debug(`本地存储的用户角色为: ${v}[${userRoleName[v]}]`);
+                    resolve(v);
+                },
+                fail: reject,
+            });
+        }
+    )
+}
+
+
+class Salary {
+    constructor(min, max) {
+        this.min = min;
+        this.max = max;
+        this.value = `${min}K - ${max}K`;
+    }
+}
+
+
+module.exports = {
+    saveUserRole: saveUserRole,
+    loadUserRole: loadUserRole,
+    UserRole: UserRole,
+    genderList: genderList,
+    Salary: Salary,
+}

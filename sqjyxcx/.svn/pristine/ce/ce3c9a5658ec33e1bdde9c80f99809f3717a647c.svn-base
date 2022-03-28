@@ -1,0 +1,34 @@
+const { Api } = require('../common/api');
+const $ = require('../utils/request_util');
+
+const app = getApp();
+
+function getOpenid(){
+    return wx.getStorageSync('openid');
+}
+
+const UserService = {
+    loadUserInfo: async function () {
+        return await $.request({
+            url: Api.userInfo,
+            data: {
+                openid: getOpenid(),
+            },
+        }).then(r => r.data);
+    },
+
+    loadRcruiteeInfo: async function () {
+        let openid = wx.getStorageSync('openid');
+        return await $.request({
+            url: Api.userCandidateInfo,
+            data: {
+                openid: getOpenid(),
+            },
+        }).then(r => r.data);
+    }
+};
+
+module.exports = {
+    UserService: UserService,
+}
+

@@ -1,0 +1,26 @@
+const Api = {
+    // recruitee
+    userCandidateAdd: '/user-candidate/add',
+    userCandidateInfo: '/user-candidate/info',
+    // recruiter
+    userRecruiterInfo: '/user-recruiter/info',
+    userRecruiterAdd: '/user-recruiter/add',
+
+
+    // user
+    userInfo: '/user/info',
+
+    // recruiter-company
+    recruiterCompanyInfo: '/recruit-company/info'
+
+};
+
+
+module.exports = {
+    Api: Api,
+}
+
+
+
+
+

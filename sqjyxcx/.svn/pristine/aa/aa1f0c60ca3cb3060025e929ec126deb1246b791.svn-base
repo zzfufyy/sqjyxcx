@@ -1,0 +1,106 @@
+<view class="container">
+	<view class="box">
+		<view class="top">期望职位</view>
+		<view class="bottom" bindtap="qwzw">
+			<text hidden="{{txthide}}" >请选择期望职位</text>
+			<text hidden="{{arrhide}}" wx:for="{{arrtag}}" wx:key="key">{{item.job}} </text>
+		</view>
+	</view>
+	<view class="box">
+		<view class="top">期望薪资</view>
+		<view class="bottom" >
+			<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+				<view class="picker">
+					{{array[index]}}
+				</view>
+			</picker>
+		</view>
+	</view>
+	<view class="box">
+		<view class="top">求职区域</view>
+		<view class="bottom" bindtap="qzqubtn">
+			<text hidden="{{qzqutxt}}" >请选择期望求职区域</text>
+			<text hidden="{{qzqumess}}" wx:for="{{qzlocalist}}" wx:key="key">{{item.local}} </text>
+		</view>
+	</view>
+</view>
+
+
+<view class="zzc " hidden="{{qzyx}}"></view>
+<view class="qwzwbox" hidden="{{qzyx}}">
+	<view style="height: 10px;background: #fff;"></view>
+	<view style="background: #fff;">	
+		<view class="topbox INinputheader">
+			<icon class="INsearchicon" type="search" size="22" />
+			<input type="text" class="weui-input" bindinput="inputjob" 	confirm-type="done" bindconfirm="confrim" placeholder="请输入期望职位" />
+			<view bindtap="quxiaozzc" class="quxiao">取消</view>
+		</view>
+		<view class="middlebox">
+			<view wx:for="{{wantjob}}" style="display: {{item.display}};" data-job="{{item.job}}" data-id="{{item.id}}" wx:key="key" class="wantjob   {{item.checked?'active':''}}" bindtap="wantjob">
+				{{item.job}}
+			</view>
+		</view>
+		<view class="middlebox" >
+			<text class="hascs" >已选择：</text>
+			<text wx:for="{{csjob}}" bindtap="haschoosejob" class="hascs {{item.checked?'':'active'}}" data-id="{{item.id}}" wx:key="key"> {{item.job}} </text> 
+		</view>
+	</view>
+	<view>
+		<view class="tijsq" bindtap="baocun">保存</view>
+	</view>
+</view>
+
+<view class="zzc1" hidden="{{qzlocal}}" bindtap="gb"></view>
+<view class="qwzwbox1" hidden="{{qzqxlocal}}">
+	<view style="height: 10px;background: #fff;"></view>
+	<view style="background: #fff;">	
+		<!-- <view class="middlebox">
+			<view wx:for="{{qwchoose}}" data-job="{{item.job}}" data-id="{{item.id}}" wx:key="key" class="wantjob {{item.checked?'active':''}} {{item.active}}" bindtap="wantjob">
+				{{item.job}}
+			</view>
+		</view> -->
+		<view class="cpjs">
+			<view class="clearfloat bigbox">
+				<view class="ft ltbox">
+					<scroll-view scroll-y style="height:{{oht}}px;" scroll-y>
+						<block wx:for="{{sjLeftItems}}" wx:key="index">
+							<!--当前项的id等于item项的id，那个就是当前状态-->
+							<!--用data-index记录这个数据在数组的下标位置，使用data-id设置每个item的id值，供打开2级页面使用-->
+								<view id="zmzsj{{item.typeid}}" 
+											class="nav_left_items {{curNav1 == item.typeid ? 'activ12' : ''}} ltbtn" 
+											bindtap="switchRightTab1"  data-index1="{{index}}" 
+											data-id="{{item.typeid}}">
+											{{item.typename}}
+								</view>
+						</block>
+					</scroll-view>
+				</view>
+
+				<view class="fr rtbox">
+					<scroll-view class="scroll-view_H" scroll-y style="width:100%;height:{{oht}}px;" scroll-into-view="zmzsj{{toView1}}" scroll-y scroll-top="{{scrollTop}}" scroll-with-animation="true">
+						<block wx:for="{{sjRightItems}}" wx:key="index" wx:for-item="item">
+							<view class="type" id="zmzsj{{item.typeid}}">{{item.typename}}</view>
+							<view class="zmz-scroll-content-item" >
+									<view class="zmz-grid-content">
+											<view class="zmz-grid-row zmz-grid-row-clear">
+												<view wx:for="{{item.typelist}}" wx:key="index"  
+												class="zmz-grid-row-item {{item.checked?'active':''}}" data-id="{{item.id}}"  bindtap="choselocal" >
+														<text class="zmz-grid-row-label">{{item.childname}}</text>
+														<!-- <view class="line1"></view> -->
+												</view>
+											</view>
+									</view>
+							</view>
+						</block>
+					</scroll-view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view>
+		<view class="tijsq" bindtap="zwbc">保存</view>
+	</view>
+</view>
+
+<view class="tijsq" bindtap="bc">保存</view>
+

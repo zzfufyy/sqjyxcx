@@ -1,0 +1,34 @@
+function isEmpty(param) {
+    if (typeof (param) === "undefined" || param === null || param.length == 0) {
+        return true;
+    }
+}
+
+function splitBySemiColon(str) {
+    return str.split(";").filter(s => !isEmpty(s));
+}
+
+/**
+ * 将给定的字符串值（可以是null或者undefined）以合理的形式返回
+ * 即，如果给定 null 或 undefined，返回 空串 ''（或者给定的 onEmpty）,
+ * 否则返回原字符串
+ * 
+ * @param {*} value 原来的字符串值（可以为 null 或者 undefined）
+ * @param {*} onEmpty 在原串不合理的时候的替代值
+ */
+function toEmptyString(value, onEmpty) {
+    if (value === null || value === undefined) {
+        if (onEmpty && onEmpty instanceof String) {
+            return onEmpty
+        } else {
+            return '';
+        }
+    } else {
+        return value;
+    }
+}
+
+module.exports = {
+    isEmpty: isEmpty,
+    splitBySemiColon: splitBySemiColon,
+};

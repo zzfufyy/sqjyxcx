@@ -1,0 +1,25 @@
+// 节流
+function throttle(func, wait) {
+    let timeout = null;
+
+    return function () {
+        if (!timeout) {
+            timeout = setTimeout(() => {
+                timeout = null;
+                func.call(this, arguments);
+            }, wait);
+        }
+    }
+}
+
+// 防抖
+function debounce(func, wait) {
+    let timeout = null;
+
+    return function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+            func();
+        }, wait);
+    }
+}

@@ -1,0 +1,23 @@
+<view class="clearfloat container">
+	<view class="topbox">
+		<view class="comname">公司信息</view>
+		<view class="comimg1 clearfloat" bindtap="changedw">
+			<view class="ft dz">{{address}}</view>
+			<image class="jtimg fr" src="/img/jt.png"> </image>
+		</view>
+		<view class="line1 "></view>
+		
+	</view>
+	<view style="margin: 0 20px;">
+		<view class="comimg clearfloat">
+			请输入详情地址
+		</view>
+		<view class="line1 "></view>
+		<view class="comimg clearfloat" style="position: relative;">
+			<input type="text" class="ipt" placeholder="例：东区5号3层302" style="position: absolute;bottom: 0;"
+			bindinput="bindinputAddressDetail" value="{{addressDetail}}"/>
+		</view>
+		<view class="line1 "></view>
+	</view>
+</view>
+<view class="tijsq" bindtap="bc">保存</view>

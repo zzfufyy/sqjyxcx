@@ -1,0 +1,9 @@
+const STATUS = {
+    NORMAL: 0,
+    DELETED: -1,
+}
+
+
+module.exports ={
+    STATUS:STATUS
+}

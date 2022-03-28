@@ -1,0 +1,45 @@
+
+page{
+	background-color: #F5F5F5;
+}
+.container{
+	background: #fff;
+}
+
+.topbox{
+	padding: 38px 20px 0 20px;
+}
+.comname{
+	font-size: 22px;margin-bottom: 20px;
+font-family: Source Han Sans CN-Bold, Source Han Sans CN;
+font-weight: bold;
+color: #333333;
+}
+.comimg{
+	height: 56px;line-height: 56px;
+}
+.comimg1{
+	height: auto;
+}
+
+.ipt{
+	text-align: left;height: 56px;line-height: 56px;
+}
+.bcbox{margin-top: 21px;}
+.dz{
+	font-size: 18px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;width: 85%;padding-bottom: 20px;
+color: #333333;
+}
+.jtimg{
+	width: 19px;
+	height: 18px;
+	vertical-align: middle;
+	margin-top: 3px;
+}
+
+
+
+
+

@@ -1,0 +1,16 @@
+<view class="container">
+	<view class="bbox">
+		<text class="abus">关于我们</text>
+		<image class="rtimg" src="/img/jt.png"></image>
+	</view>
+	<navigator class="bbox" 	open-type="exit" target="miniProgram">
+		<text class="abus">退出登录</text>
+		<image class="rtimg" src="/img/jt.png"></image>
+	</navigator>
+</view>
+
+<view class="container" hover-class="none">
+
+</view>
+
+

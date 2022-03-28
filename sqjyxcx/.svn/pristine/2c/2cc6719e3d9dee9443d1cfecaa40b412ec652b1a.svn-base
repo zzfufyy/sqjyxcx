@@ -1,0 +1,14 @@
+function isEmpty(param){
+    if(typeof(param)==="undefined" || param.length == 0 || param === null){
+        return true;
+    }
+}
+
+function splitBySemiColon(str){
+    return str.split(";").filter( s => !isEmpty(s));
+}
+
+module.exports = {
+    isEmpty:isEmpty,
+    splitBySemiColon:splitBySemiColon,
+};

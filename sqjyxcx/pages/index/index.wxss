@@ -1,0 +1,291 @@
+/* 自定义顶部栏高度 */
+page{background-color: #EEEEEE;}
+.nav{
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+.nav-title{
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  position: absolute;
+  top: 19px;
+  left: 0;
+  z-index: 10;
+  font-family:PingFang-SC-Medium;
+  font-size:36rpx;
+  letter-spacing:2px;
+}
+.nav .back{
+  width: 22px;
+  height: 22px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 10px 15px;
+}
+.bg-white{
+  background-color:#3384FD;
+  /* background: linear-gradient(180deg, #0E6CF9 0%, #D5F0FF 100%); */
+  border-bottom-left-radius: 8%;
+    border-bottom-right-radius: 8%;
+}
+
+.overflow{
+  overflow: auto;position: relative;border-radius: 5px;
+  /* top: 70px; */
+  background: #fff;height: 100px;display: flex;
+  z-index: 9999;width: 95%;margin:0 10px;align-items: center;
+}
+.hidden{
+  overflow: hidden;
+}
+.INinputheader{
+  width:60%;
+  margin: 0 auto;
+ height:30px;
+  background:rgba(255,255,255,1);
+  border-radius:30px;
+  font-size: 14px;
+  margin-top:-17px;
+  position: relative; 
+  /* float: left; */
+}
+.INsearchicon{
+  position: absolute;
+  left:8px;
+  top: 4px;
+}
+.weui-input{
+  height: 30px;
+  line-height: 30px;
+  text-align: left; 
+  padding-left: 30px;
+  letter-spacing:0px;
+  background-color: #77AFFC;
+    border-radius: 30px;    color: #fff;
+}
+input::-webkit-input-placeholder{
+  color:#fff;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+  color:#fff;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+  color:#fff;
+}
+.opl{  /* Internet Explorer 10-11 */
+  color:#fff;
+}
+.INtab{
+  text-align: left;
+  margin-left: 12px;
+  color: #fff;
+}
+
+.btmbor{height: 20px;position: absolute;
+  bottom: 0;
+  width: 100%;}
+
+.navtop{width: 33%;text-align: center;font-size: 13px;}
+.imgbox image{width: 36px;height: 36px;}
+.texname{margin-top: 10px;}
+.wdbox{background: #fff;position: relative;
+  border-radius: 5px;
+  /* top: 70px; */
+  width: 95%;margin: 0 10px;margin-top: 8px;}
+.jobbox{height: 70px;padding-bottom: 5px;}
+.ltjobox{width: 70%;}
+.lrjobox{width: 30%;display: flex;justify-content: center;}
+.txextname{font-size: 20px;margin: 12px 0 0 15px;
+  font-family: SimHei-Regular, SimHei;
+  font-weight: 400;
+  color: #333333;}
+.jobtj{font-size: 14px;
+  font-family: SimHei-Regular, SimHei;margin: 8px 0 0 15px;
+  font-weight: 400;
+  color: #3384FD;}
+.btntjia{width: 80px;height: 30px;line-height: 30px;margin-top: 20px;
+  background: #3384FD;border-radius: 30px;color: #fff;font-size: 13px;text-align: center;}
+.local{
+  width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    margin-top: -3px;
+}
+.topjob{font-size: 16px;padding: 14px 0 14px 16px;border-bottom: 1px solid #CCCCCC;
+  font-family: SimHei-Regular, SimHei;
+  font-weight: 400;color: #333333;
+}
+.company{
+  border-bottom: 1px solid #E5E5E5;
+}
+.companyname{
+  padding: 19px 0 0 14px;font-size: 18px;
+  font-family: SimHei-Regular, SimHei;
+  font-weight: 400;
+  color: #1A1A1A;
+}
+.companyjuli{
+  padding: 10px 0 0 14px;font-size: 14px;
+  font-family: SimHei-Regular, SimHei;
+  font-weight: 400;
+  color: #297EFE;
+}
+.tagbox{
+  display: flex;flex-wrap: wrap;margin: 0 15px;margin-top: 9px;padding-bottom: 6px;
+}
+.companytag{
+  height: 27px;line-height: 27px;text-align: center;padding: 2px 9px;margin-right: 9px;margin-bottom:5px ;
+  background: #EAF1FB;
+  border-radius: 5px 5px 5px 5px;font-size: 14px;
+  font-family: SimHei-Regular, SimHei;
+  font-weight: 400;
+  color: #3384FD;
+}
+.qzbox{
+  width: 85%;margin: 0 auto;background: #fff;top: 25%;position: fixed;z-index: 99991;left: 0;
+  right: 0;border-radius: 10px 10px 10px 10px;padding-bottom: 20px;
+}
+.qusf{font-size: 24px;
+  font-family: SimHei-Regular, SimHei;
+  font-weight: 400;
+  color: #333333;padding: 25px 0 0 24px;
+}
+.zsfw{font-size: 16px;
+  font-family: SimHei-Regular, SimHei;
+  font-weight: 400;
+  color: #999999;padding: 9px 0 0 24px;
+
+}
+.qzz{
+  margin: 0 20px;height: 60px;line-height: 60px;font-size: 18px;
+  font-family: SimHei-Regular, SimHei;margin-top: 18px ;
+  font-weight: 400;background: #EAF2FF;
+  border-radius: 5px 5px 5px 5px;padding-left: 20px;
+  color: #3384FD;
+}
+.zpf{
+  margin-top: 9px;
+}
+.smrz{
+  padding-right: 23px;
+}
+.iptnam{
+  border-bottom:  1px solid #E2E2E2;
+  height: 34px;
+}
+.qzz1{
+  margin: 0 22px;height: 34px;line-height: 34px;font-size: 18px;
+  font-family: SimHei-Regular, SimHei;margin-top: 18px ;
+  font-weight: 400;
+  border-radius: 5px 5px 5px 5px;font-size: 16px;
+}
+.xxbox{
+  margin-top: 8px;flex-wrap: wrap;height: auto;
+}
+.xb{padding: 2px 10px;display: inline-block;
+  line-height: 30px;margin-bottom: 10px;
+  border-radius: 5px 5px 5px 5px;
+  opacity: 1;
+  background: #EEEEEE;
+  text-align: center;margin-right: 10px;
+}
+.active{
+  background: #EAF2FF;color: #3384FD;
+  /* border: 1px solid #3384FD; */
+}
+.zc{
+  font-size: 16px;
+font-family: SimHei-Regular, SimHei;
+font-weight: 400;
+color: #3384FD;margin: 0 21px;margin-top: 22px;
+}
+
+.textts{font-size: 14px;color: #332d2d;margin:0 20px ;margin-top: 10px;}
+.pomis{
+  height: 35px;
+    line-height: 35px;
+    width: 40%!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.jobbox1{
+	margin: 0 16px 0 20px;padding-bottom: 19px;
+}
+.ltbox{
+	width: 70%;
+}
+.jobname{
+	font-size: 18px;
+font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+font-weight: 500;margin-top: 23px;
+color: #333333;
+}
+.jobmoney{font-size: 16px;
+	font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+	font-weight: 500;margin: 14px 0 8px 0;
+	color: #F8424C;
+}
+.companyname1 {
+  font-size: 14px;
+  font-family: SimHei-Regular, SimHei;
+  font-weight: 400;
+  color: #999999;
+}
+.companytx {
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+  background: #CBCBCB;
+  border-radius: 50%;
+}
+.far {
+  font-size: 14px;
+  margin-top: 23px;
+  font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+  font-weight: 500;
+  color: #999999;
+  text-align: right;
+}
+.phonecall {
+  height: 30px;
+  width: 70px;
+  margin-top: 32px;
+  background: #FFFFFF;
+  border-radius: 0px 0px 0px 0px;
+  font-size: 12px;
+  font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+  font-weight: 500;
+  color: #F8424C;
+  opacity: 1;
+  border: 1px solid #F8424C;
+  line-height: 30px;
+  text-align: center;
+}
+
+.tximgc{
+  width: 22px;
+height: 22px;border-radius: 50%;vertical-align: middle;margin-top: -3px;margin-right: 6px;
+}
+.btmbbb{
+  margin: 0 15px;margin-top: 4px;padding-bottom: 11px;
+}
+.nemas{
+  font-size: 14px;
+font-family: SimHei-Regular, SimHei;
+font-weight: 400;
+color: #999999;
+}
+
+
+
+
+

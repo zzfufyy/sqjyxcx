@@ -1,0 +1,107 @@
+// pages/personjl/personjl.js
+Page({
+
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+		tximg:'/img/tx.png',
+		name:'张三',
+		companyname:'长沙市竟网科技有限公司',
+		comadress:'长沙市岳麓区国际公寓A座',
+		ygz:'3000-5000',
+	
+		gzjy:'介绍一下企业',
+		boolean:true,
+		qyxc:'添加企业相册展示企业风采',
+		selfpj:true,
+		zwpj:[
+			{zwpj:'善于交流，善于团队合作，吃苦耐劳。'	}
+		],
+
+		zyjn:true,
+		gerenzyjn:[
+			{jobjl:'java,.net,c++'	}
+		],
+	},
+	//工作经历  添加
+	gzjltj(){
+		wx.navigateTo({
+			url: '/pages/gzjl/gzjl',
+		})
+	},
+	//公司地址
+	changedw(){
+		wx.navigateTo({
+			url: '/pages/comadrres/comadrres',
+		})
+	},
+	//企业介绍
+	gzjltj(){
+		wx.navigateTo({
+			url: '/pages/comjs/comjs',
+		})
+	},
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {
+		console.log(options)
+		let that = this
+		let ocomadress = options.comadress
+		this.setData({
+			comadress:ocomadress,
+			tximg:options.imgsrc,
+			name:options.name,
+		})
+	},
+
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function () {
+
+	},
+
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function () {
+
+	},
+
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+
+	},
+
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function () {
+
+	}
+})

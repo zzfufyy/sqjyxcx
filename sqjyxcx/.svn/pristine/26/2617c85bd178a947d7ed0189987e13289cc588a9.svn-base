@@ -1,0 +1,29 @@
+const $ = require('../utils/request_util')
+
+
+const loadListByCompanyUuid = function (companyUuid) {
+    return $.request({
+        url: '/recruit-job/listByCompanyUuid?companyUuid=' + companyUuid,
+        data: {},
+        method: $.RequestMethod.POST,
+        header: $.jsonHeader
+    })
+}
+
+const updateStatusByid = function (id, status) {
+    let updateData = {
+        id: id,
+        status: status,
+    }
+    return $.request({
+        url: '/recruit-job/modify',
+        data: updateData,
+        method: $.RequestMethod.POST,
+        header: $.jsonHeader
+    });
+}
+
+module.exports = {
+    loadListByCompanyUuid: loadListByCompanyUuid,
+    updateStatusByid: updateStatusByid,
+}

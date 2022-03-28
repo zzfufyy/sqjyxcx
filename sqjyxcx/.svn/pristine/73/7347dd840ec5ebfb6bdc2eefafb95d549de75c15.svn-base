@@ -1,0 +1,94 @@
+/// 首页用于加载招聘者用户信息的模块const { Api } = require('../../common/api');
+
+const loading = require('../../utils/loading_util');
+const $ = require('../../utils/request_util');
+const { Api } = require('../../common/api');
+const { UserService, user } = require('../../service/user_service');
+const { CompanyService } = require('../../service/company_service');
+
+const app = getApp();
+
+const createRecruiterMethods = () => ({
+
+    goToCompanyWaitPage: function () {
+        wx.navigateTo({
+            url: '/pages/waiteyz/waiteyz',
+        });
+    },
+
+    goToCompanyRegisterPage: function () {
+        wx.navigateTo({
+            url: '/pages/qyzc/qyzc',
+        });
+    },
+
+    _handleRecruiterSelected: async function () {
+        debugger
+        try {
+            loading.begin();
+
+            let userInfo = await UserService.loadRecruiterInfo();
+
+            if (userInfo != null) {
+                let companyUuid = userInfo.companyUuid;
+                if (companyUuid) {
+                    let companyInfo = await CompanyService
+                        .loadRecruiterCompanyInfo(companyUuid);
+                    // 认证完成
+                    if (companyInfo.flagIdentification) {
+
+                        UserService.saveUserRole(user.UserRole.Recruiter);
+
+                        this.setData({
+                            juesehide: true,
+                            ident: 'company',
+                        });
+                    }
+                    // 还在认证
+                    else {
+                        this.goToCompanyWaitPage();
+                    }
+                } else {
+                    this.goToCompanyRegisterPage();
+                }
+            }
+            // 服务端没有此人数据
+            else {
+                await this._commitRecruiterInfo();
+                this.goToCompanyRegisterPage();
+            }
+        } catch (e) {
+            console.error(e);
+        } finally {
+            loading.end();
+        }
+    },
+
+    _commitRecruiterInfo: async function () {
+        loading.begin();
+        try {
+            await $.request({
+                url: Api.userRecruiterAdd,
+                data: {
+                    id: app.getOpenid(),
+                },
+                method: $.RequestMethod.POST,
+                header: $.jsonHeader,
+            });
+
+            // user.saveUserRole(user.UserRole.Recruitee);
+        } finally {
+            loading.end();
+        }
+
+
+        this.setData({
+            infows: true
+        })
+    },
+});
+
+module.exports = {
+    createRecruiterMethods: createRecruiterMethods,
+};
+

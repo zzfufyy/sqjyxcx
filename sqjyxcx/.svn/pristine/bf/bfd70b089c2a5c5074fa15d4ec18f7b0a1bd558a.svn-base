@@ -1,0 +1,74 @@
+<view class="container">
+  <!-- 自定义头部 -->
+  <view class='nav bg-white' style='height:110px;position: fixed;'>
+    <view class=' ' style='height:{{navH}}px'>
+      <view class='nav-title'>
+        <view class="INinputheader">
+          <!-- <icon class="INsearchicon" type="search" size="22"/> -->
+          <view class="weui-input" >个人中心</view>
+        </view>
+      </view>
+      <view class="btmbor"></view>
+    </view>
+  </view>
+	<view class='bg-gray overflow' scroll-y >
+		<view class="clearfloat personbox">
+			<view class="ft ltimg">
+				<image src="{{tximg}}" class="tximg"></image>
+			</view>
+			<view class="fr nameinfo">
+				<view class="name">{{name}}</view>
+				<view class="sex">
+					{{sex}} {{year}} {{cellphone}}
+				</view>
+			</view>
+		</view>
+		<view class="yxbox clearfloat">
+			<view class="ft zgyx">工作意向</view>
+			<view class="fr yx">
+				<view class="yxgz">{{jobname}}, {{money}} <image class="imgjt" src="/img/jt.png"></image></view>
+			</view>
+		</view>
+	</view>
+	<view class="cont">
+		<view class="clearfloat yxbox1">
+			<view class="ft zgyx"><image class="contltimg" src="/img/pergrjl.png"></image>个人简历</view>
+			<view class="fr yx">
+				<image class="imgjt" src="/img/jt.png" />
+			</view>
+		</view>
+		<view class="clearfloat yxbox1">
+			<view class="ft zgyx"><image class="contltimg" src="/img/msgw.png"></image>面试岗位</view>
+			<view class="fr yx">
+				<text>{{msgw}}</text><image class="imgjt" src="/img/jt.png" />
+			</view>
+		</view>
+		<view class="clearfloat yxbox1">
+			<view class="ft zgyx"><image class="contltimg" src="/img/ytdgw.png"></image>已投递岗位</view>
+			<view class="fr yx">
+				<text>{{ytdgw}}</text><image class="imgjt" src="/img/jt.png" />
+			</view>
+		</view>
+		<view class="clearfloat yxbox1">
+			<view class="ft zgyx"><image class="contltimg" src="/img/byll.png"></image>被游览量</view>
+			<view class="fr yx">
+				<text>{{byll}}</text><image class="imgjt" src="/img/jt.png" />
+			</view>
+		</view>
+	</view>
+	<view class="cont1">
+		<view class="clearfloat yxbox1">
+			<view class="ft zgyx"><image class="contltimg" src="/img/qhsf.png"></image>切换身份</view>
+			<view class="fr yx">
+				<view class="dasf" style="">当前身份-{{nowsf}} <image class="imgjt" src="/img/jt.png" /></view>
+			</view>
+		</view>
+		<view class="clearfloat yxbox1">
+			<view class="ft zgyx"><image class="contltimg" src="/img/sz.png"></image>设置</view>
+			<view class="fr yx">
+				<image class="imgjt" src="/img/jt.png" />
+			</view>
+		</view>
+	</view>
+</view>
+<view class="comname">长沙市竟网科技有限公司</view>

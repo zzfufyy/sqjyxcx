@@ -1,0 +1,103 @@
+// pages/zwxq/zwxq.js
+Page({
+
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+		jobname:'清洁工',
+		jobmony:'3000-3800',
+		jobyq:{rs:'招1人',nl:'30-45',worknj:'3-5',xl:'学历不限'},
+		xqxq:'1.工作职责: 室内保洁人员主要负责办公楼、仪电楼、化工楼内公共区域的清扫工作。 室外保洁	2.卫生标准及要求:3.室内保洁: 保持走廊地面无脚印、无口香糖印,夏季地面无土,冬季无结冰下',
+		comname:'长沙星沙文和友餐饮文化',
+		conadrres:'长沙岳麓区中电软件园A栋1920 ',
+		ident:"user"
+	},
+	// 聊一聊
+	talk(){
+		let ident = this.data.ident
+		wx.navigateTo({
+			url: '/pages/talkjobcom/talkjobcom?userident='+ ident ,
+		})
+	},
+	//投递简历
+	tdjl(e){
+		wx.showModal({
+			title: '提示',
+			content: '是否投递简历',
+			success (res) {
+				if (res.confirm) {
+					console.log('用户点击确定')
+				} else if (res.cancel) {
+					console.log('用户点击取消')
+				}
+			}
+		})
+	},
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function () {
+
+	},
+
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function () {
+
+	},
+
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+
+	},
+
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function (res) {
+		if (res.from === 'button') {
+      // 来自页面内转发按钮
+      title= "这个是页面自定义的分享事件~";
+      // imageUrl='***.png';
+    }
+    if(res.from ==='menu'){
+	  title= "这个是页面右上角的分享事件~";
+	  // imageUrl='***.png';
+    }
+	},
+	onShareTimeline(res) {
+    console.log(res)
+  }
+})

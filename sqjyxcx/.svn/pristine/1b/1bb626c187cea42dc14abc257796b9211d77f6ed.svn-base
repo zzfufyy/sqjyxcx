@@ -1,0 +1,75 @@
+<view class="container">
+	<block wx:if="{{ident == 'user'}}">
+		<navigator hover-class="none" url="/pages/byll/byll" class="obox clearfloat">
+			<view class="ft ltbox">
+				<image class="ltimg" src="/img/xt.png"></image>
+			</view>
+			<view class="ft frbox" style="width: {{imgwd}}px;">
+				<view class="bigtit clearfloat">
+					<text>系统通知</text>
+					<text class="fr opx">{{xttime}}</text>
+				</view>
+				<view class="btmtxt">最近有{{num}}家公司游览了你的信息，快去看看..</view>
+			</view>
+		</navigator>
+
+		<navigator hover-class="none" url="/pages/msjob/msjob" class="obox clearfloat">
+			<view class="ft ltbox">
+				<image class="ltimg" src="/img/qyyq.png"></image>
+				<view class="hd" wx:if="{{qywd==true}}"></view>
+
+			</view>
+			<view class="ft frbox" style="width: {{imgwd}}px;">
+				<view class="bigtit clearfloat">
+					<text>企业邀请</text>
+					<text class="fr opx">{{usertime}}</text>
+				</view>
+				<view class="btmtxt" >您有待邀请信息未处理</view>
+			</view>
+		</navigator>
+
+		<navigator wx:for="{{talklist}}" wx:key="key" hover-class="none" bindtap="talk" class="obox clearfloat">
+			<view class="ft ltbox">
+				<image class="ltimg" src="{{item.tximg}}"></image>
+				<view class="hd" wx:if="{{item.wd==true}}"></view>
+			</view>
+			<view class="ft frbox" style="width: {{imgwd}}px;">
+				<view class="bigtit clearfloat">
+					<text>{{item.name}}</text>
+					<text class="fr opx">{{item.time}}</text>
+				</view>
+				<view class="btmtxt">{{item.zt}}</view>
+			</view>
+		</navigator>
+	</block>
+
+	<block wx:if="{{ident == 'company'}}">
+		<navigator hover-class="none" url="/pages/manegejl/manegejl" class="obox clearfloat">
+			<view class="ft ltbox">
+				<image class="ltimg" src="/img/xt.png"></image>
+			</view>
+			<view class="ft frbox" style="width: {{imgwd}}px;">
+				<view class="bigtit clearfloat">
+					<text>系统通知</text>
+					<text class="fr opx">{{item.time}}</text>
+				</view>
+				<view class="btmtxt">您有{{num}}条待查看简历，快去看看..</view>
+			</view>
+		</navigator>
+
+		<navigator wx:for="{{companytalklist}}" wx:key="key" hover-class="none" bindtap="talk" class="obox clearfloat">
+			<view class="ft ltbox">
+				<image class="ltimg" src="{{item.tximg}}"></image>
+				<view class="hd" wx:if="{{item.wd==true}}"></view>
+			</view>
+			<view class="ft frbox" style="width: {{imgwd}}px;">
+				<view class="bigtit clearfloat">
+					<text>{{item.name}}</text>
+					<text class="fr opx">3月02日</text>
+				</view>
+				<view class="btmtxt">{{item.zt}}</view>
+			</view>
+		</navigator>
+	</block>
+
+</view>

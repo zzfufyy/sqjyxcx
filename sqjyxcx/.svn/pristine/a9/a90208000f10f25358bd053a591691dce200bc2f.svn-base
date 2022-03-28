@@ -1,0 +1,138 @@
+const { Completer } = require("../../utils/function_util.js");
+const { UserService, user } = require('../../service/user_service');
+
+const app = getApp();
+
+const createStepMethod = () => ({
+    /* 引导用户授权 */
+    _doAuthorize: function (scene) {
+        let auth = new Completer();
+        this.state.authCompleter = auth;
+
+        var that = this;
+
+        wx.login({
+            success: function (res) {
+                that.setData({
+                    res: res
+                })
+                wx.request({
+                    url: app.globalData.web_path + '/wx/user/' + app.globalData.appId + '/login',
+                    data: {
+                        code: res.code,
+                        loginType: 'openid'
+                    },
+                    header: app.globalData.header,
+                    success: function (e) {
+                        //将openid  缓存
+                        // wx.setStorageSync('openid', res.data.data.openid);
+                        // wx.setStorageSync('sessionKey', res.data.data.sessionKey);
+                        // wx.setStorageSync('Token', res.data.data.Token);
+                        // console.log(JSON.stringify(e.data.data.userWx))
+
+                        if (JSON.stringify(e.data.data.userWx) == undefined) {
+                            that.setData({
+                                hideUserInfoAuth: false,
+                                scene: scene
+                            })
+                            setTimeout(() => {
+                                that.setData({
+                                    animated: true
+                                })
+                            }, 100)
+
+                        } else {
+                            //已授权：1.已注册会自动登录 2.已授权但未注册则弹出注册页面
+
+                            that.setData({
+                                hideUserInfoAuth: true,
+                                scene: scene
+                            })
+                            setTimeout(() => {
+                                that.setData({
+                                    animated: false
+                                })
+                            }, 100);
+
+                            // 自动登录，无需授权，因此直接完成
+                            auth.resolve();
+                        }
+                    }
+                })
+            }
+        });
+
+        return auth.promise;
+    },
+
+    _loadUserRole: async function () {
+
+        let failback = (title) => {
+            console.warn(title);
+            this.setData({
+                juesehide: false,
+            });
+        }
+
+        try {
+            let userRole = await UserService.loadUserRole();
+            let info = await UserService.getUserRoleInfo(userRole);
+            if (!info) {
+                console.warn('用户身份失效');
+            } else {
+                console.info(`用户身份 [${user.userRoleName[userRole]}] 校验成功`);
+                return info;
+            }
+        } catch (e) {
+            console.warn('没有本地存储的用户角色，提示用户选择角色');
+        }
+
+        return null;
+    },
+
+    _hasUserRole(userRole) {
+        return UserService.getUserRoleInfo(userRole);
+    },
+
+    _loadUserRole: async function () {
+        try {
+            return await UserService.loadUserRole();
+        } catch (e) {
+            console.warn('本地未存储用户角色信息');
+            return null;
+        }
+    },
+
+    _selectUserRole: async function () {
+        let userRole = await this._loadUserRole();
+        // 如果没有本地的角色信息，显示对话框
+        if (!userRole) {
+            this.setData({
+                juesehide: false,
+            });
+        }
+        // 加载角色信息到状态
+        else {
+            switch (userRole) {
+                case user.UserRole.Recruiter:
+                    await this._handleRecruiterSelected();
+                    break;
+                case user.UserRole.Recruiter:
+                    await this._handleRecruiteeSelected();
+                    break;
+                default:
+                    console.error(`位置的登录身份 [${userRole}]`)
+            }
+        }
+    },
+
+    bootstrap: async function () {
+        await app.state.opendidReady;
+        await this._doAuthorize();
+        await this._selectUserRole();
+    },
+});
+
+module.exports = {
+    createStepMethod: createStepMethod,
+}

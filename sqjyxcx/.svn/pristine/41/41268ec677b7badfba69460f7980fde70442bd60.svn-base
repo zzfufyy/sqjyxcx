@@ -1,0 +1,108 @@
+// pages/comjbxx/comjbxx.js
+Page({
+
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+		imgsrc:'',
+		name:'',
+		cellphone:''
+	},
+	//点击企业标志
+	xgtx(){
+		let imgsrc = this.data.imgsrc
+		let that = this
+		wx.chooseMedia({
+			count: 1,
+			mediaType: ['image'],
+			sourceType: ['album', 'camera'],
+			camera: ['back', 'front'],
+			success(res) {
+				console.log(res.tempFiles[0].tempFilePath)
+				that.setData({
+					imgsrc:res.tempFiles[0].tempFilePath,
+					none:0
+				})
+			}
+		})
+	},
+	// 保存
+	bc(){
+		let imgsrc = this.data.imgsrc
+		let name = this.data.name
+		let cellphone = this.data.cellphone
+		wx.navigateTo({
+			url: '/pages/rzcenter/rzcenter?imgsrc='+imgsrc+'&name='+name+'&cellphone='+cellphone,
+		})
+	},
+	name(e){
+		console.log(e)
+		let name = this.data.name
+		this.setData({
+			name:e.detail.value
+		})
+	},
+	cellphone(e){
+		console.log(e)
+		let cellphone = this.data.cellphone
+		this.setData({
+			cellphone:e.detail.value
+		})
+	},
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function () {
+
+	},
+
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function () {
+
+	},
+
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+
+	},
+
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function () {
+
+	}
+})

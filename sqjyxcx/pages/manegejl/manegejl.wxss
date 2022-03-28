@@ -1,0 +1,149 @@
+.top_nav{display: flex;border-bottom: 1px solid #F5F5F5;
+}
+.nav-name{
+	display: inline-block;text-align: center;height: 40px;line-height: 40px;
+	background: #fff;width: 100%;
+	color: #333333;
+	padding: 18rpx 18rpx 10rpx 18rpx;
+	font-size: 14px;
+	opacity: 0.6;
+}
+.nav-hover{font-size: 14px;font-family: Source Han Sans CN;background: #fff;
+ opacity: 1;
+ color: #333333;
+ font-weight: bold;
+}
+.nav-hover .linbc{width: 35px;
+	height: 4px;
+	background: rgba(67, 118, 228, 1);
+	margin: 0 auto;
+	border-radius: 3px;
+}
+.workbox{
+	margin:10px 10px 0px 10px ;border: 1px dashed #A0A0A0;font-size: 14px;background: #fff;
+}
+.jobname{
+	font-size: 14px;margin: 20px 0px 12px 20px ;
+font-family: Source Han Sans CN-Bold, Source Han Sans CN;
+font-weight: bold;
+color: #333333;
+}
+.gwyq{
+	font-size: 14px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #333333;margin-left: 20px;margin-bottom: 7px;
+}
+.btmbox{
+	padding:9px  18px 15px 19px;border-top: 1px solid #ECECEC;
+}
+.bjbox{
+	display: inline-block;width: 55px;
+	color: #3384FD;
+	height: 25px;line-height: 25px;text-align: center;
+	background: #FFFFFF;
+	border-radius: 3px 3px 3px 3px;
+	opacity: 1;
+	border: 1px solid #3384FD;
+}
+.xiajia1{
+	display: inline-block;width: 55px;
+	color: #F8424C;text-align: center;line-height: 25px;
+	/* margin-left: 10px; */
+	height: 25px;
+	background: #FFFFFF;
+	border-radius: 3px 3px 3px 3px;
+	opacity: 1;
+	border: 1px solid #F8424C;
+}
+.xiajia{
+	display: inline-block;width: 55px;
+	color: #999999;text-align: center;line-height: 25px;margin-left: 10px;
+	height: 25px;
+	background: #FFFFFF;
+	border-radius: 3px 3px 3px 3px;
+	opacity: 1;
+	border: 1px solid #999999;
+}
+.rtbox{
+	margin-top: 3px;
+}
+.jtbox{
+	width:0;
+height:0;
+border:7px solid transparent;      position: absolute;
+top: 26px;margin-left: 4px;
+border-top-color:#A9A9A9;display: inline; font-size: 14px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+}
+.sx{
+	position: relative;color: #A9A9A9;
+}
+.sxac{
+	color: #F8424C;margin-right: 23px;font-size: 14px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+}
+.xz{
+	transform: rotate(180deg);top: 16px;border-top-color:#F8424C;
+}
+.yx{
+	font-size: 14px;margin-left: 10px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #999999;
+}
+
+/* 悬浮层 */
+.topjlsg{
+	margin: 17px 10px 19px 10px ;
+}
+.yxbox{
+	margin: 6px 10px 19px 10px;display: flex;flex-wrap: wrap;
+}
+.yxforbox{
+	width: 30%;margin-right: 3%;margin-top: 10px;font-size: 12px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333333;
+	background: #F7F8FA;padding: 9px 0;text-align: center;
+}
+.active{
+	
+color: #F8424C;
+background: #FFEBED;
+}
+
+
+.btmbtnbox{
+	display: flex;justify-content: space-around;padding-bottom: 37px;margin-top:30px ;
+}
+.clear{
+	font-size: 18px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;width: 29%;
+border-radius: 4px 4px 4px 4px;
+color: #FFFFFF;
+border: 1px solid #F8424C;
+color: #F8424C;height: 46px;line-height: 46px;text-align: center;
+}
+.qd{
+	background: #F8424C;height: 46px;line-height: 46px;text-align: center;
+border-radius: 4px 4px 4px 4px;font-size: 18px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #FFFFFF;width: 56%;
+}
+.sxbox{
+	height: 100%;
+}
+
+
+.date{
+	font-size: 16px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #999999;margin: 18px 0 0 21px;
+}
+
+
+

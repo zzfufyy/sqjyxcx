@@ -1,0 +1,205 @@
+// pages/manegejob/manegejob.js
+Page({
+
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+		currentId: '0',
+		currentTab:'0',
+		yhid:"",
+		organid:"",
+    section: [],
+		joblistyfb:[
+			{jobname:'店长',money:'6000-7000',needs:'1',gwyq:'合理控制人事成本，保持员工工作的高效率；维持会所良好的顾客服务；加强防火、防盗、防工伤、安全保卫的工作；审核店内预算和支出；',yl:'1234',td:'234',xjid:'0'},
+			{jobname:'店长',money:'6000-7000',needs:'2',gwyq:'合理控制人事成本，保持员工工作的高效率；维持会所良好的顾客服务；加强防火、防盗、防工伤、安全保卫的工作；审核店内预算和支出；',yl:'1234',td:'234',xjid:'1'}
+		],
+		joblistyxj:[
+			{jobname:'店长',money:'6000-7000',needs:'3',gwyq:'合理控制人事成本，保持员工工作的高效率；维持会所良好的顾客服务；加强防火、防盗、防工伤、安全保卫的工作；审核店内预算和支出；',yl:'1234',td:'234',sjid:'2'},
+		],
+	},
+	//点击头部导航的点击事件
+	handleTap: function(e) {
+		let id = e.currentTarget.id;
+		if(id){
+			this.setData({
+				currentId:id,
+					currentTab: id,
+			})
+		}
+	},
+	// 滚动切换标签样式 
+	switchTab: function(e) {
+		// console.log(e) 
+		var that = this; 
+		that.setData({
+		 currentTab: e.detail.current,
+		 currentId: e.detail.current
+		}); 
+	},
+	//编辑职位
+	editjob(){
+		wx.navigateTo({
+			url: '/pages/editjob/editjob',
+		})
+	},
+	//下架点击事件
+	xiajia(e){
+		let that = this
+		let xiajiaid = e.currentTarget.dataset.xjid
+		let joblistyfb = that.data.joblistyfb
+		let joblistyxj = that.data.joblistyxj
+		console.log(e)
+		for(let i = 0;i<joblistyfb.length;i++){
+			if(xiajiaid == joblistyfb[i].xjid){
+				wx.showModal({
+					title: '提示',
+					content: '是否确认下架',
+					success (res) {
+						if (res.confirm) {
+							joblistyxj.push(joblistyfb[i])
+							joblistyfb.splice(i, 1)
+							let section1 = [
+								{name: '已发布',typeId: '0',num:joblistyfb.length}, 
+								{name: '已下架',typeId: '1',num:joblistyxj.length},
+							]
+							that.setData({
+								joblistyfb:joblistyfb,
+								joblistyxj:joblistyxj,
+								section:section1
+							})
+							
+						} else if (res.cancel) {
+							console.log('用户点击取消')
+						}
+					}
+				})
+				
+			}
+		}
+		let section1 = [
+			{name: '已发布',typeId: '0',num:joblistyfb.length}, 
+			{name: '已下架',typeId: '1',num:joblistyxj.length},
+		]
+		that.setData({
+			joblistyfb:joblistyfb,
+			joblistyxj:joblistyxj,
+			section:section1
+		})
+	},
+	//上架点击事件
+	shangjia(e){
+		let that = this
+		let sjiaid = e.currentTarget.dataset.sjid
+		let joblistyfb = that.data.joblistyfb
+		let joblistyxj = that.data.joblistyxj
+		console.log(e)
+		for(let i = 0;i<joblistyxj.length;i++){
+			if(sjiaid == joblistyxj[i].sjid){
+				wx.showModal({
+					title: '提示',
+					content: '是否确认上架',
+					success (res) {
+						if (res.confirm) {
+							joblistyfb.push(joblistyxj[i])
+							joblistyxj.splice(i, 1)
+							let section1 = [
+								{name: '已发布',typeId: '0',num:joblistyfb.length}, 
+								{name: '已下架',typeId: '1',num:joblistyxj.length},
+							]
+							that.setData({
+								joblistyfb:joblistyfb,
+								joblistyxj:joblistyxj,
+								section:section1
+							})
+						} else if (res.cancel) {
+							console.log('用户点击取消')
+						}
+					}
+				})
+				
+			}
+		}
+		let section1 = [
+			{name: '已发布',typeId: '0',num:joblistyfb.length}, 
+			{name: '已下架',typeId: '1',num:joblistyxj.length},
+		]
+		that.setData({
+			joblistyfb:joblistyfb,
+			joblistyxj:joblistyxj,
+			section:section1
+		})
+	},
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {
+		let that = this
+		wx.getSystemInfo({
+			success: function (res) {
+				that.setData({
+					winWidth: res.windowWidth,
+					winHeight: res.windowHeight,
+				});
+			}
+		})
+		let fblg = that.data.joblistyfb.length
+		let xjlg = that.data.joblistyxj.length
+		let section1 = [
+			{name: '已发布',typeId: '0',num:fblg}, 
+			{name: '已下架',typeId: '1',num:xjlg},
+		]
+		that.setData({
+			section:section1
+		});
+	},
+
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function () {
+
+	},
+
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function () {
+
+	},
+
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function () {
+
+	},
+
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+
+	},
+
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function () {
+
+	}
+})

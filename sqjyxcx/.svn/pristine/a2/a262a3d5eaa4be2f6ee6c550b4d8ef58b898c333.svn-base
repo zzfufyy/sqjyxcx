@@ -1,0 +1,35 @@
+<view class="container">
+	<view class="topbox">
+		<view class="jobname">{{jobname}}</view>
+		<view class="jobmony">{{jobmony}}元/月</view>
+		<view class="jobyq">{{jobyq.rs}} | {{jobyq.nl}}岁 | {{jobyq.worknj}}年</view>
+	</view>
+	<view class="line1"></view>
+	<view class="topbox jobxq">
+		<view class="jobname">岗位需求</view>
+		<view class="xqxq">{{xqxq}}</view>
+	</view>
+	<view class="line1"></view>
+	<view class="topbox comxx">
+		<view class="jobname">公司信息</view>
+		<view class="combox">
+			<view class="comtb clearfloat">
+				<view class="imgbox">
+					<image class="ltimg" src="/img/tx.png" ></image>
+					<text class="comname">{{comname}}</text>
+				</view>
+				<view class="conadrres">{{conadrres}}</view>
+			</view>
+		</view>
+	</view>
+	<!-- <view class="line1"></view> -->
+	
+	<view class="botombox clearfloat">
+		<button class="imgbt ft buttonbox" style="margin-left: 9px;" open-type = "share">
+			<image src="/img/share.png" class="imgbg ft"></image>
+		</button>
+		<image class="imgbt ddh ft" data-cellphne="{{cellphne}}" bindtap="callnum" src="/img/dhred.png"></image>
+		<view class="fr tijsq lyl" bindtap="talk">聊一聊</view>
+		<view class="fr tijsq tdjl" bindtap="tdjl">投递简历</view>
+	</view>
+</view>

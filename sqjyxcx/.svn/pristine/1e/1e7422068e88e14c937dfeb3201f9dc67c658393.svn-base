@@ -1,0 +1,57 @@
+
+const _app = getApp();
+const basePath = _app.globalData.web_path;
+
+function request(params) {
+    console.debug(`Request ${params.url} with data: `);
+    console.debug(params.data);
+
+    params.url = basePath + params.url;
+    console.debug(`Change param.url to ${params.url}`);
+
+    return new Promise(
+        function (resolve, reject) {
+            wx.request({
+                ...params,
+                success: function (r) {
+                    console.debug(`Request ${params.url} get response: `);
+                    console.debug(r);
+                    if (r.statusCode == 200 && r.data && r.data.code == 0 && r.data) {
+                        resolve(r.data);
+                    } else {
+                        reject(r);
+                    }
+                },
+                fail: function (error) {
+                    console.error(`Request ${params.url} Failed`);
+                    reject(error);
+                },
+            });
+        }
+    );
+}
+
+const requestOnlyData = (params) => request(params).then(r => r.data);
+
+const RequestMethod = {
+    GET: "GET",
+    POST: "POST",
+}
+
+const ContentType = {
+    DEFAULT: "application/x-www-form-urlencoded",
+    JSON: "application/json",
+}
+
+const jsonHeader = {
+    ...getApp().globalData.header,
+    "Content-Type": ContentType.JSON,
+}
+
+module.exports = {
+    request: request,
+    requestOnlyData: requestOnlyData,
+    RequestMethod: RequestMethod,
+    ContentType: ContentType,
+    jsonHeader: jsonHeader,
+}

@@ -1,0 +1,24 @@
+<view class="container">
+	<view class="toptit">
+		35家公司查看能了你的简历
+	</view>
+	<view class="line1"></view>
+
+	<block wx:for="{{joblist}}" wx:key="key">
+		<view class="jobbox clearfloat" >
+			<view class="ft ltbox">
+				<view class="jobname">{{item.jobname}}</view>
+				<!-- <view class="jobmoney">{{item.jobmoney}}元/月</view> -->
+				<view class="companyname">
+					<image src="{{item.companytx}}" class="companytx"></image>
+					{{item.companyname}}
+				</view>
+			</view>
+			<view class="fr lrbox">
+				<view class="far">{{item.jl}}公里</view>
+				<view class="phonecall" bindtap="callphone" data-phonenum="{{item.phonenum}}">电话沟通</view>
+			</view>
+		</view>
+		<view class="line1"></view>
+	</block>
+</view>

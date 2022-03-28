@@ -1,0 +1,41 @@
+<view class="container">
+	<view class="naxbox" style="padding-bottom: 5px;" >
+		<view class="name">公司名称</view>
+		<input type="text" placeholder="请输入公司名称" class="wxh truename" />
+	</view>
+	<view class="naxbox" style="padding-bottom: 5px;" >
+		<view class="name">职位名称</view>
+		<input type="text" placeholder="请输入职位名称" class="wxh truename" />
+	</view>
+	<view class="naxbox clearfloat">
+		<view class="ft" style="width: 49%;">
+			<view class="name">开始时间</view>
+			<view class="phonenum">
+				<picker mode="date" value="{{date}}" fields="month" end="{{enddate}}" bindchange="bindDateChange">
+					<view class="picker">
+						 {{newdate}}月
+					</view>
+				</picker>
+			</view>
+		</view>
+		<view class="fr" style="width: 49%;">
+			<view class="name" >结束时间</view>
+			<view class="phonenum">
+				<picker mode="date" value="{{dateend}}" fields="month" end="{{enddate}}" bindchange="bindDateChange1">
+					<view class="picker">
+						 {{newdate1}}月
+					</view>
+				</picker>
+			</view>
+		</view>
+	</view>
+	<view class="line15"></view>
+	<view class="jobcont">
+		<view class="contnr">
+			<view class="gznr">工作内容</view>
+			<textarea class="areanr" style="width:90%!important;margin: 0 auto;" name="contnr" id="" cols="30" rows="10"></textarea>
+		</view>
+	</view>
+</view>
+
+<view class="tijsq" bindtap="tijsq">保存</view>
