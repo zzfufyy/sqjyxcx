@@ -1,0 +1,65 @@
+.top_nav{display: flex;border-bottom: 1px solid #F5F5F5;
+}
+.nav-name{
+	display: inline-block;text-align: center;height: 40px;line-height: 40px;
+	background: #fff;width: 100%;
+	color: #333333;
+	padding: 18rpx 18rpx 10rpx 18rpx;
+	font-size: 14px;
+	opacity: 0.6;
+}
+.nav-hover{font-size: 14px;font-family: Source Han Sans CN;background: #fff;
+ opacity: 1;
+ color: #333333;
+ font-weight: bold;
+}
+.nav-hover .linbc{width: 35px;
+	height: 4px;
+	background: rgba(67, 118, 228, 1);
+	margin: 0 auto;
+	border-radius: 3px;
+}
+.workbox{
+	margin:10px 10px 0px 10px ;border: 1px dashed #A0A0A0;font-size: 14px;background: #fff;
+}
+.jobname{
+	font-size: 14px;margin: 20px 0px 12px 20px ;
+font-family: Source Han Sans CN-Bold, Source Han Sans CN;
+font-weight: bold;
+color: #333333;
+}
+.gwyq{
+	font-size: 14px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #333333;margin-left: 20px;margin-bottom: 7px;
+}
+.btmbox{
+	padding:9px  18px 15px 19px;border-top: 1px solid #ECECEC;
+}
+.bjbox{
+	display: inline-block;width: 55px;
+	color: #3384FD;
+	height: 25px;line-height: 25px;text-align: center;
+	background: #FFFFFF;
+	border-radius: 3px 3px 3px 3px;
+	opacity: 1;
+	border: 1px solid #3384FD;
+}
+.xiajia{
+	display: inline-block;width: 55px;
+	color: #999999;text-align: center;line-height: 25px;margin-left: 10px;
+	height: 25px;
+	background: #FFFFFF;
+	border-radius: 3px 3px 3px 3px;
+	opacity: 1;
+	border: 1px solid #999999;
+}
+.rtbox{
+	margin-top: 3px;
+}
+
+
+
+
+

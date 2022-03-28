@@ -1,0 +1,6 @@
+<view class="container" style="background: #F5F5F5;">
+	<view class="obox">
+		<image class="img" src="/img/qyyz.png"></image>
+		<view class="qyxx">企业信息认证中</view>
+	</view>
+</view>

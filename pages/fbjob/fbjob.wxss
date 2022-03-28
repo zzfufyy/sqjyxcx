@@ -1,0 +1,59 @@
+page,.line10 	{
+	background: #EEEEEE;}
+.ttbox{
+	height: 50px;line-height: 50px;border-bottom: 1px solid #EEEEEE;
+}
+.container{margin:10px 10px 0px 10px;padding-bottom: 150px;}
+.leftname{
+	margin-left: 15px;width: 45%;font-size: 18px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #333333;
+}
+.rtip{
+	margin-right: 15px;width: 45%;height: 50px;font-size: 16px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #333333;
+}
+.iptqy{
+	height: 18px;line-height: 18px;background: #fff;
+	margin-top: 16px;text-align: right;
+}
+.clearfloat {background: #fff;}
+.qyname {
+	width: 45%;
+	text-align: right;
+	font-family: Microsoft YaHei;
+	font-weight: 400;
+	color: #333333;
+	position: relative;margin-right: 15px;
+}
+.slect{width: 16px;height: 16px;vertical-align: middle;margin-top: -3px;}
+.picker{	color: #808080;}
+
+.jxtj{height: 48px;line-height: 48px;text-align: center;font-size: 18px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;background: #fff;
+	color: #999999;
+}
+.jianhao{
+	width: 20px;position: absolute;right: -7px;top: -7px;
+	height: 20px;
+	vertical-align: middle;
+	margin-left: 10rpx;
+}
+.textarea{
+	width: 90%;
+    margin: 0 auto;
+    /* height: 150px; */margin-bottom: 17px;
+}
+.btnbox{
+	width: 100%;text-align: center;background: #fff;height: 78px;
+	position: fixed;left:0;right: 0;margin: 0 auto;bottom: 0;
+}
+
+
+
+
+

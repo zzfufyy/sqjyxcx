@@ -1,0 +1,11 @@
+<view class="container">
+	<!-- <view class="line15"></view> -->
+	<view class="jobcont">
+		<view class="contnr">
+			<!-- <view class="gznr"></view> -->
+			<textarea class="areanr" placeholder="请输入自我评价内容" style="width:90%!important;margin: 0 auto;padding-top: 10px;" bindinput="zwpj" name="contnr" id="" cols="30" rows="10" value="{{zwpj}}"></textarea>
+		</view>
+	</view>
+</view>
+
+<view class="tijsq" bindtap="tijsq">保存</view>

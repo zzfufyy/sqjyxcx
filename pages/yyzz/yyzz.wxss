@@ -1,0 +1,28 @@
+/* pages/comxc/comxc.wxss */
+page{
+	background: #F5F5F5;
+}
+.container{
+	background: #fff;
+}
+.imgbox{
+	margin: 0px 20px 0 20px;display: flex;flex-wrap: wrap;padding-top: 31px;
+}
+
+.imgxc{margin-top: 10px;
+border-radius: 5px 5px 5px 5px;margin-right: 10px;position: relative;
+}
+.tjimg{
+	background: #F6F6F6;text-align: center;opacity: 0.8;
+	border-radius: 5px 5px 5px 5px;font-size: 50px;margin-top: 10px;
+}
+.gbimg{
+	width: 16px;height: 16px;position: absolute;    right: -6px;
+	top: -6px;background: #fff;
+	border-radius: 50%;
+}
+
+
+
+
+

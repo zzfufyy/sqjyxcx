@@ -1,0 +1,18 @@
+.bbox{
+	margin: 0 9px 0 11px;border-bottom: 1px solid #eeeeee;
+	height: 58px;line-height: 58px;position: relative;
+}
+.abus{
+	position: absolute;font-size: 14px;left: 5px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333333;
+}
+.rtimg{
+	width: 12px;
+	position: absolute;right: 0;top: 19px;right: 4px;
+	height: 14px;vertical-align: middle;
+}
+
+
+

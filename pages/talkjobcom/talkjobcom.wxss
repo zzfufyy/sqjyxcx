@@ -1,0 +1,101 @@
+.topnav{
+	height: 70px;background: #fff;display: flex;justify-content: center;align-items: center;justify-content:space-around;box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.16);
+}
+.topitem{
+	text-align: center;
+}
+page{
+	background: #f5f5f5;
+}
+.itemimg{
+	width: 22px;height: 22px;
+}
+.itemtxt{
+	font-size: 14px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #333333;
+}
+
+.middlebox{
+	border-radius: 3px;
+	margin: 0 10px;
+	margin-top: 10px;
+}
+.qzzinfobox{
+	height: 46px;line-height: 46px;background: #fff;padding-left: 15px;font-size: 16px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #333333;
+}
+.qzzname{
+	font-size: 18px;
+font-family: SimHei-Regular, SimHei;
+font-weight: 400;
+color: #333333;
+}
+
+
+.time{
+	margin: 18px auto 9px auto;text-align: center;font-size: 14px;
+	font-family: SimHei-Regular, SimHei;
+	font-weight: 400;
+	color: #999999;
+}
+
+
+.qybox{
+	margin-bottom: 20px;
+}
+.txbox{
+	width: 44px;
+height: 44px;border-radius: 50%;
+}
+.ltbox{
+	font-size: 14px;
+font-family: SimHei-Regular, SimHei;
+font-weight: 400;
+border-radius: 10px 0px 10px 10px;
+color: #333333;padding: 19px 14px 18px 18px;background-color: #fff;max-width: 66%;margin-right: 10px;
+}
+.rtbox{
+	margin-right: 8px;
+}
+
+.qzbox{
+	margin-bottom: 20px;
+}
+.qzbox .txbox{
+	width: 44px;
+height: 44px;border-radius: 50%;
+}
+.qzbox .ltbox{
+	font-size: 14px;
+font-family: SimHei-Regular, SimHei;
+font-weight: 400;
+border-radius: 10px 0px 10px 10px;
+color: #fff;padding: 19px 14px 18px 18px;background-color: #3384FD;max-width: 66%;margin-right: 10px;
+}
+.qzbox .rtbox{
+	margin-right: 8px;
+}
+.inputbox{
+	background-color: #fff;padding:8px 0px 8px 0px ;position: fixed;bottom: 0;width: 100%;left: 0%;
+}
+.inputmesege{
+	height: 48px;background:#EEEEEE ;padding-left: 13px;font-size: 16px;
+	font-family: SimHei-Regular, SimHei;width: 90%;margin: 0 auto;
+	border-radius: 6px 6px 6px 6px;
+	font-weight: 400;
+}
+
+.buheshi{
+	opacity: 0.5;
+}
+
+
+
+
+
+
+

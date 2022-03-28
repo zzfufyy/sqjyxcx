@@ -1,0 +1,57 @@
+<view class="container">
+	<view class="INinputheader clearfloat">
+		<view class="ft lt">
+			<icon class="INsearchicon" type="search" size="22" color="#fff" />
+			<input class="weui-input" placeholder-class="opl" placeholder="搜索职位、公司" bindtap="searchjob"
+				confirm-type="search" />
+		</view>
+		<view class="nav-name sx fr" bindtap="sx">筛选<view class="jtbox "></view></view>
+	</view>
+	<view class="line1"></view>
+	<navigator hover-class="none" url="/pages/zwxq/zwxq" wx:for="{{joblist}}" wx:key="key">
+		<view class="jobbox1 clearfloat" >
+			<view class="ft ltbox">
+				<view class="jobname">{{item.jobname}}</view>
+				<view class="jobmoney">{{item.jobmoney}}元/月</view>
+				<view class="companyname1">
+					<image src="{{item.companytx}}" class="companytx"></image>
+					{{item.companyname}}
+				</view>
+			</view>
+			<view class="fr lrbox">
+				<view class="far">{{item.jl}}公里</view>
+				<view class="phonecall" catchtap="callphone" data-phonenum="{{item.phonenum}}">电话沟通</view>
+			</view>
+		</view>
+		<view class="line1"></view>
+	</navigator>
+</view>
+
+<view class="zzc" bindtap="sx" hidden="{{hidesx}}"></view>
+<scroll-view scroll-y  class="sxbox" hidden="{{hidesx}}">
+	<view class="topjlsg">
+		<view class="yxyq clearfloat">
+			<view class="yx ft">月薪要求</view>
+			<view class=" fr sxac" bindtap="sx">收起 <view class="jtbox xz"></view></view>
+		</view>
+		<view class="yxbox">
+			<view class="yxforbox {{item.checked?'active':'xb'}}"  bindtap="yxxz" data-id="{{item.id}}" 
+			wx:for="{{yxyq}}" wx:key="key">{{item.yxmoney}}</view>
+		</view>
+	</view>
+	<view class="topjlsg">
+		<view class="yxyq clearfloat">
+			<view class="yx ft">距离</view>
+			<!-- <view class=" fr sxac">收起 <view class="jtbox xz"></view></view> -->
+		</view>
+		<view class="yxbox">
+			<view class="yxforbox {{item.id==oid?'active':'xb'}}"  bindtap="nlfw" data-id="{{item.id}}" 
+			wx:for="{{nyxz}}" wx:key="key">{{item.nl}}</view>
+		</view>
+	</view>
+	<view class="btmbtnbox">
+		<view class="clear" bindtap="clear">清空</view>
+		<view class="qd" bindtap="qd">确定</view>
+	</view>
+</scroll-view>
+
