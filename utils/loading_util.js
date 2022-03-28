@@ -1,4 +1,7 @@
-const loading = require('../utils/loading_util');
+﻿const loading = require('../utils/loading_util');
+
+
+// modified
 
 function beginLoading(option) {
     if (!option) {
