@@ -78,14 +78,14 @@ Page({
   },
 
   // 更改定位
-  changeLocation(e) {
+  changedw(e) {
     let that = this
     wx.chooseLocation({
       type: 'gcj02',
       success(res) {
         console.log(res)
-        let latitude = res.latitude
-        let longitude = res.longitude
+        const latitude = res.latitude
+        const longitude = res.longitude
         var positionData = res.address
         that.setData({
           // positionData:positionData

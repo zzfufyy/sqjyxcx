@@ -132,10 +132,6 @@ const createRecruiteeMethods = () => ({
                     smhide: true,
                     ident: 'user',
                 });
-
-                // 加载角色选择完成
-                this.state.userRoleCompl.resolve();
-
                 // 保存登录角色信息
                 UserService.saveUserRole(Constant.UserRole.Recruitee);
             }
@@ -151,39 +147,21 @@ const createRecruiteeMethods = () => ({
 
     // 加载求职用户应该看到的工作信息
     _loadJobList: async function () {
+        let jobInfoPageConfig = this.state.jobInfoPageConfig;
 
-        console.debug('加载首页工作列表');
-        let pageConfig = this._getPageConfig();
-
-        let location = this._getLocation();
-        let pagingParam = pageConfig.buildNextParam({
-            longitude: location.longitude,
-            latitude: location.latitude,
+        debugger
+        // TODO： 获取求职用户的位置（或者是默认的位置（如市中心等））
+        let pagingParam = jobInfoPageConfig.buildNextParam({
+            longitude: 112.9389, latitude: 28.0,
         });
 
-        if (!pagingParam) {
-            return;
-        }
+        let data = await RecruitJobService.pagedByDistacne(pagingParam);
+        jobInfoPageConfig.handlePageInfo(data.pageInfo);
 
-        let pageInfo;
-        try {
-            Loading.begin();
-            // 请求数据
-            pageInfo = await RecruitJobService.pagedByDistacne(pagingParam);
-        } catch (e) {
-            console.error(e);
-        } finally {
-            Loading.end();
-        }
-
-        // pageConifg 保存当前的分页信息，并且取出 pageInfo 中的 list
-        let dataList = pageConfig.handlePageInfo(pageInfo);
-
-        // 当前的列表数据， 用于之后的列表拼接
         let current = this.data.jobInfoList;
 
         // 将服务端的数据映射成页面展示数据
-        let newList = dataList.map(jobInfo => ({
+        let newList = data.list.map(jobInfo => ({
             jobname: jobInfo.jobName,
             jobmoney: new Constant.Salary(
                 jobInfo.jobSalaryMin,
@@ -203,12 +181,6 @@ const createRecruiteeMethods = () => ({
             jobInfoList: current.concat(
                 newList,
             ),
-        });
-    },
-
-    _resetJobList() {
-        this.setData({
-            jobInfoList: [],
         });
     }
 });

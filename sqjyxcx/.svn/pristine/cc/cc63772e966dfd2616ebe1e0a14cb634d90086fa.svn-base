@@ -37,7 +37,7 @@
           </view>
           <view class="texname">邀约面试</view>
         </navigator> -->
-        <navigator hover-class="none" bindtap="changeLocation" url="" class="navtop" wx:key="key">
+        <navigator hover-class="none" bindtap="changedw" url="" class="navtop" wx:key="key">
           <view class="imgbox">
             <image src="/img/xgdw.png"></image>
           </view>
@@ -59,7 +59,7 @@
         <view class="topjob">
           <image class="local" src="/img/Icon ／ Location On ／ Rounded@2x.png"></image>附近职位
         </view>
-        <view class="joblist">
+        <view class="jobInfoList">
           <!-- <view class="company" wx:for="{{compangjob}}" wx:key="key">
             <view class="companyname">{{item.companyname}}</view>
             <view class="companyjuli">{{item.companyjuli}}km {{item.companylocal}}</view>
@@ -84,10 +84,6 @@
             </view>
             <view class="line1"></view>
           </navigator>
-          <!-- 这里需要调整一下样式 -->
-          <view wx:if="{{noMoreData == true}}">
-            没有更多数据
-          </view>
         </view>
       </view>
     </view>
@@ -129,7 +125,7 @@
           </view>
           <view class="texname">管理简历</view>
         </navigator>
-        <navigator hover-class="none" bindtap="changeLocation" url="" class="navtop" wx:key="key">
+        <navigator hover-class="none" bindtap="changedw" url="" class="navtop" wx:key="key">
           <view class="imgbox">
             <image src="/img/xgdw.png"></image>
           </view>
@@ -151,7 +147,7 @@
         <view class="topjob">
           <image class="local" src="/img/Icon ／ Location On ／ Rounded@2x.png"></image>推荐人才
         </view>
-        <view class="joblist">
+        <view class="jobInfoList">
           <view class="company" wx:for="{{compangjob}}" wx:key="key">
             <view class="companyname">找 {{item.jobname}} 工作</view>
             <view class="wid95 tagbox">
@@ -219,7 +215,7 @@
         <view class="xb {{salary==index?'active':''}}" bindtap="handleSelectSalary" data-index3="{{index}}"
           wx:for="{{salaryList}}" wx:key="key">{{item.value}}</view>
       </view>
-      <view class="tijsq" bindtap="commitRecruiteeInfo" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>
+      <view class="tijsq" bindtap="commitRecruitInfo" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>
     </view>
   </view>
 

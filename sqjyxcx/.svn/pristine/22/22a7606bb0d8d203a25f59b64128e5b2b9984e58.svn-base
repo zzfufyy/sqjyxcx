@@ -1,45 +1,17 @@
 // 如果小程序是采用组件化的方式开发的话，那可以将这一部分迁移到子组件的逻辑中
 
 const Paging = require('../../utils/paging_util');
-const Constant = require('../../common/constant');
 
 const userIdent = 'user';
 const companyIdent = 'company';
 
-const createContentData = () => ({
-    positionInfo: positionInfo,
-});
 
 const createContentMethods = () => ({
     // 分页状态
     state: {
         pageConfig: new Paging.PageConfig(5),
-        location: Constant.defaultLocation,
     },
 
-    // 修改定位
-    changeLocation(e) {
-        let that = this
-        wx.chooseLocation({
-            type: 'gcj02',
-            success(res) {
-                console.debug('用户选择定位：');
-                console.debug(res);
-
-                that.setData({
-                    location: res,
-                });
-
-                that._resetContent();
-            },
-            fail: function (e) {
-                console.log(e);
-                that.setData({
-                    location: defaultLocation,
-                });
-            }
-        })
-    },
 
     // 根据用户角色加载列表信息
     loadContent: async function () {
@@ -68,18 +40,6 @@ const createContentMethods = () => ({
 
     _getPageConfig() {
         return this.state.pageConfig;
-    },
-
-    _resetContent() {
-        this.state.pageConfig.reset();
-        // 重置工作列表哦
-        this._resetJobList();
-        // 重新加载内容
-        this.loadContent();
-    },
-
-    _getLocation() {
-        return this.data.location ?? Constant.defaultLocation;
     }
 });
 

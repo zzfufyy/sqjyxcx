@@ -78,14 +78,14 @@ Page({
   },
 
   // 更改定位
-  changeLocation(e) {
+  changedw(e) {
     let that = this
     wx.chooseLocation({
       type: 'gcj02',
       success(res) {
         console.log(res)
-        let latitude = res.latitude
-        let longitude = res.longitude
+        const latitude = res.latitude
+        const longitude = res.longitude
         var positionData = res.address
         that.setData({
           // positionData:positionData
@@ -234,18 +234,14 @@ Page({
   },
 
   onShow() {
-    this._loadPage();
+
   },
 
-  onReachBottom: function () {
-		this.loadContent();
-	},
-
-
   _loadPage: async function () {
-    await app.state.opendidReady;
     if (app.getGlobal(GlobalKey.IndexBootstrap)) {
+
       await this.bootstrap();
+      debugger
       await this.loadContent();
 
       app.setGlobal(GlobalKey.IndexBootstrap, false);

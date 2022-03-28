@@ -37,7 +37,7 @@
           </view>
           <view class="texname">邀约面试</view>
         </navigator> -->
-        <navigator hover-class="none" bindtap="changeLocation" url="" class="navtop" wx:key="key">
+        <navigator hover-class="none" bindtap="changedw" url="" class="navtop" wx:key="key">
           <view class="imgbox">
             <image src="/img/xgdw.png"></image>
           </view>
@@ -129,7 +129,7 @@
           </view>
           <view class="texname">管理简历</view>
         </navigator>
-        <navigator hover-class="none" bindtap="changeLocation" url="" class="navtop" wx:key="key">
+        <navigator hover-class="none" bindtap="changedw" url="" class="navtop" wx:key="key">
           <view class="imgbox">
             <image src="/img/xgdw.png"></image>
           </view>
@@ -219,7 +219,7 @@
         <view class="xb {{salary==index?'active':''}}" bindtap="handleSelectSalary" data-index3="{{index}}"
           wx:for="{{salaryList}}" wx:key="key">{{item.value}}</view>
       </view>
-      <view class="tijsq" bindtap="commitRecruiteeInfo" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>
+      <view class="tijsq" bindtap="commitRecruitInfo" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>
     </view>
   </view>
 

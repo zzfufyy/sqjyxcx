@@ -155,10 +155,9 @@ const createRecruiteeMethods = () => ({
         console.debug('加载首页工作列表');
         let pageConfig = this._getPageConfig();
 
-        let location = this._getLocation();
+        // TODO： 获取求职用户的位置（或者是默认的位置（如市中心等））
         let pagingParam = pageConfig.buildNextParam({
-            longitude: location.longitude,
-            latitude: location.latitude,
+            longitude: 112.9389, latitude: 28.0,
         });
 
         if (!pagingParam) {
@@ -203,12 +202,6 @@ const createRecruiteeMethods = () => ({
             jobInfoList: current.concat(
                 newList,
             ),
-        });
-    },
-
-    _resetJobList() {
-        this.setData({
-            jobInfoList: [],
         });
     }
 });
