@@ -19,7 +19,7 @@
     <view scroll-y style="top: -30px;position: relative;height: {{}}px;z-index: 999;">
       <!-- 菜单栏 -->
       <view class='bg-gray overflow' scroll-y>
-        <navigator hover-class="none" url="/pages/ytdjob/ytdjob" bindtap="tdjl"  class="navtop" wx:key="key">
+        <navigator hover-class="none" url="/pages/ytdjob/ytdjob" bindtap="tdjl" class="navtop" wx:key="key">
           <view class="imgbox">
             <image src="/img/tdjl.png"></image>
           </view>
@@ -67,8 +67,8 @@
               <view class="companytag" wx:key="key" wx:for="{{item.companytag}}">{{item.tagbq}}</view>
             </view>
           </view> -->
-          <navigator hover-class="none" url="/pages/zwxq/zwxq" wx:for="{{joblist}}" wx:key="key">
-            <view class="jobbox1 clearfloat" >
+          <navigator hover-class="none" url="/pages/zwxq/zwxq" wx:for="{{jobInfoList}}" wx:key="key">
+            <view class="jobbox1 clearfloat">
               <view class="ft ltbox">
                 <view class="jobname">{{item.jobname}}</view>
                 <view class="jobmoney">{{item.jobmoney}}元/月</view>
@@ -84,6 +84,10 @@
             </view>
             <view class="line1"></view>
           </navigator>
+          <!-- 这里需要调整一下样式 -->
+          <view wx:if="{{noMoreData == true}}">
+            没有更多数据
+          </view>
         </view>
       </view>
     </view>
@@ -97,8 +101,7 @@
         <view class='nav-title'>
           <view class="INinputheader">
             <icon class="INsearchicon" type="search" size="22" color="#fff" />
-            <input class="weui-input" placeholder-class="opl" placeholder="搜索职位、公司"
-            bindtap="searchjob1"
+            <input class="weui-input" placeholder-class="opl" placeholder="搜索职位、公司" bindtap="searchjob1"
               confirm-type="search" />
           </view>
         </view>
@@ -151,7 +154,7 @@
         <view class="joblist">
           <view class="company" wx:for="{{compangjob}}" wx:key="key">
             <view class="companyname">找 {{item.jobname}} 工作</view>
-            <view class="wid95 tagbox" >
+            <view class="wid95 tagbox">
               <view class="companytag" wx:key="key" wx:for="{{item.usertag}}">{{item.tagbq}}</view>
             </view>
             <view class="btmbbb">
@@ -163,7 +166,7 @@
       </view>
     </view>
   </block>
-  
+
   <!-- 选择角色 -->
   <view class="" hidden="{{juesehide}}">
     <view class="zzc"></view>
@@ -199,7 +202,7 @@
       <view class="zsfw smrz">性别</view>
       <view class="qzz1 xxbox">
         <view class="xb {{gender==index?'active':''}}" wx:key="key" wx:for="{{genderList}}" data-index1="{{index}}"
-          bindtap="selectGender">{{item}}</view>
+          bindtap="handleSelectGender">{{item}}</view>
       </view>
       <view class="zsfw smrz">我想从事的工作</view>
       <view class="qzz1 xxbox">
@@ -213,7 +216,7 @@
       </view>
       <view class="zsfw smrz">薪资要求</view>
       <view class="qzz1 xxbox">
-        <view class="xb {{salary==index?'active':''}}" bindtap="selectSalary" data-index3="{{index}}"
+        <view class="xb {{salary==index?'active':''}}" bindtap="handleSelectSalary" data-index3="{{index}}"
           wx:for="{{salaryList}}" wx:key="key">{{item.value}}</view>
       </view>
       <view class="tijsq" bindtap="commitRecruitInfo" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>

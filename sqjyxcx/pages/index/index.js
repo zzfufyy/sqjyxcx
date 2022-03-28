@@ -1,9 +1,14 @@
 // index.js
 const { GlobalKey } = require('../../service/global_service');
 
+// 求职者模块
 const recruitee = require('./recruitee');
+// 招聘者模块
 const recruiter = require('./recruiter');
+// 启动引导模块（引导用户授权、选择角色、注册角色等）
 const bootstrap = require('./bootstrap');
+// 内容加载模块
+const content = require('./content');
 
 
 // 获取应用实例
@@ -61,12 +66,11 @@ Page({
     isShow: false,
     arrshow: true,
 
-
-    joblist: [
-      { jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
-      { jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
-      { jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
-    ],
+    // joblist: [
+    //   { jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
+    //   { jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
+    //   { jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
+    // ],
   },
 
   state: {
@@ -230,8 +234,20 @@ Page({
   },
 
   onShow() {
+    this._loadPage();
+  },
+
+  onReachBottom: function () {
+		this.loadContent();
+	},
+
+
+  _loadPage: async function () {
+    await app.state.opendidReady;
     if (app.getGlobal(GlobalKey.IndexBootstrap)) {
-      this.bootstrap();
+      await this.bootstrap();
+      await this.loadContent();
+
       app.setGlobal(GlobalKey.IndexBootstrap, false);
     }
   },
@@ -239,4 +255,5 @@ Page({
   ...bootstrap.createBootstrapMethod(),
   ...recruitee.createRecruiteeMethods(),
   ...recruiter.createRecruiterMethods(),
+  ...content.createContentMethods(),
 })

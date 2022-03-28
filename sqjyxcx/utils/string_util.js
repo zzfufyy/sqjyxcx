@@ -48,7 +48,7 @@ function maybeEmptyString(value, onEmpty) {
 }
 
 function meterToKiloMeterString(meter) {
-    return `${(meter / 1000.0).toFixed(2)} 公里`;
+    return (meter / 1000.0).toFixed(2);
 }
 
 module.exports = {

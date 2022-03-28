@@ -24,7 +24,9 @@ function debounce(func, wait) {
     }
 }
 
-
+/** 
+ * 完成器，以手动的方式 完成、拒绝 Promise 回调
+ */
 class Completer {
     constructor() {
         this.promise = new Promise(

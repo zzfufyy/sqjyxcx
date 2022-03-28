@@ -28,12 +28,22 @@ class PageConfig {
         this.pageInfo = _initPageInfo;
     }
 
+    setNoMoreDataCallback(callback) {
+        this.handleNoMoreData = callback;
+    }
+
     reset() {
         this.pageInfo = _initPageInfo;
     }
 
     handlePageInfo(pageInfo) {
         this.pageInfo = pageInfo;
+
+        if (!pageInfo.hasNextPage && this.handleNoMoreData) {
+            this.handleNoMoreData();
+        }
+
+        return pageInfo.list;
     }
 
 
@@ -69,6 +79,18 @@ class PageConfig {
         return this.pageInfo.nextPage;
     }
 
+    /**
+     * 把 给定 的 condition 和本 configuere 中存储的分页信息封装成一个 pagingParam 请求对象
+     * 即：
+     * {
+     *     page : {
+     *          page: page (传入的 page),
+     *          rows: this.pageSize (构造的时候传入的 pageSize)
+     *      },
+     *     condition: condition (传入的 condition)
+     * }
+     * 
+     */
     buildParam(page, condition) {
         let $this = this;
         return {

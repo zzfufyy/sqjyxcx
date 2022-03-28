@@ -8,10 +8,18 @@ const Constant = require('../../common/constant');
 const app = getApp();
 
 const createBootstrapMethod = () => ({
+
+    state: {
+        // 授权流程完成器，检测授权流程是否完成
+        authCompl: null,
+        // 角色选择、创建完成器，检测角色选择流程是否完成
+        userRoleCompl: null,
+    },
+
     /* 引导用户授权 */
     _doAuthorize: function (scene) {
-        let auth = new Completer();
-        this.state.authCompleter = auth;
+        let authCompl = new Completer();
+        this.state.authCompl = authCompl;
 
         var that = this;
 
@@ -46,14 +54,14 @@ const createBootstrapMethod = () => ({
                             });
 
                             // 自动登录，无需授权，因此直接完成
-                            auth.resolve();
+                            authCompl.resolve();
                         }
                     }
                 })
             }
         });
 
-        return auth.promise;
+        return authCompl.promise;
     },
 
     // 本地加载用户角色，如果没有返回 null
@@ -71,15 +79,21 @@ const createBootstrapMethod = () => ({
         return UserService.loadUserRoleInfo(userRole);
     },
 
-    _selectUserRole: async function () {
+    // 用户选择、创建角色
+    _doSelectUserRole: async function () {
+        let userRoleCompl = new Completer();
+        this.state.userRoleCompl = userRoleCompl;
+
+        // 从本地（当前实现）或者从服务端（还没有实现）
         let userRole = await this._loadUserRole();
+
         // 如果没有本地的角色信息，显示对话框
         if (userRole === null || userRole === undefined) {
             this.setData({
                 juesehide: false,
             });
         }
-        // 自动点击对话框
+        // 类似于一个自动点击对话框的操作
         else {
             switch (userRole) {
                 case Constant.UserRole.Recruiter:
@@ -88,10 +102,16 @@ const createBootstrapMethod = () => ({
                 case Constant.UserRole.Recruitee:
                     await this._handleRecruiteeSelected();
                     break;
+
+                // TODO： 实现社区身份登录
                 default:
-                    console.error(`未知的登录身份 [${userRole}]`)
+                    console.error(`未知的登录身份 [${userRole}]`);
+                    userRoleCompl.resolve();
+                    break;
             }
         }
+
+        return userRoleCompl.promise;
     },
 
     /* 保存用户信息到后台 */
@@ -207,18 +227,15 @@ const createBootstrapMethod = () => ({
                 console.error("用户没有给予授权，需要对应的处理程序");
 
             }, complete: () => {
-                this.state.authCompleter.resolve();
+                this.state.authCompl.resolve();
             }
         });
     },
 
 
     bootstrap: async function () {
-        debugger
-        await app.state.opendidReady;
         await this._doAuthorize();
-        await this._selectUserRole();
-        await this._loadJobList();
+        await this._doSelectUserRole();
     },
 });
 

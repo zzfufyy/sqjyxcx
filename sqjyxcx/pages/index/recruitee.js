@@ -4,7 +4,7 @@ const { RecruitJobService } = require('../../service/recruit_job_service');
 
 const Constant = require('../../common/constant');
 const Loading = require('../../utils/loading_util');
-const Paging = require('../../utils/paging_util');
+
 const $ = require('../../utils/request_util');
 const StringUtil = require('../../utils/string_util');
 
@@ -25,26 +25,32 @@ const createRecruiteeData = () => ({
     salaryList: Constant.salaryList,
 
     // 数据信息
-    jobInfoPageConfig: new Paging.PageConfig(10),
     jobInfoList: [],
 });
 
+
+
+
 // TODO: 输入校验
 const createRecruiteeMethods = () => ({
+    // 以 handle 开头的函数均为处理界面中的数据绑定，
+    // 例如 bindTap，bindInput 等
     handleRealName: function (e) {
         var value = e.detail.value;
         this.setData({
             realName: value,
         });
     },
+
     handleIdentityCard: function (e) {
         var value = e.detail.value;
         this.setData({
             identityCard: value,
         });
     },
+
     // 选择性别
-    selectGender(e) {
+    handleSelectGender(e) {
         let that = this;
         let index = e.currentTarget.dataset.index1;
         console.debug(`性别设置为 [${index}]: ${Constant.genderList[index]}`);
@@ -52,8 +58,9 @@ const createRecruiteeMethods = () => ({
             gender: index
         })
     },
+
     // 选择薪资
-    selectSalary(e) {
+    handleSelectSalary(e) {
         let that = this;
         let index = e.currentTarget.dataset.index3;
         console.debug(`性别设置为 [${index}]: ${Constant.salaryList[index].value}`);
@@ -61,7 +68,8 @@ const createRecruiteeMethods = () => ({
             salary: index
         })
     },
-    // 提交信息
+
+    // 从 data 中获取 提交给服务端的 信息
     _getRecruiteeInfo() {
         let data = this.data;
         let salary = Constant.salaryList[data.salary];
@@ -75,7 +83,9 @@ const createRecruiteeMethods = () => ({
             expectSalaryMax: salary.max,
         }
     },
-    commitRecruitInfo: async function () {
+
+    // 提交求职者信息
+    commitRecruiteeInfo: async function () {
         let recruiteeInfo = this._getRecruiteeInfo();
 
         Loading.begin();
@@ -93,6 +103,7 @@ const createRecruiteeMethods = () => ({
             });
         } finally {
             Loading.end();
+            this.state.userRoleCompl.resolve();
         }
 
 
@@ -101,6 +112,7 @@ const createRecruiteeMethods = () => ({
         });
     },
 
+    // 角色选择时，用户点击选择求职者
     _handleRecruiteeSelected: async function () {
         try {
             Loading.begin();
@@ -120,6 +132,10 @@ const createRecruiteeMethods = () => ({
                     smhide: true,
                     ident: 'user',
                 });
+
+                // 加载角色选择完成
+                this.state.userRoleCompl.resolve();
+
                 // 保存登录角色信息
                 UserService.saveUserRole(Constant.UserRole.Recruitee);
             }
@@ -133,32 +149,58 @@ const createRecruiteeMethods = () => ({
         }
     },
 
+    // 加载求职用户应该看到的工作信息
     _loadJobList: async function () {
-        let jobInfoPageConfig = this.data.jobInfoPageConfig;
-        debugger
-        let pagingParam = jobInfoPageConfig.buildNextParam({
+
+        console.debug('加载首页工作列表');
+        let pageConfig = this._getPageConfig();
+
+        // TODO： 获取求职用户的位置（或者是默认的位置（如市中心等））
+        let pagingParam = pageConfig.buildNextParam({
             longitude: 112.9389, latitude: 28.0,
         });
-        let data = await RecruitJobService.pagedByDistacne(pagingParam);
-        jobInfoPageConfig.handlePageInfo(data.pageInfo);
 
+        if (!pagingParam) {
+            return;
+        }
+
+        let pageInfo;
+        try {
+            Loading.begin();
+            // 请求数据
+            pageInfo = await RecruitJobService.pagedByDistacne(pagingParam);
+        } catch (e) {
+            console.error(e);
+        } finally {
+            Loading.end();
+        }
+
+        // pageConifg 保存当前的分页信息，并且取出 pageInfo 中的 list
+        let dataList = pageConfig.handlePageInfo(pageInfo);
+
+        // 当前的列表数据， 用于之后的列表拼接
         let current = this.data.jobInfoList;
+
+        // 将服务端的数据映射成页面展示数据
+        let newList = dataList.map(jobInfo => ({
+            jobname: jobInfo.jobName,
+            jobmoney: new Constant.Salary(
+                jobInfo.jobSalaryMin,
+                jobInfo.jobSalaryMax,
+            ).value,
+            companyname: jobInfo.companyName,
+            companytx: StringUtil.getSROD(
+                jobInfo.portraitPath,
+                'img/tx.png'
+            ),
+            jl: StringUtil.meterToKiloMeterString(jobInfo.distance),
+            //phonenum: '13112345678'
+        }));
+
+        // 刷新页面
         this.setData({
-            jobInfoList: current.conact(
-                data.list.map(jobInfo => ({
-                    jobname: jobInfo.jobName,
-                    jobmoney: new Constant.Salary(
-                        jobInfo.jobSalaryMin,
-                        jobInfo.jobSalaryMax,
-                    ).value,
-                    companyname: jobInfo.companyName,
-                    companytx: StringUtil.getSROD(
-                        jobInfo.portraitPath,
-                        'img/tx.png'
-                    ),
-                    jl: StringUtil.meterToKiloMeterString(jobInfo.distance),
-                    //phonenum: '13112345678'
-                }))
+            jobInfoList: current.concat(
+                newList,
             ),
         });
     }

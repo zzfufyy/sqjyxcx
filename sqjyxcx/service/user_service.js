@@ -82,7 +82,8 @@ const UserService = {
         }
     },
 
-    // 返回了一个 Promise
+    // 返回了一个 Promise，方便未来（可能）从本地存储到服务端存储的迁移
+    // 虽然本地存储有同步的接口，但是这里使用异步。便于从服务端异步加载数据的迁移
     loadUserRole: function () {
         return new Promise(
             (resolve, reject) => {
