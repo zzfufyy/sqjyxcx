@@ -99,7 +99,7 @@ Page({
 		await app.getOpenidReady();
 		let openid = wx.getStorageSync('openid');
 
-		let loadRecordListPormise = recruitRecordService.loadListDeliveredByCandidateOpenid(openid);
+		let loadRecordListPormise = recruitRecordService.listRecordPlusByCandidateOpenid(openid);
 		let sumJobList = [];
 		// {jobname:'清洁工',
 		// jobmoney:'3000-3800',

@@ -17,9 +17,18 @@ const loadEntityById = function (id) {
     })
 }
 
-const loadListDeliveredByCandidateOpenid = function(candidateOpenid){
+const listRecordPlusByCandidateOpenid = function(candidateOpenid){
     return $.request({
-        url: '/recruit-record/listDeliveredByCandidateOpenid?candidateOpenid=' + candidateOpenid,
+        url: '/recruit-record/listRecordPlusByCandidateOpenid?candidateOpenid=' + candidateOpenid,
+        data: {},
+        method: $.RequestMethod.GET,
+        header: $.jsonHeader
+    })
+}
+
+const listRecordPlusByCompanyUuid = function(companyUuid){
+    return $.request({
+        url: '/recruit-record/listRecordPlusByCompanyUuid?companyUuid=' + companyUuid,
         data: {},
         method: $.RequestMethod.GET,
         header: $.jsonHeader
@@ -30,5 +39,6 @@ const loadListDeliveredByCandidateOpenid = function(candidateOpenid){
 module.exports = {
     insertByEntity:insertByEntity,
     loadEntityById:loadEntityById,
-    loadListDeliveredByCandidateOpenid:loadListDeliveredByCandidateOpenid,
+    listRecordPlusByCandidateOpenid:listRecordPlusByCandidateOpenid,
+    listRecordPlusByCompanyUuid:listRecordPlusByCompanyUuid,
 }

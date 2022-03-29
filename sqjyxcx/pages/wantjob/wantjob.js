@@ -429,7 +429,7 @@ Page({
 		let salary = new Salary(min, max).value;
 
 		this.setData({
-			salaryList: salaryList.concat(Salary),
+			salaryList: salaryList.concact(Salary),
 			salaryStringList: this.data.salaryStringList.concat(salary.value),
 		});
 
