@@ -17,7 +17,18 @@ const loadEntityById = function (id) {
     })
 }
 
+const loadListDeliveredByCandidateOpenid = function(candidateOpenid){
+    return $.request({
+        url: '/recruit-record/listDeliveredByCandidateOpenid?candidateOpenid=' + candidateOpenid,
+        data: {},
+        method: $.RequestMethod.GET,
+        header: $.jsonHeader
+    })
+}
+
+
 module.exports = {
     insertByEntity:insertByEntity,
     loadEntityById:loadEntityById,
+    loadListDeliveredByCandidateOpenid:loadListDeliveredByCandidateOpenid,
 }
