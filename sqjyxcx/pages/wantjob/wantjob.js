@@ -2,6 +2,7 @@
 
 
 const { UserService } = require('../../service/user_service');
+const { Category } = require('../../service/job_category');
 const { Salary } = require('../../common/constant');
 const { GlobalKey } = require('../../service/global_service');
 
@@ -86,20 +87,23 @@ Page({
 	},
 	//输入职位后点击键盘右下角完成
 	confrim(e) {
+		var that = this;
 		console.log(e.detail.value)
+		that.loadJob(that,e.detail.value)
 		let wantjob = this.setData.wantjob
 		let arrtag = this.data.arrtag
 		let arr = []
 		arr.push(e.detail.value)
-		// let oarr = arrtag.concat(arr)
-		// this.setData({
-		// 	wantjob:arrtag.concat(arr)
-		// })
-		// console.log(arr)
+		let oarr = arrtag.concat(arr)
+		this.setData({
+			wantjob:arrtag.concat(arr)
+		})
+		console.log(arr)
 	},
 	// 保存按钮按钮
 	baocun() {
 		let arrtag = this.data.arrtag
+
 		if (arrtag.length <= 0) {
 			console.log("000")
 			let txthide = this.data.txthide
@@ -191,12 +195,54 @@ Page({
 
 
 	},
-	//已选择职业
+	//选择职业
 	haschoosejob(e) {
 		let id = e.currentTarget.dataset.id
 		let job = e.currentTarget.dataset.job
 		let arrtag = this.data.arrtag
 		console.log(e)
+		for (let i = 0; i < this.data.wantjob.length; i++) {
+			if (this.data.wantjob[i].id == id) {
+				if (this.data.wantjob[i].checked == true) {
+					this.data.wantjob[i].checked = false;
+					this.data.wantjob[i].display = 'block';
+					for (let o = 0; o < arrtag.length; o++) {
+						if (this.data.wantjob[i].job == arrtag[o].job) {
+							arrtag.splice(o, 1)
+							this.setData({
+								arrtag: arrtag,
+								csjob: arrtag
+							})
+						}
+					}
+				} else {
+					this.data.wantjob[i].checked = true;
+					this.data.wantjob[i].display = 'block';
+
+					let json = {}
+					json.job = this.data.wantjob[i].job
+					json.id = this.data.wantjob[i].id
+					json.active = "active"
+					arrtag.push(json)
+					this.setData({
+						arrtag: arrtag,
+						csjob: arrtag
+					})
+					console.log(arrtag)
+				}
+			}
+		}
+		this.setData({
+			wantjob: this.data.wantjob,
+			arrtag: arrtag,
+			msg: "id:" + id
+		})
+	},
+	//加载已选择职业
+	userhaschoosejob(eid,jobs) {
+		let id = eid
+		let job = jobs
+		let arrtag = this.data.arrtag
 		for (let i = 0; i < this.data.wantjob.length; i++) {
 			if (this.data.wantjob[i].id == id) {
 				if (this.data.wantjob[i].checked == true) {
@@ -312,6 +358,65 @@ Page({
 		// console.log(arrtag)
 
 	},
+	//已选择求职区域
+	userchoselocal(e) {
+		let sjRightItems = this.data.sjRightItems
+		let nulllocal = this.data.nulllocal
+		let id = e
+		for (let i = 0; i < this.data.sjRightItems.length; i++) {
+			// console.log(this.data.sjRightItems[i].typelist[0].id)
+			for (let q = 0; q < this.data.sjRightItems[i].typelist.length; q++) {
+				if (this.data.sjRightItems[i].typelist[q].id == id) {
+					if (this.data.sjRightItems[i].typelist[q].checked == true) {
+						this.data.sjRightItems[i].typelist[q].checked = false;
+						for (let o = 0; o < nulllocal.length; o++) {
+							if (this.data.nulllocal[0].id == nulllocal[o].id) {
+								nulllocal.splice(o, 1)
+								console.log(nulllocal)
+							}
+						}
+
+					} else {
+
+						if (nulllocal.length >= 3) {
+							wx.showModal({
+								title: '提示',
+								content: '最多选择三个区域',
+								success(res) {
+									if (res.confirm) {
+										console.log('用户点击确定')
+									} else if (res.cancel) {
+										console.log('用户点击取消')
+									}
+								}
+							})
+						} else {
+							this.data.sjRightItems[i].typelist[q].checked = true;
+							let json = {}
+							json.local = this.data.sjRightItems[i].typelist[q].childname
+							json.id = this.data.sjRightItems[i].typelist[q].id
+							json.active = "active"
+							nulllocal.push(json)
+							this.setData({
+								nulllocal: nulllocal
+								
+							})
+						}
+
+
+						console.log(nulllocal)
+					}
+				}
+			}
+
+		}
+		this.setData({
+			sjRightItems: this.data.sjRightItems,
+			nulllocal: nulllocal
+		})
+		// console.log(arrtag)
+
+	},
 	// 求职区域呼出
 	qzqubtn() {
 		this.setData({
@@ -348,8 +453,58 @@ Page({
 			qzqxlocal: true
 		})
 	},
+	savesaveUser(zwid,areaid,openid){
+
+		wx.request({
+			url: app.globalData.web_path+'/community-info/saveUser',
+      data: { zwid:zwid,areaid:areaid,openid:openid},
+      header: app.globalData.header,
+      method: "POST",
+      success: function (data) {
+			}
+		})
+	},
 	//保存
 	bc: async function () {
+		let that =this;
+		let zwids = that.data.arrtag
+		let areaids = that.data.nulllocal;
+		let openid =wx.getStorageSync('openid')
+		let zwid ="";
+		let areaid="";
+		console.log(zwids)
+		console.log(areaids)
+
+		for(let i=0;i<zwids.length;i++){
+			if(i==0){
+				zwid+=zwids[i].id
+			}else{
+				zwid+=","+zwids[i].id
+			}
+		}
+		for(let j=0;j<areaids.length;j++){
+			if(j==0){
+				areaid+=areaids[j].id
+			}else{
+				areaid+=","+areaids[j].id
+			}
+		}
+		if(areaid==""){
+			wx.showToast({
+				title: '请选择期望区域',
+			})
+			return;
+		}
+		if(zwid==""){
+			wx.showToast({
+				title: '请选择期望职位',
+			})
+			return;
+		}
+		console.log(zwid)
+		console.log(areaid)
+
+		
 		let salary = this.data.salaryList[
 			this.data.index
 		];
@@ -360,11 +515,83 @@ Page({
 		});
 
 		app.getGlobal(GlobalKey.UserInfoChanged).notifyListeners();
-
+		that.savesaveUser(zwid,areaid,openid)
 		wx.navigateTo({
 			url: '/pages/personjl/personjl',
 		})
 	},
+//加载工作列表
+	loadJob:function(that,name) {
+    wx.request({
+      url: app.globalData.web_path+'/job-category/listbyyx',
+      data: { name:name},
+      header: app.globalData.header,
+      method: "POST",
+      success: function (data) {
+				console.log(data)
+				let wantjob =[];
+				for(let i=0;i<data.data.obj.length;i++){
+						let job = {job:data.data.obj[i].categoryName,id:data.data.obj[i].id}
+						wantjob.push(job)
+				}
+				that.setData({
+					wantjob:wantjob
+				})
+				// wantjob: [
+				// 	{ job: 'IT', id: 0 }, { job: '文化传媒', id: 1 }, { job: '电子制造', id: 2 }, { job: '机械制造', id: 3 }, { job: '美容美发', id: 4 }
+				// ],
+      }
+    })
+	},
+	loadCommunity: async function(that,name) {
+    wx.request({
+      url: app.globalData.web_path+'/community-info/listbyyx',
+      data: { name:name},
+      header: app.globalData.header,
+      method: "POST",
+      success: function (data) {
+				
+				let sjLeftItems =[];
+				let sjRightItems=[];
+			
+				let communityInformationList= data.data.obj.communityInformationList
+
+					for(let i=0;i<communityInformationList.length;i++){
+						let xq = {typename:communityInformationList[i].districtName,typeid:communityInformationList[i].id}
+						sjLeftItems.push(xq)
+						wx.request({
+							url: app.globalData.web_path+'/community-info/listbyyx1',
+							data: { name:communityInformationList[i].id},
+							header: app.globalData.header,
+							method: "POST",
+							success: function (data) {
+								let typelist=[];
+								let communityInformationList1= data.data.obj.communityInformationList1
+								for(let j=0;j<communityInformationList1.length;j++){
+										let typelist1 ={childname:communityInformationList1[j].communityName,id:communityInformationList1[j].id}
+										typelist.push(typelist1);
+								}
+								
+							let xq1 = {typename:communityInformationList[i].districtName,typelist:typelist,typeid:communityInformationList[i].id}
+							sjRightItems.push(xq1)
+							that.setData({
+								sjRightItems:sjRightItems
+							})
+							}
+						})
+						
+				}
+				that.setData({
+					sjLeftItems:sjLeftItems,
+				})
+			
+			
+				// wantjob: [
+				// 	{ job: 'IT', id: 0 }, { job: '文化传媒', id: 1 }, { job: '电子制造', id: 2 }, { job: '机械制造', id: 3 }, { job: '美容美发', id: 4 }
+				// ],
+      }
+    })
+  },
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
@@ -381,7 +608,8 @@ Page({
 				})
 			},
 		});
-
+		that.loadJob(that,"")
+		that.loadCommunity(that,"");
 		this._reloadData();
 	},
 
@@ -391,18 +619,48 @@ Page({
 
 
 	_reloadData: async function (params) {
-
+		var that = this;
 		await app.getOpenidReady();
 
 		try {
 			Loading.begin();
 
 			let recruiteeInfo = await UserService.loadRcruiteeInfo();
+			wx.request({
+				url: app.globalData.web_path+'/community-info/getjobandCom',
+				data: { zwid:recruiteeInfo.expectCategoryId,areaid:recruiteeInfo.expectCommunityId},
+				header: app.globalData.header,
+				method: "POST",
+				success: function (data) {
+					console.log(data)
+					let arealist = data.data.obj.list;
+					let joblist = data.data.obj.joblist;
+					for(let i=0;i<arealist.length;i++){
+						that.userchoselocal(arealist[i].id)
+					}
+					
+					for(let i=0;i<joblist.length;i++){
+						that.userhaschoosejob(joblist[i].id,joblist[i].categoryName)
+					}
+					if(joblist.length>0){
+						that.setData({
+							arrhide:false,
+							txthide:true
+						});
+					}
+					if(arealist.length>0){
+						that.setData({
+							qzqumess:false,
+							qzqutxt:true
+						});
+					}
+					console.log(that.data.nulllocal)
+				}
+			})
 			let i = this._dummySalary(
 				recruiteeInfo.expectSalaryMin,
 				recruiteeInfo.expectSalaryMax,
 			);
-
 			console.log(this.data.salaryList);
 			this.setData({
 				index: i,
@@ -429,10 +687,10 @@ Page({
 		let salary = new Salary(min, max).value;
 
 		this.setData({
-			salaryList: salaryList.contact(Salary),
+			salaryList: salaryList.concart(Salary),
 			salaryStringList: this.data.salaryStringList.concat(salary.value),
 		});
-
+		
 		return len;
 	}
 })

@@ -75,8 +75,8 @@ Page({
 
 	_reloadData: async function () {
 		console.log('个人简历页面重载数据');
+		var that = this;
 		await app.getOpenidReady();
-
 		try {
 			Loading.begin();
 			let [userInfo, recruiteeInfo] = await Promise.all([
@@ -86,7 +86,27 @@ Page({
 
 			// let userInfo = infoList[0];
 			// let recruiteeInfo = infoList[1];
-
+			console.log(recruiteeInfo)
+			console.log(userInfo)
+			wx.request({
+				url: app.globalData.web_path+'/community-info/getjobandCom',
+				data: { zwid:recruiteeInfo.expectCategoryId,areaid:recruiteeInfo.expectCommunityId},
+				header: app.globalData.header,
+				method: "POST",
+				success: function (data) {
+					console.log(data)
+					let arealist = data.data.obj.list;
+					var sq =[];
+					for(let i=0;i<arealist.length;i++){
+						var sqname ={	sqname:arealist[i].communityName}
+						sq.push(sqname);
+					}
+					that.setData({
+						yxjobname:data.data.obj.zwname,
+						sqname:sq
+					})
+				}
+			})
 			this.setData({
 				tximg: StringUtil.getSROD(
 					recruiteeInfo.portraitPath,
@@ -96,16 +116,67 @@ Page({
 					recruiteeInfo.realName,
 					userInfo.nickname,
 				),
+			
 				sex: Constant.genderList[recruiteeInfo.gender],
 				ygz: new Constant.Salary(
 					recruiteeInfo.expectSalaryMin,
 					recruiteeInfo.expectSalaryMax,
 				).value,
+				gznl:recruiteeInfo.ext1,
 				zwpj: recruiteeInfo.introduction,
 				cellphone: StringUtil.maybeEmptyString(recruiteeInfo.telephone),
+				year:this.getAge(recruiteeInfo.birthday)
 			});
 		} finally {
 			Loading.end();
 		}
-	}
+	},
+
+
+	// 根据出生日期计算年龄周岁
+ getAge:function(strBirthday) {
+  var returnAge = '';
+  var mouthAge = '';
+  var strBirthdayArr = strBirthday.split("-");
+  var birthYear = strBirthdayArr[0];
+  var birthMonth = strBirthdayArr[1];
+  var birthDay = strBirthdayArr[2];
+  var d = new Date();
+  var nowYear = d.getFullYear();
+  var nowMonth = d.getMonth() + 1;
+  var nowDay = d.getDate();
+  if (nowYear == birthYear) {
+    // returnAge = 0; //同年 则为0岁
+    var monthDiff = nowMonth - birthMonth; //月之差 
+    if (monthDiff < 0) {
+    } else {
+      mouthAge = monthDiff + '个月';
+    }
+  } else {
+    var ageDiff = nowYear - birthYear; //年之差
+    if (ageDiff > 0) {
+      if (nowMonth == birthMonth) {
+        var dayDiff = nowDay - birthDay; //日之差 
+        if (dayDiff < 0) {
+          returnAge = ageDiff - 1 + '岁';
+        } else {
+          returnAge = ageDiff + '岁';
+        }
+      } else {
+        var monthDiff = nowMonth - birthMonth; //月之差 
+        if (monthDiff < 0) {
+          returnAge = ageDiff - 1 + '岁';
+        } else {
+          mouthAge = monthDiff + '个月';
+          returnAge = ageDiff + '岁';
+        }
+      }
+    } else {
+      returnAge = -1; //返回-1 表示出生日期输入错误 晚于今天
+    }
+  }
+  return returnAge + mouthAge; //返回周岁年龄+月份
+}
+
+
 })

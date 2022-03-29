@@ -20,7 +20,7 @@
 		<view class="top">求职区域</view>
 		<view class="bottom" bindtap="qzqubtn">
 			<text hidden="{{qzqutxt}}" >请选择期望求职区域</text>
-			<text hidden="{{qzqumess}}" wx:for="{{qzlocalist}}" wx:key="key">{{item.local}} </text>
+			<text hidden="{{qzqumess}}" wx:for="{{nulllocal}}" wx:key="key">{{item.local}} </text>
 		</view>
 	</view>
 </view>

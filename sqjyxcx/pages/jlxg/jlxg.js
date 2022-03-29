@@ -22,10 +22,17 @@ Page({
 		array: Constant.genderList,
 		index: 0,
 		phonenum: '',
-		borthday: '1990',
 		worktime: '1-3',
+		date:'1990',
+		gznx:"",
 	},
-
+	// 出生年月啊
+  bindDateChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
+    })
+  },
 	// 性别选择
 	bindPickerChange: function (e) {
 		console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -33,13 +40,59 @@ Page({
 			index: e.detail.value
 		})
 	},
-
+	setPhone(openid,phone){
+    wx.request({
+      url: app.globalData.web_path + '/gywm/setWxuserPhone',
+      data: {
+        openid:openid,
+        phone:phone,
+      },
+      header: app.globalData.header,
+      success: function (res) {
+        console.log(res)
+        // that.openAlert(scene);
+      },
+      fail: function (res) {
+      }
+    })
+  },
+	getPhoneNumber (e) {
+    let that = this
+    var sessionKey =wx.getStorageSync('sessionKey')
+    var openid =wx.getStorageSync('openid')
+    console.log(openid)
+    console.log(e)
+    console.log(sessionKey)
+    wx.request({
+      url: app.globalData.web_path + '/wx/user/' + app.globalData.appId + '/phoneNumberInfo',
+      data: {
+        sessionKey:sessionKey,
+        iv: e.detail.iv,
+        encryptedData: e.detail.encryptedData,
+      },
+      header: app.globalData.header,
+      success: function (res) {
+        console.log(res.data.data.phoneNumber)
+        that.setData({
+          sqrphone:res.data.data.phoneNumber
+        })
+        that.setPhone(openid,res.data.data.phoneNumber);
+        wx.setStorageSync('phone',res.data.data.phoneNumber)
+      },
+      fail: function (res) {
+      }
+    })
+  },
 	handleInputRealName: function (e) {
 		this.setData({
 			zsname: e.detail.value,
 		});
 	},
-
+	gznx:function(e){
+		this.setData({
+			gznx: e.detail.value,
+		});
+	},
 	handleInputPhoneNumber: function (e) {
 		this.setData({
 			phonenum: e.detail.value,
@@ -107,7 +160,7 @@ Page({
 			UserService.loadUserInfo(),
 			UserService.loadRcruiteeInfo(),
 		]);
-
+		let csny =app.formatDate(recruiteeInfo.birthday,"yyyy-MM-dd")
 		this.setData({
 			_portraitPath: recruiteeInfo._portraitPath,
 			tximg: StringUtil.getSROD(
@@ -117,6 +170,8 @@ Page({
 			zsname: recruiteeInfo.realName,
 			index: recruiteeInfo.gender,
 			phonenum: recruiteeInfo.telephone,
+			date:csny,
+			gznx:recruiteeInfo.ext1
 		});
 	},
 
@@ -133,6 +188,8 @@ Page({
 					realName: data.zsname,
 					gender: data.index,
 					telephone: data.phonenum,
+					birthday:data.date,
+					ext1:data.gznx
 				},
 				method: $.RequestMethod.POST,
 				header: $.jsonHeader,

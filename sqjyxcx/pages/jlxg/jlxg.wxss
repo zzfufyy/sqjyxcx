@@ -76,7 +76,16 @@ page{
 .container{
 	background-color: #fff;
 }
+.worktime{
+	display: inline-block;
+    width: 120px;
+    vertical-align: middle;
+    height: 25px;
+    line-height: 25px;margin-top: -3px;
+}
+.year{
 
+}
 
 
 
