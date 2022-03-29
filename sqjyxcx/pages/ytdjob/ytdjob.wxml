@@ -8,7 +8,8 @@
 	<swiper current="{{currentTab}}" data-current="{{currentId}}"  style="height:{{winHeight - 55}}px;" bindchange="switchTab">
 			<!-- 未反馈 -->
 			<swiper-item style="height:100%;overflow-y:scroll;background: #fff;" >
-				<navigator hover-class="none" url="/pages/zwxq/zwxq" wx:for="{{joblist}}" wx:key="key">
+				<navigator hover-class="none"  wx:for="{{joblist}}" wx:key="index" 
+					bindtap="bindtapJoblist" data-index="{{index}}">
 					<view class="jobbox clearfloat" >
 						<view class="ft ltbox">
 							<view class="jobname">{{item.jobname}}</view>
@@ -29,7 +30,7 @@
 
 			<!-- 沟通中 -->
 			<swiper-item style="height:100%;overflow-y:scroll;background: #fff;" >
-				<navigator hover-class="none" url="/pages/zwxq/zwxq"  wx:for="{{jobgtlist}}" wx:key="key">
+				<navigator hover-class="none"  wx:for="{{jobgtlist}}" wx:key="index" bindtap="bindtapJobgtlist" data-index="{{index}}">
 					<view class="jobbox clearfloat" >
 						<view class="ft ltbox">
 							<view class="jobname">{{item.jobname}}</view>
@@ -50,7 +51,7 @@
 
 			<!-- 不合适 -->
 			<swiper-item style="height:100%;overflow-y:scroll;background: #fff;" >
-				<navigator hover-class="none" url="/pages/zwxq/zwxq" wx:for="{{jobbhslist}}" wx:key="key">
+				<navigator hover-class="none" wx:for="{{jobbhslist}}" wx:key="index" bindtap="bindtapJobbhslist" data-index="{{index}}">
 					<view class="jobbox clearfloat" >
 						<view class="ft ltbox">
 							<view class="jobname">{{item.jobname}}</view>

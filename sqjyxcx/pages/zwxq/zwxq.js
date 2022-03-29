@@ -33,8 +33,8 @@ Page({
 		// jobyq: { rs: '招1人', nl: '30-45', worknj: '3-5', xl: '学历不限' },
 		xqxq: '1.工作职责: 室内保洁人员主要负责办公楼、仪电楼、化工楼内公共区域的清扫工作。 室外保洁	2.卫生标准及要求:3.室内保洁: 保持走廊地面无脚印、无口香糖印,夏季地面无土,冬季无结冰下',
 
-		comname: '长沙星沙文和友餐饮文化',
-		conadrres: '长沙岳麓区中电软件园A栋1920 ',
+		comname: '',
+		conadrres: '',
 		portraitPath: '',
 		recruiterTelephone: '',
 		ident: "user"
@@ -91,7 +91,7 @@ Page({
 		let that = this;
 		let recruitJobUuid = this.options.recruitJobUuid;
 		// 测试用：
-		recruitJobUuid = '47219d8c-2d6a-4f9b-9f7a-01496e7b46bd';
+		// recruitJobUuid = '47219d8c-2d6a-4f9b-9f7a-01496e7b46bd';
 		// 获取用户openid
 		await app.getOpenidReady();
 		let openid = wx.getStorageSync('openid');

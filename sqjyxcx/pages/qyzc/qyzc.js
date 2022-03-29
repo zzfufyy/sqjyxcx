@@ -2,6 +2,8 @@
 var QQMapWX = require('../../mapjs/qqmap-wx-jssdk.js');
 const string_util = require('../../utils/string_util');
 const $ = require('../../utils/request_util');
+
+
 // 实例化API核心类
 const app = getApp()
 

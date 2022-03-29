@@ -3,6 +3,13 @@ const STATUS = {
     DELETED: -1,
 }
 
+const FLOW_RECRUIT = {
+    NORMAL: 0, // 未反馈 未沟通
+    PROCESSING: 1,
+    UNSUITABLE: -1,
+}
+
+// 薪水类
 class Salary {
     constructor(min, max) {
         this.min = min;
@@ -59,6 +66,7 @@ const defaultLocation = {
 
 module.exports = {
     STATUS: STATUS,
+    FLOW_RECRUIT:FLOW_RECRUIT,
     Salary: Salary,
     salaryList: salaryList,
     userRoleName: userRoleName,

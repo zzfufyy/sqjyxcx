@@ -54,8 +54,8 @@ Page({
 				console.log(positionData);
 				that.setData({
 					address: positionData,
-					lon: longitude.toFixed(4),
-					lat: latitude.toFixed(4),
+					lon: longitude.toFixed(6),
+					lat: latitude.toFixed(6),
 				})
 			}
 		})

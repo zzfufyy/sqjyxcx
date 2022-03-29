@@ -92,16 +92,18 @@
 				wx:for="{{nyxz}}" wx:key="key">{{item.nl}}</view>
 			</view>
 		</view>
+	<!--
 		<view class="topjlsg">
 			<view class="yxyq clearfloat">
 				<view class="yx ft">工作经验</view>
-				<!-- <view class=" fr sxac">收起 <view class="jtbox xz"></view></view> -->
+				<view class=" fr sxac">收起 <view class="jtbox xz"></view></view>
 			</view>
 			<view class="yxbox">
 				<view class="yxforbox {{item.checked?'active':'xb'}}"  bindtap="gzjy" data-id="{{item.id}}" 
 				wx:for="{{gzjy}}" wx:key="key">{{item.jy}}</view>
 			</view>
 		</view>
+		-->
 		<view class="btmbtnbox">
 			<view class="clear" bindtap="clear">清空</view>
 			<view class="qd" bindtap="qd">确定</view>
