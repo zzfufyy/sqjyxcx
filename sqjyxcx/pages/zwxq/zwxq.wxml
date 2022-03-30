@@ -31,7 +31,7 @@
 			<image src="/img/share.png" class="imgbg ft"></image>
 		</button>
 		<image class="imgbt ddh ft" data-cellphne="{{cellphne}}" bindtap="callPhone" src="/img/dhred.png"></image>
-		<view class="fr tijsq lyl" bindtap="talk">聊一聊</view>
+		<!-- <view class="fr tijsq lyl" bindtap="talk">聊一聊</view> -->
 		<view class="fr tijsq tdjl" bindtap="tdjl">投递简历</view>
 	</view>
 </view>

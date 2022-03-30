@@ -137,7 +137,6 @@ const createRecruiteeMethods = () => ({
 
                 // 加载角色选择完成
                 this.state.userRoleCompl.resolve();
-                this._loadJobList();
                 // 保存登录角色信息
                 UserService.saveUserRole(Constant.UserRole.Recruitee);
             }

@@ -34,7 +34,7 @@
 	border-bottom: 1px solid #F2F2F2;
 	margin: 0 10px;text-align: center; 
 	height: 60px;
-	padding-top: 10px;
+	padding-top: 10px;position: relative;
 }
 .name{    width: 100%;
 	font-size: 14px;
@@ -47,6 +47,7 @@ color: #C1C1C1;margin-bottom: 5px;
 font-family: Source Han Sans CN-Regular, Source Han Sans CN;
 font-weight: 400;
 color: #AFAFAF;
+
 }
 .naxbox1{
 	border-bottom: 1px solid #F2F2F2;
@@ -60,6 +61,9 @@ font-family: Source Han Sans CN-Regular, Source Han Sans CN;
 font-weight: 400;
 color: #333333;    height: 35px;
 line-height: 35px;
+}
+.sjh{
+	width: 60%;
 }
 .picker{
 	color: #333;
@@ -87,6 +91,19 @@ page{
 
 }
 
+.hqlxfs {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 500;
+	margin-top: 6px;
+	width: 35%!important;
+	padding: 8px 0px;
+	right: 0;
+	position: absolute;
+	margin-left: 0px!important;
+	margin-right: 0!important;
+	bottom: 2px;color: blue;
+}
 
 
 

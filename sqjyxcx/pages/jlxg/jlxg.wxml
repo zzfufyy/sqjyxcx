@@ -27,17 +27,10 @@
 	</view>
 	<view class="naxbox">
 		<view class="name">手机号</view>
-		<input bindinput="handleInputPhoneNumber" type="text" placeholder="输入手机号" class="wxh truename"
-			value="{{phonenum}}" /> 
+		<input bindinput="handleInputPhoneNumber" type="text" placeholder="输入手机号" class="wxh truename sjh" value="{{phonenum}}" /> 
+			<button class="hqlxfs " open-type="getUserInfo" open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="getPhoneNumber">获取联系方式</button>
 	</view>
-	<view class="dkbox clearfloat">
-      <view class="qymc ft"></view>
-      <view class="qyname fr">
-      <button class="hqlxfs" open-type="getUserInfo" open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="getPhoneNumber">获取联系方式</button>
-        <!-- <input type="number" disabled="true" maxlength="11" class="ipt" bindblur="lxdh" placeholder="请输入手机号" 
-        value="{{sqrphone}}" /> -->
-      </view>
-    </view>
+
 	<view class="naxbox clearfloat">
 		<view class="ft" style="width: 49%;">
 			<view class="name">出生年份</view>

@@ -82,7 +82,6 @@ const createContentMethods = () => ({
         this.state.pageConfig.setNoMoreDataCallback(this._noMoreData);
 
         let data = this.data;
-        console.error(this.data)
         console.log(this.data.ident);
         // await this._loadCandidateList();
         // 当前用户角色是求职者
@@ -91,7 +90,7 @@ const createContentMethods = () => ({
             await this._loadJobList();
         }
         // 当前用户是招聘者
-        else if (data.ident == companyIdent) {
+        else if (data.ident === companyIdent) {
             await this._loadCandidateList();
         }
     },

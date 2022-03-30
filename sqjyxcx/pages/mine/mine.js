@@ -29,6 +29,9 @@ Page({
 			ytdgw: '127',
 			byll: '',
 		}],
+		ytdgw:"",
+		byll: '',
+		zw:"",
 		companyinfo: [{
 			tximg: '/img/tx.png',
 			name: '张三',
@@ -95,8 +98,11 @@ Page({
 
 	onLoad: function (params) {
 		console.debug('\n个人中心页面加载=========');
+		let that = this;
 		app.getGlobal(GlobalKey.UserInfoChanged).addListener(this._listenInfoChange);
 		this._reloadData();
+		// var recruiteeInfo =  UserService.loadRcruiteeInfo();
+		console.log(that.data.zw)
 	},
 
 	onUnload: function (params) {

@@ -28,7 +28,7 @@
 			<navigator url="/pages/wantjob/wantjob" hover-class="none" class="yxbox clearfloat">
 				<view class="ft zgyx">工作意向</view>
 				<view class="fr yx">
-					<view class="yxgz">{{item.jobname}}, {{item.money}} <image class="imgjt" src="/img/jt.png"></image></view>
+					<view class="yxgz">{{zw}}, {{item.money}} <image class="imgjt" src="/img/jt.png"></image></view>
 				</view>
 			</navigator>
 		</view>
@@ -48,13 +48,13 @@
 			<navigator url="/pages/ytdjob/ytdjob" hover-class="none"  class="clearfloat yxbox1">
 				<view class="ft zgyx"><image class="contltimg" src="/img/ytdgw.png"></image>已投递岗位</view>
 				<view class="fr yx">
-					<text>{{item.ytdgw}}</text><image class="imgjt" src="/img/jt.png" />
+					<text>{{ytdgw}}</text><image class="imgjt" src="/img/jt.png" />
 				</view>
 			</navigator>
 			<navigator url="/pages/byll/byll" hover-class="none"  class="clearfloat yxbox1">
 				<view class="ft zgyx"><image class="contltimg" src="/img/byll.png"></image>被游览量</view>
 				<view class="fr yx">
-					<text>{{item.byll}}</text><image class="imgjt" src="/img/jt.png" />
+					<text>{{byll}}</text><image class="imgjt" src="/img/jt.png" />
 				</view>
 			</navigator>
 		</view>

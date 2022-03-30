@@ -251,11 +251,12 @@ Page({
 
 
   _loadPage: async function () {
-    await app.state.opendidReady;
+    console.log("#############  loadPage")
+    await app.getOpenidReady();
+    console.log(app.getGlobal(GlobalKey.IndexBootstrap))
     if (app.getGlobal(GlobalKey.IndexBootstrap)) {
       await this.bootstrap();
       await this.loadContent();
-
       app.setGlobal(GlobalKey.IndexBootstrap, false);
     }
   },

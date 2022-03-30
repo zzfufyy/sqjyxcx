@@ -59,7 +59,8 @@
     "pages/yyzz/yyzz",
     "pages/aboutus/aboutus",
     "pages/searchpage/searchpage",
-    "pages/qysearch/qysearch"
+    "pages/qysearch/qysearch",
+    "pages/sqfw/sqfw"
     
   ],
   "permission": {

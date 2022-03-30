@@ -1,6 +1,6 @@
 <view class="container">
 	<view class="toptit">
-		35家公司查看能了你的简历
+		{{comnum}}家公司查看了你的简历
 	</view>
 	<view class="line1"></view>
 
