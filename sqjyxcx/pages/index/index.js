@@ -27,18 +27,18 @@ Page({
     hideUserInfoAuth: true,
     animated: false,
     compangjob: [
-      {
-        jobname: '服务员/保洁', usertag: [{ tagbq: '女' }, { tagbq: '29岁' }, { tagbq: '3000-5000/月' }],
-        name: '张三', tximg: '/img/tx.png', hxtime: '10分钟前', sqname: '天源社区', companyjuli: '1.2',
-      },
-      {
-        jobname: '服务员/保洁', usertag: [{ tagbq: '女' }, { tagbq: '29岁' }, { tagbq: '3000-5000/月' }],
-        name: '李四', tximg: '/img/tx.png', hxtime: '10分钟前', sqname: '天源社区', companyjuli: '1.2',
-      },
-      {
-        jobname: '服务员/保洁', usertag: [{ tagbq: '女' }, { tagbq: '29岁' }, { tagbq: '3000-5000/月' }],
-        name: '王二', tximg: '/img/tx.png', hxtime: '10分钟前', sqname: '天源社区', companyjuli: '1.2',
-      },
+      // {
+      //   jobname: '服务员/保洁', usertag: [{ tagbq: '女' }, { tagbq: '29岁' }, { tagbq: '3000-5000/月' }],
+      //   name: '张三', tximg: '/img/tx.png', hxtime: '10分钟前', sqname: '天源社区', companyjuli: '1.2',
+      // },
+      // {
+      //   jobname: '服务员/保洁', usertag: [{ tagbq: '女' }, { tagbq: '29岁' }, { tagbq: '3000-5000/月' }],
+      //   name: '李四', tximg: '/img/tx.png', hxtime: '10分钟前', sqname: '天源社区', companyjuli: '1.2',
+      // },
+      // {
+      //   jobname: '服务员/保洁', usertag: [{ tagbq: '女' }, { tagbq: '29岁' }, { tagbq: '3000-5000/月' }],
+      //   name: '王二', tximg: '/img/tx.png', hxtime: '10分钟前', sqname: '天源社区', companyjuli: '1.2',
+      // },
 
     ],
     scene: "",
@@ -77,13 +77,12 @@ Page({
 
   },
 
-  // 更改定位
+  // 更改定位  已重新 在content.js
   changeLocation(e) {
     let that = this
     wx.chooseLocation({
       type: 'gcj02',
       success(res) {
-        console.log(res)
         let latitude = res.latitude
         let longitude = res.longitude
         var positionData = res.address
@@ -239,13 +238,14 @@ Page({
     that.setData({
       ht: app.globalData.arrij.screenHeight - 119
     })
+    this._loadPage();
   },
 
   onShow() {
     this._loadPage();
   },
 
-  onReachBottom: function () {
+  onReachBottom: async function () {
     this.loadContent();
   },
 

@@ -37,7 +37,7 @@
           </view>
           <view class="texname">邀约面试</view>
         </navigator> -->
-        <navigator hover-class="none" bindtap="changeLocation" url="" class="navtop" wx:key="key">
+        <navigator hover-class="none" bindtap="changeLocation" class="navtop" wx:key="key">
           <view class="imgbox">
             <image src="/img/xgdw.png"></image>
           </view>

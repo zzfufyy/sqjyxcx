@@ -123,7 +123,8 @@ const createRecruiteeMethods = () => ({
                     juesehide: true,
                     // 做实名验证
                     smhide: false,
-                    ident: 'user'
+                    ident: 'user',
+                    openid: app.getOpenid(),
                 });
             } else {
                 console.debug(`服务端已经有此求职者信息: ${app.getOpenid()}`);
@@ -131,11 +132,12 @@ const createRecruiteeMethods = () => ({
                     juesehide: true,
                     smhide: true,
                     ident: 'user',
+                    openid: app.getOpenid(),
                 });
 
                 // 加载角色选择完成
                 this.state.userRoleCompl.resolve();
-
+                this._loadJobList();
                 // 保存登录角色信息
                 UserService.saveUserRole(Constant.UserRole.Recruitee);
             }

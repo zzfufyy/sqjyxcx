@@ -9,7 +9,7 @@
 	<swiper current="{{currentTab}}" data-current="{{currentId}}"  style="height:{{winHeight - 55}}px;" bindchange="switchTab">
 		<swiper-item style="height:100%;overflow-y:scroll;background: #F5F5F5;" >
 			<view class="workbox" wx:for="{{joblistyfb}}" wx:key="key">
-				<view class="jobname">{{item.jobname}}{{item.money}}/月{{item.needs}}人</view>
+				<view class="jobname">{{item.jobname + "  "}}{{item.money}}/月{{"  "+ item.needs}}人</view>
 				<view class="gwyq">岗位要求</view>
 				<view class="gwyq">{{item.gwyq}}</view>
 				<view class="clearfloat btmbox">
