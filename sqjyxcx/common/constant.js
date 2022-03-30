@@ -8,6 +8,29 @@ const FLOW_RECRUIT = {
     PROCESSING: 1,
     UNSUITABLE: -1,
 }
+// 年龄类：
+class Age{
+    constructor(min, max){
+        this.min = min;
+        this.max = max;
+        if(min <=0 && max <=0){
+            this.value = '年龄不限';
+        } else if (min <= 0 && max > 0) {
+            this.value = `${max}以下`;
+        } else if (min > 0 && max <= 0) {
+            this.value = `${min}以上`;
+        } else {
+            this.value = `${min} - ${max}`;
+        }
+    }
+}
+const ageList = [
+    new Age(0,0),
+    new Age(20,30),
+    new Age(30,40),
+    new Age(40,50),
+    new Age(50,60),
+]
 
 // 薪水类
 class Salary {
@@ -67,6 +90,8 @@ const defaultLocation = {
 module.exports = {
     STATUS: STATUS,
     FLOW_RECRUIT:FLOW_RECRUIT,
+    Age: Age,
+    ageList:ageList,
     Salary: Salary,
     salaryList: salaryList,
     userRoleName: userRoleName,

@@ -14,7 +14,7 @@
 				<view class="date">{{item.date}}</view>
 				<view class="workbox"  wx:for="{{item.list}}" wx:key="key">
 					<navigator hover-class="none" url="/pages/loojl/lookjl" >
-						<view class="jobname">{{item.name}} {{item.sex}} {{item.year}} {{item.workyear}}年 {{item.jyzt}}</view>
+						<view class="jobname">{{item.name}} {{item.sex}} {{item.year}}岁 {{item.workyear}} {{item.jyzt}}</view>
 						<view class="gwyq">应聘岗位:{{item.ypzw}}</view>
 					</navigator>
 					<!-- <view class="gwyq"></view> -->
@@ -22,7 +22,7 @@
 						<view class="ft ltbox">
 							<!-- <view class="bjbox" data-ckid="{{item.ckid}}" bindtap="dcktalk">聊一聊</view> -->
 							<view class="xiajia1" data-ckid="{{item.ckid}}" data-cellphne="{{item.cellphne}}" bindtap="call">电话</view>
-							<view class="xiajia" data-ckid="{{item.ckid}}" bindtap="bhs">不合适</view>
+							<view class="xiajia" data-recordUuid="{{item.recordUuid}}" data-ckid="{{item.ckid}}" bindtap="bhs">不合适</view>
 						</view>
 					</view>
 				</view>
@@ -34,7 +34,7 @@
 				<view class="date">{{item.date}}</view>
 				<view class="workbox" wx:for="{{item.list}}" wx:key="key">
 					<navigator hover-class="none" url="/pages/loojl/lookjl"  >
-						<view class="jobname">{{item.name}} {{item.sex}} {{item.year}} {{item.workyear}}年 {{item.jyzt}}</view>
+						<view class="jobname">{{item.name}} {{item.sex}} {{item.year}}岁 {{item.workyear}} {{item.jyzt}}</view>
 						<view class="gwyq">应聘岗位:{{item.ypzw}}</view>
 					</navigator>
 					<!-- <view class="gwyq"></view> -->
@@ -54,7 +54,7 @@
 				<view class="date">{{item.date}}</view>
 				<view class="workbox" wx:for="{{item.list}}" wx:key="key">
 					<navigator hover-class="none" url="/pages/loojl/lookjl"  >
-						<view class="jobname">{{item.name}} {{item.sex}} {{item.year}} {{item.workyear}}年 {{item.jyzt}}</view>
+						<view class="jobname">{{item.name}} {{item.sex}} {{item.year}}岁 {{item.workyear}} {{item.jyzt}}</view>
 						<view class="gwyq">应聘岗位:{{item.ypzw}}</view>
 					</navigator>
 					<!-- <view class="gwyq"></view> -->

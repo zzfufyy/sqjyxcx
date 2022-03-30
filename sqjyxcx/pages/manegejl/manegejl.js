@@ -20,6 +20,10 @@ Page({
 		yhid: "",
 		organid: "",
 		section: [],
+		// 原始数据保存
+		dckOrigin: "",
+		gtzOrigin: "",
+		buheshiOrigin: "",
 		dck: [
 			{
 				date: '3月9日', list: [
@@ -50,14 +54,15 @@ Page({
 		// 弹窗
 		sxkz: true,
 		// 月薪要求
-		yxyq: [
-			{ yxmoney: '不限', id: 0, checked: true }, { yxmoney: '2千以下', id: 1 }, { yxmoney: '2千-3千', id: 2 }, { yxmoney: '3千-4千', id: 3 }, { yxmoney: '4千-5千', id: 4 }, { yxmoney: '5千-7千', id: 5 }, { yxmoney: '7千-1万', id: 6 }, { yxmoney: '1万-1.5万', id: 7 }
-		],
+		salaryList: CONSTANT.salaryList,
+		yxyq: [], // min max yxmoney id checked
+
 		index: '',
 
 		// 年龄范围
+		ageList: CONSTANT.ageList,
 		nyxz: [
-			{ nl: '不限', id: 0, checked: true }, { nl: '20-30岁', id: 1 }, { nl: '30-40岁', id: 2 }, { nl: '40-50岁', id: 3 }, { nl: '50-60岁', id: 4 },
+			{ nl: '不限', id: 0, checked: true, min: 0, max: 0 }, { nl: '20-30岁', id: 1 }, { nl: '30-40岁', id: 2 }, { nl: '40-50岁', id: 3 }, { nl: '50-60岁', id: 4 },
 		],
 		// 工作经验
 		gzjy: [
@@ -76,53 +81,44 @@ Page({
 	yxxz(e) {
 		let id = e.currentTarget.dataset.id
 		console.log(id)
-		for (let i = 0; i < this.data.yxyq.length; i++) {
-			if (this.data.yxyq[i].id == id) {
-				if (this.data.yxyq[i].checked == true) {
-					this.data.yxyq[i].checked = false;
-				} else {
-					this.data.yxyq[i].checked = true;
-				}
-			}
-		}
-		this.setData({
-			yxyq: this.data.yxyq
+		let yxyqList = this.data.yxyq;
+		yxyqList.forEach((v, i) => {
+			v.checked = v.id == id ? true : false
 		})
+		this.setData({
+			yxyq: yxyqList
+		})
+		console.log(this.data.yxyq);
 	},
 	//年龄范围
 	nlfw(e) {
 		let id = e.currentTarget.dataset.id
 		console.log(id)
-		for (let i = 0; i < this.data.nyxz.length; i++) {
-			if (this.data.nyxz[i].id == id) {
-				if (this.data.nyxz[i].checked == true) {
-					this.data.nyxz[i].checked = false;
-				} else {
-					this.data.nyxz[i].checked = true;
-				}
-			}
-		}
+		let nyxzList = this.data.nyxz;
+		nyxzList.forEach((v, i) => {
+			v.checked = v.id == id ? true : false
+		});
 		this.setData({
-			nyxz: this.data.nyxz
+			nyxz: nyxzList
 		})
 	},
-	//工作经验
-	gzjy(e) {
-		let id = e.currentTarget.dataset.id
-		console.log(id)
-		for (let i = 0; i < this.data.gzjy.length; i++) {
-			if (this.data.gzjy[i].id == id) {
-				if (this.data.gzjy[i].checked == true) {
-					this.data.gzjy[i].checked = false;
-				} else {
-					this.data.gzjy[i].checked = true;
-				}
-			}
-		}
-		this.setData({
-			gzjy: this.data.gzjy
-		})
-	},
+	// //工作经验
+	// gzjy(e) {
+	// 	let id = e.currentTarget.dataset.id
+	// 	console.log(id)
+	// 	for (let i = 0; i < this.data.gzjy.length; i++) {
+	// 		if (this.data.gzjy[i].id == id) {
+	// 			if (this.data.gzjy[i].checked == true) {
+	// 				this.data.gzjy[i].checked = false;
+	// 			} else {
+	// 				this.data.gzjy[i].checked = true;
+	// 			}
+	// 		}
+	// 	}
+	// 	this.setData({
+	// 		gzjy: this.data.gzjy
+	// 	})
+	// },
 	//清空
 	clear() {
 		for (let i = 0; i < this.data.yxyq.length; i++) {
@@ -142,9 +138,100 @@ Page({
 	},
 	//确定
 	qd() {
+		// 获取3个列表
+		let dckList = JSON.parse(this.data.dckOrigin);
+		let gtzList = JSON.parse(this.data.gtzOrigin);
+		let buheshiList = JSON.parse(this.data.buheshiOrigin);
+		// 获取月薪要求范围 并过滤
+		let yxyqChoosed = this.data.yxyq.filter(v => { return v.checked })[0];
+		console.log(yxyqChoosed);
+		console.log(this.data);
+		switch (yxyqChoosed.id) {
+			case 0: break;
+			// 3000以下
+			case 1: {
+				dckList.forEach((v) => {
+					v.list = v.list.filter(r => { return r.max <= yxyqChoosed.max })
+				})
+				gtzList.forEach((v) => {
+					v.list = v.list.filter(r => { return r.max <= yxyqChoosed.max })
+				})
+				buheshiList.forEach((v) => {
+					v.list = v.list.filter(r => { return r.max <= yxyqChoosed.max })
+				})
+				break;
+			}
+			// 10000以上
+			case 5: {
+				dckList = dckList.filter((v) => {
+					v.list = v.list.filter(r => { return r.min >= yxyqChoosed.min })
+				})
+				gtzList = gtzList.filter((v, i) => {
+					v.list = v.list.filter(r => { return r.min >= yxyqChoosed.min })
+				})
+				buheshiList = buheshiList.filter((v, i) => {
+					v.list = v.list.filter(r => { return r.min >= yxyqChoosed.min })
+				})
+				break;
+			}
+			default: {
+				dckList.forEach((v, i) => {
+					v.list = v.list.filter(r => { return r.min >= yxyqChoosed.min && r.max <= yxyqChoosed.max })
+				})
+				gtzList.forEach((v, i) => {
+					v.list = v.list.filter(r => { return r.min >= yxyqChoosed.min && r.max <= yxyqChoosed.max })
+				})
+				buheshiList.forEach((v, i) => {
+					v.list = v.list.filter(r => { return r.min >= yxyqChoosed.min && r.max <= yxyqChoosed.max })
+				})
+				break;
+			}
+		}
+		// 获取年龄范围 并过滤
+		let nyxzChoosed = this.data.nyxz.filter(v => { return v.checked })[0];
+		switch (nyxzChoosed.id) {
+			case 0: break;
+			default: {
+				dckList.forEach((v) => {
+					v.list = v.list.filter(r => { return r.year > nyxzChoosed.min && r.year < nyxzChoosed.max });
+
+				});
+				gtzList.forEach((v) => {
+					v.list = v.list.filter(r => { return r.year > nyxzChoosed.min && r.year < nyxzChoosed.max })
+				});
+				buheshiList.forEach((v) => {
+					v.list = v.list.filter(r => { return r.year > nyxzChoosed.min && r.year < nyxzChoosed.max })
+				});
+				break;
+			}
+		}
+
+		// 过滤list为0的
+		dckList = dckList.filter(v => { return v.list.length > 0 });
+		gtzList = gtzList.filter(v => { return v.list.length > 0 });
+		buheshiList = buheshiList.filter(v => { return v.list.length > 0 });
+		this.setData({
+			dck: dckList,
+			gtz: gtzList,
+			buheshi: buheshiList,
+		})
+		// 计算长度
+		let dcklen = 0;
+		dckList.forEach(v => v.list.forEach(r => dcklen ++ ));
+		let gtzlen = 0;
+		gtzList.forEach(v => v.list.forEach(r => gtzlen ++ ));
+		let buheshilen = 0;
+		buheshiList.forEach(v => v.list.forEach(r => buheshilen ++ ));
+		let section1 = [
+			{ name: '待查看', typeId: '0', num: dcklen },
+			{ name: '沟通中', typeId: '1', num: gtzlen },
+			{ name: '不合适', typeId: '2', num: buheshilen },
+		]
+		console.log(this.data);
 		let hidesx = !this.data.hidesx
 		this.setData({
-			hidesx: hidesx
+			hidesx: hidesx,
+			section:section1,
 		})
 	},
 
@@ -205,6 +292,9 @@ Page({
 	},
 	//待查看不合适点击事件
 	bhs(e) {
+		console.log(e.currentTarget);
+		// 获取记录id
+		let recordUuid = e.currentTarget.dataset.recordUuid;
 
 	},
 	//沟通中不合适点击事件
@@ -332,14 +422,6 @@ Page({
 			console.error(r)
 		)
 		// 根据compnayUuid加载求职简历信息
-		// dck: [
-		// 	{
-		// 		date: '3月9日', list: [
-		// 			{ name: '张三', sex: '女', year: '24', workyear: '1-3', jyzt: '待业', ypzw: '清洁工', cellphne: '13112345678', ckid: '0' },
-		// 			{ name: '张三', sex: '女', year: '24', workyear: '1-3', jyzt: '待业', ypzw: '清洁工', cellphne: '13212345678', ckid: '1' },
-		// 			{ name: '张三', sex: '女', year: '24', workyear: '1-3', jyzt: '待业', ypzw: '清洁工', cellphne: '13212345678', ckid: '2' },
-		// 		]
-		// 	},
 		// 初步处理list
 		let listInit = []
 		// list初始化
@@ -347,7 +429,7 @@ Page({
 		let loadRecordPromise = recruitRecordService.listRecordPlusByCompanyUuid(this.data.companyUuid);
 		await loadRecordPromise.then(r => {
 			console.log(r.data);
-			r.data.forEach(v => {
+			r.data.forEach((v,i) => {
 				console.log(date_utils.dateToCN(v.createTime));
 				let tempData = {
 					recordUuid: v.recordUuid,
@@ -358,6 +440,9 @@ Page({
 					ypzw: v.jobName,
 					cellphne: v.telephone,
 					flowRecruit: v.flowRecruit,
+					min: v.jobSalaryMin,
+					max: v.jobSalaryMax,
+					ckid:i,
 				}
 				switch (tempData.flowRecruit) {
 					case CONSTANT.FLOW_RECRUIT.NORMAL:
@@ -374,79 +459,139 @@ Page({
 			console.error(r);
 		})
 		console.log(listDck);
+		this.buildList(listDck, listGtz, listBuheshi);
+		// 保存初始数据
+		temp1 = JSON.stringify(this.data.dck);
+		temp2 = JSON.stringify(this.data.gtz);
+		temp3 = JSON.stringify(this.data.buheshi);
+		this.setData({
+			dckOrigin: temp1,
+			gtzOrigin: temp2,
+			buheshiOrigin: temp3,
+		})
+
+		// 搜索栏构建月薪要求
+		let yxyqList = [];
+		CONSTANT.salaryList.forEach((val, i) => {
+			let checked = i == 0 ? true : false;
+			yxyqList.push({
+				yxmoney: val.value,
+				id: i,
+				checked: checked,
+				min: val.min,
+				max: val.max,
+			})
+		})
+		this.setData({
+			yxyq: yxyqList,
+		});
+		// 搜索栏构建年龄限制 { nl: '不限', id: 0, checked: true },
+		let nyxzList = [];
+		CONSTANT.ageList.forEach((val, i) => {
+			let checked = i == 0 ? true : false;
+			nyxzList.push({
+				nl: val.value,
+				id: i,
+				checked: checked,
+				min: val.min,
+				max: val.max,
+			})
+		})
+		this.setData({ nyxz: nyxzList });
+	},
+	
+
+	// 函数 构建list
+	buildList: function (listDck, listGtz, listBuheshi) {
+		let that = this;
 		let dckTemp = []; let gtzTemp = []; buheshiTemp = [];
 		// 构建dck
 		let date = '';
 		let tempData = { date: '', list: [], };
-		listDck.forEach((r, i, arr) => {
-			if (date != r.date) {
-				if (tempData.list.length != 0) {
+		if (listDck.length != 0) {
+			listDck.forEach((r, i, arr) => {
+				if (date != r.date) {
+					if (tempData.list.length != 0) {
+						dckTemp.push(tempData);
+					}
+					tempData = { date: r.date, list: [], }
+				}
+				tempData.list.push({
+					recordUuid: r.recordUuid,
+					name: r.name,
+					sex: r.gender,
+					year: r.year,
+					ypzw: r.ypzw,
+					cellphne: r.cellphne,
+					flowRecruit: r.flowRecruit,
+					min: r.min,
+					max: r.max,
+					ckid: r.ckid,
+				})
+				date = r.date;
+				if (i == (arr.length - 1)) {
 					dckTemp.push(tempData);
 				}
-				tempData = { date: r.date, list: [], }
-			}
-			tempData.list.push({
-				recordUuid: r.recordUuid,
-				name: r.name,
-				sex: r.gender,
-				year: r.year,
-				ypzw: r.ypzw,
-				cellphne: r.cellphne,
-				flowRecruit: r.flowRecruit,
-			})
-			date = r.date;
-			if (i == (arr.length - 1)) {
-				dckTemp.push(tempData);
-			}
-		});
+			});
+		}
 		// 构建gtz
 		date = '';
 		tempData = { date: '', list: [], };
-		listGtz.forEach((r, i, arr) => {
-			if (date != r.date) {
-				if (tempData.list.length != 0) {
+		if (listGtz.length != 0) {
+			listGtz.forEach((r, i, arr) => {
+				if (date != r.date) {
+					if (tempData.list.length != 0) {
+						gtzTemp.push(tempData);
+					}
+					tempData = { date: r.date, list: [], }
+				}
+				tempData.list.push({
+					recordUuid: r.recordUuid,
+					name: r.name,
+					sex: r.gender,
+					year: r.year,
+					ypzw: r.ypzw,
+					cellphne: r.cellphne,
+					flowRecruit: r.flowRecruit,
+					min: r.min,
+					max: r.max,
+					ckid: r.ckid,
+				})
+				date = r.date;
+				if (i == (arr.length - 1)) {
 					gtzTemp.push(tempData);
 				}
-				tempData = { date: r.date, list: [], }
-			}
-			tempData.list.push({
-				recordUuid: r.recordUuid,
-				name: r.name,
-				sex: r.gender,
-				year: r.year,
-				ypzw: r.ypzw,
-				cellphne: r.cellphne,
-				flowRecruit: r.flowRecruit,
-			})
-			date = r.date;
-			if (i == (arr.length - 1)) {
-				gtzTemp.push(tempData);
-			}
-		});
+			});
+		}
 		// 构建buheshi
 		date = '';
 		tempData = { date: '', list: [], };
-		listBuheshi.forEach((r, i, arr) => {
-			if (date != r.date) {
-				if (tempData.list.length != 0) {
+		if (listBuheshi.length != 0) {
+			listBuheshi.forEach((r, i, arr) => {
+				if (date != r.date) {
+					if (tempData.list.length != 0) {
+						buheshiTemp.push(tempData);
+					}
+					tempData = { date: r.date, list: [], }
+				}
+				tempData.list.push({
+					recordUuid: r.recordUuid,
+					name: r.name,
+					sex: r.gender,
+					year: r.year,
+					ypzw: r.ypzw,
+					cellphne: r.cellphne,
+					flowRecruit: r.flowRecruit,
+					min: r.min,
+					max: r.max,
+					ckid: r.ckid,
+				})
+				date = r.date;
+				if (i == (arr.length - 1)) {
 					buheshiTemp.push(tempData);
 				}
-				tempData = { date: r.date, list: [], }
-			}
-			tempData.list.push({
-				recordUuid: r.recordUuid,
-				name: r.name,
-				sex: r.gender,
-				year: r.year,
-				ypzw: r.ypzw,
-				cellphne: r.cellphne,
-				flowRecruit: r.flowRecruit,
-			})
-			date = r.date;
-			if (i == (arr.length - 1)) {
-				buheshiTemp.push(tempData);
-			}
-		});
+			});
+		}
 		this.setData({
 			dck: dckTemp,
 			gtz: gtzTemp,
@@ -484,7 +629,6 @@ Page({
 			section: section1
 		});
 	},
-
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
