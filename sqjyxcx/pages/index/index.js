@@ -93,6 +93,14 @@ Page({
       }
     })
   },
+  bindtapCandidateJobInfo(e) {
+    let recruitJobUuid = this.data.jobInfoList[e.currentTarget.dataset.index].jobUuid;
+    wx.navigateTo({
+      url: '/pages/zwxq/zwxq?recruitJobUuid=' + recruitJobUuid,
+    })
+
+
+  },
   //求职者搜索函数
   searchjob() {
     wx.navigateTo({
@@ -238,8 +246,8 @@ Page({
   },
 
   onReachBottom: function () {
-		this.loadContent();
-	},
+    this.loadContent();
+  },
 
 
   _loadPage: async function () {

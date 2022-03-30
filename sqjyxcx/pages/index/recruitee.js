@@ -184,6 +184,7 @@ const createRecruiteeMethods = () => ({
 
         // 将服务端的数据映射成页面展示数据
         let newList = dataList.map(jobInfo => ({
+            jobUuid:jobInfo.jobId,
             jobname: jobInfo.jobName,
             jobmoney: new Constant.Salary(
                 jobInfo.jobSalaryMin,

@@ -67,7 +67,8 @@
               <view class="companytag" wx:key="key" wx:for="{{item.companytag}}">{{item.tagbq}}</view>
             </view>
           </view> -->
-          <navigator hover-class="none" url="/pages/zwxq/zwxq" wx:for="{{jobInfoList}}" wx:key="key">
+          <navigator hover-class="none"  wx:for="{{jobInfoList}}" wx:key="index" 
+          bindtap="bindtapCandidateJobInfo" data-index="{{index}}">
             <view class="jobbox1 clearfloat">
               <view class="ft ltbox">
                 <view class="jobname">{{item.jobname}}</view>
