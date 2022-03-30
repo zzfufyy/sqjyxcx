@@ -2,7 +2,7 @@
   <!-- <view style="border-top: 1px solid #D9D9D9;"></view> -->
   <block wx:for="{{newlist}}" wx:key="key">
     <!-- url="/pages/zcxq/zcxq" -->
-    <navigator hover-class="none" id = "{{item.id}}" bindtap="fczcbtnclick" class="mainbox clearfloat">
+    <navigator hover-class="none" id = "{{item.newsUuid}}" bindtap="fczcbtnclick" class="mainbox clearfloat">
       <view class="ft leftimgbox">
         <image wx:if='{{item.ltimg}}' class="ltimg" src="{{item.ltimg}}"></image>
       </view>
