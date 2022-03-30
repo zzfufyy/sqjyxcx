@@ -1,2 +1,52 @@
-<!--pages/sqfw/sqfw.wxml-->
-<text>pages/sqfw/sqfw.wxml</text>
+<view class="container">
+	<view class="topbox clearfloat">
+		<view class="ft">
+			<image class="sqzy" src="/img/sqzy.png"></image>
+		</view>
+		<view class="ft lrbox">
+			<view class="sqname">
+				<text class="namesq">{{sqname}}	</text>
+				<image class="phoneimg" bindtap="cellphone" src="/img/phoneimg.png"></image>
+			</view>
+			<view class="local">
+				<image class="localimg" src="/img/localimg.png"></image>
+				<text class="localtt">{{localtt}}	</text>
+			</view>
+		</view>
+	</view>
+	<view class="content">
+		<navigator wx:for="{{zhjy}}" wx:key="key" hover-class="none" url="{{item.url}}"  class="vcont" style="background: {{item.bac}};">
+			<image class="qyzp" src="{{item.iconimg}}"></image>
+			<text class="qytext">{{item.name}}</text>
+		</navigator>
+	</view>
+	<view class="line10"></view>
+	<view class="newsbox">
+		<view class="titbox clearfloat">
+			<view class="ft">
+				<image class="newimg" src="/img/newimg.png"></image>
+				<text class="newtit">新闻公告</text>
+			</view>
+			<view class="fr qbnews" bindtap="qbnews">
+				全部 >
+			</view>
+		</view>
+		<block wx:for="{{newlist}}" wx:key="key">
+			<!-- url="/pages/zcxq/zcxq" -->
+			<navigator hover-class="none" id = "{{item.id}}" bindtap="fczcbtnclick" class="mainbox clearfloat">
+				<view class="ft leftimgbox">
+					<image wx:if='{{item.ltimg}}' class="ltimg" src="{{item.ltimg}}"></image>
+				</view>
+				<view class="fr rightbox">
+					<view class="title">{{item.ptit}}</view>
+					<view class="ptit">{{item.pcont}}</view>
+					<view class="clearfloat">
+						<view class="ptime ft">{{item.pjg}}</view>
+						<view class="ptime fr">{{item.ptime}}</view>
+					</view>
+				</view>
+			</navigator>
+			<view class="line1"></view>
+		</block>
+	</view>
+</view>

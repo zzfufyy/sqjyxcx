@@ -60,7 +60,9 @@
     "pages/aboutus/aboutus",
     "pages/searchpage/searchpage",
     "pages/qysearch/qysearch",
-    "pages/sqfw/sqfw"
+    "pages/sqfw/sqfw",
+    "pages/wglr/wglr",
+    "pages/sqgl/sqgl"
     
   ],
   "permission": {

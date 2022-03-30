@@ -43,6 +43,12 @@
           </view>
           <view class="texname">修改定位</view>
         </navigator>
+        <navigator hover-class="none" bindtap="sqfw"  class="navtop" wx:key="key">
+          <view class="imgbox">
+            <image src="/img/sqfw.png"></image>
+          </view>
+          <view class="texname">社区服务</view>
+        </navigator>
       </view>
       <!-- 意向工作 -->
       <view class="jobbox wdbox clearfloat">
@@ -135,6 +141,12 @@
             <image src="/img/xgdw.png"></image>
           </view>
           <view class="texname">修改定位</view>
+        </navigator>
+        <navigator hover-class="none" bindtap="sqfw"  class="navtop" wx:key="key">
+          <view class="imgbox">
+            <image src="/img/sqfw.png"></image>
+          </view>
+          <view class="texname">社区服务</view>
         </navigator>
       </view>
       <!-- 意向工作 -->

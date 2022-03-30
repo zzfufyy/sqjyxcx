@@ -76,7 +76,12 @@ Page({
   state: {
 
   },
-
+  //社区服务
+  sqfw(){
+    wx.navigateTo({
+      url: '/pages/sqfw/sqfw',
+    })
+  },
   // 更改定位  已重新 在content.js
   changeLocation(e) {
     let that = this

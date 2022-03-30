@@ -92,7 +92,7 @@ input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
   bottom: 0;
   width: 100%;}
 
-.navtop{width: 33%;text-align: center;font-size: 13px;}
+.navtop{width: 25%;text-align: center;font-size: 13px;}
 .imgbox image{width: 36px;height: 36px;}
 .texname{margin-top: 10px;}
 .wdbox{background: #fff;position: relative;
