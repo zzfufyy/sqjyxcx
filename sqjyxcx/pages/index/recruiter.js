@@ -57,8 +57,9 @@ const createRecruiterMethods = () => ({
                         this.setData({
                             juesehide: true,
                             ident: 'company',
+                            companyUuid: companyInfo.id,
                         });
-                        await this._loadCandidateList();
+                        this.state.userRoleCompl.resolve();
                     }
                     // 还在认证
                     else {
