@@ -110,7 +110,6 @@ const createBootstrapMethod = () => ({
                     break;
             }
         }
-
         return userRoleCompl.promise;
     },
 
@@ -200,7 +199,7 @@ const createBootstrapMethod = () => ({
     },
 
     //获取微信用户信息
-    _getUserProfile(e) {
+    getUserProfile(e) {
         const scene = this.data.scene;
         var that = this;
 

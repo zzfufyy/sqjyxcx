@@ -116,6 +116,7 @@ const createRecruiteeMethods = () => ({
     _handleRecruiteeSelected: async function () {
         try {
             Loading.begin();
+            // 获取bc_user_wx 表信息
             let res = await UserService.loadRcruiteeInfo();
             if (!res) {
                 console.debug(`服务端没有此求职者信息: ${app.getOpenid()}`);
