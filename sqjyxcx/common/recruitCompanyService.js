@@ -10,7 +10,7 @@ const loadEntityById = function (id) {
     })
 }
 
-const updateRecruitCompany = function( recruitCompany){
+const updateRecruitCompany = function (recruitCompany) {
     return $.request({
         url: '/recruit-company/modify',
         data: recruitCompany,
@@ -19,8 +19,18 @@ const updateRecruitCompany = function( recruitCompany){
     });
 }
 
+const insertByEntity = function (openid, recruitCompany ){
+    return $.request({
+        url: '/recruit-company/add?openid=' + openid,
+        data: recruitCompany,
+        method: $.RequestMethod.POST,
+        header: $.jsonHeader,
+    });
+};
+
 
 module.exports = {
     loadEntityById: loadEntityById,
     updateRecruitCompany: updateRecruitCompany,
+    insertByEntity:insertByEntity,
 }

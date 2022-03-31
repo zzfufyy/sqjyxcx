@@ -186,12 +186,12 @@ Page({
 				companyName: this.data.companyName,
 				recruiterOpenid: this.data.recruiterOpenid,
 			}
-			console.log(PAGENAME + '提交数据: ' + submitData)
+			console.log(PAGENAME + '提交数据:'); console.log(submitData);
 			let submitPromise = recruitJobService.insertByEntity(submitData)
 			await submitPromise.then(r => {
-				console.log(PAGENAME + r);
+				console.log(r);
 			}).catch(r => {
-				console.error(PAGENAME + r);
+				console.error(r);
 			});
 		});
 		Loading.end();
@@ -244,7 +244,7 @@ Page({
 
 			})
 		}).catch(r => {
-			console.error(PAGENAME + r);
+			console.error(PAGENAME); console.error(r);
 		})
 		console.log(PAGENAME + "招聘人企业id:" + this.data.companyUuid);
 
