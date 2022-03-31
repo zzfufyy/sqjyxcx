@@ -19,6 +19,15 @@ const loadEntityById = function (id) {
     });
 }
 
+const insertByEntity = function (submitData) {
+    return $.request({
+        url: '/recruit-job/add',
+        data: submitData,
+        method: $.RequestMethod.POST,
+        header: $.jsonHeader
+    });
+}
+
 
 const updateByEntity = function (updateData) {
     return $.request({
@@ -30,7 +39,8 @@ const updateByEntity = function (updateData) {
 }
 
 module.exports = {
-    loadEntityById:loadEntityById,
+    loadEntityById: loadEntityById,
     loadListByCompanyUuid: loadListByCompanyUuid,
     updateByEntity: updateByEntity,
+    insertByEntity: insertByEntity,
 }
