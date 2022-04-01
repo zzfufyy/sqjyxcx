@@ -38,9 +38,29 @@ const updateByEntity = function (updateData) {
     });
 }
 
+const pagedByDistance = function (pagingParam) {
+    return $.requestOnlyData({
+        url: '/recruit-job/paged-by-distance',
+        data: pagingParam,
+        method: $.RequestMethod.POST,
+        header: $.jsonHeader,
+    });
+}
+
+const pagedByDistanceAndSalary = function (jobSalaryMin, jobSalaryMax, pagingParam) {
+    return $.requestOnlyData({
+        url: '/recruit-job/paged-by-distance?jobSalaryMin=' + jobSalaryMin + '&jobSalaryMax=' + jobSalaryMax,
+        data: pagingParam,
+        method: $.RequestMethod.POST,
+        header: $.jsonHeader,
+    });
+}
+// 接口暴露
 module.exports = {
     loadEntityById: loadEntityById,
     loadListByCompanyUuid: loadListByCompanyUuid,
     updateByEntity: updateByEntity,
     insertByEntity: insertByEntity,
+    pagedByDistance: pagedByDistance,
+    pagedByDistanceAndSalary: pagedByDistanceAndSalary,
 }

@@ -23,7 +23,7 @@
 			{{yxjobname}}
 		</view>
 		<view class="clearfloat monbox" >
-			<text style="margin-right: 30px;">{{ygz}}元/月</text>  
+			<text style="margin-right: 30px;">{{ygz}}</text>  
 			<text class="sqname" wx:for="{{sqname}}" wx:key="key">{{item.sqname}}</text>
 		</view>
 		

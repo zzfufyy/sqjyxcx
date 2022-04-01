@@ -2,17 +2,18 @@
 	<view class="INinputheader clearfloat">
 		<view class="ft lt">
 			<icon class="INsearchicon" type="search" size="22" color="#fff" />
-			<input class="weui-input" placeholder-class="opl" placeholder="搜索职位、公司" bindtap="searchjob"
+			<input class="weui-input" placeholder-class="opl" placeholder="搜索职位" bindtap="searchjob"
 				confirm-type="search" />
 		</view>
 		<view class="nav-name sx fr" bindtap="sx">筛选<view class="jtbox "></view></view>
 	</view>
 	<view class="line1"></view>
-	<navigator hover-class="none" url="/pages/zwxq/zwxq" wx:for="{{joblist}}" wx:key="key">
+	<navigator hover-class="none"  wx:for="{{joblist}}" wx:key="key" 
+	wx:key="index"  bindtap="bindtapChooseJob" data-index="{{index}}">
 		<view class="jobbox1 clearfloat" >
 			<view class="ft ltbox">
 				<view class="jobname">{{item.jobname}}</view>
-				<view class="jobmoney">{{item.jobmoney}}元/月</view>
+				<view class="jobmoney">{{item.jobmoney}}</view>
 				<view class="companyname1">
 					<image src="{{item.companytx}}" class="companytx"></image>
 					{{item.companyname}}
