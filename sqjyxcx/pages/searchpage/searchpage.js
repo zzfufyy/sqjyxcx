@@ -1,12 +1,13 @@
 // pages/searchpage/searchpage.js
 const $ = require('../../utils/request_util');
 const string_util = require('../../utils/string_util');
-const userRecruiterService = require('../../common/userRecruiterService');
-const recruitCompanyService = require('../../common/recruitCompanyService');
-const recruitJobService = require('../../common/recruitJobService');
+
 const userCandidateService = require('../../common/userCandidateService');
 const CONSTANT = require('../../common/constant');
+
 const { salaryList } = require('../../common/constant');
+// 附加模块
+const searchpageEx = require('./searchpageEx');
 
 
 const app = getApp();
@@ -22,14 +23,12 @@ Page({
 		userLon:0.0,
 		userLat:0.0,
 
-	
-
 		// 弹窗
 		sxkz: true,
 		joblist: [
-			{ jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
-			{ jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
-			{ jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
+			// { jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
+			// { jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
+			// { jobname: '清洁工', jobmoney: '3000-3800', companyname: '文和友餐饮有限公司', companytx: '/img/tx.png', jl: '1.5', phonenum: '13112345678' },
 		],
 		// 月薪
 		yxyq: [
@@ -44,6 +43,7 @@ Page({
 		oid: 0,
 		hidesx: true,
 	},
+	
 	// 筛选事件
 	sx() {
 		let hidesx = !this.data.hidesx
@@ -120,8 +120,6 @@ Page({
 		await app.getOpenidReady();
 		let openid = wx.getStorageSync('openid');
 		let yxyq_list  = [];
-		yxyq: [
-			{ yxmoney: '不限', id: 0, checked: true }, { yxmoney: '2千以下', id: 1 }, { yxmoney: '2千-3千', id: 2 }, { yxmoney: '3千-4千', id: 3 }, { yxmoney: '4千-5千', id: 4 }, { yxmoney: '5千-7千', id: 5 }, { yxmoney: '7千-1万', id: 6 }, { yxmoney: '1万-1.5万', id: 7 }]
 		let	salaryList = CONSTANT.salaryList;
 		salaryList.forEach((v,i)=>{
 			let yxmoney = v.value;
@@ -153,7 +151,8 @@ Page({
 			})
 		}).catch(r=>{
 			console.error(r);
-		})
+		});
+
 		
 	
 	},
@@ -169,9 +168,14 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-
+		this.loadContent();
 	},
-
+/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+		this.loadContent();
+	},
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
@@ -193,17 +197,13 @@ Page({
 
 	},
 
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom: function () {
-
-	},
+	
 
 	/**
 	 * 用户点击右上角分享
 	 */
 	onShareAppMessage: function () {
 
-	}
+	},
+	...searchpageEx.createPageMethods(),
 })

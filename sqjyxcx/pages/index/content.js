@@ -14,7 +14,7 @@ const createContentData = () => ({
 const createContentMethods = () => ({
     // 分页状态
     state: {
-        pageConfig: new Paging.PageConfig(5),
+        pageConfig: new Paging.PageConfig(3),
         location: Constant.defaultLocation,
     },
 

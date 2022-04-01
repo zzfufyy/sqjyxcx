@@ -10,9 +10,11 @@ const bootstrap = require('./bootstrap');
 // 内容加载模块
 const content = require('./content');
 
-
 // 获取应用实例
 const app = getApp();
+
+// 日志首名
+const PAGENAME = 'index.js - ';
 Page({
   data: {
     ...recruitee.createRecruiteeInfo(),
@@ -256,9 +258,10 @@ Page({
 
 
   _loadPage: async function () {
-    console.log("#############  loadPage")
+    console.log(PAGENAME + '_loadPage')
     await app.getOpenidReady();
     console.log(app.getGlobal(GlobalKey.IndexBootstrap))
+
     if (app.getGlobal(GlobalKey.IndexBootstrap)) {
       await this.bootstrap();
       await this.loadContent();

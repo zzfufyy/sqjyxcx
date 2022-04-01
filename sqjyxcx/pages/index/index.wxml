@@ -176,6 +176,9 @@
             </view>
           </view>
         </view>
+        <view wx:if="{{noMoreData == true}}">
+            没有更多数据
+          </view>
       </view>
     </view>
   </block>

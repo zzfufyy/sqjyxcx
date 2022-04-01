@@ -148,7 +148,20 @@ const createRecruiterMethods = () => ({
         console.log(this.data);
         console.log("######################");
         console.log(dataList);
-        
+        var that = this;
+        for(let i=0;i<dataList.length;i++){
+            wx.request({
+              url: app.globalData.web_path + '/view-record/getjobs',
+              data: {
+                openid:dataList[i].candidateOpenid,
+                jobid:dataList[i].expectCategoryId,
+              },
+              header: app.globalData.header,
+              success: function (res) {
+                  console.log(res)
+              }
+            })
+        }
         let newList = dataList.map(r => ({
             candidateOpenid: r.candidateOpenid,
             expectCatagoryId: r.expectCategoryId,

@@ -39,7 +39,11 @@ class PageConfig {
     handlePageInfo(pageInfo) {
         this.pageInfo = pageInfo;
 
-        if (!pageInfo.hasNextPage && this.handleNoMoreData) {
+        // 如果hasNextPage 则不执行后面 setNomoredata
+        // if (!pageInfo.hasNextPage && this.handleNoMoreData) {
+        //     this.handleNoMoreData();
+        // }
+        if (!pageInfo.hasNextPage) {
             this.handleNoMoreData();
         }
 

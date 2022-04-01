@@ -71,7 +71,6 @@ const createBootstrapMethod = () => ({
         } catch (e) {
             console.warn('没有本地存储的用户角色，提示用户选择角色');
         }
-
         return null;
     },
 
@@ -110,6 +109,7 @@ const createBootstrapMethod = () => ({
                     break;
             }
         }
+
         return userRoleCompl.promise;
     },
 

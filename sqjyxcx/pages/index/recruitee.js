@@ -157,6 +157,8 @@ const createRecruiteeMethods = () => ({
         console.debug('加载首页工作列表');
         let pageConfig = this._getPageConfig();
 
+        console.log(pageConfig);
+
         let location = this._getLocation();
         let pagingParam = pageConfig.buildNextParam({
             longitude: location.longitude,
@@ -172,6 +174,10 @@ const createRecruiteeMethods = () => ({
             Loading.begin();
             // 请求数据
             pageInfo = await RecruitJobService.pagedByDistacne(pagingParam);
+            console.log('请求求职用户数据：');
+            console.log(pageInfo)
+
+
         } catch (e) {
             console.error(e);
         } finally {
