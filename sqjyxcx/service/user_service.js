@@ -91,6 +91,7 @@ const UserService = {
                     key: _userRoleStorageKey,
                     success: (r) => {
                         let v = r.data;
+                        console.debug(`全局存储的 USER_ROLE: ${v}`);
                         console.debug(`本地存储的用户角色为: ${v}[${Constant.userRoleName[v]}]`);
                         resolve(v);
                     },

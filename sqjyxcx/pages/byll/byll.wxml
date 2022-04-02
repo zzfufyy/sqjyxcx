@@ -8,7 +8,7 @@
 		<view class="jobbox clearfloat" >
 			<view class="ft ltbox">
 				<view class="jobname">{{item.jobname}}</view>
-				<!-- <view class="jobmoney">{{item.jobmoney}}元/月</view> -->
+				<!-- <view class="jobmoney">{{item.jobmoney}}</view> -->
 				<view class="companyname">
 					<image src="{{item.companytx}}" class="companytx"></image>
 					{{item.companyname}}

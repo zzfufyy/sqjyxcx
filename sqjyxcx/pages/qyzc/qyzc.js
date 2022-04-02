@@ -1,37 +1,53 @@
 // pages/qyzc/qyzc.js
 var QQMapWX = require('../../mapjs/qqmap-wx-jssdk.js');
+// 加载工具类
 const string_util = require('../../utils/string_util');
 const $ = require('../../utils/request_util');
+const Loading = require('../../utils/loading_util');
+const CONSTANT = require('../../common/constant');
+// 加载接口服务
+const userRecruiterService = require('../../common/userRecruiterService');
+const recruitCompanyService = require('../../common/recruitCompanyService');
+const recruitJobService = require('../../common/recruitJobService');
+const communityInformationService = require('../../common/communityInformationService');
+const jobCategoryService = require('../../common/jobCategoryService');
+const companyForCategoryService = require('../../common/companyForCategoryService');
 
-
-// 实例化API核心类
-const app = getApp()
-
+// 常量定义
+const app = getApp();
+const PAGENAME = 'qyzc.js - ';
 Page({
-	
+
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
+		// 招聘人
+		recruiterOpenid: '',
 		// 企业名称
-		companyName:'',
+		companyName: '',
+		companyAddress: '',
+		longitude: 0.0,
+		latitude: 0.0,
 		// 分类选择
 		array: ['IT', '文化传媒', '电子制造'], // categoryName
 		categoryUuid_list: [],
-		categoryUuid:'',
+		categoryUuid: '',
 		index: 0,
 		// 社区选择
 		array1: ['社区1', '街道1', '街道2'], // communityName
-		communityUuid_list: [],
-		communityUuid:'',
+		communityUuidList: [],
+		communityUuid: '',
 		index1: 0,
 		positionData: '',
-		licenseId:'',
-		wantjob: [{ job: 'IT', id: 0 }, { job: '文化传媒', id: 1 }, { job: '电子制造', id: 2 }, { job: '电子制造', id: 3 }, { job: '电子制造', id: 4 }],
+		licenseId: '',
+		wantjob: [
+			// { job: 'IT', id: 0 }, { job: '文化传媒', id: 1 }, { job: '电子制造', id: 2 }, { job: '电子制造', id: 3 }, { job: '电子制造', id: 4 }
+		],
 		datdid: ''
 	},
-	// 更换企业名字
-	bindinputCompanyName(e){
+	// 企业名字
+	bindinputCompanyName(e) {
 		this.setData({
 			companyName: e.detail.value
 		})
@@ -50,7 +66,7 @@ Page({
 		console.log('picker发送选择改变，携带值为', e.detail.value)
 		this.setData({
 			index1: e.detail.value,
-			communityUuid: this.data.communityUuid_list[e.detail.value],
+			communityUuid: this.data.communityUuidList[e.detail.value],
 		})
 		console.log(this.data)
 	},
@@ -60,150 +76,150 @@ Page({
 		wx.chooseLocation({
 			type: 'gcj02',
 			success(res) {
-				console.log(res)
-				const latitude = res.latitude
-				const longitude = res.longitude
-				var positionData = res.address
+				console.log(PAGENAME + '公司地址选择:'); console.log(res);
 				that.setData({
-					positionData: positionData
+					positionData: res.address + ' ' + res.name,
+					companyAddress: res.address + ' ' + res.name,
+					longitude: res.longitude,
+					latitude: res.latitude,
 				})
 			}
 		})
 	},
 	// 统一社会信用代码
-	bindinputLicenseId(e){
+	bindinputLicenseId(e) {
 		this.setData({
-			licenseId:e.detail.value
+			licenseId: e.detail.value
 		})
 	},
 	// 招聘岗位意向去除
 	closethis(e) {
 		let id = e.currentTarget.dataset.id
 		console.log(id)
-		for (let i = 0; i < this.data.wantjob.length; i++) {
-			if (this.data.wantjob[i].id == id) {
-				if (this.data.wantjob[i].checked == true) {
-					this.data.wantjob[i].checked = false;
-				} else {
-					this.data.wantjob[i].checked = true;
-				}
+		let wantjobList = [];
+		this.data.wantjob.forEach((v) => {
+			if (v.id == id) {
+				if (v.checked == true) {
+					v.checked = false;
+				} else { v.checked = true }
 			}
-		}
+			wantjobList.push(v);
+		})
 		this.setData({
-			wantjob: this.data.wantjob,
+			wantjob: wantjobList,
 			msg: "id:" + id
 		})
+		console.log(PAGENAME + '意向表：'); console.log(this.data.wantjob);
 	},
 
 	//企业注册提交审核
-	wstijsq() {
+	async wstijsq() {
 		let that = this;
-		let openid = wx.getStorageSync('openid');
-		console.log(openid);
 		let companyName = this.data.companyName;
-		if(string_util.isEmpty(companyName)){
+		
+		// 企业名称检测
+		if (string_util.isEmpty(companyName)) {
 			wx.showModal({
 				title: '提示',
 				content: '必须填写企业名称',
 			})
 			return;
 		}
-		let communityUuid = this.data.communityUuid;
-		if(string_util.isEmpty(communityUuid)){
-			wx.showModal({
-				title: '提示',
-				content: '必须选择所属社区',
-			})
-			return;
-		}
-		let address = this.data.positionData;
-		let licenseId = this.data.licenseId;
-		let recruiterOpenid = openid; 
-		let recruitCompany =  {
-			companyName,
-			communityUuid,
-			address,
-			licenseId,
-			recruiterOpenid
+		// 提交开始
+		Loading.begin();
+		let recruitCompany = {
+			companyName: this.data.companyName,
+			communityUuid: this.data.communityUuid,
+			address: this.data.companyAddress,
+			lon: this.data.longitude,
+			lat: this.data.latitude,
+			licenseId: this.data.licenseId,
+			recruiterOpenid: this.data.recruiterOpenid,
 		}
 		console.log(recruitCompany);
+		
+		let insertCompanyPromise = recruitCompanyService.insertByEntity(this.data.recruiterOpenid, recruitCompany)
 		let companyUuid;
-		wx.request({
-			url: app.globalData.web_path + '/recruit-company/add?openid='+ openid,
-			method: $.RequestMethod.POST,
-			header:  $.jsonHeader,
-			data: recruitCompany,
-			success: function (res) {
-				console.log(res);
-				companyUuid = res.data.data;
-				console.log(companyUuid);
-				wx.navigateTo({
-					url: '/pages/fbjob/fbjob?companyUuid=' + companyUuid,
+		await insertCompanyPromise.then(r=>{
+			console.log(PAGENAME + '新增企业id: '); console.log(r);
+			companyUuid =  r.data;
+		});
+		
+		// 意向添加到 company_for_category
+		//构建list<entity>
+		let categoryList = [];
+		this.data.wantjob.forEach(v=>{
+			if(v.checked == false){
+				categoryList.push({
+					companyUuid: companyUuid,
+					categoryUuid: v.categoryUuid,
+					categoryName: v.job,
 				})
 			}
 		});
-		
-		
+		let insertListPromise = companyForCategoryService.insertByEntityList(categoryList);
+		await insertListPromise.then(r=>{
+			console.log(r);
+		}).catch(r=>{
+			console.error(r);
+		})
+		// 提交结束
+		Loading.end()
+		// 页面跳转
+		wx.navigateTo({
+			url: '/pages/fbjob/fbjob',
+	 	})
 	},
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function (options) {
-		var that = this
-		var openid = wx.getStorageSync('openid');
-		console.log(openid);
-
+	onLoad: async function (options) {
+		Loading.begin();
+		let that = this;
+		await app.getOpenidReady();
+		let openid = wx.getStorageSync('openid');
+		console.log(PAGENAME + '当前用户openid: ' + openid);
+		this.setData({ recruiterOpenid: openid});
 		// 获取社区列表
-		wx.request({
-			url: app.globalData.web_path + '/community-info/list',
-			data: {
-			},
-			header: app.globalData.header,
-			success: function (res) {
-				communityName_list = new Array();
-				communityUuid_list = new Array();
-				res.data.data.forEach(function (item, index) {
-					communityName_list.push(item.communityName);
-					communityUuid_list.push(item.id);
-				});
-				console.log(communityName_list);
-				that.setData({
-					array1: communityName_list,
-					communityUuid_list: communityUuid_list,
-					communityUuid: communityUuid_list[0],
-				})
-			}
-		});
-		// 获取行业分类列表
-		wx.request({
-			url: app.globalData.web_path + '/job-category/list',
-			data: {
-			},
-			header: app.globalData.header,
-			success: function (res) {
-				wantjob_list = [];
-				i = 0;
-				res.data.data.forEach(function (item, index) {
-					if(i>10) return;
-					let temp = {
-						job:item.categoryName,
-						id:i,
-						categoryUuid:item.categoryUuid
-					}
-					wantjob_list.push(temp);
-					i++;
-				});
-				that.setData({
-					wantjob:wantjob_list
-				})
+		let loadCommunityListPromise = communityInformationService.loadList();
+		await loadCommunityListPromise.then(r => {
+			let communityNameList = []; let communityUuidList = [];
+			r.data.forEach((item) => {
+				communityNameList.push(item.communityName);
+				communityUuidList.push(item.id);
+			});
+			that.setData({
+				array1: communityNameList,
+				communityUuidList: communityUuidList,
+				communityUuid: communityUuidList[0],
+			})
 
-			}
-		});
+		}).catch(r => {
+			console.error(PAGENAME + r);
+		})
+
+		let loadCategoryListPromise = jobCategoryService.loadList();
+		await loadCategoryListPromise.then(r => {
+			let wantjobList = [];
+			r.data.forEach(function (item, index) {
+				wantjobList.push({
+					job: item.categoryName,
+					id: index,
+					categoryUuid: item.id,
+					checked: false,
+				});
+			});
+			that.setData({
+				wantjob: wantjobList
+			})
+		}).catch(r => {
+			console.error(r);
+		})
 		var qqmapsdk = new QQMapWX({
 			key: 'Z3WBZ-TX76I-CKXGO-5GWTU-CSSK3-7LBFO' // 必填
 		});
 
-		// 获取位置信息
+		// 获取位置信息  默认位置
 		wx.getLocation({
 			type: 'gcj02',
 			success(res) {
@@ -214,10 +230,12 @@ Page({
 					url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + latitude + ',' + longitude + '&key=Z3WBZ-TX76I-CKXGO-5GWTU-CSSK3-7LBFO&get_poi=0',
 					method: 'GET',
 					success(res) {
-						console.log(res.data)
-						var positionData = res.data.result.address
+						let tempData = res.data.result;
 						that.setData({
-							positionData: positionData
+							positionData: tempData.address + ' ' + tempData.formatted_addresses.recommend,
+							companyAddress: tempData.address + ' ' + tempData.formatted_addresses.recommend,
+							longitude: tempData.location.lng,
+							latitude: tempData.location.lat,
 						})
 					}
 				})
@@ -236,6 +254,7 @@ Page({
 				// })
 			}
 		});
+		Loading.end();
 
 	},
 

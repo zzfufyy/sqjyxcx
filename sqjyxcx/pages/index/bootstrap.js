@@ -71,7 +71,6 @@ const createBootstrapMethod = () => ({
         } catch (e) {
             console.warn('没有本地存储的用户角色，提示用户选择角色');
         }
-
         return null;
     },
 
@@ -200,7 +199,7 @@ const createBootstrapMethod = () => ({
     },
 
     //获取微信用户信息
-    _getUserProfile(e) {
+    getUserProfile(e) {
         const scene = this.data.scene;
         var that = this;
 

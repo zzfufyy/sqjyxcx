@@ -1,34 +1,37 @@
 // pages/fbjob/fbjob.js
-const {  genderList } = require('../../common/user');
-const { Salary } = require('../../common/constant');
 const CONSTANT = require('../../common/constant');
 var string_util = require('../../utils/string_util');
 const $ = require('../../utils/request_util');
 
+const userRecruiterService = require('../../common/userRecruiterService');
+const recruitCompanyService = require('../../common/recruitCompanyService');
+const recruitJobService = require('../../common/recruitJobService');
+
+const Loading = require('../../utils/loading_util');
 const app = getApp();
 
-let salary_list = [];
-// 构建薪资范围list
-salary_list = CONSTANT.salaryList;
+const PAGENAME = 'fbjob.js - ';
 let dataJobNum = 0;
-console.log(salary_list[0].value);
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
+		recruiterOpenid: '',
+		// 是否已认证
+		flagIdentification: 0,
 		companyUuid: '',
 		companyName: '',
-		companyAddress:'',
+		companyAddress: '',
 		datall: [
 			{
-				array: salary_list.map((val) => { return val.value }),
+				array: CONSTANT.salaryList.map((val) => { return val.value }),
 				// salay范围index
 				index: 0,
 				jobName: '',
-				jobSalaryMin: salary_list[0].min,
-				jobSalaryMax: salary_list[0].max,
+				jobSalaryMin: CONSTANT.salaryList[0].min,
+				jobSalaryMax: CONSTANT.salaryList[0].max,
 				jobIntroduction: '',
 				recruitingNumber: '',
 				pindex: dataJobNum,
@@ -44,12 +47,12 @@ Page({
 		let odatall = that.data.datall
 		dataJobNum++;
 		let newitem = {
-			array: salary_list.map((val) => { return val.value }),
+			array: CONSTANT.salaryList.map((val) => { return val.value }),
 			// salay范围index
 			index: 0,
 			jobName: '',
-			jobSalaryMin: salary_list[0].min,
-			jobSalaryMax: salary_list[0].max,
+			jobSalaryMin: CONSTANT.salaryList[0].min,
+			jobSalaryMax: CONSTANT.salaryList[0].max,
 			jobIntroduction: '',
 			recruitingNumber: '',
 			pindex: dataJobNum,
@@ -76,8 +79,8 @@ Page({
 		let thisDatall = this.data.datall;
 		let pindex = e.target.dataset.index; //数组下标
 		let index = e.detail.value;
-		thisDatall[pindex].jobSalaryMin = salary_list[index].min;
-		thisDatall[pindex].jobSalaryMax = salary_list[index].max;
+		thisDatall[pindex].jobSalaryMin = CONSTANT.salaryList[index].min;
+		thisDatall[pindex].jobSalaryMax = CONSTANT.salaryList[index].max;
 		thisDatall[pindex].index = index;
 		console.log('picker发送选择改变，携带值为', e.detail.value)
 		// console.log(ppindex)
@@ -89,7 +92,6 @@ Page({
 	},
 	// 招聘人数
 	bindinputRecruitingNumber(e) {
-		console.log(e)
 		let pindex = e.target.dataset.index; //数组下标
 		let thisDatall = this.data.datall;
 
@@ -106,7 +108,6 @@ Page({
 		this.setData({
 			datall: thisDatall
 		})
-		console.log(this.data.datall[pindex].jobIntroduction);
 	},
 
 	/****删除*/
@@ -140,99 +141,125 @@ Page({
 		}
 	},
 	// 确认发布
-	qrfb() {
+	async qrfb() {
 		let that = this;
 		// 遍历检查名称
-		let isEmptyJobName,isEmptyRecruitingNumber,isEmptyJobIntroduction = false;
-		this.data.datall.forEach((val)=>{
-			string_util.isEmpty(val.jobName)?isEmptyJobName = true:false;
-			string_util.isEmpty(val.recruitingNumber)?isEmptyRecruitingNumber = true:false;
-			string_util.isEmpty(val.jobIntroduction)?isEmptyJobIntroduction = true:false;
+		let isEmptyJobName, isEmptyRecruitingNumber, isEmptyJobIntroduction = false;
+		this.data.datall.forEach((val) => {
+			string_util.isEmpty(val.jobName) ? isEmptyJobName = true : false;
+			string_util.isEmpty(val.recruitingNumber) ? isEmptyRecruitingNumber = true : false;
+			string_util.isEmpty(val.jobIntroduction) ? isEmptyJobIntroduction = true : false;
 		})
-		if(isEmptyJobName){
+		if (isEmptyJobName) {
 			wx.showModal({
 				title: '提示',
 				content: '请填写岗位名称',
 			})
 			return;
 		}
-		if(isEmptyRecruitingNumber){
+		if (isEmptyRecruitingNumber) {
 			wx.showModal({
 				title: '提示',
 				content: '请正确填写招聘人数',
 			})
 			return;
 		}
-		if(isEmptyJobIntroduction){
+		if (isEmptyJobIntroduction) {
 			wx.showModal({
 				title: '提示',
 				content: '请填写岗位需求',
 			})
 			return;
 		}
-		let recruiterOpenid = wx.getStorageSync('openid');
-		// 检验后提交
-		this.data.datall.forEach((val) =>{	
+		// 提交数据
+		Loading.begin();
+		this.data.datall.forEach(async (val) => {
 			let submitData = {
 				jobName: val.jobName,
 				categoryName: val.jobName,
-				jobIntroduction : val.jobIntroduction,
-				jobSalaryMin : val.jobSalaryMin,
-				jobSalaryMax : val.jobSalaryMax,
+				jobIntroduction: val.jobIntroduction,
+				jobSalaryMin: val.jobSalaryMin,
+				jobSalaryMax: val.jobSalaryMax,
 				jobAddress: this.data.companyAddress,
-				recruitingNumber : val.recruitingNumber,
-				companyUuid : this.data.companyUuid,
-				companyName : this.data.companyName,
-				recruiterOpenid: recruiterOpenid,
+				recruitingNumber: val.recruitingNumber,
+				companyUuid: this.data.companyUuid,
+				companyName: this.data.companyName,
+				recruiterOpenid: this.data.recruiterOpenid,
 			}
-			console.log(submitData);
-		
-			wx.request({
-				url: app.globalData.web_path + '/recruit-job/add',
-				method: $.RequestMethod.POST,
-				header:  $.jsonHeader,
-				data: submitData,
-				success: function (res) {
-					console.log(res);
-				}
+			console.log(PAGENAME + '提交数据:'); console.log(submitData);
+			let submitPromise = recruitJobService.insertByEntity(submitData)
+			await submitPromise.then(r => {
+				console.log(r);
+			}).catch(r => {
+				console.error(r);
 			});
 		});
+		Loading.end();
 
-		// 跳转   企业认证中
-		wx.navigateTo({
-			url: '/pages/waitye/waitye',
+		let flagIdentification = this.data.flagIdentification;
+		console.log(PAGENAME + '企业验证状态: ' + flagIdentification);
+		wx.showToast({
+			title: '发布成功',
+			icon: 'success',
+			duration: 2000,
+			success: function () {
+				// 跳转 企业认证中
+				console.log(PAGENAME + '发布成功 -> 页面跳转');
+				if (flagIdentification == 0) {
+					wx.navigateTo({
+						url: '/pages/waiteyz/waiteyz',
+					})
+				} else if (flagIdentification == 1) {
+					wx.switchTab({
+						url: '/pages/mine/mine',
+					})
+				}
+			}
 		})
 
-		
-		
+
+
+
+
 
 	},
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function (options) {
+	onLoad: async function (options) {
+		// 页面加载开始
+		Loading.begin();
 		let that = this;
-		// 获取 页面跳转传值  
+		await app.getOpenidReady();
+		let openid = wx.getStorageSync('openid');
 		this.setData({
-			// companyUuid: this.options.companyUuid,
-			// companyName: this.options.companyName,
-			// 测试
-			companyUuid: '0f8062ae-77ae-4729-99ae-775fc6b5a4a0',
-		});
-		// 根据id获取企业信息
-		wx.request({
-			url: app.globalData.web_path + '/recruit-company/info?id='+ this.data.companyUuid,
-			method: $.RequestMethod.GET,
-			header:  $.jsonHeader,
-			data: {},
-			success: function (res) {
-				console.log(res);
-				that.setData({
-					companyName: res.data.data.companyName,
-					companyAddress: res.data.data.address,
-				})
-			}
-		});
+			recruiterOpenid: openid,
+		})
+		// 招聘人openid
+		console.log(PAGENAME - '招聘人openid:' + openid);
+		let loadRecruitPromise = userRecruiterService.loadEntityById(openid);
+		await loadRecruitPromise.then(r => {
+			that.setData({
+				companyUuid: r.data.companyUuid,
+
+			})
+		}).catch(r => {
+			console.error(PAGENAME); console.error(r);
+		})
+		console.log(PAGENAME + "招聘人企业id:" + this.data.companyUuid);
+
+		let loadCompanyPromise = recruitCompanyService.loadEntityById(this.data.companyUuid);
+		await loadCompanyPromise.then(r => {
+			console.log(r);
+			that.setData({
+				companyName: r.data.companyName,
+				flagIdentification: r.data.flagIdentification,
+			})
+		}).catch(r => {
+			console.error(r);
+		})
+		// 加载完毕
+		Loading.end();
 
 	},
 

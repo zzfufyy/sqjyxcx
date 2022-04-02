@@ -17,6 +17,7 @@ const createRecruiteeMethods = () => ({
             // TODO: 在一个接口里获取所有信息
             let recruiteeInfo = await UserService.loadRcruiteeInfo();
             let userInfo = await UserService.loadUserInfo();
+            
             wx.request({
 				url: app.globalData.web_path+'/community-info/getjobandCom',
 				data: { zwid:recruiteeInfo.expectCategoryId,areaid:recruiteeInfo.expectCommunityId},

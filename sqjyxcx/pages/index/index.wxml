@@ -9,7 +9,7 @@
         <view class='nav-title'>
           <view class="INinputheader">
             <icon class="INsearchicon" type="search" size="22" color="#fff" />
-            <input class="weui-input" placeholder-class="opl" placeholder="搜索职位、公司" bindtap="searchjob"
+            <input class="weui-input" placeholder-class="opl" placeholder="搜索职位" bindtap="searchjob"
               confirm-type="search" />
           </view>
         </view>
@@ -78,7 +78,7 @@
             <view class="jobbox1 clearfloat">
               <view class="ft ltbox">
                 <view class="jobname">{{item.jobname}}</view>
-                <view class="jobmoney">{{item.jobmoney}}元/月</view>
+                <view class="jobmoney">{{item.jobmoney}}</view>
                 <view class="companyname1">
                   <image src="{{item.companytx}}" class="companytx"></image>
                   {{item.companyname}}
@@ -176,6 +176,9 @@
             </view>
           </view>
         </view>
+        <view wx:if="{{noMoreData == true}}">
+            没有更多数据
+          </view>
       </view>
     </view>
   </block>

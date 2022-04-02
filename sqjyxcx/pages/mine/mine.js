@@ -5,7 +5,7 @@ const { GlobalKey } = require("../../service/global_service");
 const { UserService } = require("../../service/user_service");
 const { Completer } = require("../../utils/function_util");
 
-const Constant = require('../../common/constant');
+const CONSTANT = require('../../common/constant');
 const recruitee = require('./recruitee');
 const recruiter = require('./recruiter');
 
@@ -48,6 +48,8 @@ Page({
 		// 默认身份为求职方
 		// TODO: 使用加载条
 		isRecruitee: true,
+		// 默认求职者
+		identity: CONSTANT.UserRole.Recruitee,
 	},
 
 
@@ -55,19 +57,19 @@ Page({
 	switchUserRole: async function () {
 		let isRecruitee = this.data.isRecruitee;
 		let currentRole = (isRecruitee ?
-			Constant.UserRole.Recruitee : Constant.UserRole.Recruiter
+			CONSTANT.UserRole.Recruitee : CONSTANT.UserRole.Recruiter
 		);
 		let targetRole = (isRecruitee ?
-			Constant.UserRole.Recruiter : Constant.UserRole.Recruitee
+			CONSTANT.UserRole.Recruiter : CONSTANT.UserRole.Recruitee
 		);
 
-		let current = Constant.userRoleName[currentRole];
-		let target = Constant.userRoleName[targetRole];
+		let currentUserRoleName = CONSTANT.userRoleName[currentRole];
+		let targetUserRoleName = CONSTANT.userRoleName[targetRole];
 
 		let completer = new Completer();
 		wx.showModal({
 			title: '提示',
-			content: '您当前是' + current + '身份，点击[确认]可切换至' + target + '身份',
+			content: '您当前是' + currentUserRoleName + '身份，点击[确认]可切换至' + targetUserRoleName + '身份',
 			success(res) {
 				if (res.confirm) {
 					completer.resolve(true);
@@ -117,7 +119,6 @@ Page({
 
 	_reloadData: async function () {
 		console.info('个人中心重载数据');
-
 		await app.getOpenidReady();
 		await this._loadUserRole();
 		await this._loadUserInfo();
@@ -131,15 +132,13 @@ Page({
 
 			switch (role) {
 				// 应聘人
-				case Constant.UserRole.Recruitee:
+				case CONSTANT.UserRole.Recruitee:
 					isRecruitee = true;
 					break;
-				case Constant.UserRole.Recruiter:
+				case CONSTANT.UserRole.Recruiter:
 					isRecruitee = false;
 					break;
-				// TODO: 实现社区工作人员
-
-				case Constant.UserRole.CommunityPersonel:
+				case CONSTANT.UserRole.CommunityPersonel:
 				default:
 					console.error("未实现社区人员")
 					break;
@@ -154,11 +153,11 @@ Page({
 		if (isRecruitee != null) {
 
 			let currentRole = isRecruitee ?
-				Constant.UserRole.Recruitee : Constant.UserRole.Recruiter;
+				CONSTANT.UserRole.Recruitee : CONSTANT.UserRole.Recruiter;
 
 			this.setData({
 				isRecruitee: isRecruitee,
-				nowsf: Constant.userRoleName[currentRole],
+				nowsf: CONSTANT.userRoleName[currentRole],
 			})
 		}
 	},

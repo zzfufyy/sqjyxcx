@@ -116,6 +116,7 @@ const createRecruiteeMethods = () => ({
     _handleRecruiteeSelected: async function () {
         try {
             Loading.begin();
+            // 获取bc_user_wx 表信息
             let res = await UserService.loadRcruiteeInfo();
             if (!res) {
                 console.debug(`服务端没有此求职者信息: ${app.getOpenid()}`);
@@ -156,6 +157,8 @@ const createRecruiteeMethods = () => ({
         console.debug('加载首页工作列表');
         let pageConfig = this._getPageConfig();
 
+        console.log(pageConfig);
+
         let location = this._getLocation();
         let pagingParam = pageConfig.buildNextParam({
             longitude: location.longitude,
@@ -171,6 +174,10 @@ const createRecruiteeMethods = () => ({
             Loading.begin();
             // 请求数据
             pageInfo = await RecruitJobService.pagedByDistacne(pagingParam);
+            console.log('请求求职用户数据：');
+            console.log(pageInfo)
+
+
         } catch (e) {
             console.error(e);
         } finally {

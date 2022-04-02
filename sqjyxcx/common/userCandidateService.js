@@ -1,7 +1,7 @@
 const $ = require('../utils/request_util')
 
 
-const loadEntityById = function (id) {
+const loadEntityById = function (openid) {
     return $.request({
         url: '/user-candidate/info?openid=' + openid,
         data: {},
