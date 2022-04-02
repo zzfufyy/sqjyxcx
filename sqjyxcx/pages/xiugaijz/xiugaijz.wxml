@@ -1,0 +1,82 @@
+<view class="container">
+	<view class="xinbox" style="margin-top: 25px;">
+		<view class="boxtt">居住人姓名</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" value="{{jzrxm}}" bindinput="jzrxm"/>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">身份证号码</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" value="{{sfzhm}}" bindinput="sfzhm"/>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">电话号码</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" value="{{dhhm}}" bindinput="dhhm"/>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">户籍地</view>
+		<view class="iptbox ">
+			<picker mode="region" bindchange="bindRegionChange" value="{{region}}" 
+				custom-item="{{customItem}}">
+				<view class="picker ipt cor" style="line-height: 48px;color: #333;">
+					{{region[0]}} {{region[1]}} {{region[2]}}
+					<image src="/img/jt.png" class="jt"></image>
+				</view>
+			</picker>
+		</view>
+		<view class="iptbox">
+			<input class="ipt" value="{{xxdz}}" placeholder="请输入详细地址" bindinput="xxdz"/>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">个人信息</view>
+		<view class="iptbox">
+			<!-- <view class="ipt" style="line-height: 48px;">
+				性别：{{sex}} 
+				<text style="margin-left: 20px;">年龄：{{age}}岁</text>
+			</view> -->
+			<view class="pi">
+				<picker class="ps" bindchange="bindPickerChangesex" value="{{index1}}" range="{{array1}}">
+					<view class="picker ipt cor pickers" style="line-height: 48px;color: #333;">
+						{{array1[index1]}}
+						<image src="/img/jt.png" class="jt"></image>
+					</view>
+				</picker>
+				<input type="text" class="xwd" value="{{age}}" bindinput="age"/>
+				<text style="margin-left: 0px;">岁</text>
+			</view>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">党员（单位）</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" value="{{dydw}}" bindinput="dydw"/>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">特殊人群</view>
+		<view class="iptbox ">
+			<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+				<view class="picker ipt cor" style="line-height: 48px;color: {{cor2}};">
+					{{array[index]}}
+					<image src="/img/jt.png" class="jt"></image>
+				</view>
+			</picker>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">备注</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" bindinput="bz"/>
+		</view>
+	</view>
+
+	<view class="tijsq" bindtap="save">保存</view>
+</view>
+
+
+

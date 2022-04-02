@@ -1,0 +1,41 @@
+<view class="clearfloat">
+	<view class="xinbox" style="margin-top: 25px;">
+		<view class="boxtt">企业名称</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" bindinput="jzrxm"/>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">工商登记号码</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" bindinput="jzrxm"/>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">行业经营许可证号</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" bindinput="jzrxm"/>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">法定代表人</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" bindinput="jzrxm"/>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">法定代表人电话号码</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" bindinput="jzrxm"/>
+		</view>
+	</view>
+	<view class="xinbox">
+		<view class="boxtt">其他事项</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" bindinput="jzrxm"/>
+		</view>
+	</view>
+	<view class="tijsq" bindtap="qrtj">确认提交</view>
+</view>
+
+

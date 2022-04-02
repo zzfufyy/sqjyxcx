@@ -1,0 +1,42 @@
+<view class="container" style="padding-bottom: 60px;">
+	<view class="xinbox" style="padding-top: 25px;">
+		<view class="boxtt">居住人数*</view>
+		<view class="iptbox">
+			<view class="pi">
+				<input type="text" bindinput="jzrs" class="xwd"/><text>人</text>
+			</view>
+		</view>
+	</view>
+	<view class="line1"></view>
+	<view class="xinbox clearfloat pdt" >
+		<view class="jzrs ft">居住人信息*</view>
+		<view class="tj fr" bindtap="tjjz">+ 添加</view>
+	</view>
+	<view class="manibox">
+		<view class="jzrxx" wx:for="{{jzlist}}" wx:key="key">
+			<view class="topbx clearfloat">
+				<view class="ft ltbox">
+						{{item.name}} {{item.sex}} {{item.age}}
+				</view>
+				<view class="fr rtbox">
+					<image src="/img/jt.png" class="jtimg"></image>
+				</view>
+			</view>
+			<view class="clearfloat">
+				<view class="ft ltsf">{{item.idcard}}</view>
+			</view>
+			<view class="clearfloat">
+				<view class="ft ltsf">{{item.cell}}</view>
+			</view>
+			<view class="clearfloat">
+				<view class="ft ltsf">{{item.local}}</view>
+				<view class="fr rtsf" bindtap="deleat" data-id="{{item.id}}">删除</view>
+			</view>
+		</view>
+	</view>
+
+	
+	<view class="qstj"><view class="tijsq" bindtap="tijsq">确认提交</view></view>
+</view>
+
+

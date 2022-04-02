@@ -1,0 +1,27 @@
+.xinbox {
+	margin: 0px 22px 50px 20px;
+}
+.boxtt {
+	font-size: 14px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333333;margin-bottom: 15px;
+}
+.ipt {
+	height: 48px;
+	margin-top: 5px;
+	padding-left: 15px;
+	background: #FFFFFF;
+	font-size: 16px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333;
+	border-radius: 4px 4px 4px 4px;
+	opacity: 1;
+	border: 1px solid #F3F3F3;
+}
+.tijsq {
+	margin-bottom: 17px;
+}
+
+
