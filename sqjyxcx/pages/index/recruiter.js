@@ -169,7 +169,7 @@ const createRecruiterMethods = () => ({
             jobname: r.expectCatagoryId, // 暂时用id代替
             usertag:[{tagbq:Constant.genderList[r.gender]},
                      {tagbq:date_utils.getAgeByBirthday(r.birthday)},
-                     {tagbq:new Constant.Salary(r.expectSalaryMin,r.expectSalaryMax).value + '/月'}],
+                     {tagbq:new Constant.Salary(r.expectSalaryMin,r.expectSalaryMax).value}],
             name: r.realName,
             tximg:r.candidatePortraitPath,
             hxtime: '', // 10分钟前 暂时忽略

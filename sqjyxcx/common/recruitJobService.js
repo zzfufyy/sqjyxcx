@@ -55,6 +55,15 @@ const pagedByDistanceAndSalary = function (jobSalaryMin, jobSalaryMax, pagingPar
         header: $.jsonHeader,
     });
 }
+const increaseViewCount = function (jobUuid) {
+    return $.request({
+        url: '/recruit-job/increaseCountView?id=' + jobUuid,
+        data: {},
+        method: $.RequestMethod.GET,
+        header: $.jsonHeader,
+    });
+}
+
 // 接口暴露
 module.exports = {
     loadEntityById: loadEntityById,
@@ -63,4 +72,5 @@ module.exports = {
     insertByEntity: insertByEntity,
     pagedByDistance: pagedByDistance,
     pagedByDistanceAndSalary: pagedByDistanceAndSalary,
+    increaseViewCount:increaseViewCount,
 }

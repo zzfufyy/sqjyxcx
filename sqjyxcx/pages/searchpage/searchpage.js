@@ -1,10 +1,11 @@
 // pages/searchpage/searchpage.js
 const $ = require('../../utils/request_util');
 const Loading = require('../../utils/loading_util');
-
-
 const CONSTANT = require('../../common/constant');
 const { Salary } = require('../../common/constant');
+// 加载服务
+const recruitJobService = require('../../common/recruitJobService');
+const viewRecordService = require('../../common/viewRecordService');
 
 // 附加模块
 const searchpageEx = require('./searchpageEx');
@@ -121,14 +122,30 @@ Page({
 		})
 	},
 	// 点击跳转到对应岗位
-	bindtapChooseJob(e){
-		let recruitJobUuid = this.data.joblist[e.currentTarget.dataset.index].jobUuid;
+	async bindtapChooseJob(e){
+		let jobData = this.data.joblist[e.currentTarget.dataset.index]
+		let recruitJobUuid = jobData.jobUuid;
 		// TODO 生成浏览记录  +  浏览量+1
+		try{
+			Loading.begin();
+			await recruitJobService.increaseViewCount(recruitJobUuid);
+			console.log('increasecountview完成');
+			// 构建ViewRecord
+			let viewRecord = {
+				candidateOpenid: this.data.userOpenid,
+				recruiterOpenid: jobData.recruiterOpenid,
+				companyUuid: jobData.companyUuid,
+			}
+			await viewRecordService.insertByEntity(viewRecord)
+		}catch(e){
+			console.log(e);
+		}finally{
+			Loading.end();
+			wx.navigateTo({
+				url: "/pages/zwxq/zwxq?recruitJobUuid=" + jobData.jobUuid,
+			})
+		}
 		
-
-		wx.navigateTo({
-			url: "/pages/zwxq/zwxq?recruitJobUuid=" + recruitJobUuid,
-		})
 	},
 	/**
 	 * 生命周期函数--监听页面加载

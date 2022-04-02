@@ -73,7 +73,7 @@ const createPageMethods = () => ({
 
         // 初始化分页配置
         let pageConfig = this.state.pageConfig;
-;
+        ;
         // 加載位置 location
         await this._loadLocation(openid);
         let location = this.state.location;
@@ -117,6 +117,8 @@ const createPageMethods = () => ({
             companytx: url_util.isImageUrlInServer(jobInfo.portraitPath) ? app.globalData.web_path + jobInfo.portraitPath : jobInfo.portraitPath,
             jl: (jobInfo.distance / 1000).toFixed(1),
             phonenum: jobInfo.telephone,
+            recruiterOpenid: jobInfo.recruiterOpenid,
+            companyUuid: jobInfo.companyId,
         }));
 
         // 拼接数据
