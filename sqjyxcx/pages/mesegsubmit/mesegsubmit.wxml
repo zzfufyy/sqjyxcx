@@ -1,0 +1,10 @@
+<view class="container">
+	<view class="midbox">
+		<image class="ggimg" src="/img/ggimg.png"></image>
+		<view class="xxtt">信息提交成功</view>
+	</view>
+	<view class="btnbox">
+		<view class="btn fh">返回主页</view>
+		<view class="btn dj">继续登记</view>
+	</view>
+</view>

@@ -1,0 +1,58 @@
+.xinbox {
+	margin: 0px 22px 10px 20px;
+}
+.boxtt {
+	font-size: 18px;
+	font-family: Source Han Sans CN-Medium, Source Han Sans CN;
+	font-weight: 500;
+	color: #333333;
+}
+.ipt {
+	height: 48px;
+	margin-top: 5px;
+	padding-left: 15px;
+	background: #FFFFFF;
+	font-size: 16px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333;
+	border-radius: 4px 4px 4px 4px;
+	opacity: 1;
+	border: 1px solid #F3F3F3;
+}
+.picker {
+	position: relative;
+}
+.jt {
+	width: 16px;
+	height: 15px;
+	position: absolute;
+	right: 10px;
+	top: 16px;
+	transform: rotate(90deg);
+}
+.pickers{
+	width: 53px;
+}
+.ps{
+	display: inline-block;margin-right: 20px;margin-left: 8px;
+}
+.pi{
+	display: flex;
+	/* justify-content: center; */
+	align-items: center;
+}
+.xwd{
+	width: 50px;
+	border-radius: 4px 4px 4px 4px;
+	border: 1px solid #F3F3F3;
+	height: 48px;font-size: 16px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333333;padding-left: 20px;margin-right: 8px;
+
+}
+
+
+
+

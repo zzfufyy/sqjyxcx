@@ -141,7 +141,7 @@ color: #999999;
 	width: 36px;height: 36px;margin-top:14px;margin-left: 14px;
 }
 .tijsq {
-	width: 62%; margin-top: 9px;margin-right: 9px;
+	width: 75%; margin-top: 9px;margin-right: 9px;
 }
 .imgbg{
 	margin-left: 0;width: 36px;height: 36px;

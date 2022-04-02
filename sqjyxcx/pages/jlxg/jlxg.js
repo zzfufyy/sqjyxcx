@@ -41,6 +41,7 @@ Page({
 		})
 	},
 	setPhone(openid,phone){
+		var that = this;
     wx.request({
       url: app.globalData.web_path + '/gywm/setWxuserPhone',
       data: {
@@ -49,7 +50,8 @@ Page({
       },
       header: app.globalData.header,
       success: function (res) {
-        console.log(res)
+				console.log(res)
+				that._init();
         // that.openAlert(scene);
       },
       fail: function (res) {

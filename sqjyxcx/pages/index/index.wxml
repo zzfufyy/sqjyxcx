@@ -260,7 +260,7 @@
       <view class="textts">获取头像昵称,需要您的授权，为了提供更好的服务，请在稍后的提示框中点击“允许”</view>
       <view class="clearfloat" style="margin-top: 20px;display: flex;">
         <button class="ft  pomis" bindtap="hulue">忽略</button>
-        <button class="tijsq pomis fr" bindtap="getUserProfile" style="margin-top: 0px;">允许</button>
+        <button class="tijsq pomis fr" bindtap="_getUserProfile" style="margin-top: 0px;">允许</button>
       </view>
     </view>
   </view>

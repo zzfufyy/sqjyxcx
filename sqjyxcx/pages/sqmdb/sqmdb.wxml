@@ -1,0 +1,77 @@
+<view class="container">
+
+	<view class="xinbox" style="margin-top: 25px;">
+		<view class="boxtt">房屋地址*</view>
+		<view class="iptbox ">
+			<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+				<view class="picker ipt cor" style="line-height: 48px;">
+					{{array[index]}}
+					<image src="/img/jt.png" class="jt"></image>
+				</view>
+			</picker>
+		</view>
+		<view class="iptbox ">
+			<picker bindchange="bindPickerChange1" value="{{index1}}" range="{{array1}}">
+				<view class="picker ipt cor" style="line-height: 48px;">
+					{{array1[index1]}}
+					<image src="/img/jt.png" class="jt"></image>
+				</view>
+			</picker>
+		</view>
+		<view class="iptbox ">
+			<picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array2}}">
+				<view class="picker ipt cor" style="line-height: 48px;">
+					{{array2[index2]}}
+					<image src="/img/jt.png" class="jt"></image>
+				</view>
+			</picker>
+		</view>
+		<view class="iptbox ">
+			<picker bindchange="bindPickerChange3" value="{{index3}}" range="{{array3}}">
+				<view class="picker ipt cor" style="line-height: 48px;">
+					{{array3[index3]}}
+					<image src="/img/jt.png" class="jt"></image>
+				</view>
+			</picker>
+		</view>
+	</view>
+
+	<view class="xinbox">
+		<view class="boxtt">房屋情况*</view>
+		<view class="iptbox">
+			<view class="pi">
+				<input type="text" class="xwd"/><text>平米</text>
+				<picker class="ps" bindchange="bindPickerChange4" value="{{index4}}" range="{{array4}}">
+					<view class="picker ipt cor pickers" style="line-height: 48px;">
+						{{array4[index4]}}
+						<image src="/img/jt.png" class="jt"></image>
+					</view>
+				</picker>
+				<text style="margin-left: -10px;">室</text>
+				<picker class="ps" bindchange="bindPickerChange5" value="{{index5}}" range="{{array5}}">
+					<view class="picker ipt cor pickers" style="line-height: 48px;">
+						{{array5[index5]}}
+						<image src="/img/jt.png" class="jt"></image>
+					</view>
+				</picker>
+				<text style="margin-left: -10px;">厅</text>
+			</view>
+		</view>
+	</view>
+
+	<view class="xinbox" >
+		<view class="boxtt">房主姓名*</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" bindinput="jzrxm"/>
+		</view>
+	</view>
+	<view class="xinbox" >
+		<view class="boxtt">房主电话号码*</view>
+		<view class="iptbox">
+			<input class="ipt" placeholder="请输入" bindinput="dhhm"/>
+		</view>
+	</view>
+</view>
+
+
+

@@ -1,15 +1,11 @@
-// page/wglr/wglr.js
+// pages/mesegsubmit/mesegsubmit.js
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		sqname:'东湖社区 ',
-		sqlist:[
-			{xqname:'东湖新寓',ld:'8',lc:'31',hs:'8',ydj:'1234',ydj:'1200'},
-			{xqname:'东湖新寓',ld:'8',lc:'31',hs:'8',ydj:'1234',ydj:'1200'},
-		]
+
 	},
 
 	/**

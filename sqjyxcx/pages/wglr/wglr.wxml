@@ -1,2 +1,9 @@
-<!--page/wglr/wglr.wxml-->
-<text>page/wglr/wglr.wxml</text>
+<view class="container">
+	<view class="sqname">{{sqname}} ></view>
+	<view class="mainbox">
+		<navigator hover-class="none" url="/pages/wglrxq/wglrxq" class="xqbox" wx:for="{{sqlist}}" wx:key="key">
+			<view class="xqname">{{item.xqname}}</view>
+			<view class="sqlocal">共{{item.ld}}栋{{item.lc}}层{{item.hs}}户 {{item.ydj}}户已登记 {{item.ydj}}户未登记</view>
+		</navigator>
+	</view>
+</view>

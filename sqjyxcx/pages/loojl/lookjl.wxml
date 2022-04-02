@@ -65,8 +65,8 @@
 	<button class="imgbt ft buttonbox" style="margin-left: 9px;" open-type = "share">
 		<image src="/img/share.png" class="imgbg ft"></image>
 	</button>
-	<image class="imgbt ddh ft" data-cellphne="{{cellphne}}" bindtap="callnum" src="/img/dhred.png"></image>
-	<view class="fr tijsq" bindtap="talk">聊一聊</view>
+	<!-- <image class="imgbt ddh ft" src="/img/dhred.png"></image> -->
+	<view class="fr tijsq" data-cellphne="{{cellphne}}" bindtap="callnum" >打电话</view>
 </view>
 
 
