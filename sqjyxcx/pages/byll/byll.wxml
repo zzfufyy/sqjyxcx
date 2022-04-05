@@ -5,7 +5,7 @@
 	<view class="line1"></view>
 
 	<block wx:for="{{joblist}}" wx:key="key">
-		<view class="jobbox clearfloat" >
+		<view class="jobbox clearfloat">
 			<view class="ft ltbox">
 				<view class="jobname">{{item.jobname}}</view>
 				<!-- <view class="jobmoney">{{item.jobmoney}}</view> -->
@@ -21,4 +21,7 @@
 		</view>
 		<view class="line1"></view>
 	</block>
+	<view wx:if="{{noMoreData == true}}">
+			没有更多数据
+		</view>
 </view>

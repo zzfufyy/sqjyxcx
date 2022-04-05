@@ -52,7 +52,7 @@ Page({
 			header: app.globalData.header,
 			success: function (res) {
 				console.log(res)
-				that._init();
+				// that._init();
 				// that.openAlert(scene);
 			},
 			fail: function (res) {
