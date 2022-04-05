@@ -3,20 +3,26 @@
 const { Completer } = require("../../utils/function_util.js");
 const { UserService } = require('../../service/user_service');
 
+// 常量
 const Constant = require('../../common/constant');
+const Loading = require('../../utils/loading_util');
+const string_util = require('../../utils/string_util');
+
+const userCandidateService = require('../../common/userCandidateService');
+const userRecruiterService = require('../../common/userRecruiterService');
+
 
 const app = getApp();
-
+// bootstrap 对象加载
 const createBootstrapMethod = () => ({
 
     state: {
         // 授权流程完成器，检测授权流程是否完成
         authCompl: null,
-        // 角色选择、创建完成器，检测角色选择流程是否完成
-        userRoleCompl: null,
+
     },
 
-    /* 引导用户授权 */
+    /* 引导用户授权 hidden位：hideUserInfoAuth */
     _doAuthorize: function (scene) {
         let authCompl = new Completer();
         this.state.authCompl = authCompl;
@@ -25,9 +31,6 @@ const createBootstrapMethod = () => ({
 
         wx.login({
             success: function (res) {
-                // that.setData({
-                //     res: res
-                // })
                 wx.request({
                     url: app.globalData.web_path + '/wx/user/' + app.globalData.appId + '/login',
                     data: {
@@ -64,57 +67,8 @@ const createBootstrapMethod = () => ({
         return authCompl.promise;
     },
 
-    // 本地加载用户角色，如果没有返回 null
-    _loadUserRole: async function () {
-        try {
-            return await UserService.loadUserRole();
-        } catch (e) {
-            console.warn('没有本地存储的用户角色，提示用户选择角色');
-        }
-        return null;
-    },
-
-    _getUserRole(userRole) {
-        return UserService.loadUserRoleInfo(userRole);
-    },
-
-    // 用户选择、创建角色
-    _doSelectUserRole: async function () {
-        let userRoleCompl = new Completer();
-        this.state.userRoleCompl = userRoleCompl;
-
-        // 从本地（当前实现）或者从服务端（还没有实现）
-        let userRole = await this._loadUserRole();
-
-        // 如果没有本地的角色信息，显示对话框
-        if (userRole === null || userRole === undefined) {
-            this.setData({
-                juesehide: false,
-            });
-        }
-        // 类似于一个自动点击对话框的操作
-        else {
-            switch (userRole) {
-                case Constant.UserRole.Recruiter:
-                    await this._handleRecruiterSelected();
-                    break;
-                case Constant.UserRole.Recruitee:
-                    await this._handleRecruiteeSelected();
-                    break;
-
-                // TODO： 实现社区身份登录
-                default:
-                    console.error(`未知的登录身份 [${userRole}]`);
-                    userRoleCompl.resolve();
-                    break;
-            }
-        }
-
-        return userRoleCompl.promise;
-    },
-
     /* 保存用户信息到后台 */
-    _saveUserInfo: function (userInfo, iv, signature, encryptedData, rawData, scene) {
+    _saveUserInfo: async function (userInfo, iv, signature, encryptedData, rawData, scene) {
         const that = this;
         console.log(userInfo)
         console.log(iv)
@@ -140,7 +94,8 @@ const createBootstrapMethod = () => ({
                             loginType: 'openid'
                         },
                         header: app.globalData.header,
-                        success: function (res) {
+                        success: async function (res) {
+                            console.log(res);
                             // wx.setStorageSync('openid', res.data.data.openid);
                             wx.setStorageSync('sessionKey', res.data.data.sessionKey);
                             // wx.setStorageSync('Token', res.data.data.Token);
@@ -153,9 +108,9 @@ const createBootstrapMethod = () => ({
 
                             //判断是否存在token,不存在则说明该用户没有注册,需要弹出用户登录页面,有则不需要进行页面跳转
                             if (!res.data.data.Token && userInfo) {
-                                //保存用户信息
-                                var openid = wx.getStorageSync('openid')
-
+                                //保存用户信息 到bc_user
+                                var openid = wx.getStorageSync('openid');
+                                console.log(openid);
                                 wx.request({
                                     url: app.globalData.web_path + '/wx/user/' + app.globalData.appId + '/info',
                                     data: {
@@ -178,6 +133,21 @@ const createBootstrapMethod = () => ({
                                         console.log(111)
                                     }
                                 })
+                                // 求职者用户初始化
+                                let insertCandidateData = {
+                                    id: openid,
+                                    realName: userInfo.nickName,
+                                    gender: userInfo.gender,
+                                    portraitPath: userInfo.avatarUrl,
+                                }
+                                await userCandidateService.insertByEntity(insertCandidateData);
+                                // 招聘人用户初始化
+                                let insertRecruiterData = {
+                                    id: openid,
+                                    realName: userInfo.nickName,
+                                    portraitPath: userInfo.avatarUrl,
+                                }
+                                await userRecruiterService.insertByEntity(insertRecruiterData);
                             } else {
                                 //放在请求头里
                                 app.globalData.header.Token = res.data.data.Token
@@ -199,7 +169,7 @@ const createBootstrapMethod = () => ({
     },
 
     //获取微信用户信息
-    getUserProfile(e) {
+    bindtapGetUserProfile(e) {
         const scene = this.data.scene;
         var that = this;
 
@@ -209,21 +179,24 @@ const createBootstrapMethod = () => ({
         wx.getUserProfile({
             desc: "获取你的昵称、头像、地区及性别", // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
             success: (res) => {
-
+                console.log(res);
                 this.setData({
                     userInfo: res.userInfo,
                 })
                 that._saveUserInfo(res.userInfo, res.iv, res.signature, res.encryptedData, res.rawData, scene);
-
                 // 如果用户同意
                 this.setData({
+                    isUserAuthorized: true,
                     hideUserInfoAuth: true,
                 });
 
             }, fail: (res) => {
+                this.setData({
+                    isUserAuthorized: false,
+                    hideUserInfoAuth: true,
+                });
                 console.log(res);
-                // TODO: 未授权退出
-                console.error("用户没有给予授权，需要对应的处理程序");
+                console.error("用户没有给予授权，需要授权后赋以操作功能");
 
             }, complete: () => {
                 this.state.authCompl.resolve();
@@ -234,7 +207,11 @@ const createBootstrapMethod = () => ({
 
     bootstrap: async function () {
         await this._doAuthorize();
-        await this._doSelectUserRole();
+        // await this._doSelectUserRole();
+        // 弹出角色选择
+        this.setData({
+            juesehide: false,
+        });
     },
 });
 

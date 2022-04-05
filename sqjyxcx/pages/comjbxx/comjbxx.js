@@ -50,7 +50,7 @@ Page({
 				name: 'file',
 				header: app.globalData.header,
 			});
-			uploadPromise
+			await uploadPromise
 				.then((r) => { console.log(r) })
 				.catch((r) => console.error(r));
 		}
@@ -61,10 +61,9 @@ Page({
 		}
 		console.log(submitData);
 		let submitPromise = recruitCompanyService.submitRecruitCompany(submitData);
-		submitPromise.then((r) => {
+		await submitPromise.then((r) => {
 			console.log(r);
 		}).catch(r => console.error(r));
-		await submitPromise;
 		wx.navigateTo({
 			// url: '/pages/rzcenter/rzcenter?imgsrc=' + imgsrc + '&name=' + name + '&cellphone=' + cellphone,
 			url: '/pages/rzcenter/rzcenter',

@@ -1,6 +1,16 @@
 const $ = require('../utils/request_util')
 
 
+const insertByEntity = function (insertData) {
+    return $.request({
+        url: '/user-candidate/add',
+        data: insertData,
+        method: $.RequestMethod.POST,
+        header: $.jsonHeader,
+    });
+}
+
+
 const loadEntityById = function (openid) {
     return $.request({
         url: '/user-candidate/info?openid=' + openid,
@@ -26,12 +36,42 @@ const pagedByDistacne = function (pagingParam) {
         method: $.RequestMethod.POST,
         header: $.jsonHeader,
     });
+}
 
+const increaseCountView = function (id) {
+    return $.request({
+        url: '/user-candidate/increaseCountView?id=' + id,
+        data: {},
+        method: $.RequestMethod.GET,
+        header: $.jsonHeader,
+    });
+}
+
+const pagedByDistance = function (pagingParam) {
+    return $.requestOnlyData({
+        url: '/user-candidate/paged-by-distance',
+        data: pagingParam,
+        method: $.RequestMethod.POST,
+        header: $.jsonHeader,
+    });
+}
+
+const pagedByDistanceAndSalary = function (jobSalaryMin, jobSalaryMax, pagingParam) {
+    return $.requestOnlyData({
+        url: '/user-candidate/paged-by-distance?jobSalaryMin=' + jobSalaryMin + '&jobSalaryMax=' + jobSalaryMax,
+        data: pagingParam,
+        method: $.RequestMethod.POST,
+        header: $.jsonHeader,
+    });
 }
 
 
 module.exports = {
+    insertByEntity: insertByEntity,
     loadEntityById: loadEntityById,
     updateByEntity: updateByEntity,
-    pagedByDistacne:pagedByDistacne,
+    pagedByDistacne: pagedByDistacne,
+    increaseCountView: increaseCountView,
+    pagedByDistance:pagedByDistance,
+    pagedByDistanceAndSalary:pagedByDistanceAndSalary,
 }

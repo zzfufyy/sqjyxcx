@@ -1,9 +1,9 @@
 <view class="container">
 	<view class="box">
 		<view class="top">期望职位</view>
-		<view class="bottom" bindtap="qwzw">
+		<view class="bottom" bindtap="bindtapPopupExpectCategory">
 			<text hidden="{{txthide}}" >请选择期望职位</text>
-			<text hidden="{{arrhide}}" wx:for="{{arrtag}}" wx:key="key">{{item.job}} </text>
+			<text hidden="{{arrhide}}" wx:for="{{wantjob}}" wx:key="key">{{item.checked?item.job:''}} </text>
 		</view>
 	</view>
 	<view class="box">
@@ -18,39 +18,39 @@
 	</view>
 	<view class="box">
 		<view class="top">求职区域</view>
-		<view class="bottom" bindtap="qzqubtn">
+		<view class="bottom" bindtap="bindtapPopupExpectCommunity">
 			<text hidden="{{qzqutxt}}" >请选择期望求职区域</text>
 			<text hidden="{{qzqumess}}" wx:for="{{nulllocal}}" wx:key="key">{{item.local}} </text>
 		</view>
 	</view>
 </view>
 
-
-<view class="zzc " hidden="{{qzyx}}"></view>
-<view class="qwzwbox" hidden="{{qzyx}}">
+<!-- qzyx 判断是否隐藏 -->
+<view class="zzc " hidden="{{hiddenPopupExpectCategory}}"></view>
+<view class="qwzwbox" hidden="{{hiddenPopupExpectCategory}}">
 	<view style="height: 10px;background: #fff;"></view>
 	<view style="background: #fff;">	
 		<view class="topbox INinputheader">
 			<icon class="INsearchicon" type="search" size="22" />
-			<input type="text" class="weui-input" bindinput="inputjob" 	confirm-type="done" bindconfirm="confrim" placeholder="请输入期望职位" />
-			<view bindtap="quxiaozzc" class="quxiao">取消</view>
+			<input type="text" class="weui-input" bindinput="inputjob" 	confirm-type="done" bindconfirm="bindconfirmSeachCategory" placeholder="请输入期望职位" />
+			<view bindtap="bindtapCategoryCancel" class="quxiao">取消</view>
 		</view>
 		<view class="middlebox">
-			<view wx:for="{{wantjob}}" style="display: {{item.display}};" data-job="{{item.job}}" data-id="{{item.id}}" wx:key="key" class="wantjob   {{item.checked?'active':''}}" bindtap="wantjob">
+			<view wx:for="{{wantjob}}" style="display: {{item.display}};" data-job="{{item.job}}" data-id="{{item.id}}" wx:key="key" class="wantjob   {{item.checked?'active':''}}" bindtap="bindtapChooseCategory">
 				{{item.job}}
 			</view>
 		</view>
 		<view class="middlebox" >
 			<text class="hascs" >已选择：</text>
-			<text wx:for="{{csjob}}" bindtap="haschoosejob" class="hascs {{item.checked?'':'active'}}" data-id="{{item.id}}" wx:key="key"> {{item.job}} </text> 
+			<text wx:for="{{csjob}}" bindtap="bindtapRemoveCategory" class="hascs active}}" data-id="{{item.id}}" wx:key="key"> {{item.job}} </text> 
 		</view>
 	</view>
 	<view>
-		<view class="tijsq" bindtap="baocun">保存</view>
+		<view class="tijsq" bindtap="bindtapCategorySave">保存</view>
 	</view>
 </view>
 
-<view class="zzc1" hidden="{{qzlocal}}" bindtap="gb"></view>
+<view class="zzc1" hidden="{{qzlocal}}" bindtap="bindtapCommunityMask"></view>
 <view class="qwzwbox1" hidden="{{qzqxlocal}}">
 	<view style="height: 10px;background: #fff;"></view>
 	<view style="background: #fff;">	
@@ -84,7 +84,7 @@
 									<view class="zmz-grid-content">
 											<view class="zmz-grid-row zmz-grid-row-clear">
 												<view wx:for="{{item.typelist}}" wx:key="index"  
-												class="zmz-grid-row-item {{item.checked?'active':''}}" data-id="{{item.id}}"  bindtap="choselocal" >
+												class="zmz-grid-row-item {{item.checked?'active':''}}" data-id="{{item.id}}"  bindtap="bindtapChooseCommunity" >
 														<text class="zmz-grid-row-label">{{item.childname}}</text>
 														<!-- <view class="line1"></view> -->
 												</view>
@@ -98,7 +98,7 @@
 		</view>
 	</view>
 	<view>
-		<view class="tijsq" bindtap="zwbc">保存</view>
+		<view class="tijsq" bindtap="bindtapCommunitySave">保存</view>
 	</view>
 </view>
 

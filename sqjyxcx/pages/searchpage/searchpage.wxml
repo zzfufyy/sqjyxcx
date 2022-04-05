@@ -8,7 +8,7 @@
 		<view class="nav-name sx fr" bindtap="sx">筛选<view class="jtbox "></view></view>
 	</view>
 	<view class="line1"></view>
-	<navigator hover-class="none"  wx:for="{{joblist}}" wx:key="key" 
+	<navigator hover-class="none"  wx:for="{{joblist}}"
 	wx:key="index"  bindtap="bindtapChooseJob" data-index="{{index}}">
 		<view class="jobbox1 clearfloat" >
 			<view class="ft ltbox">

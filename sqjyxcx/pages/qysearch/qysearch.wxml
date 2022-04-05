@@ -2,13 +2,14 @@
 	<view class="INinputheader clearfloat">
 		<view class="ft lt">
 			<icon class="INsearchicon" type="search" size="22" color="#fff" />
-			<input class="weui-input" placeholder-class="opl" placeholder="搜索职位、公司" bindtap="searchjob"
+			<input class="weui-input" placeholder-class="opl" placeholder="搜索人才" bindtap="searchjob"
 				confirm-type="search" />
 		</view>
 		<view class="nav-name sx fr" bindtap="sx">筛选<view class="jtbox "></view></view>
 	</view>
 	<view class="joblist">
-		<navigator hover-class="none" url="/pages/loojl/lookjl" class="company" wx:for="{{compangjob}}" wx:key="key">
+		<navigator hover-class="none" class="company" wx:for="{{compangjob}}"
+			wx:key="index"  bindtap="bindtapChooseCandidate" data-index="{{index}}">
 			<view class="companyname">找 {{item.jobname}} 工作</view>
 			<view class="wid95 tagbox" >
 				<view class="companytag" wx:key="key" wx:for="{{item.usertag}}">{{item.tagbq}}</view>
@@ -18,6 +19,9 @@
 				<text class="nemas">{{item.name}} {{item.hxtime}} {{item.sqname}} {{item.companyjuli}}km</text>
 			</view>
 		</navigator>
+		<view wx:if="{{noMoreData == true}}">
+			没有更多数据
+    	</view>
 	</view>
 </view>
 
@@ -33,10 +37,9 @@
 			wx:for="{{yxyq}}" wx:key="key">{{item.yxmoney}}</view>
 		</view>
 	</view>
-	<view class="topjlsg">
+	<!-- <view class="topjlsg">
 		<view class="yxyq clearfloat">
 			<view class="yx ft">年龄范围</view>
-			<!-- <view class=" fr sxac">收起 <view class="jtbox xz"></view></view> -->
 		</view>
 		<view class="yxbox">
 			<view class="yxforbox {{item.checked?'active':'xb'}}"  bindtap="nlfw" data-id="{{item.id}}" 
@@ -46,13 +49,12 @@
 	<view class="topjlsg">
 		<view class="yxyq clearfloat">
 			<view class="yx ft">工作经验</view>
-			<!-- <view class=" fr sxac">收起 <view class="jtbox xz"></view></view> -->
 		</view>
 		<view class="yxbox">
 			<view class="yxforbox {{item.checked?'active':'xb'}}"  bindtap="gzjy" data-id="{{item.id}}" 
 			wx:for="{{gzjy}}" wx:key="key">{{item.jy}}</view>
 		</view>
-	</view>
+	</view> -->
 	<view class="btmbtnbox">
 		<view class="clear" bindtap="clear">清空</view>
 		<view class="qd" bindtap="qd">确定</view>

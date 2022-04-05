@@ -39,7 +39,7 @@
 			</view>
 		</view>
 	</view>
-	<view class="topbox">
+	<!-- <view class="topbox">
 		<view class="topjob">
 			<image class="local" src="/img/Icon ／ Location On ／ Rounded@2x.png"></image>推荐人才
 		</view>
@@ -51,7 +51,6 @@
 					<view class="companytag" >{{item.tagnl}}岁</view>
 					<view class="companytag" >{{item.taggz}}/月</view>
 				</view>
-				<!-- <view class="companyjuli">{{item.companyjuli}}km {{item.companylocal}}</view> -->
 				<view class="companyname lcm">
 					<image src="{{item.persontx}}" class="companytx"></image>
 					{{item.personname}} {{item.time}}分钟前 {{item.sq}}·{{item.juli}}km
@@ -59,7 +58,7 @@
 			</view>
 			
 		</view>
-	</view>
+	</view>-->
 </view>
 <view class="botombox clearfloat">
 	<button class="imgbt ft buttonbox" style="margin-left: 9px;" open-type = "share">

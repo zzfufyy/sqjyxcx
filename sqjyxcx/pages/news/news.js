@@ -4,7 +4,7 @@ const string_util = require('../../utils/string_util');
 const userRecruiterService = require('../../common/userRecruiterService');
 const recruitCompanyService = require('../../common/recruitCompanyService');
 const informationNewsService = require('../../common/informationNewsService');
-const date_utils = require('../../utils/date_utils');
+const date_util = require('../../utils/date_util');
 
 const app = getApp();
 
@@ -45,7 +45,7 @@ Page({
 					ptit: v.articleTitle,
 					pcont: v.articleIntroduction,
 					pjg: v.articleAuthor,
-					ptime: date_utils.dateToCN(v.articleReleaseTime),
+					ptime: date_util.dateToCN(v.articleReleaseTime),
 					ltimg: v.articlePortraitPath,
 				})
 			})

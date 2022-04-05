@@ -1,12 +1,15 @@
 // pages/manegejob/manegejob.js
 const $ = require('../../utils/request_util');
 const string_util = require('../../utils/string_util');
+const date_util = require('../../utils/date_util');
+const Loading = require('../../utils/loading_util');
+
 const userRecruiterService = require('../../common/userRecruiterService');
 const recruitCompanyService = require('../../common/recruitCompanyService');
 const recruitRecordService = require('../../common/recruitRecordService');
-const date_utils = require('../../utils/date_utils');
 const CONSTANT = require('../../common/constant');
 const app = getApp();
+
 Page({
 
 	/**
@@ -290,11 +293,24 @@ Page({
 			}
 		})
 	},
-	//待查看不合适点击事件
-	bhs(e) {
+	// 不合适点击事件
+	async bhs(e) {
 		console.log(e.currentTarget);
 		// 获取记录id
-		let recordUuid = e.currentTarget.dataset.recordUuid;
+		let recordUuid = e.currentTarget.dataset.recorduuid;
+		let updateData = {
+			id: recordUuid,
+			flowRecruit: -1, // 不合适
+		}
+		try{
+			Loading.begin();
+			await recruitRecordService.updateByEntity(updateData);
+			this.loadContent();	
+		}catch(e){
+			console.error(e);
+		}finally{
+			Loading.end();
+		}
 
 	},
 	//沟通中不合适点击事件
@@ -407,6 +423,16 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: async function (options) {
+		try{
+			Loading.begin();
+			await this.loadContent();
+		}catch(e){
+			console.error(e);
+		}finally{
+			Loading.end();
+		}
+	},
+	loadContent: async function(){
 		let that = this;
 		// openid
 		await app.getOpenidReady();
@@ -430,13 +456,14 @@ Page({
 		await loadRecordPromise.then(r => {
 			console.log(r.data);
 			r.data.forEach((v,i) => {
-				console.log(date_utils.dateToCN(v.createTime));
+				console.log(date_util.dateToCN(v.createTime));
 				let tempData = {
 					recordUuid: v.recordUuid,
-					date: date_utils.dateToCN(v.createTime),
+					candidateOpenid: v.candidateOpenid,
+					date: date_util.dateToCN(v.createTime),
 					name: v.realName,
 					sex: CONSTANT.genderList[v.gender],
-					year: date_utils.getAgeByBirthday(v.birthday),
+					year: date_util.getAgeByBirthday(v.birthday),
 					ypzw: v.jobName,
 					cellphne: v.telephone,
 					flowRecruit: v.flowRecruit,
@@ -499,8 +526,6 @@ Page({
 		})
 		this.setData({ nyxz: nyxzList });
 	},
-	
-
 	// 函数 构建list
 	buildList: function (listDck, listGtz, listBuheshi) {
 		let that = this;
@@ -518,6 +543,7 @@ Page({
 				}
 				tempData.list.push({
 					recordUuid: r.recordUuid,
+					candidateOpenid: r.candidateOpenid,
 					name: r.name,
 					sex: r.gender,
 					year: r.year,
@@ -547,6 +573,7 @@ Page({
 				}
 				tempData.list.push({
 					recordUuid: r.recordUuid,
+					candidateOpenid: r.candidateOpenid,
 					name: r.name,
 					sex: r.gender,
 					year: r.year,
@@ -576,6 +603,7 @@ Page({
 				}
 				tempData.list.push({
 					recordUuid: r.recordUuid,
+					candidateOpenid: r.candidateOpenid,
 					name: r.name,
 					sex: r.gender,
 					year: r.year,

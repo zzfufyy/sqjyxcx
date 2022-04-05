@@ -6,12 +6,13 @@ const $ = require('../../utils/request_util');
 const Loading = require('../../utils/loading_util');
 const CONSTANT = require('../../common/constant');
 // 加载接口服务
+const companyForCategoryService = require('../../common/companyForCategoryService');
 const userRecruiterService = require('../../common/userRecruiterService');
 const recruitCompanyService = require('../../common/recruitCompanyService');
 const recruitJobService = require('../../common/recruitJobService');
 const communityInformationService = require('../../common/communityInformationService');
 const jobCategoryService = require('../../common/jobCategoryService');
-const companyForCategoryService = require('../../common/companyForCategoryService');
+
 
 // 常量定义
 const app = getApp();
@@ -25,6 +26,7 @@ Page({
 		// 招聘人
 		recruiterOpenid: '',
 		// 企业名称
+		companyUuid: '',
 		companyName: '',
 		companyAddress: '',
 		longitude: 0.0,
@@ -157,7 +159,7 @@ Page({
 				})
 			}
 		});
-		let insertListPromise = companyForCategoryService.insertByEntityList(categoryList);
+		let insertListPromise = companyForCategoryService.insertByEntityList(companyUuid, categoryList);
 		await insertListPromise.then(r=>{
 			console.log(r);
 		}).catch(r=>{
@@ -179,7 +181,9 @@ Page({
 		await app.getOpenidReady();
 		let openid = wx.getStorageSync('openid');
 		console.log(PAGENAME + '当前用户openid: ' + openid);
-		this.setData({ recruiterOpenid: openid});
+		this.setData({ 
+			recruiterOpenid: openid
+		});
 		// 获取社区列表
 		let loadCommunityListPromise = communityInformationService.loadList();
 		await loadCommunityListPromise.then(r => {

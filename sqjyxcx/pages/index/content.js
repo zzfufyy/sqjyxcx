@@ -38,7 +38,7 @@ const createContentMethods = () => ({
             
                     }
                     let updateCandidatePromise = userCandidateService.updateByEntity(updateData);
-                    updateCandidatePromise.then(r=>{
+                    await updateCandidatePromise.then(r=>{
                         console.log(r);
                     }).catch(r => {
                         console.error(r);
@@ -52,7 +52,7 @@ const createContentMethods = () => ({
                         addressDetail:'', // 清空详细地址（门牌号等）
                     }
                     let updateCompanyPromise = recruitCompanyService.updateRecruitCompany(updateData);
-                    updateCompanyPromise.then(r=>{
+                    await updateCompanyPromise.then(r=>{
                         console.log(r);
                     }).catch(r =>{
                         console.error(r);
@@ -63,8 +63,6 @@ const createContentMethods = () => ({
                 that.setData({
                     location: res,
                 });
-
-                that._resetContent();
             },
             fail: function (e) {
                 console.log(e);
@@ -77,20 +75,20 @@ const createContentMethods = () => ({
 
     // 根据用户角色加载列表信息
     loadContent: async function () {
-        console.log('首页加载列表数据');
+        // 重置分页参数及内容
+
 
         this.state.pageConfig.setNoMoreDataCallback(this._noMoreData);
 
         let data = this.data;
         console.log(this.data.ident);
-        // await this._loadCandidateList();
-        // 当前用户角色是求职者
-        if (data.ident === userIdent) {
-            // 调用 recruitee 模块中的加载数据的函数
+        if (this.data.ident === 'user') {
+            console.log('加载求职者方 展示的数据')
             await this._loadJobList();
         }
         // 当前用户是招聘者
-        else if (data.ident === companyIdent) {
+        else if (data.ident === 'company') {
+            console.log('加载招聘人方 展示的数据')
             await this._loadCandidateList();
         }
     },
@@ -106,10 +104,12 @@ const createContentMethods = () => ({
         return this.state.pageConfig;
     },
 
-    _resetContent() {
+    reloadContent() {
         this.state.pageConfig.reset();
-        // 重置工作列表哦
-        this._resetJobList();
+        // 重置 展现岗位的列表
+        this._resetJobInfoList();
+        // 重置 展现求职者的列表
+        this._resetCompangjob();
         // 重新加载内容
         this.loadContent();
     },

@@ -63,7 +63,7 @@ const salaryList = [
 
 
 const genderList = [
-    '女', '男',
+    '男', '女', 
 ]
 
 const UserRole = {

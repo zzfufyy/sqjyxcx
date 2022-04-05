@@ -1,6 +1,6 @@
 // pages/zxxq/zxxq.js
 const informationNewsService = require('../../common/informationNewsService');
-const date_util = require('../../utils/date_utils');
+const date_util = require('../../utils/date_util');
 
 const app = getApp();
 Page({

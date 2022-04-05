@@ -6,7 +6,7 @@
 		<view class="ft nameinfo">
 			<view class="name">{{name}}</view>
 			<view class="sex">
-				{{sex}} {{year}} {{gznl}}年 {{cellphone}}
+				{{sex}} {{year}}岁 {{gznl}} {{cellphone}}
 			</view>
 		</view>
 		<view class="fr frimg">
@@ -20,7 +20,7 @@
 			<view class="fr "><image class="imgjt" src="/img/jt.png"></image></view>
 		</navigator>
 		<view class="clearfloat yxjobname" >
-			{{yxjobname}}
+			<text class="sqname" wx:for="{{yxjobname}}" wx:key="key">{{item.categoryName}}</text>
 		</view>
 		<view class="clearfloat monbox" >
 			<text style="margin-right: 30px;">{{ygz}}</text>  

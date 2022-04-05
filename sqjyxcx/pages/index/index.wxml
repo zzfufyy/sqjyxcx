@@ -43,7 +43,7 @@
           </view>
           <view class="texname">修改定位</view>
         </navigator>
-        <navigator hover-class="none" bindtap="sqfw"  class="navtop" wx:key="key">
+        <navigator hover-class="none" bindtap="sqfw" class="navtop" wx:key="key">
           <view class="imgbox">
             <image src="/img/sqfw.png"></image>
           </view>
@@ -73,8 +73,8 @@
               <view class="companytag" wx:key="key" wx:for="{{item.companytag}}">{{item.tagbq}}</view>
             </view>
           </view> -->
-          <navigator hover-class="none"  wx:for="{{jobInfoList}}" wx:key="index" 
-          bindtap="bindtapCandidateJobInfo" data-index="{{index}}">
+          <navigator hover-class="none" wx:for="{{jobInfoList}}" wx:key="index" bindtap="bindtapCandidateJobInfo"
+            data-index="{{index}}">
             <view class="jobbox1 clearfloat">
               <view class="ft ltbox">
                 <view class="jobname">{{item.jobname}}</view>
@@ -108,7 +108,7 @@
         <view class='nav-title'>
           <view class="INinputheader">
             <icon class="INsearchicon" type="search" size="22" color="#fff" />
-            <input class="weui-input" placeholder-class="opl" placeholder="搜索职位、公司" bindtap="searchjob1"
+            <input class="weui-input" placeholder-class="opl" placeholder="搜索人才" bindtap="searchjob1"
               confirm-type="search" />
           </view>
         </view>
@@ -142,7 +142,7 @@
           </view>
           <view class="texname">修改定位</view>
         </navigator>
-        <navigator hover-class="none" bindtap="sqfw"  class="navtop" wx:key="key">
+        <navigator hover-class="none" bindtap="sqfw" class="navtop" wx:key="key">
           <view class="imgbox">
             <image src="/img/sqfw.png"></image>
           </view>
@@ -164,21 +164,43 @@
         <view class="topjob">
           <image class="local" src="/img/Icon ／ Location On ／ Rounded@2x.png"></image>推荐人才
         </view>
+
         <view class="joblist">
-          <view class="company" wx:for="{{compangjob}}" wx:key="key">
-            <view class="companyname">找 {{item.jobname}} 工作</view>
-            <view class="wid95 tagbox">
-              <view class="companytag" wx:key="key" wx:for="{{item.usertag}}">{{item.tagbq}}</view>
-            </view>
-            <view class="btmbbb">
-              <image src="{{item.tximg}}" class="tximgc"></image>
-              <text class="nemas">{{item.name}} {{item.hxtime}} {{item.sqname}} {{item.companyjuli}}km</text>
-            </view>
-          </view>
+          <navigator class="company" hover-class="none" wx:for="{{compangjob}}" wx:key="index"
+            bindtap="bindtapRecruiterJobInfo" data-index="{{index}}">
+            <!-- <view class="company" wx:for="{{compangjob}}" wx:key="key"> -->
+              <view class="companyname">找 {{item.jobname}} 工作</view>
+              <view class="wid95 tagbox">
+                <view class="companytag" wx:key="key" wx:for="{{item.usertag}}">{{item.tagbq}}</view>
+              </view>
+              <view class="btmbbb">
+                <image src="{{item.tximg}}" class="tximgc"></image>
+                <text class="nemas">{{item.name}} {{item.hxtime}} {{item.sqname}} {{item.companyjuli}}km</text>
+              </view>
+            <!-- </view> -->
+          </navigator>
         </view>
+        <!-- <navigator hover-class="none"  wx:for="{{jobInfoList}}" wx:key="index" 
+          bindtap="bindtapCandidateJobInfo" data-index="{{index}}">
+            <view class="jobbox1 clearfloat">
+              <view class="ft ltbox">
+                <view class="jobname">{{item.jobname}}</view>
+                <view class="jobmoney">{{item.jobmoney}}</view>
+                <view class="companyname1">
+                  <image src="{{item.companytx}}" class="companytx"></image>
+                  {{item.companyname}}
+                </view>
+              </view>
+              <view class="fr lrbox">
+                <view class="far">{{item.jl}}公里</view>
+                <view class="phonecall" catchtap="callphone" data-phonenum="{{item.phonenum}}">电话沟通</view>
+              </view>
+            </view>
+            <view class="line1"></view>
+          </navigator> -->
         <view wx:if="{{noMoreData == true}}">
-            没有更多数据
-          </view>
+          没有更多数据
+        </view>
       </view>
     </view>
   </block>
@@ -201,19 +223,20 @@
       <view class="qusf">实名认证</view>
       <view class="zsfw smrz">温馨提示：根据国家、省对政务服务实名制管理要求，使用“社区就业”需要进行实名信息验证</view>
       <view class="qzz1">
-        <input type="text" class="iptnam" bindinput="handleRealName" placeholder="请输入姓名" />
+        <input type="text" class="iptnam" bindinput="handleRealName" placeholder="请输入姓名" value='{{realName}}' />
       </view>
       <view class="qzz1 zpf">
-        <input type="text" class="iptnam" bindinput="handleIdentityCard" placeholder="请输入身份证号码" />
+        <input type="text" class="iptnam" bindinput="handleIdentityCard" placeholder="请输入身份证号码"
+          value='{{identityCard}}' />
       </view>
-      <view class="tijsq" bindtap="smrztijsq" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>
+      <view class="tijsq" bindtap="submitRealUser" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>
     </view>
   </view>
 
   <!-- 求职者完善信息 -->
   <view class="" hidden="{{infows}}">
     <view class="zzc" bindtap="wsxnhide"></view>
-    <view class="qzbox" style="top: 15%;">
+    <view class="qzbox" style="top: 10%;">
       <view class="qusf">完善信息</view>
       <view class="zsfw smrz">性别</view>
       <view class="qzz1 xxbox">
@@ -222,20 +245,21 @@
       </view>
       <view class="zsfw smrz">我想从事的工作</view>
       <view class="qzz1 xxbox">
-        <view class="xb {{item.checked?'active':'xb'}}" wx:for="{{wantjob}}" data-id='{{item.id}}' bindtap="wanjob"
-          wx:key="key">{{item.job}}</view>
+        <view class="xb {{item.checked?'active':'xb'}}" wx:for="{{wantjob}}" data-id='{{item.id}}'
+          bindtap="handleSelectCategory" wx:key="key">{{item.job}}</view>
       </view>
-      <view class="zsfw smrz">年龄</view>
+      <!--TODO  年龄范围选择不合理-->
+      <!-- <view class="zsfw smrz">年龄</view>
       <view class="qzz1 xxbox">
         <view class="xb {{num2==index?'active':''}}" wx:for="{{nianl}}" data-index2="{{index}}" wx:key="key"
           bindtap="nlxz">{{item.nal}}</view>
-      </view>
+      </view> -->
       <view class="zsfw smrz">薪资要求</view>
       <view class="qzz1 xxbox">
         <view class="xb {{salary==index?'active':''}}" bindtap="handleSelectSalary" data-index3="{{index}}"
           wx:for="{{salaryList}}" wx:key="key">{{item.value}}</view>
       </view>
-      <view class="tijsq" bindtap="commitRecruiteeInfo" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>
+      <view class="tijsq" bindtap="submitRecruiteeInfo" style="margin: 0 21px;width: auto;margin-top: 25px;">确认</view>
     </view>
   </view>
 
@@ -255,7 +279,7 @@
     </view>
   </view>
 
-  <!-- 提示用户需要获取手机号 -->
+  <!-- 提示用户需要获取用户信息 -->
   <view class="" hidden="{{hideUserInfoAuth}}">
     <view class="zzc"></view>
     <view class="qzbox">
@@ -263,7 +287,7 @@
       <view class="textts">获取头像昵称,需要您的授权，为了提供更好的服务，请在稍后的提示框中点击“允许”</view>
       <view class="clearfloat" style="margin-top: 20px;display: flex;">
         <button class="ft  pomis" bindtap="hulue">忽略</button>
-        <button class="tijsq pomis fr" bindtap="_getUserProfile" style="margin-top: 0px;">允许</button>
+        <button class="tijsq pomis fr" bindtap="bindtapGetUserProfile" style="margin-top: 0px;">允许</button>
       </view>
     </view>
   </view>

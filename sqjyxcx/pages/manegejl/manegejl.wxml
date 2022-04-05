@@ -13,7 +13,7 @@
 			<block wx:for="{{dck}}" wx:key="key">
 				<view class="date">{{item.date}}</view>
 				<view class="workbox"  wx:for="{{item.list}}" wx:key="key">
-					<navigator hover-class="none" url="/pages/loojl/lookjl" >
+					<navigator hover-class="none" url="/pages/loojl/lookjl?candidateOpenid={{item.candidateOpenid}}" >
 						<view class="jobname">{{item.name}} {{item.sex}} {{item.year}}岁 {{item.workyear}} {{item.jyzt}}</view>
 						<view class="gwyq">应聘岗位:{{item.ypzw}}</view>
 					</navigator>
@@ -33,7 +33,7 @@
 			<block wx:for="{{gtz}}" wx:key="key">
 				<view class="date">{{item.date}}</view>
 				<view class="workbox" wx:for="{{item.list}}" wx:key="key">
-					<navigator hover-class="none" url="/pages/loojl/lookjl"  >
+					<navigator hover-class="none" url="/pages/loojl/lookjl?candidateOpenid={{item.candidateOpenid}}"  >
 						<view class="jobname">{{item.name}} {{item.sex}} {{item.year}}岁 {{item.workyear}} {{item.jyzt}}</view>
 						<view class="gwyq">应聘岗位:{{item.ypzw}}</view>
 					</navigator>
@@ -53,7 +53,7 @@
 			<block wx:for="{{buheshi}}" wx:key="key">
 				<view class="date">{{item.date}}</view>
 				<view class="workbox" wx:for="{{item.list}}" wx:key="key">
-					<navigator hover-class="none" url="/pages/loojl/lookjl"  >
+					<navigator hover-class="none" url="/pages/loojl/lookjl?candidateOpenid={{item.candidateOpenid}}"  >
 						<view class="jobname">{{item.name}} {{item.sex}} {{item.year}}岁 {{item.workyear}} {{item.jyzt}}</view>
 						<view class="gwyq">应聘岗位:{{item.ypzw}}</view>
 					</navigator>

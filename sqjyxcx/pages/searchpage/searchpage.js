@@ -130,13 +130,13 @@ Page({
 			Loading.begin();
 			await recruitJobService.increaseViewCount(recruitJobUuid);
 			console.log('increasecountview完成');
-			// 构建ViewRecord
-			let viewRecord = {
-				candidateOpenid: this.data.userOpenid,
-				recruiterOpenid: jobData.recruiterOpenid,
-				companyUuid: jobData.companyUuid,
-			}
-			await viewRecordService.insertByEntity(viewRecord)
+			// // 构建ViewRecord
+			// let viewRecord = {
+			// 	candidateOpenid: this.data.userOpenid,
+			// 	recruiterOpenid: jobData.recruiterOpenid,
+			// 	companyUuid: jobData.companyUuid,
+			// }
+			// await viewRecordService.insertByEntity(viewRecord)
 		}catch(e){
 			console.log(e);
 		}finally{

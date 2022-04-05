@@ -3,8 +3,14 @@ const { GlobalKey } = require('../../service/global_service');
 const { UserService } = require('../../service/user_service');
 
 const Loading = require('../../utils/loading_util');
-const Constant = require('../../common/constant');
+const CONSTANT = require('../../common/constant');
 const StringUtil = require('../../utils/string_util');
+const url_util = require('../../utils/url_util');
+const date_util = require('../../utils/date_util');
+// 加载服务
+const candidateForCategoryService = require('../../common/candidateForCategoryService');
+const candidateForCommunityService = require('../../common/candidateForCommunityService');
+
 
 const app = getApp();
 
@@ -17,15 +23,19 @@ Page({
 		tximg: '',
 		name: '',
 		sex: '',
-		year: '24',
+		// 年龄
+		year: '',
+		// 手机
 		cellphone: '',
-		gznl: '1-3',
-		yxjobname: '保洁工作',
-		ygz: '3000-5000',
+		// 工作年限  暂不做
+		gznl: '',
+		yxjobname: '',
+		// 薪资范围
+		ygz: '',
 		sqname: [
-			{ sqname: '东湖社区' },
-			{ sqname: '定王台街道' },
-			{ sqname: '湘湖街道' },
+			// { sqname: '东湖社区' },
+			// { sqname: '定王台街道' },
+			// { sqname: '湘湖街道' },
 		],
 		gzjy: '填写工作经验，让HR快速看到你',
 		qzjy: [
@@ -58,9 +68,15 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
-		console.debug('==================个人简历加载==================');
+
+	},
+
+	onShow: function () {
+		// 页面数据加载
+		Loading.begin();
 		this._reloadData();
 		app.getGlobal(GlobalKey.UserInfoChanged).addListener(this._listeneInfoChange);
+		Loading.end();
 	},
 
 	onUnload: function (params) {
@@ -77,106 +93,58 @@ Page({
 		console.log('个人简历页面重载数据');
 		var that = this;
 		await app.getOpenidReady();
+		let openid = wx.getStorageSync('openid');
 		try {
-			Loading.begin();
+
 			let [userInfo, recruiteeInfo] = await Promise.all([
 				UserService.loadUserInfo(),
 				UserService.loadRcruiteeInfo(),
 			]);
+			console.log(userInfo);
+			console.log(recruiteeInfo);
+			// 加载 期望求职列表
+			let expectCategoryListResult = await candidateForCategoryService.loadListByCandidateOpenid(openid);
+			console.log(expectCategoryListResult);
 
-			// let userInfo = infoList[0];
-			// let recruiteeInfo = infoList[1];
-			console.log(recruiteeInfo)
-			console.log(userInfo)
-			wx.request({
-				url: app.globalData.web_path+'/community-info/getjobandCom',
-				data: { zwid:recruiteeInfo.expectCategoryId,areaid:recruiteeInfo.expectCommunityId},
-				header: app.globalData.header,
-				method: "POST",
-				success: function (data) {
-					console.log(data)
-					let arealist = data.data.obj.list;
-					var sq =[];
-					for(let i=0;i<arealist.length;i++){
-						var sqname ={	sqname:arealist[i].communityName}
-						sq.push(sqname);
-					}
-					that.setData({
-						yxjobname:data.data.obj.zwname,
-						sqname:sq
-					})
-				}
+			let yxjobnameList = [];
+			expectCategoryListResult.data.forEach(r => {
+				yxjobnameList.push({
+					categoryName: r.categoryName,
+				});
+			})
+
+			// 加载 期望社区列表
+			let expectCommunityListResult = await candidateForCommunityService.loadListByCandidateOpenid(openid);
+			console.log(expectCommunityListResult);
+			let sqnameList = [];
+			expectCommunityListResult.data.forEach(r => {
+				sqnameList.push({
+					sqname: r.communityName,
+				});
 			})
 			this.setData({
-				tximg: StringUtil.getSROD(
-					recruiteeInfo.portraitPath,
-					userInfo.avatarurl,
-				),
-				name: StringUtil.emptyBlocking(
-					recruiteeInfo.realName,
-					userInfo.nickname,
-				),
-			
-				sex: Constant.genderList[recruiteeInfo.gender],
-				ygz: new Constant.Salary(
+				yxjobname: yxjobnameList,
+				sqname: sqnameList,
+			});
+			this.setData({
+				tximg: url_util.isImageUrlInServer(recruiteeInfo.portraitPath) ?
+					app.globalData.web_path + recruiteeInfo.portraitPath : recruiteeInfo.portraitPath,
+				name: recruiteeInfo.realName,
+				sex: CONSTANT.genderList[recruiteeInfo.gender],
+				ygz: new CONSTANT.Salary(
 					recruiteeInfo.expectSalaryMin,
 					recruiteeInfo.expectSalaryMax,
 				).value,
-				gznl:recruiteeInfo.ext1,
-				zwpj: recruiteeInfo.introduction,
-				cellphone: StringUtil.maybeEmptyString(recruiteeInfo.telephone),
-				year:this.getAge(recruiteeInfo.birthday)
+				gznl: recruiteeInfo.ext1,
+				zwpj: recruiteeInfo.introduction == '' ? '请添加个人简介' : recruiteeInfo.introduction,
+				cellphone: recruiteeInfo.telephone,
+				year: date_util.getAgeByBirthday(recruiteeInfo.birthday)
 			});
 		} finally {
-			Loading.end();
 		}
 	},
 
 
-	// 根据出生日期计算年龄周岁
- getAge:function(strBirthday) {
-  var returnAge = '';
-  var mouthAge = '';
-  var strBirthdayArr = strBirthday.split("-");
-  var birthYear = strBirthdayArr[0];
-  var birthMonth = strBirthdayArr[1];
-  var birthDay = strBirthdayArr[2];
-  var d = new Date();
-  var nowYear = d.getFullYear();
-  var nowMonth = d.getMonth() + 1;
-  var nowDay = d.getDate();
-  if (nowYear == birthYear) {
-    // returnAge = 0; //同年 则为0岁
-    var monthDiff = nowMonth - birthMonth; //月之差 
-    if (monthDiff < 0) {
-    } else {
-      mouthAge = monthDiff + '个月';
-    }
-  } else {
-    var ageDiff = nowYear - birthYear; //年之差
-    if (ageDiff > 0) {
-      if (nowMonth == birthMonth) {
-        var dayDiff = nowDay - birthDay; //日之差 
-        if (dayDiff < 0) {
-          returnAge = ageDiff - 1 + '岁';
-        } else {
-          returnAge = ageDiff + '岁';
-        }
-      } else {
-        var monthDiff = nowMonth - birthMonth; //月之差 
-        if (monthDiff < 0) {
-          returnAge = ageDiff - 1 + '岁';
-        } else {
-          mouthAge = monthDiff + '个月';
-          returnAge = ageDiff + '岁';
-        }
-      }
-    } else {
-      returnAge = -1; //返回-1 表示出生日期输入错误 晚于今天
-    }
-  }
-  return returnAge + mouthAge; //返回周岁年龄+月份
-}
 
 
 })

@@ -1,7 +1,7 @@
 <view class="container">
 	<view class="topbox">
 		<view class="jobname">{{jobname}}</view>
-		<view class="jobmony">{{salaryScope}} /月</view>
+		<view class="jobmony">{{salaryScope}}</view>
 		<!-- <view class="jobyq">{{jobyq.rs}} | {{jobyq.nl}}岁 | {{jobyq.worknj}}年</view> -->
 		<view class="jobyq">{{jobyq.rs}}</view>
 	</view>

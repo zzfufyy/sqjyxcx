@@ -1,9 +1,9 @@
 const $ = require('../utils/request_util')
 
 // 根据实体类 list插入
-const insertByEntityList = function (companyUuid, list) {
+const insertByEntityList = function (candidateOpenid,list) {
     return $.request({
-        url: '/company-for-category/add?companyUuid=' + companyUuid,
+        url: '/candidate-for-category/add?candidateOpenid=' + candidateOpenid,
         data: list,
         method: $.RequestMethod.POST,
         header: $.jsonHeader,
@@ -12,7 +12,7 @@ const insertByEntityList = function (companyUuid, list) {
 
 const loadListByCandidateOpenid = function (candidateOpenid){
     return $.request({
-        url: '/candidate-for-community/listByCandidateOpenid?candidateOpenid=' + candidateOpenid,
+        url: '/candidate-for-category/listByCandidateOpenid?candidateOpenid=' + candidateOpenid,
         data: {},
         method: $.RequestMethod.GET,
         header: $.jsonHeader,

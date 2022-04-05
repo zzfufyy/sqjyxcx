@@ -4,7 +4,7 @@ const { Api } = require('../../common/api');
 const { UserService } = require('../../service/user_service');
 const { CompanyService } = require('../../service/company_service');
 // const { Age} = require('../../common/constant');
-const date_utils = require('../../utils/date_utils');
+const date_util = require('../../utils/date_util');
 const Loading = require('../../utils/loading_util');
 const $ = require('../../utils/request_util');
 const Constant = require('../../common/constant');
@@ -59,7 +59,6 @@ const createRecruiterMethods = () => ({
                             ident: 'company',
                             companyUuid: companyInfo.id,
                         });
-                        this.state.userRoleCompl.resolve();
                     }
                     // 还在认证
                     else {
@@ -115,6 +114,11 @@ const createRecruiterMethods = () => ({
     _loadCandidateList: async function () {
 
         console.log('加载首页求职者列表');
+        // 招聘人公司id加入变量
+        let userInfo = await UserService.loadRecruiterInfo();
+        this.setData({
+            companyUuid: userInfo.companyUuid,
+        });
         let pageConfig = this._getPageConfig();
         console.log(pageConfig);
         let location = this._getLocation();
@@ -138,39 +142,22 @@ const createRecruiterMethods = () => ({
             Loading.end();
         }
 
-        // {
-        //     jobname: '服务员/保洁', usertag: [{ tagbq: '女' }, { tagbq: '29岁' }, { tagbq: '3000-5000/月' }],
-        //     name: '李四', tximg: '/img/tx.png', hxtime: '10分钟前', sqname: '天源社区', companyjuli: '1.2',
-        //   },
         // pageConifg 保存当前的分页信息，并且取出 pageInfo 中的 list
+        console.log(pageInfo);
+        console.log("######################");
         let dataList = pageConfig.handlePageInfo(pageInfo);
         let current = this.data.compangjob;
-        console.log(this.data);
-        console.log("######################");
         console.log(dataList);
-        var that = this;
-        for(let i=0;i<dataList.length;i++){
-            wx.request({
-              url: app.globalData.web_path + '/view-record/getjobs',
-              data: {
-                openid:dataList[i].candidateOpenid,
-                jobid:dataList[i].expectCategoryId,
-              },
-              header: app.globalData.header,
-              success: function (res) {
-                  console.log(res)
-              }
-            })
-        }
         let newList = dataList.map(r => ({
             candidateOpenid: r.candidateOpenid,
             expectCatagoryId: r.expectCategoryId,
             expectCommunityId : r.expectCommunityId,
             jobname: r.expectCatagoryId, // 暂时用id代替
             usertag:[{tagbq:Constant.genderList[r.gender]},
-                     {tagbq:date_utils.getAgeByBirthday(r.birthday)},
+                     {tagbq:date_util.getAgeByBirthday(r.birthday)},
                      {tagbq:new Constant.Salary(r.expectSalaryMin,r.expectSalaryMax).value}],
             name: r.realName,
+            jobname:r.categoryName,
             tximg:r.candidatePortraitPath,
             hxtime: '', // 10分钟前 暂时忽略
             sqname: r.communityName,
@@ -181,9 +168,13 @@ const createRecruiterMethods = () => ({
                 newList,
             ),
         });
-
-
     },
+
+    _resetCompangjob() {
+        this.setData({
+            compangjob: [],
+        });
+    }
 });
 
 

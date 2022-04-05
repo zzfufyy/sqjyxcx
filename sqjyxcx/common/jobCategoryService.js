@@ -1,11 +1,13 @@
 const $ = require('../utils/request_util')
 
 
-const loadList = function () {
+const loadList = function (categoryName) {
     return $.request({
         url: '/job-category/list',
-        data: {},
-        method: $.RequestMethod.GET,
+        data: {
+            categoryName: categoryName,
+        },
+        method: $.RequestMethod.POST,
         header: $.jsonHeader
     })
 }

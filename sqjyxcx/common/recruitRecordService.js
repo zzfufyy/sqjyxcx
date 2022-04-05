@@ -17,7 +17,7 @@ const loadEntityById = function (id) {
     })
 }
 
-const listRecordPlusByCandidateOpenid = function(candidateOpenid){
+const listRecordPlusByCandidateOpenid = function (candidateOpenid) {
     return $.request({
         url: '/recruit-record/listRecordPlusByCandidateOpenid?candidateOpenid=' + candidateOpenid,
         data: {},
@@ -26,7 +26,7 @@ const listRecordPlusByCandidateOpenid = function(candidateOpenid){
     })
 }
 
-const listRecordPlusByCompanyUuid = function(companyUuid){
+const listRecordPlusByCompanyUuid = function (companyUuid) {
     return $.request({
         url: '/recruit-record/listRecordPlusByCompanyUuid?companyUuid=' + companyUuid,
         data: {},
@@ -35,10 +35,30 @@ const listRecordPlusByCompanyUuid = function(companyUuid){
     })
 }
 
+const countByCandidateOpenid = function (candidateOpenid) {
+    return $.request({
+        url: '/recruit-record/countByCandidateOpenid?candidateOpenid=' + candidateOpenid,
+        data: {},
+        method: $.RequestMethod.GET,
+        header: $.jsonHeader
+    })
+}
+
+const updateByEntity = function (updateData) {
+    return $.request({
+        url: '/recruit-record/modify',
+        data: updateData,
+        method: $.RequestMethod.POST,
+        header: $.jsonHeader
+    });
+}
+
 
 module.exports = {
-    insertByEntity:insertByEntity,
-    loadEntityById:loadEntityById,
-    listRecordPlusByCandidateOpenid:listRecordPlusByCandidateOpenid,
-    listRecordPlusByCompanyUuid:listRecordPlusByCompanyUuid,
+    insertByEntity: insertByEntity,
+    loadEntityById: loadEntityById,
+    listRecordPlusByCandidateOpenid: listRecordPlusByCandidateOpenid,
+    listRecordPlusByCompanyUuid: listRecordPlusByCompanyUuid,
+    countByCandidateOpenid: countByCandidateOpenid,
+    updateByEntity:updateByEntity
 }
