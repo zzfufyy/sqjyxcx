@@ -43,3 +43,28 @@ line-height: 46px;margin-top: 17px;}
 .sxbox{
 	position: fixed;top: 0;left: 0;right: 0;width: 100%;background: #fff;z-index: 99991;
 }
+
+
+
+/* 左右布局右边带箭头，左边带icon */
+/* 
+<navigator hover-class="none" url="/pages/fbnews/fbnews" class="heightboxgz clearfloat">
+		<view class="ft">
+			<image class="lticonimg" src="/img/wgimg.png"></image>
+			<text class="wggltxt">网格管理</text>
+		</view>
+		<view class="fr">
+			<image class="rtjtimg" src="/img/jt.png"></image>
+		</view>
+  </navigator> 
+*/
+.heightboxgz{
+  height:60px ;background: #fff;line-height: 60px;
+}
+.rtjtimg{
+  width: 17px;height: 16px;
+}
+.lticonimg{
+  width: 22px;height: 22px;vertical-align: middle;margin-top: -3px;
+}
+

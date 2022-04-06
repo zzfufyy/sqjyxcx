@@ -95,6 +95,7 @@ const createContentMethods = () => ({
 
     // 没有更多页面了
     _noMoreData() {
+        
         this.setData({
             noMoreData: true,
         });
@@ -113,10 +114,16 @@ const createContentMethods = () => ({
         // 重新加载内容
         this.loadContent();
     },
-
     _getLocation() {
-        return this.data.location ?? Constant.defaultLocation;
+        let a ;
+        if(this.data.location==null||this.data.location=="undefined"){
+            a=Constant.defaultLocation;
+        }else{
+            a= this.data.location;
+        }
+        return a
     }
+    
 });
 
 

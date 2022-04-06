@@ -3,10 +3,10 @@
 		<text class="abus">关于我们</text>
 		<image class="rtimg" src="/img/jt.png"></image>
 	</navigator>
-	<navigator class="bbox" 	open-type="exit" target="miniProgram">
+	<!-- <navigator class="bbox" 	open-type="exit" target="miniProgram">
 		<text class="abus">退出登录</text>
 		<image class="rtimg" src="/img/jt.png"></image>
-	</navigator>
+	</navigator> -->
 </view>
 
 <view class="container" hover-class="none">

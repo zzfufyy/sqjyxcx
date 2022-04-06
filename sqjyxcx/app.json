@@ -62,7 +62,17 @@
     "pages/qysearch/qysearch",
     "pages/sqfw/sqfw",
     "pages/wglr/wglr",
-    "pages/sqgl/sqgl"
+    "pages/sqgl/sqgl",
+    "pages/wglrxq/wglrxq",
+    "pages/djmesge/djmesge",
+    "pages/mesegsubmit/mesegsubmit",
+    "pages/sqmdb/sqmdb",
+    "pages/ptjuzhu/ptjuzhu",
+    "pages/comjuzhu/comjuzhu",
+    "pages/comxx/comxx",
+    "pages/xiugaijz/xiugaijz",
+    "pages/sqmanege/sqmanege",
+    "pages/fbnews/fbnews"
     
   ],
   "permission": {

@@ -74,7 +74,7 @@
 	
 	<view class="qstj">
 		<view class="tijsq prew" bindtap="prew">上一步</view>
-		<view class="tijsq" bindtap="tijsq">确认提交</view>
+		<view class="tijsq" bindtap="tijsq">下一步</view>
 	</view>
 </view>
 

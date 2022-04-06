@@ -51,7 +51,9 @@ Page({
 		// 默认求职者
 		identity: CONSTANT.UserRole.Recruitee,
 	},
-
+	_clearUserRole() {
+		return UserService.clearUserRole();
+	},
 
 	// 改变身份
 	switchUserRole: async function () {
@@ -135,9 +137,7 @@ Page({
 	onUnload: function (params) {
 	},
 
-	_clearUserRole() {
-		return UserService.clearUserRole();
-	},
+
 
 	...recruiter.createRecruiterMethods(),
 	...recruitee.createRecruiteeMethods(),

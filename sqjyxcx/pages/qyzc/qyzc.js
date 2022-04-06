@@ -24,6 +24,7 @@ Page({
 	 */
 	data: {
 		// 招聘人
+		sqrphone: '',
 		recruiterOpenid: '',
 		// 企业名称
 		companyUuid: '',
@@ -62,7 +63,52 @@ Page({
 			categoryUuid: this.data.categoryUuid_list[e.detail.value],
 		})
 	},
-
+	setPhone(openid,phone){
+		var that = this;
+    wx.request({
+      url: app.globalData.web_path + '/gywm/setWxuserandCompPhone',
+      data: {
+        openid:openid,
+        phone:phone,
+      },
+      header: app.globalData.header,
+      success: function (res) {
+				console.log(res)
+				// that._init();
+        // that.openAlert(scene);
+      },
+      fail: function (res) {
+      }
+    })
+  },
+	getPhoneNumber (e) {
+    let that = this
+    var sessionKey =wx.getStorageSync('sessionKey')
+    var openid =wx.getStorageSync('openid')
+    console.log(openid)
+    console.log(e)
+    console.log(sessionKey)
+    wx.request({
+      url: app.globalData.web_path + '/wx/user/' + app.globalData.appId + '/phoneNumberInfo',
+      data: {
+        sessionKey:sessionKey,
+        iv: e.detail.iv,
+        encryptedData: e.detail.encryptedData,
+      },
+      header: app.globalData.header,
+      success: function (res) {
+				console.log(res)
+        console.log(res.data.data.phoneNumber)
+        that.setData({
+          sqrphone:res.data.data.phoneNumber
+        })
+        that.setPhone(openid,res.data.data.phoneNumber);
+        wx.setStorageSync('phone',res.data.data.phoneNumber)
+      },
+      fail: function (res) {
+      }
+    })
+  },
 	// 社区选择
 	bindPickerChange1(e) {
 		console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -118,7 +164,8 @@ Page({
 	async wstijsq() {
 		let that = this;
 		let companyName = this.data.companyName;
-		
+		let phone = this.data.sqrphone; 
+		let juridicalPhone= this.data.sqrphone; 
 		// 企业名称检测
 		if (string_util.isEmpty(companyName)) {
 			wx.showModal({
@@ -137,6 +184,8 @@ Page({
 			lat: this.data.latitude,
 			licenseId: this.data.licenseId,
 			recruiterOpenid: this.data.recruiterOpenid,
+			phone:phone,
+			juridicalPhone:juridicalPhone,
 		}
 		console.log(recruitCompany);
 		

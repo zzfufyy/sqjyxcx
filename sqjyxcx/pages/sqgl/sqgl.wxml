@@ -1,2 +1,27 @@
-<!--page/sqgl/sqgl.wxml-->
-<text>page/sqgl/sqgl.wxml</text>
+<view class="container">
+	<navigator hover-class="none" url="/pages/sqmanege/sqmanege" class="topbox clearfloat">
+		<view class="ft">
+			<image class="sqzy" src="/img/sqzy.png"></image>
+		</view>
+		<view class="ft lrbox">
+			<view class="sqname">
+				<text class="namesq">{{sqname}}	</text>
+				<!-- <image class="phoneimg" bindtap="cellphone" src="/img/phoneimg.png"></image> -->
+			</view>
+			<view class="local">
+				<!-- <image class="localimg" src="/img/localimg.png"></image> -->
+				<text class="localtt">{{localtt}}	</text>
+			</view>
+		</view>
+		<view class="fr"><image class="localimg" src="/img/jt1.png"></image></view>
+	</navigator>
+	<navigator hover-class="none" url="/pages/fbnews/fbnews" class="heightboxgz clearfloat">
+		<view class="ft">
+			<image class="lticonimg" src="/img/wgimg.png"></image>
+			<text class="wggltxt">网格管理</text>
+		</view>
+		<view class="fr">
+			<image class="rtjtimg" src="/img/jt.png"></image>
+		</view>
+	</navigator>
+</view>

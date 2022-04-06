@@ -15,7 +15,8 @@ const createRecruiterMethods = () => ({
 
         async function failback(title) {
             console.info(title);
-            await this._clearUserRole();
+            // await this._handleRecruiterSelected();
+            await UserService.clearUserRole();
             app.setGlobal(GlobalKey.IndexBootstrap, true);
             wx.switchTab({
                 url: '/pages/index/index',
@@ -25,6 +26,7 @@ const createRecruiterMethods = () => ({
         try {
             // TODO: 在一个接口里获取所有信息
             let recruiterInfo = await UserService.loadRecruiterInfo();
+            console.log(recruiterInfo)
             if (!recruiterInfo) {
                 return failback(
                     `服务端没有此招聘人[${app.getOpenid()}]信息，清理本地信息，跳转首页`

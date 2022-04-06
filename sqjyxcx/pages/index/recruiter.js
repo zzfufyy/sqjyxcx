@@ -32,6 +32,7 @@ const createRecruiterMethods = () => ({
             Loading.begin();
 
             let userInfo = await UserService.loadRecruiterInfo();
+            console.log(userInfo)
 
             // 服务端有此人员数据
             if (userInfo != null) {

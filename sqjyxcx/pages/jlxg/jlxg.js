@@ -77,7 +77,7 @@ Page({
 			success: function (res) {
 				console.log(res.data.data.phoneNumber)
 				that.setData({
-					sqrphone: res.data.data.phoneNumber
+					phonenum: res.data.data.phoneNumber
 				})
 				that.setPhone(openid, res.data.data.phoneNumber);
 				wx.setStorageSync('phone', res.data.data.phoneNumber)

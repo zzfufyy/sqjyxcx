@@ -42,21 +42,21 @@ class Salary {
         }else if (min == 0 && max == 0) {
             this.value = '薪资面议';
         } else if (min == 0 && max > 0) {
-            this.value = `${max}以下 元/月`;
+            this.value = `${max}以下元/月`;
         } else if (min > 0 && max == 0) {
-            this.value = `${min}以上 元/月`;
+            this.value = `${min}以上元/月`;
         } else if (min > 0 && max > 0) {
-            this.value = `${min} - ${max} 元/月`;
+            this.value = `${min}-${max}元/月`;
         } 
 
     }
 }
 const salaryList = [
     new Salary(0, 0),
-    new Salary(0, 3000),
-    new Salary(3000, 5000),
-    new Salary(5000, 8000),
-    new Salary(8000, 10000),
+    new Salary(0,3000),
+    new Salary(3000,5000),
+    new Salary(5000,8000),
+    new Salary(8000,10000),
     new Salary(10000, 0),
 ];
 

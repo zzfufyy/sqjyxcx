@@ -1,12 +1,11 @@
-// page/sqgl/sqgl.js
+// pages/sqmanege/sqmanege.js
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		sqname:'东湖社区',
-		localtt:'湖南省长沙市芙蓉区晚报西街13号',
+
 	},
 
 	/**

@@ -49,6 +49,15 @@
 	<view class="clearfloat ttbox">
 		<input type="text" bindinput="bindinputLicenseId" class="iptqy xyd" style="" placeholder="请输入社会信用代码"  />
 	</view>
+	<view class="clearfloat ttbox">
+		<view class="ft leftname">联系电话</view>
+		<view class="fr rtip" style="color: #3384FD;text-align:right">
+			<button class="hqlxfs " open-type="getUserInfo" open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="getPhoneNumber">获取联系方式</button>
+		</view>
+	</view>
+	<view class="clearfloat ttbox">
+		<input type="text" bindinput="aasss" class="iptqy xyd" value="{{sqrphone}}"  placeholder="联系电话"  />
+	</view>
 	<view class="line10"></view>
 	<view class="clearfloat ttbox">
 		<view class="ft leftname">招聘岗位意向</view>

@@ -93,10 +93,27 @@ Page({
 	},
 	//社区服务
 	sqfw() {
-		wx.navigateTo({
-			url: '/pages/sqfw/sqfw',
+		wx.showToast({
+			title: '暂未开放',
 		})
+		// wx.navigateTo({
+		// 	url: '/pages/sqfw/sqfw',
+		// })
 	},
+		//打电话
+		callphone(e) {
+			console.log(e)
+			if(e.currentTarget.id==""){
+				wx.showToast({
+					title: '公司暂未留电话,可先发送简历',
+				})
+				return;
+			}
+			let phonenum = e.currentTarget.dataset.phonenum
+			wx.makePhoneCall({
+				phoneNumber: phonenum //仅为示例，并非真实的电话号码
+			})
+		},
 	// 点击跳转到岗位详情
 	async bindtapCandidateJobInfo(e) {
 		let recruitJobUuid = this.data.jobInfoList[e.currentTarget.dataset.index].jobUuid;
@@ -207,7 +224,22 @@ Page({
 	//提示用户需要获取手机号*忽略*
 	hulue() {
 		this.setData({
-			sjh: true,
+			hideUserInfoAuth: true,
+			// juesehide:false
+		})
+	},
+
+	//实名认证跳过
+	passbtn(){
+		this.setData({
+			smhide: true,
+			// juesehide:false
+		})
+	},
+	//求职者完善信息跳过
+	passbtnwsxx(){
+		this.setData({
+			infows: true,
 			// juesehide:false
 		})
 	},

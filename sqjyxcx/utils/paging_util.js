@@ -109,6 +109,10 @@ class PageConfig {
     buildNextParam(condition) {
         if (!this.hasNext()) {
             console.warn(`没有下一页 ${this.nextPage()}`);
+            wx.showToast({
+                title: '没有更多数据',
+                none:"none"
+              })
         } else {
             return this.buildParam(this.nextPage(), condition);
         }
