@@ -115,15 +115,15 @@ const createPageMethods = () => ({
         let newList = dataList.map(r => ({
             candidateOpenid: r.candidateOpenid,
             name: r.realName,
-            jobname: r.categoryName.replaceAll(',', '/'),
+            jobname: string_util.isEmpty(r.categoryName)?'':r.categoryName.replaceAll(',', '/'),
             usertag: [
                 { tagbq: Constant.genderList[r.gender] },
-                { tagbq: string_util.isEmpty(r.birthday) ? '' : date_util.getAgeByBirthday(r.birthday) },
+                { tagbq: string_util.isEmpty(r.birthday) ? '' : date_util.getAgeByBirthday(r.birthday)+'岁' },
                 { tagbq: new Constant.Salary(r.expectSalaryMin, r.expectSalaryMax).value},
             ],
             tximg: url_util.isImageUrlInServer(r.candidatePortraitPath)?
                 app.globalData.web_path + r.portraitPath : r.portraitPath,
-            sqname: r.communityName,
+            sqname:  string_util.isEmpty(r.communityName)?'':r.communityName,
             companyjuli: (r.distance/1000).toFixed(1),
         }));
 

@@ -21,7 +21,7 @@ Page({
 
 		// 求职用户 信息
 		userOpenid: '',
-		location:{},
+		location: {},
 
 		// 弹窗
 		sxkz: true,
@@ -43,6 +43,22 @@ Page({
 		oid: 0,
 		hidesx: true,
 	},
+
+	bindconfirmSeachCategory(e) {
+		var that = this;
+		console.log(e.detail.value);
+		let jobName = e.detail.value;
+		try {
+			Loading.begin();
+			this.clearContent();
+			this.loadContent(jobName,'','');
+		} catch (e) {
+			console.error(e)
+		}finally{
+			Loading.end()
+		}
+	},
+
 
 	// 筛选事件
 	sx() {
@@ -113,7 +129,7 @@ Page({
 
 		} else {
 			await this.clearContent();
-			await this.loadContent(currentYxyq.min, currentYxyq.max);
+			await this.loadContent(null, currentYxyq.min, currentYxyq.max);
 		}
 
 		let hidesx = !this.data.hidesx
@@ -122,11 +138,11 @@ Page({
 		})
 	},
 	// 点击跳转到对应岗位
-	async bindtapChooseJob(e){
+	async bindtapChooseJob(e) {
 		let jobData = this.data.joblist[e.currentTarget.dataset.index]
 		let recruitJobUuid = jobData.jobUuid;
 		// TODO 生成浏览记录  +  浏览量+1
-		try{
+		try {
 			Loading.begin();
 			await recruitJobService.increaseViewCount(recruitJobUuid);
 			console.log('increasecountview完成');
@@ -137,15 +153,15 @@ Page({
 			// 	companyUuid: jobData.companyUuid,
 			// }
 			// await viewRecordService.insertByEntity(viewRecord)
-		}catch(e){
+		} catch (e) {
 			console.log(e);
-		}finally{
+		} finally {
 			Loading.end();
 			wx.navigateTo({
 				url: "/pages/zwxq/zwxq?recruitJobUuid=" + jobData.jobUuid,
 			})
 		}
-		
+
 	},
 	/**
 	 * 生命周期函数--监听页面加载
@@ -183,7 +199,7 @@ Page({
 			yxyq: yxyq_list,
 		})
 
-	
+
 	},
 
 	/**
@@ -197,21 +213,33 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: async function () {
-		Loading.begin();
-		// 需要openid 加載用戶參數
-		await app.getOpenidReady();
-		// 每次进入前清空content
-		await this.clearContent();
-		await this.loadContent();
-		Loading.end();
+		try {
+			Loading.begin();
+			// 需要openid 加載用戶參數
+			await app.getOpenidReady();
+			// 每次进入前清空content
+			await this.clearContent();
+			await this.loadContent();
+
+		} catch (e) {
+			console.error(e)
+		} finally {
+			Loading.end();
+		}
 	},
 	/**
 		 * 页面上拉触底事件的处理函数
 		 */
 	onReachBottom: async function () {
-		Loading.begin();
-		await this.loadContent();
-		Loading.end();
+		try {
+			Loading.begin();
+			await this.loadContent();
+		} catch (e) {
+			console.error(e)
+		} finally {
+			Loading.end();
+		}
+		
 	},
 	/**
 	 * 生命周期函数--监听页面隐藏

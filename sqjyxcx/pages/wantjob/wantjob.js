@@ -13,6 +13,7 @@ const candidateForCategoryService = require('../../common/candidateForCategorySe
 const candidateForCommunityService = require('../../common/candidateForCommunityService');
 const communityInformationService = require('../../common/communityInformationService');
 const userCandidateService = require('../../common/userCandidateService');
+const string_util = require('../../utils/string_util');
 
 
 const app = getApp();
@@ -90,6 +91,28 @@ Page({
 
 	//输入职位
 	inputjob(e) {
+		console.log(e.detail.value);
+		var that = this;
+
+		let searchText = e.detail.value;
+		let wantjobCopyTemp = object_util.copyObject(this.data.wantjobCopy);
+		if (string_util.isEmpty(searchText)) {
+			this.setData({
+				wantjob: wantjobCopyTemp,
+			})
+		} else {
+			// 遍历查找是否包含字符串
+			let wantjobList = wantjobCopyTemp.map(v => {
+				if (v.job.indexOf(searchText) == -1) {
+					v.display = "none";
+				}
+				return v;
+			});
+			this.setData({
+				wantjob: wantjobList,
+			})
+		}
+
 		// console.log(e.detail.value)
 		// arrtag.concat(arr)
 		// let newarr = [
@@ -351,7 +374,7 @@ Page({
 			await userCandidateService.updateByEntity(updateCandidateData);
 			// 构建 插入 期望职位数据
 			let insertExpectCategoryList = [];
-			csjobList.forEach(v =>{
+			csjobList.forEach(v => {
 				insertExpectCategoryList.push({
 					candidateOpenid: candidateOpenid,
 					categoryUuid: v.id,
@@ -361,18 +384,18 @@ Page({
 			await candidateForCategoryService.insertByEntityList(candidateOpenid, insertExpectCategoryList);
 			// 构建 插入 期望社区数据
 			let insertExpectCommunityList = [];
-			nulllocalList.forEach(v =>{
+			nulllocalList.forEach(v => {
 				insertExpectCommunityList.push({
 					candidateOpenid: candidateOpenid,
 					communityUuid: v.id,
-					communityName: v.local, 
+					communityName: v.local,
 				})
 			})
 			await candidateForCommunityService.insertByEntityList(candidateOpenid, insertExpectCommunityList);
 
-		}catch(e){
+		} catch (e) {
 			console.error(e);
-		}finally{
+		} finally {
 			Loading.end();
 		}
 		wx.navigateBack({
@@ -448,7 +471,7 @@ Page({
 				return r.categoryUuid;
 			})
 			console.log(expectJobCategoryList);
-
+			
 			// 初始化已选择的求职列表
 			wantjobList = wantjobList.map(v => {
 				if (expectJobCategoryList.findIndex(categoryUuid => {

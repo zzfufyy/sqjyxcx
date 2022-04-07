@@ -284,11 +284,9 @@ const createRecruiteeMethods = () => ({
                 jobInfo.jobSalaryMax,
             ).value,
             companyname: jobInfo.companyName,
-            companytx: string_util.getSROD(
-                jobInfo.portraitPath,
-                'img/tx.png'
-            ),
-            jl: string_util.meterToKiloMeterString(jobInfo.distance),
+            companytx: jobInfo.portraitPath,
+    
+            jl: (jobInfo.distance/1000).toFixed(1),
             phonenum: jobInfo.telephone,
         }));
 

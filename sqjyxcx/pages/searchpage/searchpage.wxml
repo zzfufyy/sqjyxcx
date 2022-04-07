@@ -3,7 +3,7 @@
 		<view class="ft lt">
 			<icon class="INsearchicon" type="search" size="22" color="#fff" />
 			<input class="weui-input" placeholder-class="opl" placeholder="搜索职位" bindtap="searchjob"
-				confirm-type="search" />
+				confirm-type="search" bindconfirm="bindconfirmSeachCategory" />
 		</view>
 		<view class="nav-name sx fr" bindtap="sx">筛选<view class="jtbox "></view></view>
 	</view>

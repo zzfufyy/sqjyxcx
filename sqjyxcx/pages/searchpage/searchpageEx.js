@@ -63,7 +63,7 @@ const createPageMethods = () => ({
         })
     },
     // 加载内容
-    loadContent: async function (jobSalaryMin, jobSalaryMax) {
+    loadContent: async function (jobName, jobSalaryMin, jobSalaryMax) {
         // 加載openid
         await app.getOpenidReady();
         let openid = wx.getStorageSync('openid');
@@ -91,11 +91,11 @@ const createPageMethods = () => ({
         let pageInfo;
         // 请求数据
         try {
-            if (jobSalaryMin == undefined || jobSalaryMax == undefined) {
-                pageInfo = await recruitJobService.pagedByDistance(pagingParam);
-            } else {
-                pageInfo = await recruitJobService.pagedByDistanceAndSalary(jobSalaryMin, jobSalaryMax, pagingParam)
-            }
+            jobName = (jobName == undefined)? "": jobName;
+            jobSalaryMin = (jobSalaryMin == undefined)? "": jobSalaryMin;
+            jobSalaryMax = (jobSalaryMax == undefined)? "": jobSalaryMax;
+            
+            pageInfo = await recruitJobService.pagedByDistanceAndSalary(jobName, jobSalaryMin, jobSalaryMax, pagingParam)
             console.log(`薪资范围选择是${jobSalaryMin} - ${jobSalaryMax}, 请求搜索职位数据：`); console.log(pageInfo);
         } catch (e) {
             console.error(e);

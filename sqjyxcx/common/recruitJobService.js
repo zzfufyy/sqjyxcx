@@ -47,9 +47,9 @@ const pagedByDistance = function (pagingParam) {
     });
 }
 
-const pagedByDistanceAndSalary = function (jobSalaryMin, jobSalaryMax, pagingParam) {
+const pagedByDistanceAndSalary = function (jobName, jobSalaryMin, jobSalaryMax, pagingParam) {
     return $.requestOnlyData({
-        url: '/recruit-job/paged-by-distance?jobSalaryMin=' + jobSalaryMin + '&jobSalaryMax=' + jobSalaryMax,
+        url: '/recruit-job/paged-by-distance?jobName=' + jobName + '&jobSalaryMin=' + jobSalaryMin + '&jobSalaryMax=' + jobSalaryMax,
         data: pagingParam,
         method: $.RequestMethod.POST,
         header: $.jsonHeader,

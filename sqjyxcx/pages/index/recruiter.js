@@ -158,7 +158,7 @@ const createRecruiterMethods = () => ({
                      {tagbq:date_util.getAgeByBirthday(r.birthday)},
                      {tagbq:new Constant.Salary(r.expectSalaryMin,r.expectSalaryMax).value}],
             name: r.realName,
-            jobname:r.categoryName,
+            jobname: r.categoryName,
             tximg:r.candidatePortraitPath,
             hxtime: '', // 10分钟前 暂时忽略
             sqname: r.communityName,
