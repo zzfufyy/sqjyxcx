@@ -1,29 +1,37 @@
-// pages/sqmanege/sqmanege.js
+// pages/wgmanage/wgmanage.js
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		// sqname:'东湖社区 ',
-		sqlist:[
-			{xqname:'东湖新寓',ld:'8',lc:'31',hs:'8',ydj:'1234',ydj:'1200',ry:'暂未分配'},
-			{xqname:'东湖新寓',ld:'8',lc:'31',hs:'8',ydj:'1234',ydj:'1200',ry:'张三'},
-		],
-		showfp:true
+		sqname:'东湖社区',
+		lxfs:'0731-438953853',
+		sqlocal:'湖南省长沙市芙蓉区晚报西街13号',
+		imgurl:''
 	},
-
-	//分配管理
-	fpgl(){
-
-	},
-	wglrxq(){
-		wx.navigateTo({
-			url: '/pages/wglrxq/wglrxq',
+	//点击上传图片
+	scimgbtn(){
+		let that = this
+		wx.chooseMedia({
+			count: 1,
+			mediaType: ['image'],
+			sourceType: ['album', 'camera'],
+			maxDuration: 30,
+			camera: 'back',
+			success(res) {
+				console.log(res)
+				that.setData({
+					imgurl:res.tempFiles[0].tempFilePath
+				})
+			}
 		})
 	},
-	change(e){
-		console.log(e)
+	//点击保存
+	tijsq(){
+		wx.navigateBack({
+			delta: 1
+		})
 	},
 	/**
 	 * 生命周期函数--监听页面加载

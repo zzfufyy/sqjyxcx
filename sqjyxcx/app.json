@@ -72,7 +72,11 @@
     "pages/comxx/comxx",
     "pages/xiugaijz/xiugaijz",
     "pages/sqmanege/sqmanege",
-    "pages/fbnews/fbnews"
+    "pages/fbnews/fbnews",
+    "pages/wgmanage/wgmanage",
+    "pages/qylr/qylr",
+    "pages/qzelr/qzelr",
+    "pages/sjsb/sjsb"
     
   ],
   "permission": {

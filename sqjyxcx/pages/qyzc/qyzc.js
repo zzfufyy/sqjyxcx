@@ -47,7 +47,9 @@ Page({
 		wantjob: [
 			// { job: 'IT', id: 0 }, { job: '文化传媒', id: 1 }, { job: '电子制造', id: 2 }, { job: '电子制造', id: 3 }, { job: '电子制造', id: 4 }
 		],
-		datdid: ''
+		datdid: '',
+
+		tagjob:[{ job: 'IT', id: 0 }, { job: '文化传媒', id: 1 }, { job: '电子制造', id: 2 }, { job: '电子制造', id: 3 }, { job: '电子制造', id: 4 }]
 	},
 	// 企业名字
 	bindinputCompanyName(e) {
@@ -142,24 +144,71 @@ Page({
 	},
 	// 招聘岗位意向去除
 	closethis(e) {
+		let that = this;
 		let id = e.currentTarget.dataset.id
 		console.log(id)
-		let wantjobList = [];
+		let wantjobList = that.data.wantjob;
+		let tagjoblist = that.data.tagjob
 		this.data.wantjob.forEach((v) => {
 			if (v.id == id) {
-				if (v.checked == true) {
-					v.checked = false;
-				} else { v.checked = true }
+				if (v.checked == false) {
+					v.checked = true;
+				} else { v.checked = false }
 			}
-			wantjobList.push(v);
+			// wantjobList.push(v);
+			// tagjoblist.push(v)
+		})
+		this.data.tagjob.forEach((v) => {
+			if (v.id == id) {
+				if (v.checked == false) {
+					v.checked = true;
+				} else { v.checked = false }
+			}
+			// wantjobList.push(v);
+			// tagjoblist.push(v)
 		})
 		this.setData({
+			tagjob:tagjoblist,
 			wantjob: wantjobList,
 			msg: "id:" + id
 		})
 		console.log(PAGENAME + '意向表：'); console.log(this.data.wantjob);
 	},
+	//选择意向岗位
+	chose(e){
+		let that = this
+		let id = e.currentTarget.dataset.id
+		let wantjob = that.data.wantjob;
+		console.log(wantjob)
+		console.log(id)
+		for(let i = 0;i<wantjob.length;i++){
+			if (wantjob[i].id == id) {
+				if (wantjob[i].checked == true) {
+					wantjob[i].checked = false;
+				}else {
+					wantjob[i].checked = true;
+				}
+			}
+		}
+		let tagjoblist = that.data.tagjob
+		for(let i = 0;i<tagjoblist.length;i++){
+			if (tagjoblist[i].id == id) {
+				if (tagjoblist[i].checked == true) {
+					tagjoblist[i].checked = false;
+				}else {
+					tagjoblist[i].checked = true;
+				}
+				
+			}
+		
+		}
+		this.setData({
+			tagjob: tagjoblist,
+			wantjob:wantjob,
+			msg: "id:" + id
+		})
 
+	},
 	//企业注册提交审核
 	async wstijsq() {
 		let that = this;
@@ -263,8 +312,15 @@ Page({
 			let loadCategoryListPromise = jobCategoryService.loadList();
 			await loadCategoryListPromise.then(r => {
 				let wantjobList = [];
+				let tagjobList = [];
 				r.data.forEach(function (item, index) {
 					wantjobList.push({
+						job: item.categoryName,
+						id: index,
+						categoryUuid: item.id,
+						checked: true,
+					});
+					tagjobList.push({
 						job: item.categoryName,
 						id: index,
 						categoryUuid: item.id,
@@ -272,7 +328,8 @@ Page({
 					});
 				});
 				that.setData({
-					wantjob: wantjobList
+					wantjob: wantjobList,
+					tagjob:tagjobList
 				})
 			}).catch(r => {
 				console.error(r);

@@ -1,5 +1,5 @@
 <view class="container">
-	<navigator hover-class="none" url="/pages/sqmanege/sqmanege" class="topbox clearfloat">
+	<navigator hover-class="none" url="/pages/wgmanage/wgmanage" class="topbox clearfloat">
 		<view class="ft">
 			<image class="sqzy" src="/img/sqzy.png"></image>
 		</view>
@@ -15,10 +15,54 @@
 		</view>
 		<view class="fr"><image class="localimg" src="/img/jt1.png"></image></view>
 	</navigator>
-	<navigator hover-class="none" url="/pages/fbnews/fbnews" class="heightboxgz clearfloat">
+	<navigator hover-class="none" url="/pages/sqmanege/sqmanege" class="heightboxgz clearfloat">
 		<view class="ft">
 			<image class="lticonimg" src="/img/wgimg.png"></image>
 			<text class="wggltxt">网格管理</text>
+		</view>
+		<view class="fr">
+			<image class="rtjtimg" src="/img/jt.png"></image>
+		</view>
+	</navigator>
+	<view class="line10"></view>
+	<navigator hover-class="none" url="/pages/fbnews/fbnews" class="heightboxgz clearfloat">
+		<view class="ft">
+			<image class="lticonimg" src="/img/fbxw.png"></image>
+			<text class="wggltxt">发布新闻</text>
+		</view>
+		<view class="fr">
+			<image class="rtjtimg" src="/img/jt.png"></image>
+		</view>
+	</navigator>
+	<!-- 企业录入 -->
+	<navigator hover-class="none" url="/pages/qylr/qylr" class="heightboxgz clearfloat">
+		<view class="ft">
+			<image class="lticonimg" src="/img/qylr.png"></image>
+			<text class="wggltxt">企业录入</text>
+		</view>
+		<view class="fr">
+			<image class="rtjtimg" src="/img/jt.png"></image>
+		</view>
+	</navigator>
+	<view class="line10"></view>
+
+	<!-- 求职者录入 -->
+	<navigator hover-class="none" url="/pages/qzelr/qzelr" class="heightboxgz clearfloat">
+		<view class="ft">
+			<image class="lticonimg" src="/img/qzzlr.png"></image>
+			<text class="wggltxt">求职者录入</text>
+		</view>
+		<view class="fr">
+			<image class="rtjtimg" src="/img/jt.png"></image>
+		</view>
+	</navigator>
+	<view class="line10"></view>
+
+		<!-- 数据上报 -->
+		<navigator hover-class="none" url="/pages/sjsb/sjsb" class="heightboxgz clearfloat">
+		<view class="ft">
+			<image class="lticonimg" src="/img/sjsb.png"></image>
+			<text class="wggltxt">数据上报</text>
 		</view>
 		<view class="fr">
 			<image class="rtjtimg" src="/img/jt.png"></image>

@@ -1,0 +1,39 @@
+<view class="container">
+	<view class="commonboxmain clearfloat">
+		<view class="ft comlefttxt">社区名称*</view>
+		<view class="fr comrightipt">
+			<input type="text" class="comipt" value="{{sqname}}" />
+		</view>
+	</view>
+	<view class="line1"></view>
+	<view class="commonboxmain clearfloat">
+		<view class="ft comlefttxt">社区联系方式*</view>
+		<view class="fr comrightipt">
+			<input type="text" class="comipt" value="{{lxfs}}" />
+		</view>
+	</view>
+	<view class="line10"></view>
+	<view class="commonboxmain clearfloat">
+		<view class="ft comlefttxt">社区地址*</view>
+	</view>
+	<view class="line1"></view>
+	<view class="commonboxmain" style="height: auto;">
+		<view class=" comrightipt" style="text-align: left;">
+			<textarea class="textarea" name="" id="" cols="30" rows="5" value="{{sqlocal}}" ></textarea>
+		</view>
+	</view>
+
+	<view class="line10"></view>
+	<view class="commonboxmain clearfloat" style="height: auto;">
+		<view class="ft comlefttxt">社区主图</view>
+	</view>
+	<view class="line1"></view>
+	<view class="imgboxsq" style="padding-bottom: 20px;">
+		<view class="llb">
+			<image class="scimg" src="{{imgurl}}"></image>
+		</view>
+		<text class="scimgbtn" bindtap="scimgbtn">点击上传图片</text>
+		
+	</view>
+	<view class="tijsq" bindtap="tijsq">保存</view>
+</view>
