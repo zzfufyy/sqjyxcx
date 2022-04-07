@@ -43,6 +43,7 @@ Page({
 		communityUuid: '',
 		index1: 0,
 		positionData: '',
+		yxz:0,
 		licenseId: '',
 		wantjob: [
 			// { job: 'IT', id: 0 }, { job: '文化传媒', id: 1 }, { job: '电子制造', id: 2 }, { job: '电子制造', id: 3 }, { job: '电子制造', id: 4 }
@@ -146,12 +147,14 @@ Page({
 	closethis(e) {
 		let that = this;
 		let id = e.currentTarget.dataset.id
+		let yxz=that.data.yxz;
 		console.log(id)
 		let wantjobList = that.data.wantjob;
 		let tagjoblist = that.data.tagjob
 		this.data.wantjob.forEach((v) => {
 			if (v.id == id) {
 				if (v.checked == false) {
+					yxz-=1;
 					v.checked = true;
 				} else { v.checked = false }
 			}
@@ -169,6 +172,7 @@ Page({
 		})
 		this.setData({
 			tagjob:tagjoblist,
+			yxz:yxz,
 			wantjob: wantjobList,
 			msg: "id:" + id
 		})
@@ -176,35 +180,47 @@ Page({
 	},
 	//选择意向岗位
 	chose(e){
+		
 		let that = this
 		let id = e.currentTarget.dataset.id
-		let wantjob = that.data.wantjob;
-		console.log(wantjob)
-		console.log(id)
-		for(let i = 0;i<wantjob.length;i++){
-			if (wantjob[i].id == id) {
-				if (wantjob[i].checked == true) {
-					wantjob[i].checked = false;
-				}else {
-					wantjob[i].checked = true;
-				}
-			}
-		}
+		let yxz=that.data.yxz;
 		let tagjoblist = that.data.tagjob
-		for(let i = 0;i<tagjoblist.length;i++){
-			if (tagjoblist[i].id == id) {
-				if (tagjoblist[i].checked == true) {
-					tagjoblist[i].checked = false;
-				}else {
-					tagjoblist[i].checked = true;
+		let wantjob = that.data.wantjob;
+		if(yxz>=10){
+			wx.showToast({
+				title: '不能超过10个',
+			})
+		}else{
+			console.log(wantjob)
+			console.log(id)
+			for(let i = 0;i<wantjob.length;i++){
+				if (wantjob[i].id == id) {
+					if (wantjob[i].checked == true) {
+						wantjob[i].checked = false;
+						yxz+=1;
+					}else {
+						wantjob[i].checked = true;
+					}
 				}
-				
 			}
-		
+			
+			for(let i = 0;i<tagjoblist.length;i++){
+				if (tagjoblist[i].id == id) {
+					if (tagjoblist[i].checked == true) {
+						tagjoblist[i].checked = false;
+					}else {
+						tagjoblist[i].checked = true;
+					}
+					
+				}
+			
+			}
 		}
+		
 		this.setData({
 			tagjob: tagjoblist,
 			wantjob:wantjob,
+			yxz:yxz,
 			msg: "id:" + id
 		})
 
