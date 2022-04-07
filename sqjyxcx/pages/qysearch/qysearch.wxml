@@ -19,9 +19,9 @@
 				<text class="nemas">{{item.name}} {{item.hxtime}} {{item.sqname}} {{item.companyjuli}}km</text>
 			</view>
 		</navigator>
-		<view wx:if="{{noMoreData == true}}">
+		<!-- <view wx:if="{{noMoreData == true}}">
 			没有更多数据
-    	</view>
+    	</view> -->
 	</view>
 </view>
 

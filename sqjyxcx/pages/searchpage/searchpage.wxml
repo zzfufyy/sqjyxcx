@@ -26,9 +26,9 @@
 		</view>
 		<view class="line1"></view>
 	</navigator>
-	<view wx:if="{{noMoreData == true}}">
+	<!-- <view wx:if="{{noMoreData == true}}">
 		没有更多数据
-    </view>
+    </view> -->
 </view>
 
 <view class="zzc" bindtap="sx" hidden="{{hidesx}}"></view>

@@ -1,5 +1,5 @@
 function isEmpty(param) {
-    if (typeof (param) === "undefined" || param === null || param.length == 0) {
+    if (typeof (param) === "undefined" || param === null || param.trim().length == 0) {
         return true;
     }
 }

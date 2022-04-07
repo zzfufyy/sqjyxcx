@@ -100,20 +100,21 @@ Page({
 		// 	url: '/pages/sqfw/sqfw',
 		// })
 	},
-		//打电话
-		callphone(e) {
-			console.log(e)
-			if(e.currentTarget.id==""){
-				wx.showToast({
-					title: '公司暂未留电话,可先发送简历',
-				})
-				return;
-			}
-			let phonenum = e.currentTarget.dataset.phonenum
-			wx.makePhoneCall({
-				phoneNumber: phonenum //仅为示例，并非真实的电话号码
+	//打电话
+	callphone(e) {
+		console.log(e)
+		
+		let phonenum = e.currentTarget.dataset.phonenum;
+		if (string_util.isEmpty(phonenum)) {
+			wx.showToast({
+				title: '公司暂未留电话\n可先发送简历',
 			})
-		},
+			return;
+		}
+		wx.makePhoneCall({
+			phoneNumber: phonenum //仅为示例，并非真实的电话号码
+		})
+	},
 	// 点击跳转到岗位详情
 	async bindtapCandidateJobInfo(e) {
 		let recruitJobUuid = this.data.jobInfoList[e.currentTarget.dataset.index].jobUuid;
@@ -230,14 +231,14 @@ Page({
 	},
 
 	//实名认证跳过
-	passbtn(){
+	passbtn() {
 		this.setData({
 			smhide: true,
 			// juesehide:false
 		})
 	},
 	//求职者完善信息跳过
-	passbtnwsxx(){
+	passbtnwsxx() {
 		this.setData({
 			infows: true,
 			// juesehide:false

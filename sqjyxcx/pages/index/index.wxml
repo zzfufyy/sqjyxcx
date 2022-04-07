@@ -92,9 +92,9 @@
             <view class="line1"></view>
           </navigator>
           <!-- 这里需要调整一下样式 -->
-          <view wx:if="{{noMoreData == true}}">
+          <!-- <view wx:if="{{noMoreData == true}}">
             没有更多数据
-          </view>
+          </view> -->
         </view>
       </view>
     </view>

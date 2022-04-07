@@ -71,6 +71,7 @@ const createRecruiterMethods = () => ({
                         userInfo.nickname
                     ),
                     companyname: companyInfo.companyName,
+                    flagIdentification: companyInfo.flagIdentification,
                 }],
             });
             UserService.saveUserRole(Constant.UserRole.Recruiter, true);

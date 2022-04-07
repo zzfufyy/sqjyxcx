@@ -289,7 +289,7 @@ const createRecruiteeMethods = () => ({
                 'img/tx.png'
             ),
             jl: string_util.meterToKiloMeterString(jobInfo.distance),
-            //phonenum: '13112345678'
+            phonenum: jobInfo.telephone,
         }));
 
         // 刷新页面

@@ -5,9 +5,16 @@ const { GlobalKey } = require("../../service/global_service");
 const { UserService } = require("../../service/user_service");
 const { Completer } = require("../../utils/function_util");
 
+const Loading = require('../../utils/loading_util');
+const string_util = require('../../utils/string_util');
+
 const CONSTANT = require('../../common/constant');
 const recruitee = require('./recruitee');
 const recruiter = require('./recruiter');
+
+
+const recruitCompanyService = require('../../common/recruitCompanyService');
+const userRecruiterService = require('../../common/userRecruiterService');
 
 const app = getApp();
 
@@ -57,6 +64,9 @@ Page({
 
 	// 改变身份
 	switchUserRole: async function () {
+		await app.getOpenidReady();
+		let openid = wx.getStorageSync('openid');
+
 		let isRecruitee = this.data.isRecruitee;
 		let currentRole = (isRecruitee ?
 			CONSTANT.UserRole.Recruitee : CONSTANT.UserRole.Recruiter
@@ -68,6 +78,10 @@ Page({
 		let currentUserRoleName = CONSTANT.userRoleName[currentRole];
 		let targetUserRoleName = CONSTANT.userRoleName[targetRole];
 
+		console.log(targetRole)
+		console.log(CONSTANT.UserRole.Recruiter);
+		
+		
 		let completer = new Completer();
 		wx.showModal({
 			title: '提示',
@@ -92,6 +106,34 @@ Page({
 
 
 			} else {
+				// 切换到招聘者用户需要进行判断 如果招聘者没有企业  跳转到注册企业
+				if(targetRole == CONSTANT.UserRole.Recruiter){
+					try {
+						Loading.begin();
+						let userRecruiterData = await userRecruiterService.loadEntityById(openid);
+						console.log(userRecruiterData);
+						if(string_util.isEmpty(userRecruiterData.data.companyUuid)){
+							wx.navigateTo({
+							  url: '/pages/qyzc/qyzc',
+							});
+							return;
+						}else{
+							let recruitCompanyData = await recruitCompanyService.loadEntityById(userRecruiterData.data.companyUuid);
+							if(recruitCompanyData.data.flagIdentification != 1){
+								// 还未认证通过
+								wx.navigateTo({
+								  url: '/pages/waiteyz/waiteyz',
+								});
+								return;
+							}
+						}
+						
+					} catch (e) {
+						console.error(e)
+					}finally{
+						Loading.end();
+					}
+				}
 				await this.loadRecruiterInfo();
 				wx.setStorageSync('globalIdent', 'company');
 			}
@@ -126,9 +168,9 @@ Page({
 		}
 		// 根据角色加载数据
 		if (this.data.isRecruitee) {
-			this.loadRecruiteeInfo();
+			await this.loadRecruiteeInfo();
 		} else {
-			this.loadRecruiterInfo();
+			await this.loadRecruiterInfo();
 		}
 		// var recruiteeInfo =  UserService.loadRcruiteeInfo();
 		console.log(that.data.zw)

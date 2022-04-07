@@ -1,7 +1,11 @@
 // pages/zwxq/zwxq.js
 const $ = require('../../utils/request_util');
 const string_util = require('../../utils/string_util');
+const Loading = require('../../utils/loading_util');
+
 const userRecruiterService = require('../../common/userRecruiterService');
+const userCandidateService = require('../../common/userCandidateService');
+
 const recruitCompanyService = require('../../common/recruitCompanyService');
 const recruitJobService = require('../../common/recruitJobService');
 const recruitRecordService = require('../../common/recruitRecordService');
@@ -21,12 +25,14 @@ Page({
 
 		// 各个id
 		candidateOpenid: '',
+		candidateTelephone: '',
+
+
 		recruiterOpenid: '',
 		companyUuid: '',
 		jobUuid: '',
 		categoryUuid: '',
 		// 招聘者信息
-
 		jobName: '清洁工',
 		salaryScope: '3000-3800',
 		jobyq: { rs: '招1人' },
@@ -49,12 +55,34 @@ Page({
 	//投递简历
 	tdjl(e) {
 		let that = this;
+		if (string_util.isEmpty(this.data.candidateTelephone)) {
+			wx.showModal({
+				title: '提示',
+				content: '请先在个人简历中填写联系方式'
+			});
+			return;
+		};
 		wx.showModal({
 			title: '提示',
 			content: '是否投递简历',
 			async success(res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
+					// 如果用户已经投递过
+					let queryData = {
+						candidateOpenid: that.data.candidateOpenid,
+						jobUuid: that.data.jobUuid,
+					}
+					let countData =  await recruitRecordService.countByEntity(queryData);
+					console.log(countData)
+					if(countData.data > 0){
+						wx.showToast({
+						icon:'none',
+						  title: `您已经投递过该职位`,
+						  duration: 2000,
+						})
+						return;
+					}
 					// 生成简历记录
 					let insertData = {
 						flagWhoReceive: that.data.flagWhoReceive,
@@ -68,9 +96,12 @@ Page({
 					let insertPromise = recruitRecordService.insertByEntity(insertData);
 					await insertPromise
 						.then(r => console.log(r))
-						.catch(r => console.error(r))
+						.catch(r => console.error(r));
+					// 生成投递记录
+					await recruitJobService.increaseCountApply(that.data.jobUuid);
+				    // 跳转到首页
 					wx.switchTab({
-					  url: '/pages/index/index',
+						url: '/pages/index/index',
 					})
 				} else if (res.cancel) {
 					console.log('用户点击取消')
@@ -95,41 +126,60 @@ Page({
 		// 获取用户openid
 		await app.getOpenidReady();
 		let openid = wx.getStorageSync('openid');
-
-		// 加载岗位信息
-		let loadRecruitJobPromise = recruitJobService.loadEntityById(recruitJobUuid);
 		that.setData({
 			candidateOpenid: openid,
-		})
-		await loadRecruitJobPromise.then(r => {
-			console.log(r);
-			that.setData({
-				// 公司id
-				recruiterOpenid: r.data.recruiterOpenid,
-				companyUuid: r.data.companyUuid,
-				jobUuid: r.data.id,
-				categoryUuid: r.data.categoryUuid,
-				// 表单信息加载
-				jobName: r.data.jobName,
-				salaryScope: new Salary(r.data.jobSalaryMin, r.data.jobSalaryMax).value,
-				jobyq: { rs: '招 ' + r.data.recruitingNumber + ' 人' },
-				xqxq: r.data.jobIntroduction,
-				recruiterTelephone: r.data.recruiterTelephone,
+		});
+
+		try {
+			Loading.begin();
+			// 加载求职者信息
+			let loadCandidatePromise = userCandidateService.loadEntityById(openid);
+			await loadCandidatePromise.then(r => {
+				that.setData({
+					candidateTelephone: r.data.telephone,
+				});
 			})
 
-		}).catch(r => console.error(r));
-
-		// 加载公司信息
-		let loadRecruitCompanyPromise = recruitCompanyService.loadEntityById(this.data.companyUuid);
-		await loadRecruitCompanyPromise.then(r => {
-			console.log(r);
-			that.setData({
-				comname: r.data.companyName,
-				conadrres: r.data.address + '  ' + r.data.addressDetail,
-				portraitPath: app.globalData.web_path + r.data.portraitPath,
+			// 加载岗位信息
+			let loadRecruitJobPromise = recruitJobService.loadEntityById(recruitJobUuid);
+			await loadRecruitJobPromise.then(r => {
+				console.log(r);
+				that.setData({
+					// 公司id
+					recruiterOpenid: r.data.recruiterOpenid,
+					companyUuid: r.data.companyUuid,
+					jobUuid: r.data.id,
+					categoryUuid: r.data.categoryUuid,
+					// 表单信息加载
+					jobName: r.data.jobName,
+					salaryScope: new Salary(r.data.jobSalaryMin, r.data.jobSalaryMax).value,
+					jobyq: { rs: '招 ' + r.data.recruitingNumber + ' 人' },
+					xqxq: r.data.jobIntroduction,
+					recruiterTelephone: r.data.recruiterTelephone,
+				})
 
 			})
-		}).catch(r => console.error(r));
+
+			// 加载公司信息
+			let loadRecruitCompanyPromise = recruitCompanyService.loadEntityById(this.data.companyUuid);
+			await loadRecruitCompanyPromise.then(r => {
+				console.log(r);
+				that.setData({
+					comname: r.data.companyName,
+					conadrres: r.data.address + '  ' + r.data.addressDetail,
+					portraitPath: app.globalData.web_path + r.data.portraitPath,
+
+				})
+			})
+		} catch (e) {
+			console.error(e);
+		}finally{
+			Loading.end();
+		}
+
+
+
+
 	},
 
 	/**

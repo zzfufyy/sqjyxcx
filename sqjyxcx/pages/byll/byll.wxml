@@ -21,7 +21,7 @@
 		</view>
 		<view class="line1"></view>
 	</block>
-	<view wx:if="{{noMoreData == true}}">
+	<!-- <view wx:if="{{noMoreData == true}}">
 			没有更多数据
-		</view>
+		</view> -->
 </view>

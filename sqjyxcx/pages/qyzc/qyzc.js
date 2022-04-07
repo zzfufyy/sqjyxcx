@@ -63,52 +63,52 @@ Page({
 			categoryUuid: this.data.categoryUuid_list[e.detail.value],
 		})
 	},
-	setPhone(openid,phone){
+	setPhone(openid, phone) {
 		var that = this;
-    wx.request({
-      url: app.globalData.web_path + '/gywm/setWxuserandCompPhone',
-      data: {
-        openid:openid,
-        phone:phone,
-      },
-      header: app.globalData.header,
-      success: function (res) {
+		wx.request({
+			url: app.globalData.web_path + '/gywm/setWxuserandCompPhone',
+			data: {
+				openid: openid,
+				phone: phone,
+			},
+			header: app.globalData.header,
+			success: function (res) {
 				console.log(res)
 				// that._init();
-        // that.openAlert(scene);
-      },
-      fail: function (res) {
-      }
-    })
-  },
-	getPhoneNumber (e) {
-    let that = this
-    var sessionKey =wx.getStorageSync('sessionKey')
-    var openid =wx.getStorageSync('openid')
-    console.log(openid)
-    console.log(e)
-    console.log(sessionKey)
-    wx.request({
-      url: app.globalData.web_path + '/wx/user/' + app.globalData.appId + '/phoneNumberInfo',
-      data: {
-        sessionKey:sessionKey,
-        iv: e.detail.iv,
-        encryptedData: e.detail.encryptedData,
-      },
-      header: app.globalData.header,
-      success: function (res) {
+				// that.openAlert(scene);
+			},
+			fail: function (res) {
+			}
+		})
+	},
+	getPhoneNumber(e) {
+		let that = this
+		var sessionKey = wx.getStorageSync('sessionKey')
+		var openid = wx.getStorageSync('openid')
+		console.log(openid)
+		console.log(e)
+		console.log(sessionKey)
+		wx.request({
+			url: app.globalData.web_path + '/wx/user/' + app.globalData.appId + '/phoneNumberInfo',
+			data: {
+				sessionKey: sessionKey,
+				iv: e.detail.iv,
+				encryptedData: e.detail.encryptedData,
+			},
+			header: app.globalData.header,
+			success: function (res) {
 				console.log(res)
-        console.log(res.data.data.phoneNumber)
-        that.setData({
-          sqrphone:res.data.data.phoneNumber
-        })
-        that.setPhone(openid,res.data.data.phoneNumber);
-        wx.setStorageSync('phone',res.data.data.phoneNumber)
-      },
-      fail: function (res) {
-      }
-    })
-  },
+				console.log(res.data.data.phoneNumber)
+				that.setData({
+					sqrphone: res.data.data.phoneNumber
+				})
+				that.setPhone(openid, res.data.data.phoneNumber);
+				wx.setStorageSync('phone', res.data.data.phoneNumber)
+			},
+			fail: function (res) {
+			}
+		})
+	},
 	// 社区选择
 	bindPickerChange1(e) {
 		console.log('picker发送选择改变，携带值为', e.detail.value)
@@ -164,8 +164,8 @@ Page({
 	async wstijsq() {
 		let that = this;
 		let companyName = this.data.companyName;
-		let phone = this.data.sqrphone; 
-		let juridicalPhone= this.data.sqrphone; 
+		let phone = this.data.sqrphone;
+		let juridicalPhone = this.data.sqrphone;
 		// 企业名称检测
 		if (string_util.isEmpty(companyName)) {
 			wx.showModal({
@@ -175,139 +175,140 @@ Page({
 			return;
 		}
 		// 提交开始
-		Loading.begin();
-		let recruitCompany = {
-			companyName: this.data.companyName,
-			communityUuid: this.data.communityUuid,
-			address: this.data.companyAddress,
-			lon: this.data.longitude,
-			lat: this.data.latitude,
-			licenseId: this.data.licenseId,
-			recruiterOpenid: this.data.recruiterOpenid,
-			phone:phone,
-			juridicalPhone:juridicalPhone,
-		}
-		console.log(recruitCompany);
-		
-		let insertCompanyPromise = recruitCompanyService.insertByEntity(this.data.recruiterOpenid, recruitCompany)
-		let companyUuid;
-		await insertCompanyPromise.then(r=>{
-			console.log(PAGENAME + '新增企业id: '); console.log(r);
-			companyUuid =  r.data;
-		});
-		
-		// 意向添加到 company_for_category
-		//构建list<entity>
-		let categoryList = [];
-		this.data.wantjob.forEach(v=>{
-			if(v.checked == false){
-				categoryList.push({
-					companyUuid: companyUuid,
-					categoryUuid: v.categoryUuid,
-					categoryName: v.job,
-				})
+
+		try {
+			Loading.begin();
+
+			let recruitCompany = {
+				companyName: this.data.companyName,
+				communityUuid: this.data.communityUuid,
+				address: this.data.companyAddress,
+				lon: this.data.longitude,
+				lat: this.data.latitude,
+				licenseId: this.data.licenseId,
+				recruiterOpenid: this.data.recruiterOpenid,
+				phone: phone,
+				juridicalPhone: juridicalPhone,
 			}
-		});
-		let insertListPromise = companyForCategoryService.insertByEntityList(companyUuid, categoryList);
-		await insertListPromise.then(r=>{
-			console.log(r);
-		}).catch(r=>{
-			console.error(r);
-		})
-		// 提交结束
-		Loading.end()
+			// 插入的同时已更新对应recruiter信息
+			let insertCompanyPromise = recruitCompanyService.insertByEntity(this.data.recruiterOpenid, recruitCompany)
+			let companyUuid;
+			await insertCompanyPromise.then(r => {
+				console.log(PAGENAME + '新增企业id: '); console.log(r);
+				companyUuid = r.data;
+			});
+
+			// 意向添加到 company_for_category
+			//构建list<entity>
+			let categoryList = [];
+			this.data.wantjob.forEach(v => {
+				if (v.checked == false) {
+					categoryList.push({
+						companyUuid: companyUuid,
+						categoryUuid: v.categoryUuid,
+						categoryName: v.job,
+					})
+				}
+			});
+			let insertListPromise = companyForCategoryService.insertByEntityList(companyUuid, categoryList);
+			await insertListPromise.then(r => {
+				console.log(r);
+			}).catch(r => {
+				console.error(r);
+			})	
+		} catch (e) {
+			console.error(e);
+		}finally{
+			Loading.end()
+		}
 		// 页面跳转
 		wx.navigateTo({
 			url: '/pages/fbjob/fbjob',
-	 	})
+		})
 	},
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: async function (options) {
-		Loading.begin();
+
 		let that = this;
 		await app.getOpenidReady();
 		let openid = wx.getStorageSync('openid');
-		console.log(PAGENAME + '当前用户openid: ' + openid);
-		this.setData({ 
+		this.setData({
 			recruiterOpenid: openid
 		});
-		// 获取社区列表
-		let loadCommunityListPromise = communityInformationService.loadList();
-		await loadCommunityListPromise.then(r => {
-			let communityNameList = []; let communityUuidList = [];
-			r.data.forEach((item) => {
-				communityNameList.push(item.communityName);
-				communityUuidList.push(item.id);
-			});
-			that.setData({
-				array1: communityNameList,
-				communityUuidList: communityUuidList,
-				communityUuid: communityUuidList[0],
-			})
 
-		}).catch(r => {
-			console.error(PAGENAME + r);
-		})
 
-		let loadCategoryListPromise = jobCategoryService.loadList();
-		await loadCategoryListPromise.then(r => {
-			let wantjobList = [];
-			r.data.forEach(function (item, index) {
-				wantjobList.push({
-					job: item.categoryName,
-					id: index,
-					categoryUuid: item.id,
-					checked: false,
+		try {
+			Loading.begin();
+
+			// 获取社区列表
+			let loadCommunityListPromise = communityInformationService.loadList();
+			await loadCommunityListPromise.then(r => {
+				let communityNameList = []; let communityUuidList = [];
+				r.data.forEach((item) => {
+					communityNameList.push(item.communityName);
+					communityUuidList.push(item.id);
 				});
-			});
-			that.setData({
-				wantjob: wantjobList
-			})
-		}).catch(r => {
-			console.error(r);
-		})
-		var qqmapsdk = new QQMapWX({
-			key: 'Z3WBZ-TX76I-CKXGO-5GWTU-CSSK3-7LBFO' // 必填
-		});
-
-		// 获取位置信息  默认位置
-		wx.getLocation({
-			type: 'gcj02',
-			success(res) {
-				console.log(res)
-				const latitude = res.latitude
-				const longitude = res.longitude
-				wx.request({
-					url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + latitude + ',' + longitude + '&key=Z3WBZ-TX76I-CKXGO-5GWTU-CSSK3-7LBFO&get_poi=0',
-					method: 'GET',
-					success(res) {
-						let tempData = res.data.result;
-						that.setData({
-							positionData: tempData.address + ' ' + tempData.formatted_addresses.recommend,
-							companyAddress: tempData.address + ' ' + tempData.formatted_addresses.recommend,
-							longitude: tempData.location.lng,
-							latitude: tempData.location.lat,
-						})
-					}
+				that.setData({
+					array1: communityNameList,
+					communityUuidList: communityUuidList,
+					communityUuid: communityUuidList[0],
 				})
-				// qqmapsdk.reverseGeocoder({
-				// 	success:function(res){
-				// 		var address = res.result.address
-				// 		console.log(address)
-				// 	console.log(latitude)
 
-				// 		that.setData({
-				// 			latitude:latitude,
-				// 			longitude:longitude,
-				// 			positionData: address
-				// 		})
-				// 	}
-				// })
-			}
-		});
-		Loading.end();
+			}).catch(r => {
+				console.error(PAGENAME + r);
+			})
+
+			let loadCategoryListPromise = jobCategoryService.loadList();
+			await loadCategoryListPromise.then(r => {
+				let wantjobList = [];
+				r.data.forEach(function (item, index) {
+					wantjobList.push({
+						job: item.categoryName,
+						id: index,
+						categoryUuid: item.id,
+						checked: false,
+					});
+				});
+				that.setData({
+					wantjob: wantjobList
+				})
+			}).catch(r => {
+				console.error(r);
+			})
+			var qqmapsdk = new QQMapWX({
+				key: 'Z3WBZ-TX76I-CKXGO-5GWTU-CSSK3-7LBFO' // 必填
+			});
+
+			// 获取位置信息  默认位置
+			wx.getLocation({
+				type: 'gcj02',
+				success(res) {
+					console.log(res)
+					const latitude = res.latitude
+					const longitude = res.longitude
+					wx.request({
+						url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + latitude + ',' + longitude + '&key=Z3WBZ-TX76I-CKXGO-5GWTU-CSSK3-7LBFO&get_poi=0',
+						method: 'GET',
+						success(res) {
+							let tempData = res.data.result;
+							that.setData({
+								positionData: tempData.address + ' ' + tempData.formatted_addresses.recommend,
+								companyAddress: tempData.address + ' ' + tempData.formatted_addresses.recommend,
+								longitude: tempData.location.lng,
+								latitude: tempData.location.lat,
+							})
+						}
+					})
+				}
+			});
+
+		} catch (e) {
+			console.error(e);
+		} finally {
+			Loading.end();
+		}
 
 	},
 

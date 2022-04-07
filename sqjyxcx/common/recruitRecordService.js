@@ -53,6 +53,15 @@ const updateByEntity = function (updateData) {
     });
 }
 
+const countByEntity = function(queryData){
+    return $.request({
+        url: '/recruit-record/countByEntity',
+        data: queryData,
+        method: $.RequestMethod.POST,
+        header: $.jsonHeader
+    });
+}
+
 
 module.exports = {
     insertByEntity: insertByEntity,
@@ -60,5 +69,6 @@ module.exports = {
     listRecordPlusByCandidateOpenid: listRecordPlusByCandidateOpenid,
     listRecordPlusByCompanyUuid: listRecordPlusByCompanyUuid,
     countByCandidateOpenid: countByCandidateOpenid,
-    updateByEntity:updateByEntity
+    countByEntity:countByEntity,
+    updateByEntity:updateByEntity,
 }

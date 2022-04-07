@@ -63,6 +63,17 @@ const increaseViewCount = function (jobUuid) {
         header: $.jsonHeader,
     });
 }
+const increaseCountApply = function (jobUuid) {
+    return $.request({
+        url: '/recruit-job/increaseCountApply?id=' + jobUuid,
+        data: {},
+        method: $.RequestMethod.GET,
+        header: $.jsonHeader,
+    });
+}
+
+
+
 
 // 接口暴露
 module.exports = {
@@ -72,5 +83,6 @@ module.exports = {
     insertByEntity: insertByEntity,
     pagedByDistance: pagedByDistance,
     pagedByDistanceAndSalary: pagedByDistanceAndSalary,
-    increaseViewCount:increaseViewCount,
+    increaseViewCount: increaseViewCount,
+    increaseCountApply: increaseCountApply
 }
