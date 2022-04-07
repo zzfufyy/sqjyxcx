@@ -119,6 +119,10 @@ const createRecruiterMethods = () => ({
         let userInfo = await UserService.loadRecruiterInfo();
         this.setData({
             companyUuid: userInfo.companyUuid,
+            location:{
+                longitude: userInfo.lon,
+                latitude: userInfo.lat,
+            }
         });
         let pageConfig = this._getPageConfig();
         console.log(pageConfig);

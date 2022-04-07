@@ -15,6 +15,7 @@
 		</view>
 		<view class='bg-gray overflow' scroll-y >
 			<view class="clearfloat personbox">
+				<navigator hover-class="none" url="/pages/jlxg/jlxg" class="clearfloat personbox">
 				<view class="ft ltimg">
 					<image src="{{item.tximg}}" class="tximg"></image>
 				</view>
@@ -24,6 +25,7 @@
 						{{item.sex}} {{item.year}} {{item.cellphone}}
 					</view>
 				</view>
+			</navigator>
 			</view>
 			<navigator url="/pages/wantjob/wantjob" hover-class="none" class="yxbox clearfloat">
 				<view class="ft zgyx">工作意向</view>

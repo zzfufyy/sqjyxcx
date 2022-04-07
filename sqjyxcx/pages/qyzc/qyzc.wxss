@@ -68,8 +68,26 @@ height: 24px;
 	border-radius: 3px;
 
 }
+.jobbox1{
+	padding: 7px 14px;
+	background: #EEEEEE;
+	color: #9E9E9E;
+	border-radius: 3px;
+}
 .hide{display: none;}
-
+.hqlxfs {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 500;
+	margin-top: 6px;
+	width: 85%!important;
+	padding: 8px 0px;
+	right: 0;
+	position: absolute;
+	margin-left: 0px!important;
+	margin-right: 0!important;
+	bottom: 7px;color: blue;
+}
 
 
 

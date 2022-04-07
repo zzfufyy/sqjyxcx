@@ -1,1 +1,59 @@
-/* pages/sqmanege/sqmanege.wxss */
+.sqname{
+	font-size: 18px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333333;padding: 11px 20px 11px 20px;background: #fff;
+}
+page{
+	
+background: #F7F7F7;
+}
+.xqbox{
+	margin: 10px 15px 10px 15px;background-color: #fff;
+	border-radius: 10px 10px 10px 10px;padding:17px 0 13px 20px ;
+}
+.xqname{
+	margin-bottom:9px ;font-size: 14px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333333;
+}
+.sqlocal{
+	font-size: 12px;
+font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+font-weight: 400;
+color: #999999;
+}
+.luy{
+	border-top: 1px solid #EEEEEE;
+	margin-right: 17px;
+	font-size: 12px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #999999;padding-top: 7px;margin-top: 15px;
+}
+.addxq{
+	font-size: 14px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333333;
+}
+.fpgl{
+	font-size: 14px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #999999;
+}
+.bggbox{
+	position: relative;
+}
+.xzbox{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+}
+
+
+
+
+

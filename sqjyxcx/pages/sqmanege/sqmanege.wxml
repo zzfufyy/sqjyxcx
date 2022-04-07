@@ -1,2 +1,24 @@
-<!--pages/sqmanege/sqmanege.wxml-->
-<text>pages/sqmanege/sqmanege.wxml</text>
+<view class="container">
+	<view class="sqname clearfloat">
+		<view class="ft addxq" bindtap="addxq">+添加小区</view>
+		<view class="fr fpgl" bindtap="fpgl">分配管理</view>
+	</view>
+	<view class="mainbox">
+		<view class="bggbox" wx:for="{{sqlist}}" wx:key="key">
+			<navigator hover-class="none" catchtap="wglrxq"  class="xqbox" >
+				<view class="xqname clearfloat">
+					<view class="ft ">{{item.xqname}}</view>
+				</view>
+				<view class="sqlocal">共{{item.ld}}栋{{item.lc}}层{{item.hs}}户 {{item.ydj}}户已登记 {{item.ydj}}户未登记</view>
+				<view class="luy">
+					网格录入员: {{item.ry}}
+				</view>
+			</navigator>
+			<view class="xzbox">
+				<label class="checkbox" bindchange="change">
+					<checkbox  value="r1" />选中
+				</label>
+			</view>
+		</view>
+	</view>
+</view>

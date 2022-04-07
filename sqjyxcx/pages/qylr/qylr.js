@@ -1,30 +1,13 @@
-// pages/sqmanege/sqmanege.js
+// pages/qylr/qylr.js
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-		// sqname:'东湖社区 ',
-		sqlist:[
-			{xqname:'东湖新寓',ld:'8',lc:'31',hs:'8',ydj:'1234',ydj:'1200',ry:'暂未分配'},
-			{xqname:'东湖新寓',ld:'8',lc:'31',hs:'8',ydj:'1234',ydj:'1200',ry:'张三'},
-		],
-		showfp:true
-	},
-
-	//分配管理
-	fpgl(){
 
 	},
-	wglrxq(){
-		wx.navigateTo({
-			url: '/pages/wglrxq/wglrxq',
-		})
-	},
-	change(e){
-		console.log(e)
-	},
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */

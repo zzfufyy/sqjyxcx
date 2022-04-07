@@ -51,7 +51,7 @@
 	</view>
 	<view class="clearfloat ttbox">
 		<view class="ft leftname">联系电话</view>
-		<view class="fr rtip" style="color: #3384FD;text-align:right">
+		<view class="fr rtip" style="color: #3384FD;text-align:right;position: relative;">
 			<button class="hqlxfs " open-type="getUserInfo" open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="getPhoneNumber">获取联系方式</button>
 		</view>
 	</view>
@@ -62,13 +62,21 @@
 	<view class="clearfloat ttbox">
 		<view class="ft leftname">招聘岗位意向</view>
 		<view class="fr rtip" style="text-align: right;width: 20%;" bindtap="tianjaijob">
-			<image class="imgtj" src="/img/tjimg.png"></image>
+			<!-- <image class="imgtj" src="/img/tjimg.png"></image> -->
 		</view>
 	</view>
+	<view class="">已选择:{{yxz}}/10</view>
+
 	<view class="clearfloat obbox">
 		<view class="yxjob {{item.checked?'hide':'xb'}}" wx:for="{{wantjob}}"  wx:key="key">
 			<image src="/img/gbimg.png" class="gbimg" data-id="{{index}}" bindtap="closethis"></image>
 			<view class="jobbox"  >{{item.job}}</view>
+		</view>
+	</view>
+
+	<view class="clearfloat obbox">
+		<view class="yxjob {{item.checked?'hide':'xb'}}"  wx:for="{{tagjob}}"  wx:key="key">
+			<view class="jobbox1"  data-id="{{index}}" bindtap="chose">{{item.job}}</view>
 		</view>
 	</view>
 
