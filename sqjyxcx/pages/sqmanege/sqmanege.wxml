@@ -1,7 +1,10 @@
 <view class="container">
 	<view class="sqname clearfloat">
 		<view class="ft addxq" bindtap="addxq">+添加小区</view>
-		<view class="fr fpgl" bindtap="fpgl">分配管理</view>
+		<view class="fr fpgl" bindtap="fpgl">
+			<text hidden="{{!showfp}}" >分配管理</text> 
+			<text hidden="{{showfp}}" style="color: #3383FD;">退出管理</text>
+		</view>
 	</view>
 	<view class="mainbox">
 		<view class="bggbox" wx:for="{{sqlist}}" wx:key="key">
@@ -14,11 +17,27 @@
 					网格录入员: {{item.ry}}
 				</view>
 			</navigator>
-			<view class="xzbox">
-				<label class="checkbox" bindchange="change">
-					<checkbox  value="r1" />选中
-				</label>
+			<view class="xzbox" hidden="{{showfp}}">
+				<checkbox-group bindchange="change">
+					<label class="checkbox">
+						<checkbox color="#F8424C" value="{{item.xqname}}" />选中
+					</label>
+				</checkbox-group>
 			</view>
 		</view>
 	</view>
 </view>
+
+<view class="qdbox" hidden="{{showfp}}">
+	<view class="rdbox">
+		<radio-group bindchange="radioChange">
+			<label class="weui-cell weui-check__label" wx:for="{{items}}" wx:key="key">
+				<view class="weui-cell__hd">
+					<radio value="{{item.value}}" checked="false"/>{{item.name}}
+				</view>
+			</label>
+		</radio-group>
+	</view>
+	<view class="tijsq" bindtap="tijsq">确定分配</view>
+</view>
+

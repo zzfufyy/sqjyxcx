@@ -14,7 +14,41 @@ Page({
 		companyUuid: '',
 		imgsrc: '',
 		name: '',
-		cellphone: ''
+		cellphone: '',
+		array1: ['社区1', '街道1', '街道2'],
+		index1: 0,
+		positionData: '',
+	},
+	// 社区选择
+	bindPickerChange1(e) {
+		console.log('picker发送选择改变，携带值为', e.detail.value)
+		this.setData({
+			index1: e.detail.value,
+			communityUuid: this.data.communityUuidList[e.detail.value],
+		})
+		console.log(this.data)
+	},
+	// 更改定位
+	changedw(e) {
+		let that = this
+		wx.chooseLocation({
+			type: 'gcj02',
+			success(res) {
+				// console.log(PAGENAME + '公司地址选择:'); console.log(res);
+				that.setData({
+					positionData: res.address + ' ' + res.name,
+					// companyAddress: res.address + ' ' + res.name,
+					longitude: res.longitude,
+					latitude: res.latitude,
+				})
+			}
+		})
+	},
+	// 统一社会信用代码
+	bindinputLicenseId(e) {
+		this.setData({
+			licenseId: e.detail.value
+		})
 	},
 	//点击企业标志
 	xgtx() {

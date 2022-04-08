@@ -71,6 +71,36 @@
 			<input class="ipt" placeholder="请输入" bindinput="dhhm"/>
 		</view>
 	</view>
+	<view class="xinbox" >
+		<view class="boxtt">房屋用途（可多选）*</view>
+		<view class="iptbox" >
+			<checkbox-group class="csgop" bindchange="checkboxChange">
+				<label class="weui-cell weui-check__label " data-tag="{{item.tag}}" wx:for="{{items}}" wx:key="value">
+					<view class="weui-cell__hd ipt " data-tag="{{item.tag}}">
+						<checkbox value="{{item.value}}" data-tag="{{item.tag}}" color="#F8424C" class="tppos" checked="{{item.checked}}"/>
+						<text class="weui-cell__bd tppos1">{{item.name}}</text>
+					</view>
+				</label>
+			</checkbox-group>
+		</view>
+	</view>
+
+	<view class="xinbox" >
+		<view class="boxtt">安全情况（可多选）*</view>
+		<view class="iptbox" >
+			<checkbox-group class="csgop" bindchange="checkboxChange1">
+				<label class="weui-cell weui-check__label " data-tag="{{item.tag}}" wx:for="{{items1}}" wx:key="value">
+					<view class="weui-cell__hd ipt " data-tag="{{item.tag}}">
+						<checkbox value="{{item.value}}" data-tag="{{item.tag}}" color="#F8424C" class="tppos" checked="{{item.checked}}"/>
+						<text class="weui-cell__bd tppos1">{{item.name}}</text>
+					</view>
+				</label>
+			</checkbox-group>
+		</view>
+	</view>
+
+
+	<view class="tijsq" bindtap="next">下一步</view>
 </view>
 
 
