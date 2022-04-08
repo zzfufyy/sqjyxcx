@@ -112,18 +112,6 @@ Page({
 				wantjob: wantjobList,
 			})
 		}
-
-		// console.log(e.detail.value)
-		// arrtag.concat(arr)
-		// let newarr = [
-		// 	{job:'UI',id:5},{job:'Java',id:6},
-		// ]
-		// let arrtag = this.data.arrtag
-		// let wantjob = this.data.wantjob
-		// let newarrtag = arrtag.concat(newarr)
-		// this.setData({
-		// 	wantjob:newarrtag
-		// })
 	},
 
 
@@ -195,21 +183,55 @@ Page({
 			csjob: csjobList,
 		})
 	},
-	// 职位搜索框
-	bindconfirmSeachCategory(e) {
+	// 职位搜索框  回车按键
+	async bindconfirmSeachCategory(e) {
+
 		var that = this;
 		let searchText = e.detail.value;
 		let wantjobList = this.data.wantjob;
-		// 遍历查找是否包含字符串
-		wantjobList = wantjobList.map(v => {
-			if (v.job.indexOf(searchText) == -1) {
-				v.display = "none";
+
+		let wantjobCopyTemp = object_util.copyObject(this.data.wantjobCopy);
+		// 如果字符串为空不作处理
+		if (string_util.isEmpty(searchText)) {
+			this.setData({
+				wantjob: wantjobCopyTemp,
+			})
+			return;
+		}
+		// 查找是否存在
+		if (wantjobList.findIndex(r => {
+			return r.job.indexOf(searchText) != -1;
+		}) != -1) {
+			let wantjobList = wantjobCopyTemp.map(v => {
+				if (v.job.indexOf(searchText) == -1) {
+					v.display = "none";
+				}
+				return v;
+			});
+			this.setData({
+				wantjob: wantjobList,
+			})
+		}else{
+			insertData = {
+				categoryName : searchText,
 			}
-			return v;
-		});
-		this.setData({
-			wantjob: wantjobList,
-		})
+			// 不存在就插入  
+			let categoryUuidData = await jobCategoryService.insertByEntity(insertData);
+			let categoryUuid = categoryUuidData.data;
+			let newWantJobData = {
+				id: categoryUuid,
+				job: searchText,
+				checked: false,
+				display: 'block',
+			}
+			wantjobList.push(newWantJobData);
+			wantjobCopyTemp.push(newWantJobData);
+			this.setData({
+				wantjob: wantjobList,
+				wantjobCopy: wantjobCopyTemp,
+			})
+		}
+
 	},
 	// 取消弹窗 职位意向选择
 	bindtapCategoryCancel() {
@@ -443,10 +465,9 @@ Page({
 		await app.getOpenidReady();
 		let openid = wx.getStorageSync('openid');
 		try {
-
-
 			// 加载职位列表
 			let wantjobList = [];
+			// 13个热门职位
 			let loadCategoryPromise = jobCategoryService.loadList();
 			await loadCategoryPromise.then(r => {
 				wantjobList = r.data.map(v => {
@@ -454,7 +475,7 @@ Page({
 						job: v.categoryName,
 						id: v.id,
 						checked: false,
-						display: 'none',
+						display: 'block',
 					}
 				})
 			}).catch(r => {
@@ -467,24 +488,37 @@ Page({
 			let candidateForCategoryResult = await candidateForCategoryService.loadListByCandidateOpenid(openid);
 			console.log("加载求职者openid：" + openid + " 的求职期望列表：");
 			console.log(candidateForCategoryResult)
+			// 
 			let expectJobCategoryList = candidateForCategoryResult.data.map(r => {
-				return r.categoryUuid;
-			})
-			console.log(expectJobCategoryList);
-			
-			// 初始化已选择的求职列表
-			wantjobList = wantjobList.map(v => {
-				if (expectJobCategoryList.findIndex(categoryUuid => {
-					return categoryUuid == v.id
-				}) == -1) {
-					v.checked = false;
-					v.display = 'block';
-				} else {
-					v.checked = true;
-					v.display = 'none';
+				return {
+					job: r.categoryName,
+					id: r.categoryUuid,
+					checked: true,
+					display: 'none',
 				}
-				return v;
 			})
+			console.log(expectJobCategoryList)
+			//去重
+			wantjobList = wantjobList.filter(r => {
+
+				if (expectJobCategoryList.findIndex(v => {
+					return r.id == v.id
+				}) == -1) {
+					return true;
+				}
+			})
+			// 拼接数组
+			wantjobList = wantjobList.concat(expectJobCategoryList);
+			console.log(wantjobList);
+			let noCheckedNum = 0;
+			wantjobList = wantjobList.filter(v => {
+				if (v.checked == false) {
+					noCheckedNum += 1;
+				}
+				return v.checked == true || noCheckedNum <= 10;
+			});
+			console.log(wantjobList);
+
 
 			// 默认请选择文字是否显示
 			let arrhide; let txthide;
@@ -529,6 +563,8 @@ Page({
 
 			// 加载求职者期望社区列表
 			let candidateForCommunityResult = await candidateForCommunityService.loadListByCandidateOpenid(openid);
+
+			// 遍历加载求职者已存在的
 			let expectCommunityList = candidateForCommunityResult.data.map(r => {
 				return r.communityUuid;
 			});
