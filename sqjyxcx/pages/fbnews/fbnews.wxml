@@ -44,9 +44,12 @@
 	<view class="commonboxmain clearfloat" style="height: auto;">
 		<view class="ft comlefttxt">新闻内容*</view>
 	</view>
-  <editor id="editor" class="ql-container" placeholder="{{placeholder}}" bindstatuschange="onStatusChange" bindblur="losecon" bindready="onEditorReady" show-img-toolbar="true" show-img-resize show-img-size>
-  </editor>
-	<view class="tijsq" bindtap="tijsq">保存</view>
+	<view>
+		<editor id="editor" class="ql-container" placeholder="{{placeholder}}" bindstatuschange="onStatusChange" bindblur="losecon" bindready="onEditorReady" show-img-toolbar="true" show-img-resize show-img-size>
+		</editor>
+	</view>
+	<view class="line10"></view>
+	<view style="padding-bottom: 17px;"><view class="tijsq" bindtap="tijsq">保存</view></view>
 </view>
 
 <view class="toolbar" catchtouchend="format" hidden="{{keyboardHeight > 0 ? false : true}}" style="bottom: {{isIOS ? keyboardHeight : 0}}px">

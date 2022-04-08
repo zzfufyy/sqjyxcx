@@ -16,9 +16,12 @@
 		</view>
 		<view class="clearfloat ttbox">
 			<view class="ft leftname">岗位名称</view>
-			<view class="fr rtip">
+			<!-- <view class="fr rtip">
 				{{yxjobname}}
-			</view>
+			</view> -->
+		</view>
+		<view class="clearfloat ttbox">
+			<view class="ft leftname" style="color: #F8424C;width:100%">	{{yxjobname}}</view>
 		</view>
 		<view class="clearfloat ttbox">
 			<view class="ft leftname">期望工资</view>

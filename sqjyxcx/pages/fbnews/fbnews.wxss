@@ -11,7 +11,7 @@
 .ql-container {
   box-sizing: border-box;
   width: 100%;
-  min-height: 300px;
+  min-height: 200px;
   font-size: 16px;
   line-height: 1.5;
   overflow: auto;
@@ -85,5 +85,9 @@ background: #EAF2FF;
 	text-align: center;
 	line-height: 25px;
 	margin-top: 21px;
+}
+
+page{
+	padding-bottom: 20px;
 }
 
