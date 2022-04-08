@@ -15,7 +15,7 @@
 		</view>
 		<view class='bg-gray overflow' scroll-y >
 			<view class="clearfloat personbox">
-				<navigator hover-class="none" url="/pages/jlxg/jlxg" class="clearfloat personbox">
+				<navigator hover-class="none" url="/pages/jlxg/jlxg?nowsf={{nowsf}}" class="clearfloat personbox">
 				<view class="ft ltimg">
 					<image src="{{item.tximg}}" class="tximg"></image>
 				</view>
@@ -92,6 +92,7 @@
 		</view>
 		<view class='bg-gray overflow' scroll-y >
 			<view class="clearfloat personbox" style="padding-bottom: 15px;">
+				<navigator hover-class="none" url="/pages/jlxg/jlxg?nowsf={{nowsf}}" class="clearfloat personbox">
 				<view class="ft ltimg">
 					<image src="{{item.tximg}}" class="tximg"></image>
 				</view>
@@ -101,6 +102,7 @@
 						{{item.companyname}}
 					</view>
 				</view>
+			</navigator>
 			</view>
 		</view>
 		<view class="cont">

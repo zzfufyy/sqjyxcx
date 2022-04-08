@@ -31,7 +31,7 @@
 			<button class="hqlxfs " open-type="getUserInfo" open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="getPhoneNumber">获取联系方式</button>
 	</view>
 
-	<view class="naxbox clearfloat">
+	<view class="naxbox clearfloat" wx:if="{{sf=='求职者'}}">
 		<view class="ft" style="width: 49%;">
 			<view class="name">出生年份</view>
 			<view class="phonenum">
@@ -43,7 +43,7 @@
 				</picker>
 			</view>
 		</view>
-		<view class="fr" style="width: 49%;border-left: 1px solid #F2F2F2;">
+		<view  class="fr" style="width: 49%;border-left: 1px solid #F2F2F2;">
 			<view class="name">工作时间</view>
 			<view class="phonenum">
 				<input type="text" class="worktime" bindinput="gznx" value="{{gznx}}" placeholder="输入工作时间" />
