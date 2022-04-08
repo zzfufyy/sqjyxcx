@@ -9,12 +9,12 @@ Page({
 		sqname:'东湖社区 ',
 		seatings: [
 			{fjh:[{fj:1101,isdj:true},{fj:1102,isdj:false},{fj:1103,isdj:false},{fj:1104,isdj:false},{fj:1105,isdj:false},{fj:1106,isdj:false}]},
-			{fjh:[{fj:1201,isdj:false},{fj:1202,isdj:false},{fj:1203,isdj:false},{fj:1204,isdj:false},{fj:1205,isdj:false},{fj:1206,isdj:true}]},
+			{fjh:[{fj:1201,isdj:false},{fj:1202,isdj:false},{fj:1203,isdj:false,havexx:true},{fj:1204,isdj:false},{fj:1205,isdj:false},{fj:1206,isdj:true}]},
 			{fjh:[{fj:1301,isdj:false},{fj:1302,isdj:false},{fj:1303,isdj:false},{fj:1304,isdj:false},{fj:1305,isdj:false},{fj:1306,isdj:false}]},
 			{fjh:[{fj:1401,isdj:false},{fj:1402,isdj:false},{fj:1403,isdj:false},{fj:1404,isdj:false},{fj:1405,isdj:false},{fj:1406,isdj:false},{fj:1407,isdj:false}]},
 		],
 		sqds:'东湖新寓1栋',
-		selectedIndex: ['今日已录0户'],
+		selectedIndex: ['当前未选择房号，新增新的房号 >'],
 		showIndex:'',
 		zt:0,
 		yxyq: [
@@ -48,6 +48,7 @@ Page({
 		],
 		curNav: 1,
 		id: 1,
+		occid:'',
 	},
 	//筛选
 	sxbtn(){
@@ -96,7 +97,7 @@ Page({
 			xxdj:id
 		})
 	},
-	// 已登记户时间
+	// 已登记户事件
 	ydjsj(e){
 		let id = e.currentTarget.dataset.id
 		this.setData({
@@ -117,6 +118,7 @@ Page({
 			hidesx: hidesx
 		})
 	},
+	// 未登记选择
 	choose(e) {
 		let selectedIndex = this.data.selectedIndex
 		if (e.currentTarget.dataset.index != this.data.showIndex) {
@@ -129,7 +131,7 @@ Page({
 				zt:1
 			})
 		} else {
-			selectedIndex = ['今日已录0户']
+			selectedIndex = ['当前未选择房号，新增新的房号 >']
 			this.setData({
 				showIndex: 0,
 				selectedIndex:selectedIndex,
@@ -138,11 +140,11 @@ Page({
 		}
 	},
 	//登记事件
-	godj(){
-		wx.navigateTo({
-			url: '/pages/sqmdb/sqmdb',
-		})
-	},
+	// godj(){
+	// 	wx.navigateTo({
+	// 		url: '/pages/sqmdb/sqmdb',
+	// 	})
+	// },
 	// 已登记点击
 	ydjbtn(e){
 		let selectedIndex = this.data.selectedIndex
@@ -155,9 +157,7 @@ Page({
 			confirmText:'去修改',
 			success (res) {
 				if (res.confirm) {
-					wx.navigateTo({
-						url: '/pages/xiugaijz/xiugaijz',
-					})
+					console.log('用户点击确定')
 				} else if (res.cancel) {
 					console.log('用户点击取消')
 				}
@@ -198,6 +198,25 @@ Page({
 		let hidesqxz = !this.data.hidesqxz
 		this.setData({
 			hidesqxz:hidesqxz
+		})
+	},
+	//
+	dletthis(e){
+		let selectedIndex = this.data.selectedIndex
+		let nav = '东湖新寓1栋'+e.currentTarget.dataset.nav
+		// selectedIndex.splice(0,1,nav)
+		console.log(selectedIndex)
+		wx.showModal({
+			title: '提示',
+			content: selectedIndex + '已登记信息 是否确定删除？',
+			confirmText:'确定',
+			success (res) {
+				if (res.confirm) {
+					console.log('用户点击确定')
+				} else if (res.cancel) {
+					console.log('用户点击取消')
+				}
+			}
 		})
 	},
 	/**

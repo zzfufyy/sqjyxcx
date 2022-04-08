@@ -1,4 +1,4 @@
-// pages/mesegsubmit/mesegsubmit.js
+// pages/xqtjcg/xqtjcg.js
 Page({
 
 	/**
@@ -9,12 +9,12 @@ Page({
 	},
 	fh(){
 		wx.redirectTo({
-			url: '/pages/sqfw/sqfw',
+			url: '/pages/xqwgmanege/xqwgmanege',
 		})
 	},
 	dj(){
 		wx.redirectTo({
-			url: '/pages/wglrxq/wglrxq',
+			url: '/pages/addxq/addxq',
 		})
 	},
 	/**

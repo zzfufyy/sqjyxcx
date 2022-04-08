@@ -1,20 +1,32 @@
-// pages/mesegsubmit/mesegsubmit.js
+// pages/addxq/addxq.js
 Page({
 
 	/**
 	 * 页面的初始数据
 	 */
 	data: {
-
+		array: ['请选择社区', '中国', '巴西', '日本'],
+		index: 0,
+		array1: ['请选择命名格式', '阿拉伯数字', '英文字母'],
+		index1: 0,
 	},
-	fh(){
-		wx.redirectTo({
-			url: '/pages/sqfw/sqfw',
+	// 小区选择
+  bindPickerChange: function(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index: e.detail.value
+    })
+	},
+	// 命名格式
+	bindPickerChange1: function(e) {
+		console.log('picker发送选择改变，携带值为', e.detail.value)
+		this.setData({
+			index1: e.detail.value
 		})
 	},
-	dj(){
-		wx.redirectTo({
-			url: '/pages/wglrxq/wglrxq',
+	tijsq(){
+		wx.navigateTo({
+			url: '/pages/xqtjcg/xqtjcg',
 		})
 	},
 	/**

@@ -1,23 +1,63 @@
 <view class="clearfloat container">
+	<view class="titwarn">
+		平台提醒：标*为必填项
+	</view>
+	<view class="clearfloat ttbox">
+		<view class="ft leftname">企业名称*</view>
+		<view class="fr rtip">
+			<input type="text" bindinput="bindinputCompanyName" class="iptqy" placeholder="请输入企业名称"  />
+		</view>
+	</view>
+	<view class="clearfloat ttbox">
+		<view class="ft leftname">所属社区*</view>
+		<view class="qyname rtip fr">
+			<picker bindchange="bindPickerChange1" range="{{array1}}" value="{{index1}}" >
+				<view class="picker">
+					{{array1[index1]}}
+					<image class="slect" src="https://demo.csjing.com/img/rtjt.png"></image>
+				</view>
+			</picker>
+		</view>
+	</view>
+	<view class="line10"></view>
+	<view class="clearfloat ttbox">
+		<view class="ft leftname">统一社会信用代码</view>
+		<view class="fr rtip" style="color: #3384FD;text-align:right">
+		</view>
+	</view>
+	<view class="clearfloat ttbox">
+		{{positionData}}
+		<!-- <input type="text" bindinput="bindinputLicenseId" class="iptqy xyd" style="" placeholder="请输入社会信用代码"  /> -->
+	</view>
+	<view class="line10"></view>
+	<view class="clearfloat ttbox">
+		<view class="ft leftname">联系电话*</view>
+		<!-- <view class="fr rtip" style="color: #3384FD;text-align:right;position: relative;">
+			<button class="hqlxfs " open-type="getUserInfo" open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="getPhoneNumber">获取联系方式</button>
+		</view> -->
+	</view>
+	<view class="clearfloat ttbox">
+		<input type="text" bindinput="aasss" class="iptqy xyd" value="{{sqrphone}}"  placeholder="联系电话"  />
+	</view>
+	<view class="clearfloat ttbox">
+		<view class="ft leftname">公司地址*</view>
+		<view class="fr rtip">
+			<view class="ggdw" bindtap="changedw">更改定位</view>
+		</view>
+	</view>
+	<view class="clearfloat ttbox local">{{positionData}}</view>
+	<view class="line10"></view>
 	<view class="topbox">
-		<view class="comname">公司信息</view>
+		<view class="comname">企业标志*</view>
 		<view class="comimg">
 			<image src="{{imgsrc}}" class="imgtag" style="border:{{none}}"></image>
 			<text class="qybz" bindtap="xgtx">上传企业标志</text>
 		</view>
 		<view class="line1"></view>
 	</view>
-	<view class="topbox">
-		<view class="comname">法人信息</view>
-		<view class="clearfloat frxx">
-			<view class="ft nm">姓名</view>
-			<view class="fr nm"><input type="text" bindinput="name" placeholder="请输入" class="ipt" /></view>
-		</view>
-		<view class="clearfloat frxx">
-			<view class="ft nm">联系电话</view>
-			<view class="fr nm"><input type="text" bindinput="cellphone" placeholder="请输入" class="ipt" /></view>
-		</view>
-	</view>
+
+
+	
 </view>
 <view class="bcbox">
 	<view class="tijsq" bindtap="bc">保存</view>

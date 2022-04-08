@@ -52,6 +52,41 @@
 	color: #333333;padding-left: 20px;margin-right: 8px;
 
 }
+.weui-cell__hd{
+	position: relative;    margin-top: 0;border-radius: 0;
+	border-bottom:0px;
+}
+.weui-check__label:nth-child(odd) .weui-cell__hd{
+	border-right: 0;
+}
+.weui-check__label:last-child .weui-cell__hd{
+	border-bottom:1px solid #F3F3F3;
+}
+.weui-check__label:nth-last-child(2) .weui-cell__hd{
+	border-bottom:1px solid #F3F3F3;
+}
+.tppos{
+	position: absolute;    top: 11px;
+}
+.tppos1{
+	position: absolute;    top: 14px;left: 44px;font-size: 16px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #333333;
+}
+.weui-check__label{
+	width: 50%;margin-right: 0px;
+}
+.csgop{
+	display: flex;
+	flex-wrap: wrap;
+}
+.iptbox{
+	margin-top: 10px;
+}
+.tijsq {
+	margin-bottom: 17px;
+}
 
 
 

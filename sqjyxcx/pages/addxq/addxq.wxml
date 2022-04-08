@@ -1,0 +1,63 @@
+<view class="container">
+	<!-- 所属社区 -->
+	<view class="commonboxmain clearfloat">
+		<view class="ft comlefttxt">所属社区*</view>
+		<view class="fr comrightipt">
+			<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+				<view class="picker">
+					{{array[index]}}
+				</view>
+			</picker>
+		</view>
+	</view>
+	<!-- 小区名称 -->
+	<view class="commonboxmain clearfloat">
+		<view class="ft comlefttxt">小区名称*</view>
+		<view class="fr comrightipt">
+			<input type="text" class="comipt" bindinput="xqname" placeholder="请输入小区名称" value="{{xqname}}" />
+		</view>
+	</view>
+	<!-- 小区栋数 -->
+	<view class="commonboxmain clearfloat">
+		<view class="ft comlefttxt">小区栋数*</view>
+		<view class="fr comrightipt">
+			<input type="text" class="comipt"  bindinput="xqds" placeholder="请输入小区栋数" value="{{xqds}}" />
+		</view>
+	</view>
+	<!-- 每栋命名格式* -->
+	<view class="commonboxmain clearfloat">
+		<view class="ft comlefttxt">每栋命名格式*</view>
+		<view class="fr comrightipt">
+			<picker bindchange="bindPickerChange1" value="{{index1}}" range="{{array1}}">
+				<view class="picker">
+					{{array1[index1]}}
+				</view>
+			</picker>
+		</view>
+	</view>
+	<!-- 每栋层数* -->
+	<view class="commonboxmain clearfloat">
+		<view class="ft comlefttxt">每栋层数*</view>
+		<view class="fr comrightipt">
+			<input type="text" class="comipt"  bindinput="mdcs" placeholder="请输入每栋层数" value="{{mdcs}}" />
+		</view>
+	</view>
+	<!-- 每层户数* -->
+	<view class="commonboxmain clearfloat">
+		<view class="ft comlefttxt">每层户数*</view>
+		<view class="fr comrightipt">
+			<input type="text" class="comipt"  bindinput="mdcs" placeholder="请输入每层户数" value="{{mhcs}}" />
+		</view>
+	</view>
+</view>
+<view class="txt">
+	<view class="xitt">小区名称输入建议：</view>
+	<view class="xitt">如该小区有分区域，建议输入名称+区域，如：东南名苑一区。</view>
+	<view class="xitt">如该小区有分区域，但是栋数名称没有重复，可不加区域。</view>
+	<view class="xitt">小区每栋命名格式默认为阿拉伯数字，例如：1-8栋。</view>
+	<view class="xitt">小区每栋命名格可改为英文字母，例如：A-D栋。</view>
+	<view class="xitt">小区楼栋命名为混用情况，建议分区录入，或手动修改。</view>
+</view>
+<view class="btnboxbtm0">
+	<view class="tijsq" bindtap="tijsq">确认添加</view>
+</view>

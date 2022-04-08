@@ -76,7 +76,10 @@
     "pages/wgmanage/wgmanage",
     "pages/qylr/qylr",
     "pages/qzelr/qzelr",
-    "pages/sjsb/sjsb"
+    "pages/sjsb/sjsb",
+    "pages/addxq/addxq",
+    "pages/xqtjcg/xqtjcg",
+    "pages/xqwgmanege/xqwgmanege"
     
   ],
   "permission": {

@@ -1,0 +1,26 @@
+.comrightipt {
+	margin-top: 0%;
+	height: 50px;
+}
+.comipt {
+	height: 50px;
+	line-height: 50px;
+}
+.container{
+	background: #fff;
+}
+page{
+	background: #F7F7F7;
+	padding-bottom: 73px;
+}
+.xitt{
+	font-size: 12px;
+	font-family: Microsoft YaHei-Regular, Microsoft YaHei;
+	font-weight: 400;
+	color: #999999;
+	margin-bottom: 5px;
+}
+.txt{margin: 15px 0 0 16px;}
+
+
+
