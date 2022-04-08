@@ -5,7 +5,7 @@
 	<view class="clearfloat ttbox">
 		<view class="ft leftname">企业名称*</view>
 		<view class="fr rtip">
-			<input type="text" bindinput="bindinputCompanyName" class="iptqy" placeholder="请输入企业名称"  />
+			<input type="text" bindinput="bindinputCompanyName" class="iptqy" placeholder="请输入企业名称"  value="{{qyname}}" />
 		</view>
 	</view>
 	<view class="clearfloat ttbox">
@@ -26,8 +26,8 @@
 		</view>
 	</view>
 	<view class="clearfloat ttbox">
-		{{positionData}}
-		<!-- <input type="text" bindinput="bindinputLicenseId" class="iptqy xyd" style="" placeholder="请输入社会信用代码"  /> -->
+		
+		<input type="text" bindinput="bindinputLicenseId" class="iptqy xyd" style="" placeholder="请输入社会信用代码" value="{{tyshxydm}}" />
 	</view>
 	<view class="line10"></view>
 	<view class="clearfloat ttbox">
@@ -37,15 +37,15 @@
 		</view> -->
 	</view>
 	<view class="clearfloat ttbox">
-		<input type="text" bindinput="aasss" class="iptqy xyd" value="{{sqrphone}}"  placeholder="联系电话"  />
+		<input type="text" bindinput="lxdhip" class="iptqy xyd" value="{{cellphone}}"  placeholder="联系电话"  />
 	</view>
-	<view class="clearfloat ttbox">
+	<!-- <view class="clearfloat ttbox">
 		<view class="ft leftname">公司地址*</view>
 		<view class="fr rtip">
 			<view class="ggdw" bindtap="changedw">更改定位</view>
 		</view>
 	</view>
-	<view class="clearfloat ttbox local">{{positionData}}</view>
+	<view class="clearfloat ttbox local">{{positionData}}</view> -->
 	<view class="line10"></view>
 	<view class="topbox">
 		<view class="comname">企业标志*</view>

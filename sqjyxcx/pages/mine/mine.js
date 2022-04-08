@@ -88,6 +88,7 @@ Page({
 			content: '您当前是' + currentUserRoleName + '身份，点击[确认]可切换至' + targetUserRoleName + '身份',
 			success(res) {
 				if (res.confirm) {
+					
 					completer.resolve(true);
 				} else if (res.cancel) {
 					completer.resolve(false);

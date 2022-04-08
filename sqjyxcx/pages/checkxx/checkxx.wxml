@@ -1,0 +1,32 @@
+<view class="container">
+	<view class="topsc" bindtap="scchxx">删除此户信息</view>
+	<view class="fzbox">
+		<view class="toptt">房屋基本情况</view>
+		<view class="fxxxq">地址：{{addres}}</view>
+		<view class="fxxxq">房间面积：{{mj}}平</view>
+		<view class="fxxxq">房间格局：{{gj}}</view>
+		<view class="fxxxq">房主姓名：{{name}} </view>
+		<view class="fxxxq">房主电话：{{cell}}</view>
+		<view class="line1"></view>
+	</view>
+	<view class="fzbox">
+		<view class="toptt">使用情况</view>
+		<view class="fxxxq">房屋用途：{{yt}}</view>
+		<view class="fxxxq">居住人数：{{jzrs}}人</view>
+		<view class="fxxxq">安全情况：{{aq}}</view>
+		<view class="line1"></view>
+	</view>
+	<view class="fzbox">
+		<view class="toptt">居住人信息</view>
+		<block wx:for="{{jurlist}}" wx:key="key">
+			<view class="fxxxq">{{item.jzname}}  {{item.sex}}  {{item.age}}</view>
+			<view class="fxxxq">{{item.idcard}}</view>
+			<view class="fxxxq">{{item.cellphone}}</view>
+			<view class="fxxxq">{{item.local}}</view>
+			<view class="fxxxq" wx:if="{{item.dydz}}">党员单位地址:{{item.dydz}}</view>
+			<view class="fxxxq" wx:if="{{item.istsrq}}">是否特殊人群:{{item.istsrq}}</view>
+			<view class="fxxxq" wx:if="{{item.bz}}">备注:{{item.bz}}</view>
+			<view class="line1"></view>
+		</block>
+	</view>
+</view>

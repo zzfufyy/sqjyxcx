@@ -95,6 +95,7 @@ Page({
 	sqfw() {
 		wx.showToast({
 			title: '暂未开放',
+			icon:'none'
 		})
 		// wx.navigateTo({
 		// 	url: '/pages/sqfw/sqfw',

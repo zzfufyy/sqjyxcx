@@ -79,7 +79,10 @@
     "pages/sjsb/sjsb",
     "pages/addxq/addxq",
     "pages/xqtjcg/xqtjcg",
-    "pages/xqwgmanege/xqwgmanege"
+    "pages/xqwgmanege/xqwgmanege",
+    "pages/checkxx/checkxx",
+    "pages/isshyjz/isshyjz",
+    "pages/sqsccg/sqsccg"
     
   ],
   "permission": {

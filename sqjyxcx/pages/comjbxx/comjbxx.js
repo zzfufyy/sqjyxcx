@@ -3,7 +3,7 @@ const $ = require('../../utils/request_util');
 const string_util = require('../../utils/string_util');
 const userRecruiterService = require('../../common/userRecruiterService');
 const recruitCompanyService = require('../../common/recruitCompanyService');
-
+const communityInformationService = require('../../common/communityInformationService');
 const app = getApp();
 Page({
 
@@ -18,6 +18,10 @@ Page({
 		array1: ['社区1', '街道1', '街道2'],
 		index1: 0,
 		positionData: '',
+		communityUuidList: [],
+		communityUuid: '',
+		qyname:'',
+		tyshxydm:'',
 	},
 	// 社区选择
 	bindPickerChange1(e) {
@@ -47,7 +51,19 @@ Page({
 	// 统一社会信用代码
 	bindinputLicenseId(e) {
 		this.setData({
-			licenseId: e.detail.value
+			tyshxydm: e.detail.value
+		})
+	},
+	// 企业名称
+	bindinputCompanyName(e){
+		this.setData({
+			qyname: e.detail.value
+		})
+	},
+	//联系电话
+	lxdhip(e){
+		this.setData({
+			cellphone: e.detail.value
 		})
 	},
 	//点击企业标志
@@ -90,11 +106,14 @@ Page({
 		}
 		let submitData = {
 			id: this.data.companyUuid,
-			juridicalPerson: this.data.name,
+			companyName:this.data.qyname,
+			licenseId:this.data.tyshxydm,
+			communityUuid:this.data.communityUuid,
+			// juridicalPerson: this.data.name,
 			juridicalPhone: this.data.cellphone
 		}
 		console.log(submitData);
-		let submitPromise = recruitCompanyService.submitRecruitCompany(submitData);
+		let submitPromise = recruitCompanyService.updateRecruitCompany(submitData);
 		await submitPromise.then((r) => {
 			console.log(r);
 		}).catch(r => console.error(r));
@@ -131,20 +150,50 @@ Page({
 		}).catch((r) => {
 			console.error(r);
 		})
+		let loadCommunityListPromise = communityInformationService.loadList();
+		await loadCommunityListPromise.then(r => {
+			let communityNameList = []; let communityUuidList = [];
+			r.data.forEach((item) => {
+				communityNameList.push(item.communityName);
+				communityUuidList.push(item.id);
+			});
+			that.setData({
+				array1: communityNameList,
+				communityUuidList: communityUuidList,
+				communityUuid: communityUuidList[0],
+			})
 
+		}).catch(r => {
+			console.error(PAGENAME + r);
+		})
 		let loadCompanyPromise = recruitCompanyService.loadEntityById(this.data.companyUuid);
 		await loadCompanyPromise.then((r) => {
 			console.log(r);
 			let portraitPath =
 				string_util.isEmpty(r.data.portraitPath) ? '' : app.globalData.web_path + r.data.portraitPath;
+				let comlist = that.data.communityUuidList;
+				let indexss=0 ;
+				for(var i= 0;i<comlist.length;i++){
+					if(r.data.communityUuid==comlist[i]){
+						indexss=i;
+					}
+				}
+				console.log(indexss)
 			that.setData({
 				imgsrc: portraitPath,
 				name: r.data.juridicalPerson,
 				cellphone: r.data.juridicalPhone,
+				qyname:r.data.companyName,
+				tyshxydm:r.data.licenseId,
+				index1:indexss,
+			
 			})
 		}).catch((r) => {
 			console.error(r);
 		})
+
+
+	
 		console.log(this.data.imgsrc);
 		console.log(this.data.imgsrc.replaceAll(app.globalData.web_path, ''));
 

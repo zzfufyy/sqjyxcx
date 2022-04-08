@@ -26,6 +26,7 @@ Page({
 		worktime: '1-3',
 		date: '1990',
 		gznx: "",
+		sf:"",
 	},
 	// 出生年月啊
 	bindDateChange: function (e) {
@@ -175,6 +176,7 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: async function (options) {
+		console.log(options)
 		Loading.begin();
 		await app.getOpenidReady();
 		let [
@@ -185,6 +187,7 @@ Page({
 		]);
 		let csny = app.formatDate(recruiteeInfo.birthday, "yyyy-MM-dd")
 		this.setData({
+			sf:options.nowsf,
 			portraitPath: recruiteeInfo.portraitPath,
 			tximg: url_util.isImageUrlInServer(recruiteeInfo.portraitPath) ?
 				app.globalData.web_path + recruiteeInfo.portraitPath : recruiteeInfo.portraitPath,

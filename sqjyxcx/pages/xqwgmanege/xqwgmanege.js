@@ -8,8 +8,8 @@ Page({
 
 		sqname:'东湖社区 ',
 		seatings: [
-			{fjh:[{fj:1101,isdj:true},{fj:1102,isdj:false},{fj:1103,isdj:false},{fj:1104,isdj:false},{fj:1105,isdj:false},{fj:1106,isdj:false}]},
-			{fjh:[{fj:1201,isdj:false},{fj:1202,isdj:false},{fj:1203,isdj:false,havexx:true},{fj:1204,isdj:false},{fj:1205,isdj:false},{fj:1206,isdj:true}]},
+			{fjh:[{fj:1101,isdj:true,isptjz:true},{fj:1102,isdj:false},{fj:1103,isdj:false},{fj:1104,isdj:false},{fj:1105,isdj:false},{fj:1106,isdj:false}]},
+			{fjh:[{fj:1201,isdj:false},{fj:1202,isdj:false},{fj:1203,isdj:false,havexx:true},{fj:1204,isdj:false},{fj:1205,isdj:false},{fj:1206,isdj:true,isptjz:false}]},
 			{fjh:[{fj:1301,isdj:false},{fj:1302,isdj:false},{fj:1303,isdj:false},{fj:1304,isdj:false},{fj:1305,isdj:false},{fj:1306,isdj:false}]},
 			{fjh:[{fj:1401,isdj:false},{fj:1402,isdj:false},{fj:1403,isdj:false},{fj:1404,isdj:false},{fj:1405,isdj:false},{fj:1406,isdj:false},{fj:1407,isdj:false}]},
 		],
@@ -147,17 +147,29 @@ Page({
 	// },
 	// 已登记点击
 	ydjbtn(e){
+		
 		let selectedIndex = this.data.selectedIndex
 		let nav = '东湖新寓1栋'+e.currentTarget.dataset.nav
 		selectedIndex.splice(0,1,nav)
-		console.log(selectedIndex)
+		console.log(e.currentTarget.dataset.ptjz)
+		let ptjz = e.currentTarget.dataset.ptjz
 		wx.showModal({
 			title: '提示',
-			content: selectedIndex + '已登记信息 是否修改信息？',
-			confirmText:'去修改',
+			content: selectedIndex + '已登记信息 是否查看信息？',
+			confirmText:'去查看',
 			success (res) {
 				if (res.confirm) {
 					console.log('用户点击确定')
+					if(ptjz == true){
+						wx.navigateTo({
+							url: '/pages/checkxx/checkxx',
+						})
+					}else{
+						wx.navigateTo({
+							url: '/pages/isshyjz/isshyjz',
+						})
+					}
+					
 				} else if (res.cancel) {
 					console.log('用户点击取消')
 				}
@@ -200,7 +212,7 @@ Page({
 			hidesqxz:hidesqxz
 		})
 	},
-	//
+	//删除房号
 	dletthis(e){
 		let selectedIndex = this.data.selectedIndex
 		let nav = '东湖新寓1栋'+e.currentTarget.dataset.nav
@@ -208,7 +220,7 @@ Page({
 		console.log(selectedIndex)
 		wx.showModal({
 			title: '提示',
-			content: selectedIndex + '已登记信息 是否确定删除？',
+			content: selectedIndex + '是否确定删除？',
 			confirmText:'确定',
 			success (res) {
 				if (res.confirm) {

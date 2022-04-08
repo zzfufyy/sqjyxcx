@@ -27,10 +27,10 @@
 			</view>
 		</view>
 		<view class="clearfloat ttbox">
-			<view class="ft leftname">期望工作地址</view>
-			<view class="fr rtip" style="color: #333333;">
-				{{qwdq}}
-			</view>
+			<view class="ft leftname" style="">期望工作地址</view>
+		</view>
+		<view class="clearfloat ttbox">
+			<view class="ft leftname" style="color: #999999;width:100%">{{qwdq}}</view>
 		</view>
 		<view class="clearfloat ttbox" style="height: auto;">
 			<view class=" leftname">个人介绍</view>

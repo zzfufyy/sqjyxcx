@@ -1,0 +1,34 @@
+.ggimg{
+	width: 44px;height: 44px;margin-top: 77px;
+}
+.xxtt{
+	font-size: 14px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #3082FD;text-align: center;margin-top: 19px;
+}
+.midbox{
+	height: 200px;text-align: center;
+}
+.btnbox{
+	display: flex;justify-content: center;
+}
+.btn{
+	font-size: 14px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;text-align: center;height: 40px;line-height: 40px;
+	border-radius: 5px 5px 5px 5px;width: 35%;
+}
+.fh{
+	color: #999999;
+	border: 1px solid #999999;
+	background: #FFFFFF;
+}
+.dj{
+	color: #FFFFFF;
+	background: #297EFD;margin-left: 16px;
+}
+
+
+
+

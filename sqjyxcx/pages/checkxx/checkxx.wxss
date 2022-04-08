@@ -1,0 +1,23 @@
+.topsc{
+	font-size: 12px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #999999;margin: 14px 17px 0 0;text-align: right;
+}
+.toptt{
+	margin: 0 0 26px 31px;font-size: 16px;font-weight: bold;
+}
+.fxxxq{
+	margin: 0 30px 10px 31px;font-size: 14px;
+	font-family: Source Han Sans CN-Regular, Source Han Sans CN;
+	font-weight: 400;
+	color: #666666;    line-height: 21px;
+}
+.line1{
+	margin: 20px 10px;
+}
+
+
+
+
+

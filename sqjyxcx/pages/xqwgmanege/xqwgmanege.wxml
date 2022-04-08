@@ -23,7 +23,7 @@
 				<view class="ft frbox"  >
 					<view class="seatbox" style="width:{{wd}}px;" wx:for="{{seatings}}" wx:key="key">
 						<block  wx:for="{{item.fjh}}" wx:key="key">
-							<view wx:if="{{item.isdj == true}}" class="seatitem isdj" data-nav="{{item.fj}}" bindtap="ydjbtn" data-id="{{item.fj}}" wx:key="key">{{item.fj}}</view>
+							<view wx:if="{{item.isdj == true}}" class="seatitem isdj" data-nav="{{item.fj}}" bindtap="ydjbtn" data-ptjz="{{item.isptjz}}" data-id="{{item.fj}}" wx:key="key">{{item.fj}}</view>
 							<view wx:elif="{{item.isdj == false}}" data-index='{{item.fj+1}}' data-nav="{{item.fj}}" class="seatitem {{showIndex==item.fj+1?'active':''}}" bindtap="choose"  wx:key="key">{{item.fj}}</view>
 						</block>
 					</view>
