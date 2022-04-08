@@ -11,7 +11,7 @@ const userRecruiterService = require('../../common/userRecruiterService');
 const userCandidateService = require('../../common/userCandidateService');
 const recruitCompanyService = require('../../common/recruitCompanyService');
 const recruitJobService = require('../../common/recruitJobService');
-const loading_util = require('../../utils/loading_util');
+const Loading = require('../../utils/loading_util');
 const date_util = require('../../utils/date_util');
 // 定义常量
 const app = getApp();
@@ -64,7 +64,7 @@ const createPageMethods = () => ({
     },
 
     // 加载内容
-    loadContent: async function (jobSalaryMin, jobSalaryMax) {
+    loadContent: async function (categoryName, jobSalaryMin, jobSalaryMax) {
         // 加載openid
         await app.getOpenidReady();
         let openid = wx.getStorageSync('openid');
@@ -92,11 +92,11 @@ const createPageMethods = () => ({
         let pageInfo;
         // 请求数据
         try {
-            if (jobSalaryMin == undefined || jobSalaryMax == undefined) {
-                pageInfo = await userCandidateService.pagedByDistance(pagingParam);
-            } else {
-                pageInfo = await userCandidateService.pagedByDistanceAndSalary(jobSalaryMin, jobSalaryMax, pagingParam)
-            }
+            categoryName = (categoryName == undefined) ? "" : categoryName;
+            jobSalaryMin = (jobSalaryMin == undefined) ? "" : jobSalaryMin;
+            jobSalaryMax = (jobSalaryMax == undefined) ? "" : jobSalaryMax;
+            pageInfo = await userCandidateService.pagedByDistanceAndSalary(categoryName, jobSalaryMin, jobSalaryMax, pagingParam)
+
             console.log(`薪资范围选择是${jobSalaryMin} - ${jobSalaryMax}, 请求搜索职位数据：`);
             console.log(pageInfo);
         } catch (e) {
@@ -115,16 +115,16 @@ const createPageMethods = () => ({
         let newList = dataList.map(r => ({
             candidateOpenid: r.candidateOpenid,
             name: r.realName,
-            jobname: string_util.isEmpty(r.categoryName)?'':r.categoryName.replaceAll(',', '/'),
+            jobname: string_util.isEmpty(r.categoryName) ? '' : r.categoryName.replaceAll(',', '/'),
             usertag: [
                 { tagbq: Constant.genderList[r.gender] },
-                { tagbq: string_util.isEmpty(r.birthday) ? '' : date_util.getAgeByBirthday(r.birthday)+'岁' },
-                { tagbq: new Constant.Salary(r.expectSalaryMin, r.expectSalaryMax).value},
+                { tagbq: string_util.isEmpty(r.birthday) ? '' : date_util.getAgeByBirthday(r.birthday) + '岁' },
+                { tagbq: new Constant.Salary(r.expectSalaryMin, r.expectSalaryMax).value },
             ],
-            tximg: url_util.isImageUrlInServer(r.candidatePortraitPath)?
+            tximg: url_util.isImageUrlInServer(r.candidatePortraitPath) ?
                 app.globalData.web_path + r.portraitPath : r.portraitPath,
-            sqname:  string_util.isEmpty(r.communityName)?'':r.communityName,
-            companyjuli: (r.distance/1000).toFixed(1),
+            sqname: string_util.isEmpty(r.communityName) ? '' : r.communityName,
+            companyjuli: (r.distance / 1000).toFixed(1),
         }));
 
         // 拼接数据

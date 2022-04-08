@@ -43,6 +43,7 @@ Page({
 			{ yxmoney: '不限', id: 0, checked: true }, { yxmoney: '2千以下', id: 1 }, { yxmoney: '2千-3千', id: 2 }, { yxmoney: '3千-4千', id: 3 }, { yxmoney: '4千-5千', id: 4 }, { yxmoney: '5千-7千', id: 5 }, { yxmoney: '7千-1万', id: 6 }, { yxmoney: '1万-1.5万', id: 7 }
 		],
 		index: '',
+		currentYxyq:{},
 
 		// 年龄范围
 		nyxz: [
@@ -61,6 +62,26 @@ Page({
 			hidesx: hidesx
 		})
 	},
+	bindinputSearchCategory(e) {
+		console.log(e.detail.value);
+		this.setData({ 
+			searchText: e.detail.value 
+		});
+	},
+	bindconfirmSearchCategory(e) {
+		var that = this;
+		console.log(e.detail.value);
+		let categoryName = e.detail.value;
+		try {
+			Loading.begin();
+			this.clearContent();
+			this.loadContent(categoryName, this.data.currentYxyq.min, this.data.currentYxyq.max);
+		} catch (e) {
+			console.error(e)
+		} finally {
+			Loading.end()
+		}
+	},
 	//清空
 	clear() {
 		console.log(this.data.yxyq)
@@ -75,7 +96,8 @@ Page({
 			})
 		}
 		this.setData({
-			yxyq: yxyqList
+			yxyq: yxyqList,
+			currentYxyq: {},
 		})
 	},
 	//确定
@@ -86,13 +108,18 @@ Page({
 			return v.checked == true;
 		})
 		let currentYxyq = yxyqList[0];
+		this.setData({
+			currentYxyq: currentYxyq,
+		})
+
 		if (currentYxyq == undefined || currentYxyq.id == 0) {
+			// 薪资不限
 			await this.clearContent();
-			await this.loadContent();
+			await this.loadContent(this.data.searchText,'','');
 
 		} else {
 			await this.clearContent();
-			await this.loadContent(currentYxyq.min, currentYxyq.max);
+			await this.loadContent(this.data.searchText, currentYxyq.min, currentYxyq.max);
 		}
 		Loading.end();
 		let hidesx = !this.data.hidesx

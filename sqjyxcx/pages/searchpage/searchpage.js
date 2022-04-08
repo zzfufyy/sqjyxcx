@@ -34,6 +34,7 @@ Page({
 		yxyq: [
 			// { yxmoney: '不限', id: 0, checked: true }, { yxmoney: '2千以下', id: 1 }, { yxmoney: '2千-3千', id: 2 }, { yxmoney: '3千-4千', id: 3 }, { yxmoney: '4千-5千', id: 4 }, { yxmoney: '5千-7千', id: 5 }, { yxmoney: '7千-1万', id: 6 }, { yxmoney: '1万-1.5万', id: 7 }
 		],
+		currentYxyq:{},
 		index: '',
 
 		// 距离
@@ -43,15 +44,19 @@ Page({
 		oid: 0,
 		hidesx: true,
 	},
-
-	bindconfirmSeachCategory(e) {
+	bindinputSearchCategory(e){
+		this.setData({
+			searchText: e.detail.value,
+		})
+	},
+	bindconfirmSearchCategory(e) {
 		var that = this;
 		console.log(e.detail.value);
 		let jobName = e.detail.value;
 		try {
 			Loading.begin();
 			this.clearContent();
-			this.loadContent(jobName,'','');
+			this.loadContent(jobName,this.data.currentYxyq.min,this.data.currentYxyq.max);
 		} catch (e) {
 			console.error(e)
 		}finally{
@@ -122,14 +127,20 @@ Page({
 		let yxyqList = this.data.yxyq.filter((v) => {
 			return v.checked == true;
 		})
+
 		let currentYxyq = yxyqList[0];
+		this.setData({
+			currentYxyq: currentYxyq,
+		})
+
 		if (currentYxyq == undefined || currentYxyq.id == 0) {
 			await this.clearContent();
-			await this.loadContent();
+			await this.loadContent(this.data.searchText,'','');
 
 		} else {
 			await this.clearContent();
-			await this.loadContent(null, currentYxyq.min, currentYxyq.max);
+			console.log(this.data.searchText);
+			await this.loadContent(this.data.searchText, currentYxyq.min, currentYxyq.max);
 		}
 
 		let hidesx = !this.data.hidesx

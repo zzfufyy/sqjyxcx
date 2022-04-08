@@ -56,9 +56,9 @@ const pagedByDistance = function (pagingParam) {
     });
 }
 
-const pagedByDistanceAndSalary = function (jobSalaryMin, jobSalaryMax, pagingParam) {
+const pagedByDistanceAndSalary = function (categoryName, jobSalaryMin, jobSalaryMax, pagingParam) {
     return $.requestOnlyData({
-        url: '/user-candidate/paged-by-distance?jobSalaryMin=' + jobSalaryMin + '&jobSalaryMax=' + jobSalaryMax,
+        url: '/user-candidate/paged-by-distance?categoryName=' + categoryName + '&jobSalaryMin=' + jobSalaryMin + '&jobSalaryMax=' + jobSalaryMax,
         data: pagingParam,
         method: $.RequestMethod.POST,
         header: $.jsonHeader,
@@ -72,6 +72,6 @@ module.exports = {
     updateByEntity: updateByEntity,
     pagedByDistacne: pagedByDistacne,
     increaseCountView: increaseCountView,
-    pagedByDistance:pagedByDistance,
-    pagedByDistanceAndSalary:pagedByDistanceAndSalary,
+    pagedByDistance: pagedByDistance,
+    pagedByDistanceAndSalary: pagedByDistanceAndSalary,
 }

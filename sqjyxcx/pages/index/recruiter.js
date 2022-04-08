@@ -5,6 +5,8 @@ const { UserService } = require('../../service/user_service');
 const { CompanyService } = require('../../service/company_service');
 // const { Age} = require('../../common/constant');
 const date_util = require('../../utils/date_util');
+const string_util = require('../../utils/string_util');
+
 const Loading = require('../../utils/loading_util');
 const $ = require('../../utils/request_util');
 const Constant = require('../../common/constant');
@@ -118,7 +120,7 @@ const createRecruiterMethods = () => ({
         let pageConfig = this._getPageConfig();
         console.log(pageConfig);
 
-         let location = this.data.mapLocation == undefined? this._getLocation():this.data.mapLocation;
+        let location = this.data.mapLocation == undefined ? this._getLocation() : this.data.mapLocation;
 
         let pagingParam = pageConfig.buildNextParam({
             longitude: location.longitude,
@@ -153,17 +155,17 @@ const createRecruiterMethods = () => ({
         let newList = dataList.map(r => ({
             candidateOpenid: r.candidateOpenid,
             expectCatagoryId: r.expectCategoryId,
-            expectCommunityId : r.expectCommunityId,
+            expectCommunityId: r.expectCommunityId,
             jobname: r.expectCatagoryId, // 暂时用id代替
-            usertag:[{tagbq:Constant.genderList[r.gender]},
-                     {tagbq:date_util.getAgeByBirthday(r.birthday)},
-                     {tagbq:new Constant.Salary(r.expectSalaryMin,r.expectSalaryMax).value}],
+            usertag: [{ tagbq: Constant.genderList[r.gender] },
+            { tagbq: date_util.getAgeByBirthday(r.birthday) + '岁' },
+            { tagbq: new Constant.Salary(r.expectSalaryMin, r.expectSalaryMax).value }],
             name: r.realName,
             jobname: r.categoryName,
-            tximg:r.candidatePortraitPath,
+            tximg: r.candidatePortraitPath,
             hxtime: '', // 10分钟前 暂时忽略
-            sqname: r.communityName,
-            companyjuli: (r.distance/1000).toFixed(1),
+            sqname: string_util.isEmpty(r.communityName) ? '' : r.communityName,
+            companyjuli: (r.distance / 1000).toFixed(1),
         }));
         this.setData({
             compangjob: current.concat(
