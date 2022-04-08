@@ -4,9 +4,11 @@ const Paging = require('../../utils/paging_util');
 const Constant = require('../../common/constant');
 const userCandidateService = require('../../common/userCandidateService');
 const recruitCompanyService = require('../../common/recruitCompanyService');
+const { UserService } = require('../../service/user_service');
 const userIdent = 'user';
 const companyIdent = 'company';
 
+let app = getApp();
 const createContentData = () => ({
     positionInfo: positionInfo,
 });
@@ -19,17 +21,24 @@ const createContentMethods = () => ({
     },
 
     // 修改定位
-    changeLocation(e) {
+    async changeLocation(e) {
         let that = this
         // 判断是否是 
 
-        wx.chooseLocation({
+        let pro = wx.chooseLocation({
             type: 'gcj02',
             async success(res) {
                 console.log('用户选择定位：');
                 console.log(res);
                 console.log(that.data);
+                that.setData({
+                    mapLocation: {
+                        longitude:res.longitude,
+                        latitude: res.latitude,
+                    },
+                });
                 if (that.data.ident == 'user') {
+                    
                     let updateData = {
                         id: that.data.openid,
                         lon: res.longitude,
@@ -59,10 +68,8 @@ const createContentMethods = () => ({
                     })
 
                 }
-
-                that.setData({
-                    location: res,
-                });
+                
+               
             },
             fail: function (e) {
                 console.log(e);
@@ -75,20 +82,37 @@ const createContentMethods = () => ({
 
     // 根据用户角色加载列表信息
     loadContent: async function () {
-        // 重置分页参数及内容
-
-
+        // 加载位置参数
         this.state.pageConfig.setNoMoreDataCallback(this._noMoreData);
-
         let data = this.data;
         console.log(this.data.ident);
         if (this.data.ident === 'user') {
+            // 加载位置参数
+            let candidateInfo = await UserService.loadRcruiteeInfo();
+            this.setData({
+                location:{
+                    longitude: candidateInfo.lon,
+                    latitude: candidateInfo.lat,
+                }
+            })
             console.log('加载求职者方 展示的数据')
             await this._loadJobList();
         }
         // 当前用户是招聘者
         else if (data.ident === 'company') {
-            console.log('加载招聘人方 展示的数据')
+            let recruiterInfo = await UserService.loadRecruiterInfo();
+            let companyData = await recruitCompanyService.loadEntityById(recruiterInfo.companyUuid);
+            console.log(recruiterInfo.companyUuid);
+            this.setData({
+                companyUuid: companyData.data.id,
+                location:{
+                    longitude: companyData.data.lon,
+                    latitude: companyData.data.lat,
+                }
+            })
+            
+            console.log('加载招聘人方 展示的数据');
+            console.log(this.data);
             await this._loadCandidateList();
         }
     },

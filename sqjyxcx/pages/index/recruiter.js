@@ -115,23 +115,20 @@ const createRecruiterMethods = () => ({
     _loadCandidateList: async function () {
 
         console.log('加载首页求职者列表');
-        // 招聘人公司id加入变量
-        let userInfo = await UserService.loadRecruiterInfo();
-        this.setData({
-            companyUuid: userInfo.companyUuid,
-            location:{
-                longitude: userInfo.lon,
-                latitude: userInfo.lat,
-            }
-        });
         let pageConfig = this._getPageConfig();
         console.log(pageConfig);
-        let location = this._getLocation();
+
+         let location = this.data.mapLocation == undefined? this._getLocation():this.data.mapLocation;
+
         let pagingParam = pageConfig.buildNextParam({
             longitude: location.longitude,
             latitude: location.latitude,
         });
 
+        // 重置  maplocation
+        this.setData({
+            mapLocation: undefined,
+        })
         if (!pagingParam) {
             return;
         }

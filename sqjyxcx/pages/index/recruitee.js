@@ -242,17 +242,23 @@ const createRecruiteeMethods = () => ({
     },
     // 加载求职用户应该看到的工作信息
     _loadJobList: async function () {
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!');
+        console.log(this.data.mapLocation)
 
         console.debug('加载首页工作列表');
         let pageConfig = this._getPageConfig();
 
         console.log(pageConfig);
 
-        let location = this._getLocation();
+        let location = this.data.mapLocation == undefined? this._getLocation():this.data.mapLocation;
         let pagingParam = pageConfig.buildNextParam({
             longitude: location.longitude,
             latitude: location.latitude,
         });
+        // 重置  maplocation
+        this.setData({
+            mapLocation: undefined,
+        })
 
         if (!pagingParam) {
             return;
