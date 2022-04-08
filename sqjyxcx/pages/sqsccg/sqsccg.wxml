@@ -1,0 +1,10 @@
+<view class="container">
+	<view class="midbox">
+		<image class="ggimg" src="/img/ggimg.png"></image>
+		<view class="xxtt">录入信息删除成功</view>
+	</view>
+	<view class="btnbox">
+		<view class="btn fh" bindtap="fh">返回管理</view>
+		<view class="btn dj" bindtap="dj">从新录入信息</view>
+	</view>
+</view>

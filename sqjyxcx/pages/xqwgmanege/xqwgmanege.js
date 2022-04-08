@@ -212,7 +212,7 @@ Page({
 			hidesqxz:hidesqxz
 		})
 	},
-	//
+	//删除房号
 	dletthis(e){
 		let selectedIndex = this.data.selectedIndex
 		let nav = '东湖新寓1栋'+e.currentTarget.dataset.nav
@@ -220,7 +220,7 @@ Page({
 		console.log(selectedIndex)
 		wx.showModal({
 			title: '提示',
-			content: selectedIndex + '已登记信息 是否确定删除？',
+			content: selectedIndex + '是否确定删除？',
 			confirmText:'确定',
 			success (res) {
 				if (res.confirm) {

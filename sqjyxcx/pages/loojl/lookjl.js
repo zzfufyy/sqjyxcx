@@ -70,6 +70,7 @@ Page({
 		try {
 			// 加载数据
 			let userCandidateData = await userCandidateService.loadEntityById(candidateOpenid);
+			console.log(userCandidateData)
 			let uc = userCandidateData.data;
 			let communityListData = await candidateForCommunityService.loadListByCandidateOpenid(candidateOpenid)
 			let qwdq = '';
@@ -87,6 +88,7 @@ Page({
 				qwdq:qwdq,
 				grjs: uc.introduction,
 				cellphne: uc.telephone,
+				yxjobname:"",
 			})
 		} catch (e) {
 			console.error(e);
