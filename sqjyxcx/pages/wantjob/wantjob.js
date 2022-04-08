@@ -228,9 +228,10 @@ Page({
 			wantjobCopyTemp.push(newWantJobData);
 			this.setData({
 				wantjob: wantjobList,
-				wantjobCopy: wantjobCopyTemp,
+				wantjobCopy: object_util.copyObject(wantjobCopyTemp),
 			})
 		}
+
 
 	},
 	// 取消弹窗 职位意向选择
@@ -246,6 +247,7 @@ Page({
 	},
 	// 保存 -- 职位意向选择 
 	bindtapCategorySave() {
+		let wantjobListCopy = this.data.wantjobCopy;
 		let wantjobList = this.data.wantjob;
 		let arrhide; let txthide;
 		if (wantjobList.findIndex(r => {
@@ -257,7 +259,12 @@ Page({
 			txthide = true;
 			arrhide = false;
 		}
+		wantjobList = wantjobList.map(v =>{
+			v.display = v.checked == false? 'block':'none';
+			return v;
+		})
 		this.setData({
+			wantjob: object_util.copyObject(wantjobList),
 			hiddenPopupExpectCategory: true,
 			txthide: txthide,
 			arrhide: arrhide
