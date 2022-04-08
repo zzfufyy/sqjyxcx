@@ -134,7 +134,6 @@ const createBootstrapMethod = () => ({
                                     }
                                 })
 
-                                debugger;
                                 // 求职者用户初始化
                                 let insertCandidateData = {
                                     id: openid,
