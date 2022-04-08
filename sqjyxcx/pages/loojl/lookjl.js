@@ -11,6 +11,7 @@ const userRecruiterService = require('../../common/userRecruiterService');
 const recruitCompanyService = require('../../common/recruitCompanyService');
 const userCandidateService = require('../../common/userCandidateService');
 const candidateForCommunityService = require('../../common/candidateForCommunityService');
+const candidateForCategoryService = require('../../common/candidateForCategoryService');
 
 const app = getApp();
 Page({
@@ -72,9 +73,20 @@ Page({
 			let userCandidateData = await userCandidateService.loadEntityById(candidateOpenid);
 			let uc = userCandidateData.data;
 			let communityListData = await candidateForCommunityService.loadListByCandidateOpenid(candidateOpenid)
+			let categoryListData = await candidateForCategoryService.loadListByCandidateOpenid(candidateOpenid);
 			let qwdq = '';
-			communityListData.data.forEach(v => {
-				qwdq += (v.communityName + '  ');
+			communityListData.data.forEach((v, i) => {
+				qwdq += v.communityName;
+				if (i != communityListData.data.length-1) {
+					qwdq += ','
+				}
+			})
+			let yxjobname = '';
+			categoryListData.data.forEach((v, i) => {
+				yxjobname += v.categoryName;
+				if (i != categoryListData.data.length-1) {
+					yxjobname += ','
+				}
 			})
 			this.setData({
 				tximg: url_util.isImageUrlInServer(uc.portraitPath) ?
@@ -83,8 +95,9 @@ Page({
 				sex: CONSTANT.genderList[uc.gender],
 				year: string_util.isEmpty(uc.birthday) ? '' : date_util.getAgeByBirthday(uc.birthday) + '岁',
 				gznl: '', // TODO 10分钟前活跃
+				yxjobname: yxjobname,
 				ygz: new CONSTANT.Salary(uc.expectSalaryMin, uc.expectSalaryMax).value,
-				qwdq:qwdq,
+				qwdq: qwdq,
 				grjs: uc.introduction,
 				cellphne: uc.telephone,
 			})
